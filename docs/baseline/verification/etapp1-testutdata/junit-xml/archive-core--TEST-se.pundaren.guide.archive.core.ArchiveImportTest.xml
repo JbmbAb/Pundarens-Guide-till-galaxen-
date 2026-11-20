@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.archive.core.ArchiveImportTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:41:42" hostname="grok-bot-vm-328085215" time="0.305">
+  <properties/>
+  <testcase name="relationscitat och Rikard-utdrag är märkta" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.119"/>
+  <testcase name="BS-01 till BS-16 är godkända regler" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.02"/>
+  <testcase name="Grok Bots förslag är godkända av Jimmy men aldrig original" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.017"/>
+  <testcase name="okänd proveniens fäller importen" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.02"/>
+  <testcase name="konstruerade exempel ur sammanställningen är fortfarande inte godkända" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.009"/>
+  <testcase name="alla poster är PRIVATE vid import" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.008"/>
+  <testcase name="approved true utan Jimmy som godkännare räknas inte" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.023"/>
+  <testcase name="datafilerna ändras inte av importen" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.02"/>
+  <testcase name="originalen importeras byte för byte ur quotes json" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.014"/>
+  <testcase name="F-10 och F-09 ger APPROVED_EDIT och originalen ligger kvar" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.012"/>
+  <testcase name="F-12 och K-15 håller EX-01-FORMULERING och mönstren i arkivet" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.023"/>
+  <testcase name="verifieringsstatus följer 04" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

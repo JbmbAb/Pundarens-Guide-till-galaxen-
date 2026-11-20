@@ -41,7 +41,7 @@ Kandidatvärden (markerade *) fryses i etapp 1 och prövas i etapp 4.
 | R-09 | Förlorad konvojkontakt ska kunna utlösa prioriterat informationsläge | `ConvoyContactLost` ger `PRIORITY_INFO` |
 | R-10 | Under stress tystnar tramset (byggplanen, ändring 2) | Hastighet över 50 km/h* eller två omräkningar inom 2 min* ger bara svansar av längd ≤ 1,5 s*, och ingen glitch |
 | R-11 | Glitch får aldrig täcka sanningsremsan, pilen, avståndet eller ruttlinjen | Animationer renderas bara i svansytan. Under rörelse över 30 km/h* stängs glitch av. |
-| R-12 | Privata citat får inte läsas upp för andra deltagare | `visibility = PRIVATE` och (konvoj aktiv eller ljud via Bluetooth-/bilhögtalare): `Suppress(PRIVACY)`. Okänd ljudutgång räknas som delad. |
+| R-12 | ~~Privata citat får inte läsas upp för andra deltagare~~ **Borttagen** | Ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm), ordagrant "I helvete allt ska höras lägg av med detta trams". Alla rader får spelas upp på alla ljudutgångar och i konvoj. `Suppress(PRIVACY)` finns inte. Accepterad risk: passagerare kan höra privata namn och relationsinnehåll. Övriga regler (R-01–R-11, R-13–R-16) gäller oförändrat. |
 | R-13 | Inga upprepningar | Samma `lineId` inom de tio senaste presenterade svansarna: `Suppress(REPEAT)` |
 | R-14 | Utgången svans | `monotonicMillis > validUntilMonotonicMillis`: `Suppress(EXPIRED)` |
 | R-15 | Ej godkänd text | `approval ≠ APPROVED` i källposten: `Suppress(NOT_APPROVED)` |
@@ -68,8 +68,8 @@ Varje rad blir ett automatiskt enhetstest i `:safetygate` och ett scenariotest i
 | SG-13 | `ConvoyContactLost` | `PRIORITY_INFO`, `Suppress` | R-09 | NOT_VERIFIED |
 | SG-14 | 70 km/h, svans 3 s | `Suppress` (för lång) | R-10 | NOT_VERIFIED |
 | SG-15 | 40 km/h, glitch-animation | `Suppress` | R-11 | NOT_VERIFIED |
-| SG-16 | PRIVATE-citat, konvoj aktiv | `Suppress(PRIVACY)` | R-12 | NOT_VERIFIED |
-| SG-17 | PRIVATE-citat, ensam, ljud via bilens högtalare | `Suppress(PRIVACY)` | R-12 | NOT_VERIFIED |
+| SG-16 | PRIVATE-citat, konvoj aktiv | `Present` (ändrat genom ägarbeslutet 2026-11-20 kl. 23.30 (Europe/Stockholm)) | R-12 | NOT_VERIFIED |
+| SG-17 | PRIVATE-citat, alla ljudutgångar inklusive bil, Bluetooth och okänd | `Present` (ändrat genom ägarbeslutet 2026-11-20 kl. 23.30 (Europe/Stockholm)) | R-12 | NOT_VERIFIED |
 | SG-18 | Samma rad som för fem svansar sedan | `Suppress(REPEAT)` | R-13 | NOT_VERIFIED |
 | SG-19 | Svans med utgången livslängd | `Suppress(EXPIRED)` | R-14 | NOT_VERIFIED |
 | SG-20 | Svans från V-012 med `approval = PENDING` | `Suppress(NOT_APPROVED)` | R-15 | NOT_VERIFIED |

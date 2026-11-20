@@ -150,3 +150,36 @@ Inget här gör G0 till ACCEPT. Alla grindar förblir NOT_VERIFIED. Ingen implem
 | A-13 | Uppskjutet | Lagring bakom gränssnitt. Triggerna i 04 prövas mot SQLite i test. Room eller SQLDelight väljs senare. |
 | G5-gränser | Öppen | Måste sättas före G5. |
 | F-03, F-04 | Precisering respektive verifiering öppen | Ingen karta och ingen enhetsberoende kod i nästa etapp. |
+
+<a id="allt-ska-horas"></a>
+## 7. Ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm): allt ska höras
+
+Ägarens beslut ordagrant: "I helvete allt ska höras lägg av med detta trams". Svaret gällde frågan om vad `PRIVATE` innebär, alltså att rader inte spelas upp via bil, Bluetooth eller okänd ljudutgång.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| R-12 (06) | REJECT genom ägarbeslut med accepterad risk | Uppspelningsspärren för `PRIVATE` är borttagen ur SafetyGate. Alla rader får spelas upp på alla ljudutgångar och i konvoj. **Accepterad risk: passagerare och konvojdeltagare kan höra privata namn och relationsinnehåll.** |
+| `visibility` (04) | REVISE | Fältet och markeringen `PRIVATE` finns kvar som uppgift om känsligt innehåll, men styr inte uppspelning. |
+| RR-11 (12), R-05 (11) | REVISE | Uppdaterade efter beslutet. |
+| Gäller inte | – | F-11 (Grok Bots förslag med `approved: false` används fortfarande inte), D-8 (R-001–R-003 står kvar som öppen fråga), skrivskyddet för original, SafetyGates säkerhetsregler (manöverfönster, nödläge, omräkning, position, batteri, konvojkontakt, stress, upprepning, godkännande) och att repot är privat på GitHub. |
+
+Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 8.
+
+<a id="godkann-allt"></a>
+## 8. Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): godkänn allt
+
+Ägarens beslut ordagrant: "Godkänn allt är det något som inte passar går att radera senare". Det gäller alla 65 raderna i F-11 och besluten D-3, D-6, D-8 och D-12 i [etapp1-protokollet](../verification/etapp1-protokoll.md).
+
+| Id | Utfall | Kort |
+|---|---|---|
+| F-11 | ACCEPT genom ägarbeslut | Alla 65 rader godkända (`approved: true`, `approvedBy: "Jimmy Bruce"`, `approvedAt: "2026-11-20"`). Ursprungsklassen (`SYNTHETIC_SATIRE`/`DERIVED_RULE`) och författaren "Grok Bot (förslag)" ligger kvar; ingen blir original. Rader kan strykas senare. |
+| B-12, B-24 | REVISE | De 14 raderna med lånade namn är godkända som arbetsnamn (`workingName: true`). Byts före spridning. |
+| B-22, B-23, B-25, B-26 | ACCEPT genom ägarbeslut | Variationer, BS-11–BS-16, navigationskommentarer och exempeldialoger godkända. De 12 raderna med riktningsord eller beskedsrisk har `footOnly: true` och spärras i fordonsläge av motorn och SafetyGate (säkerhetsregel, oförändrad). |
+| D-3 | ACCEPT | Original får `approval = APPROVED` vid import. |
+| D-6 | ACCEPT | Fordonsreglerna gäller från 10 km/h även till fots (kandidatvärde, fortfarande ofryst). |
+| D-8 | ACCEPT | R-001–R-003 hålls utanför motorns radbank. |
+| D-12 | ACCEPT | Citaten klassas som M1 (utvidgat: navigationskommentarer M8, med Rikard även M5; exempel M6). |
+| Gäller inte | – | Exemplen ur sammanställningen (EX-01, EX-03, EX-05, EX-ILLOGICAL-01) och PAT-01–PAT-05 är inte Grok Bot-förslag och förblir `PENDING`; `EX-01-FORMULERING` förblir `BLOCKED` (F-12). Originaltexter och skrivskydd oförändrade. |
+
+Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 9.
+
