@@ -50,7 +50,7 @@ Ordet PASS används inte någonstans i baslinjen. En grind blir `ACCEPT` först 
 
 ## Verifiering och ägarbeslut
 
-Dokument under [`../verification/`](../verification/): G0-ägarbeslutet 2026-11-20 (inlagt byte för byte), instruktionen, svaret på sakavvikelser och underlaget för F-11. G0 är fortfarande `NOT_VERIFIED`.
+Dokument under [`../verification/`](../verification/): G0-ägarbeslutet 2026-11-20 (inlagt byte för byte), instruktionen, svaret på sakavvikelser och underlaget för F-11. G0 är `ACCEPT` genom ägarbeslut med accepterad risk 2026-11-20 kl. 22.32 (Europe/Stockholm), utan oberoende granskning, se [`G0-grindbeslut-2026-11-20.md`](../verification/G0-grindbeslut-2026-11-20.md). Övriga grindar är `NOT_VERIFIED`.
 
 ## Arkivering
 

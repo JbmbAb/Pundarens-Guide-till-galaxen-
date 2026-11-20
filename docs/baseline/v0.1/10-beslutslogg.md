@@ -135,3 +135,18 @@ Inget här gör G0 till ACCEPT. Alla grindar förblir NOT_VERIFIED. Ingen implem
 | F-15 | ÖPPEN (blockerar inte G0) | Convoy-server i etapp 6. |
 | F-16 | DOKUMENTERAT, redan utfört | PR #1 är stängd utan merge. Grenen finns kvar. Se avvikelsen i svarsfilen. |
 | F-17 | ÖPPEN (blockerar inte G0) | Licens före spridning. |
+
+<a id="g0-grindbeslut"></a>
+## 6. Grindbeslut G0, 2026-11-20 kl. 22.32 (Europe/Stockholm)
+
+Ägarens beslut ordagrant: "Stäng G0 nu och börja bygga, jag tar risken utan oberoende granskning". Gäller `main` @ `81afd55` (PR #3 sammanslagen). Detaljer och hantering av öppna punkter: [`../verification/G0-grindbeslut-2026-11-20.md`](../verification/G0-grindbeslut-2026-11-20.md).
+
+| Id | Utfall | Kort |
+|---|---|---|
+| G0 | ACCEPT genom ägarbeslut med accepterad risk | Den oberoende granskningen (F-07) är **inte gjord**. Beslutet går före ägarens tidigare instruktion att G0 skulle vara öppen tills GPT-6 granskat. Övriga grindar `NOT_VERIFIED`. |
+| F-11 | Fortfarande öppen | Inga rader godkända. Motorn använder bara `ORIGINAL_VERBATIM`, `APPROVED_EDIT` och deterministiska regler (BS-01–BS-10). Grok Bots förslag med `approved: false` används aldrig. |
+| B-12, B-13 | Fortfarande öppna | Lånade namn och appens namn är arbetsnamn. Rader med lånade namn hålls utanför motorns radbank. Ingen spridning. |
+| 05, 06 | Kandidat, ofryst | Byggs som kandidat märkt ofryst. Kandidatvärdena i 06 är konfigurerbara startvärden. |
+| A-13 | Uppskjutet | Lagring bakom gränssnitt. Triggerna i 04 prövas mot SQLite i test. Room eller SQLDelight väljs senare. |
+| G5-gränser | Öppen | Måste sättas före G5. |
+| F-03, F-04 | Precisering respektive verifiering öppen | Ingen karta och ingen enhetsberoende kod i nästa etapp. |
