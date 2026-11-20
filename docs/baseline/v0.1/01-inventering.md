@@ -64,14 +64,14 @@ Inget av följande har rekonstruerats.
 | M-04 | `Citat_och_paradoxer_falsifiering.md` | S-15 | Råkällan för P- och C-posterna. Utan den kan ingen post få verifieringsstatus `VERIFIED_SOURCE` (se 04-datamodell). |
 | M-05 | Bokprojektets arkivunderlag | S-15, R-001–R-003 | Samma följd som M-04, för R-posterna |
 | M-06 | Råa chattexporter, meddelanden och ljudtranskriptioner | S-15 ("inte en fullständig inventering"), quotes README ("återgivna från tidigare chattindex") | P-posterna kan inte kontrolleras mot råexport. De klassas som återgiven minnesuppgift tills motsatsen visats. |
-| M-07 | "Mimer" | Byggplanen ("Mimer gör beslut spårbara") | Okänt system eller dokument. Ingen följd för arkitekturen. |
-| M-08 | Röstreglerna på en sida | Byggplanen, etapp 1 | Finns inte än. Leverabel i etapp 1. |
+| M-07 | "Mimer" | Byggplanen ("Mimer gör beslut spårbara") | Dokumenterat 2026-11-20 (F-14): Jimmys eget företag och plattform. Appen har inget beroende dit. Inte kontrollerat mot någon annan källa. |
+| M-08 | Röstreglerna på en sida | Byggplanen, etapp 1 | Kandidat finns i [12-rostregler.md](12-rostregler.md). Inte fryst. G0 är fortfarande NOT_VERIFIED. |
 | M-09 | Radbanken med cirka 150 rader och tolv händelsetyper | Byggplanen, Illogical Engine | Finns inte. NAV-001–NAV-020 är en början men är oprövade förslag. |
-| M-10 | Måltelefon (modell, Android-version, lagring) | Startprompten §7 punkt 3 och 5 | Krävs för G2. Fråga till Jimmy. |
-| M-11 | Geografiskt testområde ("hemområdet") | Byggplanen, etapp 4. Startprompten §10 punkt 4 | Okänt. GeoJSON finns för Stockholms län, men det är inte bekräftat som testområde. |
+| M-10 | Målenhet (modell, Android-version, lagring) | Startprompten §7 punkt 3 och 5 | Modell beslutad (F-04): Samsung Galaxy Tab S8 Ultra, SM-X900 (Wi-Fi). Android-version, GNSS och lagring verifieras på enheten. |
+| M-11 | Geografiskt testområde ("hemområdet") | Byggplanen, etapp 4. Startprompten §10 punkt 4 | Orsa kommun och angränsande kommuner (F-03). Exakta grannkommuner är inte satta. |
 | M-12 | Leddata med verifierad status för skoter och ATV | Byggplanen "Parkerat", startprompten §7 | Ingen leddata finns. Automatisk ledruttning är därför uteslutet. |
 | M-13 | Rikards samtycke | Byggplanen "Gränser" | Krävs före spridning. Okänt om det finns. |
-| M-14 | Oberoende granskare | Startprompten §11, byggplanen "kall granskning" | Ingen namngiven. Utan granskare kan ingen säkerhetsgrind bli `ACCEPT`. |
+| M-14 | Oberoende granskare | Startprompten §11, byggplanen "kall granskning" | GPT-6 utsedd (F-07), oberoende från byggaren, med krav på arkitektur, kod och testbevis. Granskning och protokoll saknas. Utan sådant protokoll kan ingen säkerhetsgrind bli `ACCEPT`. |
 | M-15 | Lantmäteriets data (Topografi 50 med flera) | Byggplanen "Tekniken som räcker" | Inte nedladdad. Licensen CC0 ska kontrolleras i Geotorget. |
 
 ## 5. Konflikter mellan underlagen
