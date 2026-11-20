@@ -2,8 +2,8 @@
 
 | Fält | Värde |
 |---|---|
-| Datum | 2026-11-20, testkörningen startade 22.48.36 (Europe/Stockholm, UTC+1) |
-| Kod-commit som provades | `baf40b4a5dd629961187d533b6eea15c06df131f` (gren `etapp1/illogical-engine`) |
+| Datum | 2026-11-20. Senaste testkörningen startade 23.33.14 (Europe/Stockholm, UTC+1). Första körningen 22.48.36 på `baf40b4`. |
+| Kod-commit som provades | `b9d33ac3df2cbbca1184fefbe9028417ae072cd4` (gren `etapp1/illogical-engine`, med ägarbeslutet 23.30, se avsnitt 8). Första körningen: `baf40b4`. |
 | Bas | `main` @ `c0fb94b` (G0-grindbeslutet, PR #4) |
 | Byggare | Grok Bot |
 | Granskare | **Ingen.** Oberoende granskning är inte gjord. |
@@ -41,7 +41,7 @@ export JAVA_HOME=/opt/jdk17
 
 Utdata: [`gradle-clean-check.txt`](etapp1-testutdata/gradle-clean-check.txt) (`BUILD SUCCESSFUL`, `EXIT=0`), [`sammanfattning.txt`](etapp1-testutdata/sammanfattning.txt), [`junit-xml/`](etapp1-testutdata/junit-xml/) (tio testsviter), [`module-graph.txt`](etapp1-testutdata/module-graph.txt) och [`negativt-prov-G6.txt`](etapp1-testutdata/negativt-prov-G6.txt) (`BUILD FAILED`, `EXIT=1`, som avsett).
 
-**Utfall: 87 tester, 0 fel, 0 avbrott, 0 överhoppade.**
+**Utfall: 88 tester, 0 fel, 0 avbrott, 0 överhoppade** (på `b9d33ac`; första körningen på `baf40b4` gav 87 tester, 0 fel). Det negativa provet av G-6 kördes på `baf40b4` och är inte omkört; `verifyModuleGraph` och beroendena är oförändrade.
 
 | Testsvit | Tester |
 |---|---|
@@ -51,7 +51,7 @@ Utdata: [`gradle-clean-check.txt`](etapp1-testutdata/gradle-clean-check.txt) (`B
 | `babel.SatireModeTest` | 5 |
 | `engine.IllogicalEngineTest` | 8 |
 | `engine.LineBankTest` | 4 |
-| `safetygate.SafetyGateTest` | 26 |
+| `safetygate.SafetyGateTest` | 27 |
 | `verification.ArchitectureTest` | 10 |
 | `verification.EndToEndDiodeTest` | 1 |
 | `verification.VoiceRulesTest` | 10 |
@@ -71,11 +71,11 @@ Utdata: [`gradle-clean-check.txt`](etapp1-testutdata/gradle-clean-check.txt) (`B
 | K-09 | G-9 och SG-23: SafetyGate returnerar bara beslut och beror inte på `:truth:core` eller `:engine` | `ArchitectureTest` G-9/SG-23; `module-graph.txt` | ACCEPT |
 | K-10 | Dynamiskt: sanningstillståndet ändras inte av tramslagret, och inget släpps fram i EMERGENCY, REROUTING eller MANEUVER_WINDOW | `EndToEndDiodeTest` (200 händelser; sanningsmodellen är en teststub) | ACCEPT för stubben. Mot riktig `:truth:core`: NOT_VERIFIED. |
 | K-11 | SafetyGate deterministisk, kandidatvärdena konfigurerbara och märkta ofrysta | `SafetyGateConfig` (`STATUS = KANDIDAT_OFRYST`); SG-21 | ACCEPT |
-| K-12 | Ursprungsklasser och import enligt 04 §1.3, F-09 och F-10; originalen byte för byte; alla poster `PRIVATE` | `ArchiveImportTest` (10 tester) | ACCEPT. Se avvikelse D-3. |
+| K-12 | Ursprungsklasser och import enligt 04 §1.3, F-09 och F-10; originalen byte för byte; alla poster märkta `PRIVATE` (markering, styr inte uppspelning efter ägarbeslutet 23.30) | `ArchiveImportTest` (10 tester) | ACCEPT. Se avvikelse D-3. |
 | K-13 | Skrivskydd för original på modellnivå | `ArchiveStoreTest` (7 tester) | ACCEPT |
 | K-14 | Triggerna i 04 stoppar update/delete av original, uppgradering till original och ändring av historiken, och loggar synlighet | `SqliteTriggerTest` mot SQLite 3.41.2 via `org.xerial:sqlite-jdbc` (bara i test) | ACCEPT för vanlig SQLite. Room eller SQLDelight och Android: NOT_VERIFIED (A-13). |
 | K-15 | Migreringsrisken: en ombyggnad av tabellen tappar triggerna | `SqliteTriggerTest` "ombyggnad av tabellen tappar triggerna och upptäcks" visar att triggerna försvinner, att kontrollen mot `sqlite_master` upptäcker det och att skyddet är tillbaka när triggerna återskapas | ACCEPT som bevis för risken och kontrollen. Att vald teknik återskapar dem: NOT_VERIFIED. |
-| K-16 | Motorn använder bara `ORIGINAL_VERBATIM` och `APPROVED_EDIT` med `APPROVED`, aldrig Grok Bots förslag | `LineBankTest`: radbanken har 20 poster (C-001, C-002a, C-002b, C-003–C-009, N-002, P-001, P-001-N, P-002–P-007, RED-P-007). 89 utesluts: 75 ej godkända (alla 65 Grok Bot-poster), 10 fel ursprungsklass, 3 Rikard-utdrag, 1 lexikon. | ACCEPT |
+| K-16 | Motorn använder bara `ORIGINAL_VERBATIM` och `APPROVED_EDIT` med `APPROVED`, aldrig Grok Bots förslag | `LineBankTest`: radbanken har 20 poster (oförändrat efter ägarbeslutet 23.30) (C-001, C-002a, C-002b, C-003–C-009, N-002, P-001, P-001-N, P-002–P-007, RED-P-007). 89 utesluts: 75 ej godkända (alla 65 Grok Bot-poster), 10 fel ursprungsklass, 3 Rikard-utdrag, 1 lexikon. | ACCEPT |
 | K-17 | Determinism: samma händelse, minne och seed ger samma svar | `IllogicalEngineTest` (1 000 upprepningar) | ACCEPT |
 | K-18 | Svarskontraktet i 05 §5 punkt 1–5 för varje svans | `IllogicalEngineTest` "varje svans uppfyller svarskontraktet" (300 händelser) | ACCEPT |
 | K-19 | Motsägelseminnet förnekar bara presenterade yttranden | `IllogicalEngineTest` med testfixturer | ACCEPT på fixturer. Med dagens data finns inga godkända förnekelserader, så funktionen är vilande. |
@@ -95,7 +95,8 @@ Utdata: [`gradle-clean-check.txt`](etapp1-testutdata/gradle-clean-check.txt) (`B
 | SG-06, SG-07 | nödläge, 1 000 slumpade kandidater | ACCEPT |
 | SG-08, SG-09 | omräkning | ACCEPT |
 | SG-10 | förlorad position | ACCEPT för beslutet. "Sanningsremsan visar Position osäker": NOT_VERIFIED (UI finns inte). |
-| SG-11–SG-20 | osäkerhet, batteri, konvoj, stress, glitch, integritet, upprepning, utgång, ej godkänd | ACCEPT |
+| SG-11–SG-15, SG-18–SG-20 | osäkerhet, batteri, konvoj, stress, glitch, upprepning, utgång, ej godkänd | ACCEPT |
+| SG-16, SG-17 | ändrade genom ägarbeslutet 23.30: privat rad i konvoj och på alla ljudutgångar ger nu `Present`. Nytt test: säkerhetsreglerna gäller fortfarande för privata rader på bilhögtalaren. | ACCEPT mot det nya beslutet |
 | R-16 | 60 s efter nödläge | ACCEPT |
 | SG-21 | 10 000 upprepningar | ACCEPT |
 | SG-22 | 50 000 slumpade lägen, 26 703 i EMERGENCY/REROUTING/MANEUVER_WINDOW, 0 `Present` där | ACCEPT |
@@ -116,7 +117,7 @@ Utdata: [`gradle-clean-check.txt`](etapp1-testutdata/gradle-clean-check.txt) (`B
 | RR-08 | förslag och variationer kan inte vara original | ACCEPT |
 | RR-09 | Satirläget märker svaret "Satir" | ACCEPT. Analysläget finns inte: NOT_VERIFIED. |
 | RR-10 | lånade namn hålls utanför radbanken | ACCEPT. Nya namn (B-12, B-13): öppna. |
-| RR-11 | bara APPROVED; relationscitat PRIVATE; SG-16, SG-17, SG-20 | ACCEPT |
+| RR-11 | bara APPROVED; relationscitat märkta PRIVATE; privata rader ger `Present` på alla ljudutgångar, med och utan konvoj (ägarbeslut 23.30); SG-16, SG-17, SG-20 | ACCEPT mot det nya beslutet |
 | RR-12 | sanning skild från satir på skärm och i ljud | NOT_VERIFIED (UI och G4) |
 | RR-13 | inga BS-regler i navigatorns radbank | ACCEPT |
 
@@ -150,10 +151,21 @@ Ingen kod är kopierad rakt av. Idéer som tagits om enligt beslutsloggen:
 
 ## 6. Iakttagelser
 
-- I det genomgående testet släpptes 2 av 160 föreslagna svansar fram (158 stoppades). Det beror på att den syntetiska sekvensen ofta ligger i manöverfönster, omräkning eller nödläge. Det är inte ett kvalitetsmått; tröskelvärdena prövas i G5.
-- Radbanken har bara 20 rader, alla privata. Med bilhögtalare, Bluetooth eller okänd ljudutgång stoppas alla (R-12). Fler rader kräver F-11.
+- I det genomgående testet släpptes 2 av 160 föreslagna svansar fram (158 stoppades), både före och efter ägarbeslutet 23.30. Skälen efter beslutet: AFTER_EMERGENCY 97, EMERGENCY 58, STRESS_TOO_LONG 2, REROUTING 1. Den syntetiska sekvensen ligger alltså mest i nödläge eller de 60 sekunderna efter. Det är inte ett kvalitetsmått; tröskelvärdena prövas i G5.
+- Radbanken har bara 20 rader, alla märkta privata. Efter ägarbeslutet 23.30 spelas de upp också på bilhögtalare, Bluetooth och okänd utgång. Fler rader kräver F-11.
 - Gradle varnar för API som tas bort i Gradle 9 (`dependencyProject` i `verifyModuleGraph`). Det påverkar inte utfallet nu.
 
 ## 7. Inte verifierat
 
 Talsyntes och avbrott inom 100 ms (G4), allt på målenheten SM-X900 (F-04), triggerna i Room eller SQLDelight och efter migrering (A-13), `:truth:core` och G-5, Konsist (G-7), sanningsremsan (UI), Analysläget, SG-24 och oberoende granskning av allt ovan.
+
+## 8. Ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm): allt ska höras
+
+Ordagrant: "I helvete allt ska höras lägg av med detta trams". **Ägarbeslut med accepterad risk: passagerare och konvojdeltagare kan höra privata namn och relationsinnehåll.** Införd i 10 (avsnitt 7), 04, 06 (R-12, SG-16, SG-17), 11 (R-05) och 12 (RR-07, RR-11).
+
+Lösning: uppspelningsspärren togs bort ur SafetyGate (`SuppressReason.PRIVACY` finns inte längre). Synligheten `PRIVATE` ligger kvar på posterna som markering av känsligt innehåll, eftersom den uppgiften behövs vid senare spridning, men den styr inte uppspelning. Det valdes framför att sätta alla poster till `OPEN`, som skulle ha raderat uppgiften om vad som är känsligt.
+
+Oförändrat: originaltexterna och skrivskyddet, SafetyGates säkerhetsregler, F-11 (Grok Bots förslag med `approved: false` används inte), D-8 (R-001–R-003 utanför radbanken, öppen fråga) och att repot är privat på GitHub.
+
+Jämförelse i det genomgående testet: före beslutet kördes det med trådade hörlurar och gav 2 presenterade av 160. Nu körs det med bilhögtalaren och ger fortfarande 2 av 160. Med den gamla R-12 och bilhögtalare hade alla 20 rader stoppats, eftersom alla är märkta privata. Det sista är en slutsats ur koden och har inte körts som eget test.
+

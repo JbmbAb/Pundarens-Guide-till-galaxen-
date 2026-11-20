@@ -1,4 +1,4 @@
-# Kört 2026-11-20 22:48:36 CET på commit baf40b4a5dd629961187d533b6eea15c06df131f
+# Kört 2026-11-20 23:33:14 CET på commit b9d33ac3df2cbbca1184fefbe9028417ae072cd4
 # --: line 1: java: command not found ; JAVA_HOME=/opt/jdk17
 # Kommando: ./gradlew --no-daemon --console=plain clean check
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
@@ -208,6 +208,10 @@ SafetyGateTest > SG-06 nödläge avbryter och stoppar sedan allt PASSED
 
 SafetyGateTest > SG-05b till fots i fordonsfart gäller fordonsreglerna PASSED
 
+SafetyGateTest > ägarbeslutet tar inte bort säkerhetsreglerna för privata rader PASSED
+
+SafetyGateTest > SG-16 privat rad med aktiv konvoj spelas upp PASSED
+
 SafetyGateTest > SG-03 pågående svans avbryts när manövern går in i tyst fönster PASSED
 
 SafetyGateTest > SG-07 nödläge och 1000 slumpade kandidater ger alltid EMERGENCY PASSED
@@ -220,8 +224,6 @@ SafetyGateTest > SG-01 normalt läge ger Present PASSED
 
 SafetyGateTest > SG-02 manöver om 10 s i fordon ger NO_TIME PASSED
 
-SafetyGateTest > SG-16 privat citat med aktiv konvoj stoppas PASSED
-
 SafetyGateTest > SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW PASSED
 
 SafetyGateTest > SG-02b manöver inom tyst fönster utan känd talinstruktion ger MANEUVER PASSED
@@ -230,13 +232,13 @@ SafetyGateTest > SG-12 batteri 12 procent ger PRIORITY_INFO PASSED
 
 SafetyGateTest > SG-13 förlorad konvojkontakt ger PRIORITY_INFO PASSED
 
+SafetyGateTest > SG-17 privat rad spelas upp på alla ljudutgångar PASSED
+
 SafetyGateTest > SG-04 riktningsord i fordonsläge stoppas PASSED
 
 SafetyGateTest > SG-20 svans från V-012 med PENDING stoppas PASSED
 
 SafetyGateTest > SG-21 samma indata 10000 gånger ger samma beslut PASSED
-
-SafetyGateTest > SG-17 privat citat via bilens högtalare eller okänd utgång stoppas PASSED
 
 SafetyGateTest > SG-10 förlorad position under aktiv rutt stoppar PASSED
 
@@ -256,7 +258,6 @@ SafetyGateTest > kandidatvärdena är märkta som ofrysta PASSED
 
 > Task :engine:compileTestJava NO-SOURCE
 > Task :engine:testClasses UP-TO-DATE
-> Task :verification:architecture:compileTestKotlin
 
 > Task :engine:test
 
@@ -286,6 +287,7 @@ LineBankTest > radbanken innehåller bara godkända original och godkända bearb
 
 > Task :engine:check
 > Task :safetygate:check
+> Task :verification:architecture:compileTestKotlin
 > Task :verification:architecture:compileTestJava NO-SOURCE
 > Task :verification:architecture:testClasses UP-TO-DATE
 
@@ -313,8 +315,6 @@ ArchitectureTest > G-8 rena moduler har varken Android, Google eller nätverk PA
 
 EndToEndDiodeTest > tvåhundra simulerade händelser genom motor och SafetyGate PASSED
 
-VoiceRulesTest > RR-11 bara APPROVED och relationscitat är PRIVATE PASSED
-
 VoiceRulesTest > RR-05 spärrlistan omfattar böjningar men inte högre PASSED
 
 VoiceRulesTest > RR-01 varje rad i radbanken bär minst en mekanism PASSED
@@ -332,6 +332,8 @@ VoiceRulesTest > RR-09 satiren är märkt som satir PASSED
 VoiceRulesTest > RR-04 inga rader i radbanken låter som besked PASSED
 
 VoiceRulesTest > RR-07 Rikard hörs aldrig och verkliga utdrag läses inte upp PASSED
+
+VoiceRulesTest > RR-11 bara APPROVED, relationscitat märkta, och privata rader hörs överallt PASSED
 
 > Task :verification:architecture:check
 > Task :check
