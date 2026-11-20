@@ -74,6 +74,15 @@ class SafetyGateTest {
     @Test fun `SG-05b till fots i fordonsfart gäller fordonsreglerna`() =
         assertEquals(SuppressReason.DIRECTION_WORD, reason(gate.decide(input(mode = TravelMode.FOOT, speed = 40.0), tail("Sväng vänster"))))
 
+    @Test fun `F-11 rad bara till fots stoppas i fordon och släpps till fots`() {
+        val foot = tail("Svängen är korrekt.").copy(footOnly = true)
+        assertEquals(SuppressReason.DIRECTION_WORD, reason(gate.decide(input(), foot)))
+        val kartan = tail("Kartan har rätt.")
+        assertEquals(SuppressReason.FOOT_ONLY_IN_VEHICLE, reason(gate.decide(input(), kartan)))
+        assertEquals(SuppressReason.FOOT_ONLY_IN_VEHICLE, reason(gate.decide(input(), kartan.copy(footOnly = true))))
+        assertTrue(gate.decide(input(mode = TravelMode.FOOT, speed = 4.0, toManeuver = 70.0), kartan.copy(footOnly = true)) is Present)
+    }
+
     @Test fun `SG-06 nödläge avbryter och stoppar sedan allt`() {
         assertEquals(Interrupt(SuppressReason.EMERGENCY), gate.checkOngoing(input(emergency = true), tail()))
         assertEquals(SuppressReason.EMERGENCY, reason(gate.decide(input(emergency = true), tail())))

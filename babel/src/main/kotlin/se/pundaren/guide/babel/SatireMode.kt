@@ -8,12 +8,12 @@ import se.pundaren.guide.archive.api.OriginClass
 
 /**
  * Babel-Stoner, Satirläget (spelet). Deterministiskt: samma inmatning, samma sessionsläge och
- * samma seed ger samma svar. Använder bara BS-01–BS-10 (`DERIVED_RULE` med `APPROVED`) och,
- * som exempel, godkända arkivrader som regeln själv pekar på (G8, RR-13).
+ * samma seed ger samma svar. Använder bara godkända regler (`DERIVED_RULE` med `APPROVED`: BS-01–BS-10 och,
+ * sedan ägarbeslutet 2026-11-20 kl. 23.36, BS-11–BS-16), godkända arkivrader som regeln pekar på och
+ * godkända satiriska repliker (EX-F-01–EX-F-07) (G8, RR-13).
  *
- * Avgränsning i den här etappen: inga satiriska formuleringar skrivs av byggaren. Svaret är
- * regeln, dess grund och den tillämpade inmatningen, märkt som satir (RR-09). Egna repliker
- * kräver godkända rader (F-11). Analysläget och `:llm:api` ingår inte (etapp 7).
+ * Byggaren skriver inga egna formuleringar. Repliken är en godkänd exempelpost, vald deterministiskt.
+ * Analysläget och `:llm:api` ingår inte (etapp 7).
  */
 class SatireMode(archive: ArchiveReader, private val config: Config = Config()) {
 
@@ -35,6 +35,11 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
         }
         .associateBy { it.id }
 
+    /** Godkända satiriska repliker (exempeldialoger). Inte EX-01-FORMULERING (BLOCKED) eller väntande poster. */
+    val replies: List<ArchiveEntry> = archive.all()
+        .filter { it.kind == EntryKind.EXAMPLE && it.approval == Approval.APPROVED && "archive_only" !in it.tags }
+        .sortedBy { it.id }
+
     data class Session(val turns: List<String> = emptyList())
 
     data class SatireReply(
@@ -47,6 +52,9 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
         /** En godkänd arkivrad som regeln pekar på, eller null. Märkt PRIVATE (04, 1.4); styr inte uppspelning. */
         val exampleLineId: String?,
         val exampleText: String?,
+        /** Godkänd satirisk replik ur arkivet, eller null. */
+        val replyLineId: String?,
+        val replyText: String?,
         val session: Session,
     ) {
         fun render(): String = buildString {
@@ -54,10 +62,15 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
             ruleBasis?.let { append(" (grund: ").append(it).append(')') }
             append("\nTillämpas på: «").append(appliedTo).append('»')
             if (exampleText != null) append("\nUr arkivet (").append(exampleLineId).append("): ").append(exampleText)
+            if (replyText != null) append("\nReplik (").append(replyLineId).append("): ").append(replyText)
         }
     }
 
-    fun reply(input: String, session: Session, seed: Long): SatireReply {
+    /**
+     * @param inVehicle om enheten är i fordon. Då används inte repliker märkta "bara till fots" (F-11, 23.36).
+     *   Standard är det försiktiga valet `true`, eftersom Babel inte får läsa sanningskärnan.
+     */
+    fun reply(input: String, session: Session, seed: Long, inVehicle: Boolean = true): SatireReply {
         require(rules.isNotEmpty()) { "Inga godkända BS-regler i arkivet" }
         val text = input.trim()
         val next = Session(session.turns + text)
@@ -67,6 +80,8 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
         val appliedTo = if (rule.id == "BS-08") next.turns.first() else text
         val example = rule.tags.filter { it.startsWith("quote:") }.map { it.removePrefix("quote:") }
             .mapNotNull { quoteById[it] }.sortedBy { it.id }.firstOrNull()
+        val usableReplies = replies.filter { !(inVehicle && "foot_only" in it.tags) }
+        val reply = if (usableReplies.isEmpty()) null else usableReplies[(((seed * 7 + next.turns.size + text.length) % usableReplies.size + usableReplies.size) % usableReplies.size).toInt()]
         return SatireReply(
             label = "Satir",
             ruleId = rule.id,
@@ -75,6 +90,8 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
             appliedTo = appliedTo,
             exampleLineId = example?.id,
             exampleText = example?.text,
+            replyLineId = reply?.id,
+            replyText = reply?.text,
             session = next,
         )
     }

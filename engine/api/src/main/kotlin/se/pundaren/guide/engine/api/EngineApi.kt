@@ -28,6 +28,8 @@ data class TailCandidate(
     val triggeredBy: String,
     val validUntilMonotonicMillis: Long,
     val contradicts: String? = null,
+    /** Raden har riktningsord eller kan låta som ett besked och får bara presenteras till fots (F-11, 23.36). */
+    val footOnly: Boolean = false,
 )
 
 /** En svans som SafetyGate faktiskt släppte fram och som spelades. Bara sådana får förnekas (04, 1.8). */

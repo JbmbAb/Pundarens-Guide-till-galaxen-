@@ -39,7 +39,7 @@ enum class GateState { NORMAL, POSITION_UNCERTAIN, PRIORITY_INFO, MANEUVER_WINDO
 
 enum class SuppressReason {
     EMERGENCY, AFTER_EMERGENCY, REROUTING, MANEUVER, NO_TIME, PRIORITY_INFO, POSITION_LOST,
-    UNCERTAINTY_NOT_SHOWN, NOT_APPROVED, EXPIRED, REPEAT, DIRECTION_WORD, GLITCH_SPEED, STRESS_TOO_LONG,
+    UNCERTAINTY_NOT_SHOWN, NOT_APPROVED, EXPIRED, REPEAT, DIRECTION_WORD, FOOT_ONLY_IN_VEHICLE, GLITCH_SPEED, STRESS_TOO_LONG,
 }
 
 sealed interface PresentationDecision {
@@ -103,6 +103,8 @@ class SafetyGate(private val config: SafetyGateConfig = SafetyGateConfig.CANDIDA
         // R-12 (uppspelningsspärr för PRIVATE) är borttagen genom ägarbeslut 2026-11-20 kl. 23.30:
         // "I helvete allt ska höras lägg av med detta trams". Synligheten styr inte uppspelning.
         if (vehicleRules(nav) && GateDirectionCheck.hasDirectionWord(candidate.text)) return suppress(SuppressReason.DIRECTION_WORD)
+        // F-11 (ägarbeslut 23.36): rader som kan låta som besked får bara användas till fots. Egen mönsterlista + motorns märkning.
+        if (vehicleRules(nav) && (candidate.footOnly || GateDirectionCheck.soundsLikeInstruction(candidate.text))) return suppress(SuppressReason.FOOT_ONLY_IN_VEHICLE)
         if (candidate.kind == TailKind.ANIMATION && nav.speedKmh > config.glitchMaxSpeedKmh) return suppress(SuppressReason.GLITCH_SPEED)
         val stressed = stressed(input)
         if (stressed && candidate.kind == TailKind.ANIMATION) return suppress(SuppressReason.STRESS_TOO_LONG)
@@ -160,5 +162,15 @@ object GateDirectionCheck {
     fun hasDirectionWord(text: String): Boolean {
         val t = text.lowercase().replace(Regex("\\s+"), " ")
         return words.any { t.contains(it) }
+    }
+
+    /** Oberoende lista över fraser som kan misstas för besked (RR-04). Delar ingen kod med motorn. */
+    private val instructionLike = listOf(
+        "är korrekt", "har rätt", "är verklig", "du är inte vilse", "fortsätt enligt", "kör vidare",
+        "avståndet stämmer", "tiden stämmer", "du är framme",
+    )
+    fun soundsLikeInstruction(text: String): Boolean {
+        val t = text.lowercase().replace(Regex("\\s+"), " ")
+        return instructionLike.any { t.contains(it) }
     }
 }

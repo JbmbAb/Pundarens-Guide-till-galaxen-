@@ -20,6 +20,8 @@ object TailContract {
         if (candidate.triggeredBy != event.eventId) add("1: triggeredBy pekar inte på händelsen")
         if (candidate.validUntilMonotonicMillis - event.monotonicMillis > maxLifetimeMillis) add("2: livslängd över ${maxLifetimeMillis} ms")
         if (travelMode != TravelMode.FOOT && VoiceGuards.hasDirectionWord(candidate.text)) add("3: riktningsord i fordonsläge")
+        if (travelMode != TravelMode.FOOT && candidate.footOnly) add("3: rad som bara får användas till fots i fordonsläge")
+        if (!candidate.footOnly && (VoiceGuards.hasDirectionWord(candidate.text) || VoiceGuards.soundsLikeInstruction(candidate.text))) add("3: riktningsord eller beskedsliknande rad saknar footOnly")
         val src = archive.get(candidate.lineId)
         if (src == null) add("4: lineId saknas i arkivet")
         else {

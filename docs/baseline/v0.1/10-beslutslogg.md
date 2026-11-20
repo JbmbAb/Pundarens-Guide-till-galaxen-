@@ -165,3 +165,21 @@ Inget här gör G0 till ACCEPT. Alla grindar förblir NOT_VERIFIED. Ingen implem
 
 Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 8.
 
+<a id="godkann-allt"></a>
+## 8. Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): godkänn allt
+
+Ägarens beslut ordagrant: "Godkänn allt är det något som inte passar går att radera senare". Det gäller alla 65 raderna i F-11 och besluten D-3, D-6, D-8 och D-12 i [etapp1-protokollet](../verification/etapp1-protokoll.md).
+
+| Id | Utfall | Kort |
+|---|---|---|
+| F-11 | ACCEPT genom ägarbeslut | Alla 65 rader godkända (`approved: true`, `approvedBy: "Jimmy Bruce"`, `approvedAt: "2026-11-20"`). Ursprungsklassen (`SYNTHETIC_SATIRE`/`DERIVED_RULE`) och författaren "Grok Bot (förslag)" ligger kvar; ingen blir original. Rader kan strykas senare. |
+| B-12, B-24 | REVISE | De 14 raderna med lånade namn är godkända som arbetsnamn (`workingName: true`). Byts före spridning. |
+| B-22, B-23, B-25, B-26 | ACCEPT genom ägarbeslut | Variationer, BS-11–BS-16, navigationskommentarer och exempeldialoger godkända. De 12 raderna med riktningsord eller beskedsrisk har `footOnly: true` och spärras i fordonsläge av motorn och SafetyGate (säkerhetsregel, oförändrad). |
+| D-3 | ACCEPT | Original får `approval = APPROVED` vid import. |
+| D-6 | ACCEPT | Fordonsreglerna gäller från 10 km/h även till fots (kandidatvärde, fortfarande ofryst). |
+| D-8 | ACCEPT | R-001–R-003 hålls utanför motorns radbank. |
+| D-12 | ACCEPT | Citaten klassas som M1 (utvidgat: navigationskommentarer M8, med Rikard även M5; exempel M6). |
+| Gäller inte | – | Exemplen ur sammanställningen (EX-01, EX-03, EX-05, EX-ILLOGICAL-01) och PAT-01–PAT-05 är inte Grok Bot-förslag och förblir `PENDING`; `EX-01-FORMULERING` förblir `BLOCKED` (F-12). Originaltexter och skrivskydd oförändrade. |
+
+Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 9.
+

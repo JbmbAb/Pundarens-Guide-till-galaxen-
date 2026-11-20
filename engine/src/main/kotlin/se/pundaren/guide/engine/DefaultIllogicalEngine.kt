@@ -57,7 +57,7 @@ class DefaultIllogicalEngine(
         val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
         val vehicle = context.travelMode != TravelMode.FOOT
 
-        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && VoiceGuards.hasDirectionWord(e.text))
+        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && fitsSituation(e, event)
 
         // M2: motsägelseminnet förnekar bara yttranden som faktiskt presenterades.
         val lastPresented = context.memory.presented.lastOrNull()
@@ -83,6 +83,7 @@ class DefaultIllogicalEngine(
         mechanisms = line.mechanisms + extra,
         mentionsRikard = VoiceGuards.mentionsRikard(line.text),
         estimatedSpeechMillis = estimateSpeechMillis(line.text),
+        footOnly = LineBank.isFootOnly(line),
         triggeredBy = event.eventId,
         validUntilMonotonicMillis = event.monotonicMillis + config.tailLifetimeMillis,
         contradicts = contradicts,
@@ -99,6 +100,21 @@ class DefaultIllogicalEngine(
             is PositionQualityChanged -> event.quality != PositionQuality.LOST
             is RouteStarted, is ManeuverUpcoming, is ManeuverCompleted, is Rerouted,
             is Stationary, is Arrived, is TimeOfDayChanged -> true
+        }
+
+        /**
+         * Navigationskommentarernas fält `situation` styr när de får föreslås. Rader utan situation
+         * (citat, variationer, "general") passar alla händelser som får ge svans.
+         */
+        fun fitsSituation(e: ArchiveEntry, event: TruthEvent): Boolean {
+            val situation = e.tags.firstOrNull { it.startsWith("situation:") }?.removePrefix("situation:") ?: return true
+            return when (situation) {
+                "general" -> true
+                "turn" -> event is ManeuverCompleted
+                "straight" -> event is ManeuverCompleted || event is RouteStarted || event is Rerouted || event is TimeOfDayChanged
+                "arrival" -> event is Arrived
+                else -> false
+            }
         }
 
         private fun mix(seed: Long, eventId: String): Long {

@@ -41,11 +41,26 @@ class ArchiveImportTest {
         assertTrue(entries.all { it.visibility == Visibility.PRIVATE })
     }
 
-    @Test fun `Grok Bots förslag är aldrig original och aldrig godkända`() {
-        val grok = entries.filter { it.author.contains("Grok Bot") }
+    @Test fun `Grok Bots förslag är godkända av Jimmy men aldrig original`() {
+        // Ägarbeslut 2026-11-20 kl. 23.36: "Godkänn allt är det något som inte passar går att radera senare".
+        val grok = entries.filter { it.author == "Grok Bot (förslag)" }
         assertEquals("V 20 + lexikon 12 + BS 6 + EX-F 7 + NAV 20", 65, grok.size)
         assertTrue(grok.none { it.originClass == OriginClass.ORIGINAL_VERBATIM })
-        assertTrue(grok.none { it.approval == Approval.APPROVED })
+        assertTrue(grok.all { it.originClass == OriginClass.SYNTHETIC_SATIRE || it.originClass == OriginClass.DERIVED_RULE })
+        assertTrue(grok.all { it.approval == Approval.APPROVED })
+        assertTrue(grok.all { "approvedAt:2026-11-20" in it.tags })
+        assertEquals(14, entries.count { "arbetsnamn" in it.tags })
+        assertEquals(12, entries.count { "foot_only" in it.tags })
+    }
+
+    @Test fun `approved true utan Jimmy som godkännare räknas inte`() {
+        val forged = sources.copy(quotesJson = sources.quotesJson.replace("\"approvedBy\": \"Jimmy Bruce\"", "\"approvedBy\": \"Grok Bot\""))
+        val v = ArchiveImporter.import(forged).single { it.id == "V-001" }
+        assertEquals(Approval.PENDING, v.approval)
+    }
+
+    @Test fun `konstruerade exempel ur sammanställningen är fortfarande inte godkända`() {
+        listOf("EX-01", "EX-03", "EX-05", "EX-ILLOGICAL-01").forEach { assertEquals(Approval.PENDING, byId[it]!!.approval) }
     }
 
     @Test fun `F-10 och F-09 ger APPROVED_EDIT och originalen ligger kvar`() {
@@ -77,9 +92,9 @@ class ArchiveImportTest {
         }
     }
 
-    @Test fun `BS-01 till BS-10 är godkända regler och BS-11 till BS-16 väntar`() {
+    @Test fun `BS-01 till BS-16 är godkända regler`() {
         (1..10).forEach { assertEquals(Approval.APPROVED, byId["BS-%02d".format(it)]!!.approval) }
-        (11..16).forEach { assertEquals(Approval.PENDING, byId["BS-$it"]!!.approval) }
+        (11..16).forEach { assertEquals(Approval.APPROVED, byId["BS-$it"]!!.approval) }
         assertTrue((1..16).all { byId["BS-%02d".format(it)]!!.originClass == OriginClass.DERIVED_RULE })
     }
 

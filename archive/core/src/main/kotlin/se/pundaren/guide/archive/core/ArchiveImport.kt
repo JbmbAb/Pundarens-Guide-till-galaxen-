@@ -140,7 +140,7 @@ object ArchiveImporter {
                 id, OriginClass.SYNTHETIC_SATIRE, "variation", EntryKind.QUOTE, o.str("text")!!,
                 Verification.UNKNOWN, approvalFromFlag(o), o.str("author") ?: "okänd",
                 "data/quotes/quotes.json#$id", o.str("sourceNote"), origin, null, null,
-                mechanismFromWord(o.str("mechanism")), tags,
+                mechanismFromWord(o.str("mechanism")), tags + flagTags(o),
             )
         }
     }
@@ -159,8 +159,8 @@ object ArchiveImporter {
                 )
                 "förslag" -> out += entry(
                     id, OriginClass.SYNTHETIC_SATIRE, "lexikonförslag", EntryKind.LEXICON, text,
-                    Verification.UNKNOWN, Approval.PENDING, o.str("author") ?: "okänd",
-                    "data/lexicon/lexicon.json#$id", o.str("sourceNote"), null, null, "lexikon", emptySet(), emptySet(),
+                    Verification.UNKNOWN, approvalFromFlag(o), o.str("author") ?: "okänd",
+                    "data/lexicon/lexicon.json#$id", o.str("sourceNote"), null, null, "lexikon", emptySet(), flagTags(o),
                 )
                 else -> throw ArchiveImportException("Lexikon $id har okänd proveniens '$prov'")
             }
@@ -187,8 +187,8 @@ object ArchiveImporter {
                 )
                 "förslag" -> out += entry(
                     id, OriginClass.DERIVED_RULE, "regelförslag", EntryKind.RULE, o.str("function")!!,
-                    Verification.UNKNOWN, Approval.PENDING, o.str("author") ?: "okänd",
-                    "data/babel-stoner/rules.json#$id", o.str("sourceNote"), null, null, "babel-regel", mech, tags,
+                    Verification.UNKNOWN, approvalFromFlag(o), o.str("author") ?: "okänd",
+                    "data/babel-stoner/rules.json#$id", o.str("sourceNote"), null, null, "babel-regel", mech, tags + flagTags(o),
                 )
                 else -> throw ArchiveImportException("Regel $id har okänd proveniens '$prov'")
             }
@@ -215,9 +215,10 @@ object ArchiveImporter {
             val text = o.str("text") ?: o["response"]?.let(::flatten) ?: o.str("title") ?: id
             out += entry(
                 id, OriginClass.SYNTHETIC_SATIRE, "exempel", EntryKind.EXAMPLE, text, Verification.UNKNOWN,
-                if (blocked) Approval.BLOCKED else Approval.PENDING, o.str("author") ?: "sammanställningen 2026-11-20",
-                "data/babel-stoner/examples.json#$id", o.str("sourceNote"), null, null, "exempel", emptySet(),
-                if (blocked) setOf("återger_verklig_kommunikation", "archive_only") else emptySet(),
+                if (blocked) Approval.BLOCKED else approvalFromFlag(o), o.str("author") ?: "sammanställningen 2026-11-20",
+                "data/babel-stoner/examples.json#$id", o.str("sourceNote"), null, null, "exempel", setOf(Mechanism.M6),
+                (if (blocked) setOf("återger_verklig_kommunikation", "archive_only") else emptySet()) + flagTags(o) +
+                    listOfNotNull(o.str("original")?.let { "question:$it" }),
             )
         }
     }
@@ -228,15 +229,35 @@ object ArchiveImporter {
             val id = o.str("id")!!
             out += entry(
                 id, OriginClass.SYNTHETIC_SATIRE, "navigationskommentar", EntryKind.NAV_LINE, o.str("text")!!,
-                Verification.UNKNOWN, Approval.PENDING, o.str("author") ?: "okänd",
+                Verification.UNKNOWN, approvalFromFlag(o), o.str("author") ?: "okänd",
                 "data/babel-stoner/navigation_comments.json#$id", o.str("sourceNote"), null, null,
-                o.str("situation"), emptySet(), emptySet(),
+                o.str("situation"), navMechanisms(o), flagTags(o) + listOfNotNull(o.str("situation")?.let { "situation:$it" }),
             )
         }
     }
 
+    /** Bara Jimmy kan godkänna (04, 1.3): `approved: true` räknas bara med `approvedBy = "Jimmy Bruce"`. */
+    const val OWNER = "Jimmy Bruce"
+
     private fun approvalFromFlag(o: JsonObject): Approval =
-        if ((o["approved"] as? JsonPrimitive)?.booleanOrNull == true) Approval.APPROVED else Approval.PENDING
+        if ((o["approved"] as? JsonPrimitive)?.booleanOrNull == true && o.str("approvedBy") == OWNER) Approval.APPROVED
+        else Approval.PENDING
+
+    /** F-11, ägarbeslut 2026-11-20 kl. 23.36: arbetsnamn (B-12) och rader som bara får användas till fots. */
+    private fun flagTags(o: JsonObject): Set<String> = buildSet {
+        if ((o["workingName"] as? JsonPrimitive)?.booleanOrNull == true) add(TAG_WORKING_NAME)
+        if ((o["footOnly"] as? JsonPrimitive)?.booleanOrNull == true) add(TAG_FOOT_ONLY)
+        o.str("approvedAt")?.let { add("approvedAt:$it") }
+    }
+
+    /** Byggarens klassning (D-12, utvidgad): kommentarerna följer svansens struktur (M8); Rikard ger M5. */
+    private fun navMechanisms(o: JsonObject): Set<Mechanism> = buildSet {
+        add(Mechanism.M8)
+        if ((o["usesRikard"] as? JsonPrimitive)?.booleanOrNull == true) add(Mechanism.M5)
+    }
+
+    const val TAG_WORKING_NAME = "arbetsnamn"
+    const val TAG_FOOT_ONLY = "foot_only"
 
     private fun mechanismFromWord(word: String?): Set<Mechanism> = when (word) {
         "paradox" -> setOf(Mechanism.M1)

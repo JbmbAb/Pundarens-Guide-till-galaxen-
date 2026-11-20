@@ -36,8 +36,8 @@ class VoiceRulesTest {
     @Test fun `RR-01 varje rad i radbanken bär minst en mekanism`() =
         assertTrue(bank.lines.all { it.mechanisms.isNotEmpty() })
 
-    @Test fun `RR-04 inga rader i radbanken låter som besked`() =
-        assertTrue(bank.lines.none { VoiceGuards.soundsLikeInstruction(it.text) })
+    @Test fun `RR-04 rader som låter som besked finns bara som rader till fots`() =
+        assertTrue(bank.lines.filter { VoiceGuards.soundsLikeInstruction(it.text) || GateDirectionCheck.soundsLikeInstruction(it.text) }.all { LineBank.isFootOnly(it) })
 
     @Test fun `RR-05 spärrlistan omfattar böjningar men inte högre`() {
         listOf("vänster", "Höger", "rakt fram", "sväng", "U-sväng", "avfart", "rondell", "svängen", "vänstersväng", "rondellen", "avfarten")
@@ -47,7 +47,8 @@ class VoiceRulesTest {
             }
         assertFalse(VoiceGuards.hasDirectionWord("högre"))
         assertFalse(GateDirectionCheck.hasDirectionWord("högre"))
-        assertTrue("radbanken har riktningsord", bank.lines.none { VoiceGuards.hasDirectionWord(it.text) })
+        // Rader med riktningsord godkändes av Jimmy 23.36 som "bara till fots"; spärren i fordonsläge ligger kvar.
+        assertTrue("riktningsord utan fotmärkning", bank.lines.filter { VoiceGuards.hasDirectionWord(it.text) }.all { LineBank.isFootOnly(it) })
     }
 
     @Test fun `RR-06 rader som skyller på användaren spärras`() {
@@ -67,8 +68,8 @@ class VoiceRulesTest {
         assertTrue(archive.all().all { it.originClass in OriginClass.entries })
     }
 
-    @Test fun `RR-10 lånade namn kommer inte in i radbanken`() {
-        assertTrue(bank.lines.none { VoiceGuards.hasBorrowedName(it.text) })
+    @Test fun `RR-10 lånade namn finns bara som märkta arbetsnamn`() {
+        assertTrue(bank.lines.filter { VoiceGuards.hasBorrowedName(it.text) }.all { LineBank.WORKING_NAME_TAG in it.tags })
         listOf("vogonkö", "Don't Panic", "handduken", "42").forEach { assertTrue(it, VoiceGuards.hasBorrowedName(it)) }
     }
 

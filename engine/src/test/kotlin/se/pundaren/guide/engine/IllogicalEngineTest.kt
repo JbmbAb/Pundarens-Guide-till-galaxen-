@@ -83,13 +83,49 @@ class IllogicalEngineTest {
         assertEquals(emptyList<String>(), TailContract.violations(c1, Fixtures.maneuverCompleted("EV-2", 1_000), store, TravelMode.FOOT, mem.presented))
     }
 
-    @Test fun `ej godkända rader och syntetisk text når aldrig motorn`() {
+    @Test fun `ej godkända rader och regler når aldrig motorn`() {
         val store = InMemoryArchiveStore.of(listOf(
-            Fixtures.line("TEST-P", "Väntar.", approval = Approval.PENDING),
-            Fixtures.line("TEST-S", "Syntetisk men godkänd.", origin = OriginClass.SYNTHETIC_SATIRE),
+            Fixtures.line("TEST-P", "Väntar.", approval = Approval.PENDING, origin = OriginClass.SYNTHETIC_SATIRE),
+            Fixtures.line("TEST-R", "En regel.", origin = OriginClass.DERIVED_RULE),
         ))
         val e = DefaultIllogicalEngine(LineBank.from(store))
         assertTrue(e.onEvent(Fixtures.routeStarted("EV-1"), EngineContext(1, TravelMode.FOOT)).isEmpty())
+    }
+
+    @Test fun `godkänd syntetisk satir når motorn`() {
+        val store = InMemoryArchiveStore.of(listOf(Fixtures.line("TEST-S", "Godkänd satir.", origin = OriginClass.SYNTHETIC_SATIRE)))
+        assertEquals("TEST-S", DefaultIllogicalEngine(LineBank.from(store)).onEvent(Fixtures.routeStarted("EV-1"), EngineContext(1, TravelMode.PASSENGER)).single().lineId)
+    }
+
+    @Test fun `rader bara till fots föreslås aldrig i fordonsläge men till fots`() {
+        val foot = mutableSetOf<String>()
+        var memory = EngineMemory()
+        Fixtures.simulate(600, 17).forEach { ev ->
+            engine.onEvent(ev, EngineContext(3, TravelMode.PASSENGER, memory)).forEach { c ->
+                assertFalse("${c.lineId} i fordonsläge", c.footOnly)
+                memory = memory.withPresented(PresentedTail(c.id, c.lineId, ev.monotonicMillis))
+            }
+        }
+        memory = EngineMemory()
+        Fixtures.simulate(600, 17).forEach { ev ->
+            engine.onEvent(ev, EngineContext(3, TravelMode.FOOT, memory)).forEach { c ->
+                if (c.footOnly) foot += c.lineId
+                memory = memory.withPresented(PresentedTail(c.id, c.lineId, ev.monotonicMillis))
+            }
+        }
+        assertTrue("inga fotrader föreslogs till fots", foot.isNotEmpty())
+    }
+
+    @Test fun `navigationskommentarer följer sin situation`() {
+        val ankomst = Fixtures.realArchive.all().filter { "situation:arrival" in it.tags }.map { it.id }.toSet()
+        assertTrue(ankomst.isNotEmpty())
+        var memory = EngineMemory()
+        Fixtures.simulate(800, 23).forEach { ev ->
+            engine.onEvent(ev, EngineContext(9, TravelMode.FOOT, memory)).forEach { c ->
+                if (c.lineId in ankomst) assertTrue(ev is se.pundaren.guide.truth.api.Arrived)
+                memory = memory.withPresented(PresentedTail(c.id, c.lineId, ev.monotonicMillis))
+            }
+        }
     }
 
     @Test fun `G1-kriteriet med hundra simulerade händelser`() {

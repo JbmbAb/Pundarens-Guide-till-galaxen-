@@ -13,8 +13,18 @@ class SatireModeTest {
     private val archive = InMemoryArchiveStore.of(ArchiveImporter.import(ArchiveSources.fromRepo(File(System.getProperty("guide.repoRoot")))))
     private val satire = SatireMode(archive)
 
-    @Test fun `bara BS-01 till BS-10 används`() {
-        assertEquals((1..10).map { "BS-%02d".format(it) }, satire.rules.map { it.id })
+    @Test fun `bara godkända regler BS-01 till BS-16 används`() {
+        // BS-11–BS-16 godkända genom ägarbeslut 2026-11-20 kl. 23.36 (F-11).
+        assertEquals((1..16).map { "BS-%02d".format(it) }, satire.rules.map { it.id })
+    }
+
+    @Test fun `repliker är godkända exempel och fotrader används inte i fordon`() {
+        assertEquals((1..7).map { "EX-F-0$it" }, satire.replies.map { it.id })
+        val inVehicle = (0 until 300).mapNotNull { satire.reply("fråga $it", SatireMode.Session(), it.toLong(), inVehicle = true).replyLineId }.toSet()
+        assertTrue(inVehicle.isNotEmpty())
+        assertTrue(inVehicle.none { "foot_only" in archive.get(it)!!.tags })
+        val onFoot = (0 until 300).mapNotNull { satire.reply("fråga $it", SatireMode.Session(), it.toLong(), inVehicle = false).replyLineId }.toSet()
+        assertTrue(onFoot.any { "foot_only" in archive.get(it)!!.tags })
     }
 
     @Test fun `samma inmatning, session och seed ger samma svar`() {
@@ -45,11 +55,11 @@ class SatireModeTest {
         assertEquals("Första.", last!!.appliedTo)
     }
 
-    @Test fun `Rikard-utdrag och väntande förslag används aldrig som exempel`() {
+    @Test fun `Rikard-utdrag, blockerade och väntande poster används aldrig`() {
         (0 until 500).forEach { i ->
             val r = satire.reply("fråga $i", SatireMode.Session(), i.toLong())
             assertFalse(r.exampleLineId?.startsWith("R-") == true)
-            assertFalse(r.ruleId in setOf("BS-11", "BS-12", "BS-13", "BS-14", "BS-15", "BS-16"))
+            assertFalse(r.replyLineId in setOf("EX-01-FORMULERING", "EX-01", "EX-03", "EX-05", "EX-ILLOGICAL-01"))
         }
     }
 }

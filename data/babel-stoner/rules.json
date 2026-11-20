@@ -117,7 +117,13 @@
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
       "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
-      "note": "Till exempel 42 ljusår till kiosken: siffran är självklar, skalan är det inte."
+      "note": "Till exempel 42 ljusår till kiosken: siffran är självklar, skalan är det inte.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11.",
+      "workingName": true,
+      "workingNameNote": "Innehåller lånat namn ur Adams böcker. Arbetsnamn (B-12, RR-10); byts före spridning."
     },
     {
       "id": "BS-12",
@@ -130,7 +136,11 @@
       ],
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
-      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11."
     },
     {
       "id": "BS-13",
@@ -140,7 +150,13 @@
       "relatedPatternIds": [],
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
-      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11.",
+      "workingName": true,
+      "workingNameNote": "Innehåller lånat namn ur Adams böcker. Arbetsnamn (B-12, RR-10); byts före spridning."
     },
     {
       "id": "BS-14",
@@ -150,7 +166,11 @@
       "relatedPatternIds": [],
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
-      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11."
     },
     {
       "id": "BS-15",
@@ -165,7 +185,11 @@
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
       "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
-      "note": "Tabelltemat är tillit och löften; C-007 är tematisk koppling, inte ett användarcitat som regeltext."
+      "note": "Tabelltemat är tillit och löften; C-007 är tematisk koppling, inte ett användarcitat som regeltext.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11."
     },
     {
       "id": "BS-16",
@@ -175,7 +199,13 @@
       "relatedPatternIds": [],
       "provenance": "förslag",
       "author": "Grok Bot (förslag)",
-      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "approved": true,
+      "approvedBy": "Jimmy Bruce",
+      "approvedAt": "2026-11-20",
+      "approvalNote": "Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): \"Godkänn allt är det något som inte passar går att radera senare\". F-11.",
+      "workingName": true,
+      "workingNameNote": "Innehåller lånat namn ur Adams böcker. Arbetsnamn (B-12, RR-10); byts före spridning."
     }
   ],
   "patterns": [
