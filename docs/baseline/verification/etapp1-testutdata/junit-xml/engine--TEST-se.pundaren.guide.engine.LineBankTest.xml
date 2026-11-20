@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.engine.LineBankTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-20T21:48:59" hostname="grok-bot-vm-328085215" time="0.008">
+  <properties/>
+  <testcase name="inga Grok Bot-förslag kommer in i radbanken" classname="se.pundaren.guide.engine.LineBankTest" time="0.001"/>
+  <testcase name="Rikard-utdrag, regler, lexikon och arkivposter hålls utanför" classname="se.pundaren.guide.engine.LineBankTest" time="0.001"/>
+  <testcase name="det finns inga förnekelserader i dagens data" classname="se.pundaren.guide.engine.LineBankTest" time="0.001"/>
+  <testcase name="radbanken innehåller bara godkända original och godkända bearbetningar" classname="se.pundaren.guide.engine.LineBankTest" time="0.005"/>
+  <system-out><![CDATA[RADBANK (20): C-001, C-002a, C-002b, C-003, C-004, C-005, C-006, C-007, C-008, C-009, N-002, P-001, P-001-N, P-002, P-003, P-004, P-005, P-006, P-007, RED-P-007
+UTESLUTNA (89): ORIGIN_NOT_ALLOWED=10 | NOT_APPROVED=75 | REAL_PERSON_EXCERPT=3 | KIND_NOT_TAIL=1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

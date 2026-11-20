@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.babel.SatireModeTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-20T21:48:54" hostname="grok-bot-vm-328085215" time="0.19">
+  <properties/>
+  <testcase name="svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning" classname="se.pundaren.guide.babel.SatireModeTest" time="0.11"/>
+  <testcase name="bara BS-01 till BS-10 används" classname="se.pundaren.guide.babel.SatireModeTest" time="0.02"/>
+  <testcase name="samma inmatning, session och seed ger samma svar" classname="se.pundaren.guide.babel.SatireModeTest" time="0.022"/>
+  <testcase name="BS-08 återvänder till samtalets början efter flera varv" classname="se.pundaren.guide.babel.SatireModeTest" time="0.013"/>
+  <testcase name="Rikard-utdrag och väntande förslag används aldrig som exempel" classname="se.pundaren.guide.babel.SatireModeTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

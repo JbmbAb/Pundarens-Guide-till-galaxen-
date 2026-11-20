@@ -1,0 +1,17 @@
+se.pundaren.guide.archive.core.ArchiveImportTest: 10 tester, 0 fel, 0 avbrott, 0 hoppade över
+se.pundaren.guide.archive.core.ArchiveStoreTest: 7 tester, 0 fel, 0 avbrott, 0 hoppade över
+se.pundaren.guide.archive.core.SqliteTriggerTest: 6 tester, 0 fel, 0 avbrott, 0 hoppade över
+se.pundaren.guide.babel.SatireModeTest: 5 tester, 0 fel, 0 avbrott, 0 hoppade över
+se.pundaren.guide.engine.IllogicalEngineTest: 8 tester, 0 fel, 0 avbrott, 0 hoppade över
+    utskrift: G1-SIMULERING: 100 händelser, 57 svansar föreslagna, 0 brott
+se.pundaren.guide.engine.LineBankTest: 4 tester, 0 fel, 0 avbrott, 0 hoppade över
+    utskrift: RADBANK (20): C-001, C-002a, C-002b, C-003, C-004, C-005, C-006, C-007, C-008, C-009, N-002, P-001, P-001-N, P-002, P-003, P-004, P-005, P-006, P-007, RED-P-007
+    utskrift: UTESLUTNA (89): ORIGIN_NOT_ALLOWED=10 | NOT_APPROVED=75 | REAL_PERSON_EXCERPT=3 | KIND_NOT_TAIL=1
+se.pundaren.guide.safetygate.SafetyGateTest: 26 tester, 0 fel, 0 avbrott, 0 hoppade över
+    utskrift: SG-22: 50000 slumpade lägen, 26703 i EMERGENCY/REROUTING/MANEUVER_WINDOW, 0 Present där
+se.pundaren.guide.verification.ArchitectureTest: 10 tester, 0 fel, 0 avbrott, 0 hoppade över
+se.pundaren.guide.verification.EndToEndDiodeTest: 1 tester, 0 fel, 0 avbrott, 0 hoppade över
+    utskrift: E2E: 200 händelser, 2 svansar presenterade, 158 stoppade
+se.pundaren.guide.verification.VoiceRulesTest: 10 tester, 0 fel, 0 avbrott, 0 hoppade över
+
+TOTALT: 87 tester, 0 fel, 0 avbrott, 0 hoppade över

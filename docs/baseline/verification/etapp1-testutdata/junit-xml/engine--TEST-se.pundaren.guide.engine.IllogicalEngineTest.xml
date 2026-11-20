@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.engine.IllogicalEngineTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-20T21:48:59" hostname="grok-bot-vm-328085215" time="0.29">
+  <properties/>
+  <testcase name="motsägelseminnet förnekar bara presenterade yttranden" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.123"/>
+  <testcase name="G1-kriteriet med hundra simulerade händelser" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.017"/>
+  <testcase name="riktningsord väljs bort i fordonsläge men inte till fots" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.001"/>
+  <testcase name="samma händelse, minne och seed ger samma utdata" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.084"/>
+  <testcase name="varje svans uppfyller svarskontraktet i 05" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.028"/>
+  <testcase name="ingen rad upprepas inom tio presenterade repliker" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.023"/>
+  <testcase name="inga svansar vid avvikelse, nödläge, batteri eller konvojhändelser" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.011"/>
+  <testcase name="ej godkända rader och syntetisk text når aldrig motorn" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.001"/>
+  <system-out><![CDATA[G1-SIMULERING: 100 händelser, 57 svansar föreslagna, 0 brott
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
