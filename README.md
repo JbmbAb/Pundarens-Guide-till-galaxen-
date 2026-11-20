@@ -6,7 +6,7 @@ En ologisk men oumbärlig digital följeslagare för Android, inspirerad av *Lif
 
 > Appen ska inte vara en förnuftig assistent som försöker vara rolig. Den ska vara en absurd, inkonsekvent, självmedvetet inkompetent galaktisk följeslagare som av misstag råkar vara användbar.
 
-**Status:** tidig planering. Här finns produktspecifikation, design och data, men ingen Android-kod ännu.
+**Status:** milstolpe 1. Android-appen byggs med `./gradlew assembleDebug` och enhetstesterna körs med `./gradlew test`.
 
 ## Grundprincip: Illogical Engine
 
@@ -28,32 +28,72 @@ Läs hela specifikationen i [`docs/PRD.md`](docs/PRD.md).
 - **Citatarkivet:** personliga livscitat och värdepar (frihet ↔ trygghet, kaos ↔ kontroll). Originalen bevaras ordagrant, och variationer lagras separat och märks som variationer.
 - **Handdukssensorn och Vibe Protect** från tidigare briefer.
 
-## Teknisk stack (planerad)
+## Teknisk stack
 
 - **Kotlin**
 - **Jetpack Compose + Material 3** (edge-to-edge, dynamisk färg, animationer)
 - **Google Maps SDK for Android / maps-compose** (+ android-maps-utils för GeoJSON)
 - **Kotlin Coroutines**
 - **KSP + Moshi** (parsning av GeoJSON och citatarkiv)
-- **Coil** (bilder)
 
-Kartdata ligger först som GeoJSON i appen, bakom ett `PlacesRepository`-interface. PostGIS med ett API framför kommer senare utan att resten av appen behöver ändras.
+Coil, Room och Retrofit är inte med i milstolpe 1.
+
+Kartdata ligger som GeoJSON i repot och paketeras in i APK:n av Gradle, bakom `PlacesRepository` / `BundledGeoJsonPlacesRepository`. PostGIS med ett API framför kan ersätta implementationen senare utan att resten av appen behöver ändras.
+
+## Bygga och köra
+
+Kräver JDK 21 och Android SDK med `compileSdk` 37.1. `local.properties` är gitignorerad och ska inte innehålla en incheckad nyckel.
+
+```
+sdk.dir=/sökväg/till/android-sdk
+MAPS_API_KEY=din_nyckel
+```
+
+Nyckeln läses i `app/build.gradle.kts` och injiceras som `manifestPlaceholders` (`MAPS_API_KEY`) i `AndroidManifest.xml`. Saknas nyckeln används platshållaren i `local.defaults.properties`, bygget går igenom, och kartskärmen säger att nyckeln saknas. Lägg ingen riktig nyckel i git.
+
+```
+./gradlew assembleDebug
+./gradlew test
+```
+
+Debug-APK: `app/build/outputs/apk/debug/app-debug.apk`.
+
+All synlig text i appen är på svenska. Originalcitat visas ordagrant. Text som motorn skriver märks som konstruerad, variation eller förslag och presenteras inte som användarens eget citat. JSON-parsern ignorerar okända fält och accepterar proveniens `original`, `bearbetad`, `redaktionell`, `konstruerad`, `variation` och `förslag`.
+
+## Milstolpe 1
+
+- Gradle-projekt med Kotlin, Jetpack Compose, Material 3, versionskatalog, KSP och Moshi. Ren Kotlin-modul `:engine` och Android-modul `:app`.
+- Mörkt tema från Cosmic Drift och The Sentient Archive: lila och turkos, Manrope för nytta, Space Grotesk för visdom.
+- Bottennavigering, och sidomeny på bred skärm: Hem, Karta, Babel, Arkiv, Drift.
+- Karta med Praktisk, Poetisk och Osannolik, glitch i osannolikhetsläget, och upphovet © OpenStreetMap contributors.
+- Anti-navigering: pil, avstånd och gata kommer från fakta. Bara kommentaren är opålitlig, inklusive Rikard.
+- Babel-Stoner med de fem lägena, galaktisk analys och omvänd läsning som flaggar felslut utan diagnos eller motiv.
+- Citat, lexikon, regler, exempel och navigationskommentarer läses från `data/` via Gradle, utan att filerna dupliceras i källträdet.
+
+## Kvar till milstolpe 2
+
+- Riktig ruttmotor, tyst fönster före sväng och dämpad glitch i hög fart.
+- `RemotePlacesRepository` mot PostGIS via API, bbox-frågor och tätare rastplatser.
+- Klustring av kartpunkter, Room-cache och Retrofit.
+- Röst, slangläget, handdukssensorn, Vibe Protect och ett tema som byter färg med driften.
+- Godkännandeflöde för variationer. Ogiltiga eller inte godkända förslag visas i arkivet men används inte som visdomssändning.
 
 ## Repots struktur
 
 ```
 .
 ├── README.md
+├── settings.gradle.kts
+├── app/                            # Jetpack Compose
+├── engine/                         # ren Kotlin: Illogical Engine, citat, GeoJSON
 ├── docs/
-│   ├── PRD.md                      # reviderad PRD: Illogical Engine som kärna
+│   ├── PRD.md
 │   └── design/
-│       ├── README.md
-│       ├── screens/                # Stitch-skärmar (code.html + screen.png)
-│       ├── design-systems/         # Cosmic Drift och The Sentient Archive (DESIGN.md)
-│       └── original-briefs/        # de tre ursprungliga briefarna/PRD:erna från Stitch
 └── data/
-    ├── geojson/stockholms-lan/     # toaletter, rastplatser, munchie stations (OSM)
-    └── quotes/                     # citatarkivets schema och fastställda original
+    ├── geojson/stockholms-lan/
+    ├── quotes/
+    ├── babel-stoner/
+    └── lexicon/
 ```
 
 ## Data och upphov
