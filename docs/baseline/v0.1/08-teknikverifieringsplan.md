@@ -2,7 +2,7 @@
 
 Baslinje v0.1 · 2026-11-20
 
-Ingen grind är `ACCEPT`. Alla grindar har status `NOT_VERIFIED` tills ett verifieringsprotokoll finns.
+G0 är `ACCEPT` genom ägarbeslut med accepterad risk 2026-11-20 kl. 22.32 (Europe/Stockholm), utan oberoende granskning, se [G0-grindbeslut-2026-11-20.md](../verification/G0-grindbeslut-2026-11-20.md). Alla andra grindar har status `NOT_VERIFIED` tills ett verifieringsprotokoll finns.
 
 ## 1. Kontrollerade bibliotekfakta
 
@@ -41,7 +41,7 @@ Varje grind har ett verifieringsprotokoll i `docs/baseline/verification/Gx-<datu
 
 | Grind | Etapp | Vad bevisas | Acceptanskriterier | Stopp vid fel | Status |
 |---|---|---|---|---|---|
-| **G0** | 1 | Konceptet är fryst | Designsystem och skärmvariant valda (F-02). Lånade namn har ersättare eller är märkta som arbetsnamn. Röstreglerna ryms på en sida och en AI-kodare kan följa dem utan att fråga. Händelselistan (05) är fryst. Prototyp av arkivdatabasen visar att triggers i 04 stoppar update och delete av original, också efter en migrering. | Ja | NOT_VERIFIED |
+| **G0** | 1 | Konceptet är fryst | Designsystem och skärmvariant valda (F-02). Lånade namn har ersättare eller är märkta som arbetsnamn. Röstreglerna ryms på en sida och en AI-kodare kan följa dem utan att fråga. Händelselistan (05) är fryst. Prototyp av arkivdatabasen visar att triggers i 04 stoppar update och delete av original, också efter en migrering. | Ja | **ACCEPT genom ägarbeslut med accepterad risk** (2026-11-20 22.32, Europe/Stockholm). Kriterierna är inte bevisade och den oberoende granskningen är inte gjord. Öppna punkter och hur de hanteras: [G0-grindbeslut](../verification/G0-grindbeslut-2026-11-20.md). |
 | **G1** | 2 | Illogical Engine fungerar isolerat | Ren Kotlin-modul utan Android och nätverk. Hundra simulerade händelser utan att en svans motsäger ett besked, skyller på användaren eller upprepas inom tio repliker. Motsägelseminnet förnekar bara presenterade yttranden. Bara `APPROVED` rader används. Beroendegrafstest finns och är grönt. | Ja | NOT_VERIFIED |
 | **G2** | 3 | Kedjan valhalla-mobile → Ferrostar fungerar offline (startprompten §7.1 och §7.2) | I flygplansläge räknar valhalla-mobile en rutt i testområdet i OSRM-format. Ferrostar läser den via `CustomRouteProvider` och navigerar med `SimulatedLocationProvider`. Manöverbyte, avvikelse (minst 3 försök) och omräkning sker utan nät. Talinstruktioner utlöses. | **Ja. Faller det: stanna, redovisa och föreslå minsta ändring (11, R-01).** | NOT_VERIFIED |
 | **G3** | 3 | MapLibre visar lokalt kartpaket på målenheten (§7.3) | `karta.pmtiles` i `filesDir` visas med de tre stilfilerna i flygplansläge. Sanningsremsan ritas ovanpå och täcks aldrig. Ingen nätverkstrafik under testet. | Ja | NOT_VERIFIED |
