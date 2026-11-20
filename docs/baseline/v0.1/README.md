@@ -46,6 +46,11 @@ Ordet PASS används inte någonstans i baslinjen. En grind blir `ACCEPT` först 
 | 09 | [09-genomforandeplan.md](09-genomforandeplan.md) | De sju etapperna med acceptansgrindar |
 | 10 | [10-beslutslogg.md](10-beslutslogg.md) | Varje tidigare förslag med ACCEPT, REVISE eller REJECT |
 | 11 | [11-tekniska-antaganden.md](11-tekniska-antaganden.md) | Antaganden som måste verifieras |
+| 12 | [12-rostregler.md](12-rostregler.md) | Röstregler (M-08), kandidat, inte fryst |
+
+## Verifiering och ägarbeslut
+
+Dokument under [`../verification/`](../verification/): G0-ägarbeslutet 2026-11-20 (inlagt byte för byte), instruktionen, svaret på sakavvikelser och underlaget för F-11. G0 är fortfarande `NOT_VERIFIED`.
 
 ## Arkivering
 
