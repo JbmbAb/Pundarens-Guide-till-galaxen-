@@ -235,6 +235,17 @@ class EngineTest {
         assertFalse(blob.contains("motivet är"))
         assertFalse(blob.contains("psykopat"))
 
+        val long = buildList {
+            add("Jag sa att jag skulle ringa.")
+            add("Jag sa aldrig att jag skulle ringa.")
+            repeat(500) { add("Rad $it utan koppling till något annat påstående här.") }
+        }.joinToString("\n")
+        val bounded = engine.analyze(long)
+        assertTrue(bounded.contradictions.isNotEmpty())
+        assertTrue(bounded.contradictions.size <= 12)
+        assertTrue(bounded.unanswered.size <= 20)
+        assertTrue(bounded.summary.contains("400"))
+
         val crisis = engine.analyze("Jag ska döda dig om du säger det igen.")
         assertTrue(crisis.satireSuppressed)
         assertTrue(crisis.supportReferral?.contains("112") == true)

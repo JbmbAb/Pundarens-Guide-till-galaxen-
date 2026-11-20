@@ -15,6 +15,18 @@ import se.pundaren.guide.engine.model.SatiricalLabel
 import kotlin.random.Random
 
 private const val ANALYSIS_NOTE = "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+private const val MAX_ANALYSIS_LINES = 400
+private const val MAX_UNANSWERED = 20
+private const val MAX_CONTRADICTIONS = 12
+private const val CONTRADICTION_WINDOW = 24
+
+private class PreparedLine(val text: String, val words: Set<String>, val negated: Boolean)
+
+private class PreparedTranscript(
+    val lines: List<PreparedLine>,
+    val analyzedText: String,
+    val truncated: Boolean,
+)
 private const val RIKARD_VERDICT = "Rikard har godkänt protokollet."
 private const val SUPPORT_REFERRAL = "Vid akut fara, ring 112. För råd om vård, kontakta 1177."
 private val threats = listOf(
@@ -120,33 +132,24 @@ fun analyzeTranscript(text: String, archive: LoadedArchive): ReverseAnalysis {
             disclaimer = disclaimer,
         )
     }
-    val lines = text.split('\n').map { it.trim() }.filter { it.isNotEmpty() }
-    val unanswered = lines.mapIndexedNotNull { index, line ->
-        if (!line.contains('?')) return@mapIndexedNotNull null
-        val words = contentWords(line)
-        if (words.isEmpty()) return@mapIndexedNotNull null
-        val following = lines.drop(index + 1).take(4)
-        val answered = following.any { follow -> contentWords(follow).any { it in words } }
-        if (answered) null else line
-    }
-    val contradictions = buildList {
-        for (i in lines.indices) {
-            for (j in i + 1 until lines.size) {
-                val a = lines[i]
-                val b = lines[j]
-                if (a.length < 12 || b.length < 12) continue
-                val shared = contentWords(a).intersect(contentWords(b)).any { it.length > 4 }
-                val aNeg = negation.containsMatchIn(a)
-                val bNeg = negation.containsMatchIn(b)
-                if (shared && aNeg != bNeg) add(QuotedPair(a, b))
+    val prepared = prepareLines(text)
+    val unanswered = buildList {
+        prepared.lines.forEachIndexed { index, line ->
+            if (size >= MAX_UNANSWERED) return@forEachIndexed
+            if (!line.text.contains('?') || line.words.isEmpty()) return@forEachIndexed
+            val answered = prepared.lines.drop(index + 1).take(4).any { follow ->
+                follow.words.any { it in line.words }
             }
+            if (!answered) add(line.text)
         }
-    }.distinct()
-    val notes = patternNotes(text, archive)
+    }
+    val contradictions = findContradictions(prepared.lines)
+    val notes = patternNotes(prepared.analyzedText, archive)
+    val limitNote = if (prepared.truncated) " Bara de första $MAX_ANALYSIS_LINES raderna lästes." else ""
     val summary = if (unanswered.isEmpty() && contradictions.isEmpty() && notes.isEmpty()) {
-        "Inga tydliga mönster av den här typen hittades i texten. Det betyder inte att texten är entydig, bara att motorn inte såg dem. $disclaimer"
+        "Inga tydliga mönster av den här typen hittades i texten. Det betyder inte att texten är entydig, bara att motorn inte såg dem. $disclaimer$limitNote"
     } else {
-        "Texten innehåller ${unanswered.size} frågor som verkar obesvarade och ${contradictions.size} möjliga motsägelser. $disclaimer"
+        "Texten innehåller ${unanswered.size} frågor som verkar obesvarade och ${contradictions.size} möjliga motsägelser. $disclaimer$limitNote"
     }
     return ReverseAnalysis(
         satireSuppressed = false,
@@ -284,6 +287,46 @@ private fun exampleReply(example: BabelExample): String? = when {
 }
 
 private fun normalize(text: String): String = text.trim().replace(Regex("\\s+"), " ")
+
+private fun prepareLines(text: String): PreparedTranscript {
+    val lines = ArrayList<PreparedLine>(MAX_ANALYSIS_LINES)
+    var truncated = false
+    var count = 0
+    for (raw in text.lineSequence()) {
+        val line = raw.trim()
+        if (line.isEmpty()) continue
+        count += 1
+        if (count > MAX_ANALYSIS_LINES) {
+            truncated = true
+            break
+        }
+        lines += PreparedLine(line, contentWords(line), negation.containsMatchIn(line))
+    }
+    return PreparedTranscript(
+        lines = lines,
+        analyzedText = lines.joinToString("\n") { it.text },
+        truncated = truncated,
+    )
+}
+
+private fun findContradictions(lines: List<PreparedLine>): List<QuotedPair> {
+    if (lines.size < 2) return emptyList()
+    val found = ArrayList<QuotedPair>(MAX_CONTRADICTIONS)
+    for (i in lines.indices) {
+        if (found.size >= MAX_CONTRADICTIONS) break
+        val left = lines[i]
+        if (left.text.length < 12 || left.words.none { it.length > 4 }) continue
+        val end = minOf(lines.size, i + 1 + CONTRADICTION_WINDOW)
+        for (j in i + 1 until end) {
+            if (found.size >= MAX_CONTRADICTIONS) break
+            val right = lines[j]
+            if (right.text.length < 12 || left.negated == right.negated) continue
+            val shared = left.words.any { word -> word.length > 4 && word in right.words }
+            if (shared) found += QuotedPair(left.text, right.text)
+        }
+    }
+    return found
+}
 
 private fun contentWords(line: String): Set<String> = line
     .lowercase()

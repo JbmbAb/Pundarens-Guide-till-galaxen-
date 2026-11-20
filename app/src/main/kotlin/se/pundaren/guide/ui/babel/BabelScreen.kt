@@ -40,6 +40,7 @@ fun BabelScreen(
     reverse: Boolean,
     output: EngineOutput?,
     analysis: ReverseAnalysis?,
+    busy: Boolean,
     onText: (String) -> Unit,
     onMode: (BabelMode) -> Unit,
     onReverse: (Boolean) -> Unit,
@@ -92,8 +93,8 @@ fun BabelScreen(
             Text(text = if (reverse) "Omvänd analys" else "Simulering", style = MaterialTheme.typography.titleMedium)
             Switch(checked = reverse, onCheckedChange = onReverse)
         }
-        Button(onClick = onRun, modifier = Modifier.fillMaxWidth()) {
-            Text(if (reverse) "Läs texten" else "Kör")
+        Button(onClick = onRun, enabled = !busy, modifier = Modifier.fillMaxWidth()) {
+            Text(if (busy) "Läser…" else if (reverse) "Läs texten" else "Kör")
         }
         output?.let { BabelResult(it) }
         analysis?.let { ReverseResult(it) }

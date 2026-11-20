@@ -49,6 +49,7 @@ data class GuideUiState(
     val babelReverse: Boolean = false,
     val babelOutput: EngineOutput? = null,
     val reverse: ReverseAnalysis? = null,
+    val babelBusy: Boolean = false,
     val mapMode: MapMode = MapMode.PRACTICAL,
     val layers: Set<PlaceLayer> = PlaceLayer.entries.toSet(),
     val places: List<Place> = emptyList(),
@@ -71,6 +72,8 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
     private val repository = BundledGeoJsonPlacesRepository(AssetGeoJsonStore(app))
     private val _state = MutableStateFlow(GuideUiState())
     val state: StateFlow<GuideUiState> = _state.asStateFlow()
+    private var viewport: BoundingBox = BoundingBox.around(59.3293, 18.0686, 0.08)
+    private var placeRequest = 0
 
     init {
         viewModelScope.launch {
@@ -80,7 +83,7 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
                 val drive = _state.value.drive.copy(mapMode = _state.value.mapMode)
                 val facts = _state.value.facts
                 val commentary = engine.commentaryFor(facts, drive)
-                val places = loadPlaces(BoundingBox.around(59.3293, 18.0686, 0.08), _state.value.layers)
+                val places = loadPlaces(viewport, _state.value.layers)
                 _state.update {
                     it.copy(
                         ready = true,
@@ -122,11 +125,22 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
 
     fun runBabel() {
         val current = _state.value
-        if (current.babelReverse) {
-            _state.update { it.copy(reverse = engine.analyze(current.babelText), babelOutput = null) }
-        } else {
-            val output = engine.translate(current.babelText, current.babelMode.id, current.drive)
-            _state.update { it.copy(babelOutput = output, reverse = null) }
+        if (current.babelBusy) return
+        _state.update { it.copy(babelBusy = true) }
+        viewModelScope.launch {
+            val reverse = if (current.babelReverse) {
+                withContext(Dispatchers.Default) { engine.analyze(current.babelText) }
+            } else {
+                null
+            }
+            val output = if (current.babelReverse) {
+                null
+            } else {
+                withContext(Dispatchers.Default) {
+                    engine.translate(current.babelText, current.babelMode.id, current.drive)
+                }
+            }
+            _state.update { it.copy(babelBusy = false, reverse = reverse, babelOutput = output) }
         }
     }
 
@@ -147,7 +161,7 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
         val current = _state.value.layers
         val next = if (layer in current) current - layer else current + layer
         _state.update { it.copy(layers = next) }
-        refreshPlaces(next)
+        refreshPlaces(next, viewport, _state.value.cameraLat, _state.value.cameraLon)
     }
 
     fun showManeuver(facts: FactPayload) {
@@ -182,6 +196,7 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun onCamera(latitude: Double, longitude: Double, bbox: BoundingBox) {
+        viewport = bbox
         _state.update { it.copy(cameraLat = latitude, cameraLon = longitude) }
         refreshPlaces(_state.value.layers, bbox, latitude, longitude)
     }
@@ -196,12 +211,14 @@ class GuideViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun refreshPlaces(
         layers: Set<PlaceLayer>,
-        bbox: BoundingBox = BoundingBox.around(_state.value.cameraLat, _state.value.cameraLon, 0.08),
-        latitude: Double = _state.value.cameraLat,
-        longitude: Double = _state.value.cameraLon,
+        bbox: BoundingBox,
+        latitude: Double,
+        longitude: Double,
     ) {
+        val request = ++placeRequest
         viewModelScope.launch {
             val loaded = loadPlaces(bbox, layers, latitude, longitude)
+            if (request != placeRequest) return@launch
             _state.update { it.copy(places = loaded.first, placeOverflow = loaded.second) }
         }
     }
