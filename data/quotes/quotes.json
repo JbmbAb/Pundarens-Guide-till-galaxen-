@@ -1,18 +1,332 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "compilation": {
+    "title": "Citatarkiv och samtalslogik för Babel-Stoner",
+    "date": "2026-11-20",
+    "note": "Sammanställning från återfunna arkivdokument och tidigare samtalskontext, inte en fullständig inventering av samtliga meddelanden, ljudtranskriptioner och dokument."
+  },
   "valuePairs": [
-    { "id": "frihet-trygghet", "a": "frihet", "b": "trygghet" },
-    { "id": "kaos-kontroll", "a": "kaos", "b": "kontroll" }
-  ],
-  "originals": [
     {
-      "id": "orig-0001",
-      "type": "original",
-      "text": "Och så länge man själv inte står vid sitt ord kommer rädslan för att bli sviken alltid vara större än viljan att bygga tillit.",
+      "id": "frihet-trygghet",
+      "a": "frihet",
+      "b": "trygghet"
+    },
+    {
+      "id": "kaos-kontroll",
+      "a": "kaos",
+      "b": "kontroll"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "P-001",
+      "title": "Undvikandets paradox",
+      "text": "Om sticker huvudet tillräckligt djupt i sanden kommer det tillslut upp i arlset på en själv.",
+      "category": "paradox",
+      "provenance": "original",
       "language": "sv",
-      "themes": ["tillit", "löften"],
+      "themes": [
+        "undvikande",
+        "paradox"
+      ],
       "valuePairs": [],
-      "source": "personligt citatarkiv"
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport. Originalstavning enligt arkivet (bl.a. \"arlset\").",
+      "normalized": {
+        "text": "Om man sticker huvudet tillräckligt djupt i sanden kommer det tillslut upp i arslet på en själv.",
+        "isOriginal": false,
+        "note": "Arkivet anger att den normaliserade versionen använder \"Om man ... arslet\". Texten här är originalet med just de två ändringarna (infogat \"man\" efter \"Om\", \"arlset\" → \"arslet\") och är inte originalstavning."
+      }
+    },
+    {
+      "id": "P-002",
+      "title": "Sjuk/frisk-paradoxen",
+      "text": "är detta sjukt? Ja, Är jag sjuk? Troligen. Men hade jag varit frisk hade jag blivit så sjuk att jag aldrig blivit frisk igen",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "sjuk/frisk",
+        "paradox"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport."
+    },
+    {
+      "id": "P-003",
+      "title": "Att ha rätt",
+      "text": "Så sjuk i huvet så att jag hade rätt.",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "rätt",
+        "paradox"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport. Originalstavning enligt arkivet (bl.a. \"huvet\")."
+    },
+    {
+      "id": "P-004",
+      "title": "Omedveten manipulation",
+      "text": "den bäste manipulatören är den som inte själv vet om att den manipulerar",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "manipulation",
+        "omedvetenhet"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport."
+    },
+    {
+      "id": "P-005",
+      "title": "Okunnighetens paradox",
+      "text": "Det är lättare att göra fel om man inte vet att man gör fel.",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "okunnighet",
+        "paradox"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport."
+    },
+    {
+      "id": "P-006",
+      "title": "Bubblan",
+      "text": "hon är tillbaka i sin bubbla och pickar man hål på den så går det aldrig någonsin att picka på samma ställe",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "bubblan"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport."
+    },
+    {
+      "id": "P-007",
+      "title": "Insats, förlust och skam",
+      "text": "när det blir bra då ska jag satsa vara med och bidra,men vi bara bråkar. om man satsar helhjärtat på något och det inte fungerar vad får man då? skämmas. om maninte satsar dåförlorar man inte heller.",
+      "category": "paradox",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "insats",
+        "förlust",
+        "skam"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Finns i den daterade arkivsamlingen (sammanställning 20 november 2026). Flera P-poster är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport. Originalstavning enligt arkivet (bl.a. \"maninte\", \"dåförlorar\")."
+    },
+    {
+      "id": "C-004",
+      "title": "Relationens kvaliteter",
+      "text": "Trygg pålitlig och kärleksfull är väl lite mer än kåt glad och tacksam",
+      "category": "tillit",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "relation",
+        "tillit"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i sammanställningen 20 november 2026 under tillit, löften och relationer."
+    },
+    {
+      "id": "C-006",
+      "title": "Oärlighet och förväntningar",
+      "text": "Är man oärlig själv utgår man från att andra är det",
+      "category": "tillit",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "oärlighet",
+        "tillit"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i sammanställningen 20 november 2026 under tillit, löften och relationer."
+    },
+    {
+      "id": "C-007",
+      "title": "Tillitens paradox",
+      "text": "Och så länge man själv inte står vid sitt ord kommer rädslan för att bli sviken alltid vara större än viljan att bygga tillit.",
+      "category": "tillit",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "tillit",
+        "löften"
+      ],
+      "valuePairs": [],
+      "source": "personligt citatarkiv",
+      "legacyId": "orig-0001",
+      "sourceNote": "Uttryckligen sparat den 18 november 2026. Fanns redan i data/quotes/quotes.json som orig-0001; posterna är sammanslagna."
+    },
+    {
+      "id": "C-008",
+      "title": "Ursäkten och förändringen",
+      "text": "Jag hör att du är ledsen för det som varit. Men en ursäkt betyder trots allt något först när den också leder till att man gör annorlunda.",
+      "category": "tillit",
+      "provenance": "bearbetad",
+      "language": "sv",
+      "themes": [
+        "ursäkt",
+        "förändring"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Kommer från den gemensamt bearbetade meddelandetexten den 17 november 2026. Godkänd textformulering, inte ett säkert självständigt originalcitat."
+    },
+    {
+      "id": "C-009",
+      "title": "Förhoppningens förutsättning",
+      "text": "Så frågan är egentligen inte om jag har någon förhoppning. Frågan är vad du ger mig för anledning att ha det.",
+      "category": "tillit",
+      "provenance": "bearbetad",
+      "language": "sv",
+      "themes": [
+        "förhoppning",
+        "tillit"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Kommer från den gemensamt bearbetade meddelandetexten (samma bearbetning som C-008). Godkänd textformulering, inte ett säkert självständigt originalcitat."
+    },
+    {
+      "id": "R-001",
+      "title": null,
+      "text": "Allt ont kommer från dig Rikard.",
+      "category": "rikard",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "rikard"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Återges i bokprojektets arkivunderlag som ordagrant användaruttalande. Sammanställning 20 november 2026."
+    },
+    {
+      "id": "R-002",
+      "title": null,
+      "text": "Du ska inte leka med den där Rikard.",
+      "category": "rikard",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "rikard"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Återges i bokprojektets arkivunderlag som ordagrant användaruttalande. Sammanställning 20 november 2026."
+    },
+    {
+      "id": "R-003",
+      "title": null,
+      "text": "Och det är väl tacksamt och pissa på någon som gasar på och inte alltid knytit skorna ordentligt så att han snubblar på skonörena",
+      "category": "rikard",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "rikard"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Återges i bokprojektets arkivunderlag som ordagrant användaruttalande. Sammanställning 20 november 2026. Originalstavning enligt arkivet (bl.a. \"pissa\")."
+    },
+    {
+      "id": "C-001",
+      "title": null,
+      "text": "Motto man ska aldrig köpa något när man behöver det",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "motto",
+        "konsumtion"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "C-002a",
+      "title": null,
+      "text": "Optimering frågar vad som räcker för det här ändamålet",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "optimering"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "C-002b",
+      "title": null,
+      "text": "Forskning är när man börjar leta efter en tredje kandidat, justera markörer i loop, eller mäta utan att veta vad som räcker.",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "forskning"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "C-003",
+      "title": null,
+      "text": "Skriv vad du hittar, inte vad du antar.",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "metod"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "C-005",
+      "title": null,
+      "text": "vi ska inte sälja vision plattformen ska sälja kapacitet och kompetens",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "vision",
+        "kapacitet"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "N-002",
+      "title": null,
+      "text": "skam-allergi framkallande ord",
+      "category": "ovrigt",
+      "provenance": "original",
+      "language": "sv",
+      "themes": [
+        "skam"
+      ],
+      "valuePairs": [],
+      "sourceNote": "Registrerat i arkivdokumentet som användarformulering eller utdrag. Sammanställning 20 november 2026. I källtabellen var formuleringen omgiven av typografiska citattecken (U+201D); tecknen är tabellens presentation och ingår inte i citattexten."
+    },
+    {
+      "id": "RED-P-007",
+      "title": "Skammens dubbla bokföring",
+      "text": "För att undvika risken att misslyckas med något man vill lyckas med, låter man bli att göra det som krävs för att lyckas.",
+      "category": "paradox",
+      "provenance": "redaktionell",
+      "language": "sv",
+      "themes": [
+        "skam",
+        "insats",
+        "förlust"
+      ],
+      "valuePairs": [],
+      "summarizesQuoteId": "P-007",
+      "sourceNote": "Redaktionell sammanfattning av P-007 i Del II §4 i sammanställningen 20 november 2026. Inte ett originalcitat."
     }
   ],
   "variations": []

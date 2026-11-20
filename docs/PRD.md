@@ -340,54 +340,30 @@ Den ursprungliga specifikationen beskriver ett system för personliga livscitat 
 5. **Teman** – citat taggas med teman (hunger, flykt, natt osv.).
 6. **Motsägelsemotor** – appen inverterar ibland värden (t.ex. Stabilitet = Galenskap). Inversionen är alltid en variation, aldrig en ändring av originalet.
 
-### 8.2 Fastställt originalcitat
+### 8.2 Citatarkivet
+
+Arkivet från sammanställningen 20 november 2026 ligger i repot:
+
+- Citat, proveniens och teman: `data/quotes/quotes.json` (beskrivning i `data/quotes/README.md`)
+- Lexikonposten *Garderobsknullis*: `data/lexicon/lexicon.json`
+- Babel-Stoners regler och Del II-mönster: `data/babel-stoner/rules.json`
+- Nyskrivna exempeldialoger: `data/babel-stoner/examples.json`
+
+C-007 fanns redan i `quotes.json` (tidigare id `orig-0001`) och är oförändrat sammanslaget:
 
 > Och så länge man själv inte står vid sitt ord kommer rädslan för att bli sviken alltid vara större än viljan att bygga tillit.
 
-Det kan utgöra underlag för flera paradoxala kommentarer (t.ex. i Babel-Stoner, där löften och ansvar är centrala), men originalet bevaras oförändrat och nya variationer märks som sådana.
-
-**Övriga originalcitat:** `[PLATSHÅLLARE – hämtas från det personliga citatarkivet]`
+Det kan utgöra underlag för flera paradoxala kommentarer (t.ex. i Babel-Stoner, där löften och ansvar är centrala), men originalet bevaras oförändrat och nya variationer märks som sådana. Övriga poster är inlagda med proveniensnivå (`original`, `bearbetad`, `redaktionell`, `konstruerad`). Original stavas ordagrant; konstruerade dialoger ligger i examples-filen, inte bland originalen.
 
 ### 8.3 Datamodell
 
-Fil: `data/quotes/quotes.json` (se `data/quotes/README.md`).
+Fil: `data/quotes/quotes.json` (se `data/quotes/README.md`). Schemaversion 2: en gemensam lista `quotes` med fältet `provenance` i stället för enbart `originals`. Listan `variations` är oförändrad och fortfarande tom. Värdeparen frihet ↔ trygghet och kaos ↔ kontroll ligger kvar.
 
-```json
-{
-  "schemaVersion": 1,
-  "valuePairs": [
-    { "id": "frihet-trygghet", "a": "frihet", "b": "trygghet" },
-    { "id": "kaos-kontroll",   "a": "kaos",   "b": "kontroll" }
-  ],
-  "originals": [
-    {
-      "id": "orig-0001",
-      "type": "original",
-      "text": "…ordagrant…",
-      "language": "sv",
-      "themes": [],
-      "valuePairs": [],
-      "source": "personligt citatarkiv"
-    }
-  ],
-  "variations": [
-    {
-      "id": "var-0001",
-      "type": "variation",
-      "originalId": "orig-0001",
-      "text": "…",
-      "generatedBy": "rule | llm | human",
-      "mechanism": "inversion | paradox | ...",
-      "approved": false
-    }
-  ]
-}
-```
+Varje post i `quotes` har minst `id`, `text`, `category` (`paradox`, `tillit`, `rikard` eller `ovrigt`), `provenance`, `sourceNote` och `themes`. C-007 behåller dessutom tidigare fält som `themes` och `source`, plus `legacyId` (`orig-0001`).
 
-- `originals` och `variations` är separata listor och kan inte blandas ihop.
-- `type` är alltid `original` respektive `variation` och visas i UI:t.
-- En variation utan giltigt `originalId` är ogiltig.
-- Värdepar (frihet ↔ trygghet, kaos ↔ kontroll, osv.) är en egen lista så att motorn kan välja par oberoende av citat.
+- Original och variationer får inte blandas ihop. En variation utan giltigt `originalId` som pekar på ett original är ogiltig.
+- Proveniensnivåerna beskrivs i `data/quotes/README.md`.
+- Värdepar är en egen lista så att motorn kan välja par oberoende av citat.
 
 ---
 
@@ -457,7 +433,7 @@ Resten av appen beror bara på `PlacesRepository`, så bytet från filer till Po
 
 - **Ingen diagnostik.** Babel-Stoner diagnostiserar inte personer och tillskriver inga motiv.
 - **Ingen kreativ navigering.** Appen hittar aldrig på rutter, platser eller avstånd; humorn ligger enbart i kommentaren.
-- **Inga påhittade personliga citat.** Platshållare används tills arkivet finns.
+- **Inga påhittade personliga citat.** Original ligger i `data/quotes/quotes.json`. Konstruerade dialoger får bara ligga i `data/babel-stoner/examples.json` och ska vara märkta `konstruerad`.
 - **Ingen direkt databasanslutning från appen.**
 - **Inte en allmän navigationsapp** som konkurrerar med Google Maps om bilnavigering i hög fart.
 - **Ingen Android-kod ännu** i detta skede (endast planering).
@@ -467,7 +443,7 @@ Resten av appen beror bara på `PlacesRepository`, så bytet från filer till Po
 
 ## 13. Öppna frågor
 
-1. **Citatarkivet:** Var finns resten av det personliga citatarkivet, i vilket format, och hur importeras det? Vem godkänner variationer?
+1. **Citatarkivet:** Delvis besvarad. Sammanställningen från 20 november 2026 är inlagd i `data/quotes/`, `data/lexicon/` och `data/babel-stoner/`. Arkivet är inte en fullständig inventering av alla meddelanden och transkriptioner. Vem som godkänner variationer är fortfarande öppet.
 2. **Regelbaserat eller LLM?** Ska Illogical Engine vara regelbaserad (mallar + citat + slump, fungerar offline, förutsägbar och gratis), LLM-baserad (roligare och mer situationsanpassad men kostar, kräver nät och väcker integritetsfrågor, särskilt i omvänt läge) eller en hybrid?
 3. **Ruttmotor:** Vilken tjänst ger rutt och svänginstruktioner (Google Directions/Routes API, OSRM, GraphHopper)? Kostnad och licens?
 4. **Röst:** Ska anti-navigationen läsas upp (TTS), och på vilket språk som standard (svenska, engelska, båda)?

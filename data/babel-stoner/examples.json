@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "disclaimer": "Alla exempel i den här filen är märkta konstruerad: de är nyskrivna för appen eller återgivna som exempel i sammanställningens Del II, inte verifierade utdrag ur en råexport. Analysetiketter är satiriska etiketter, inte vetenskapliga mätvärden.",
+  "examples": [
+    {
+      "id": "EX-01-FORMULERING",
+      "title": "Den omöjliga rättelsen – beskriven formulering",
+      "provenance": "konstruerad",
+      "section": "Del II §1",
+      "text": "Nej Bonnie, det var inte så jag sa … inte så jag menade.",
+      "sourceNote": "Sammanställningen återger formuleringen som något kommunikationen gått åt till att förklara, utan arkiv-ID och utan att den ingår i listan över dokumenterade original. Enligt inventeringsregeln för Del II §1-exempel lagras posten som konstruerad, inte som verifierat originalcitat. Osäker proveniens."
+    },
+    {
+      "id": "EX-01",
+      "title": "Den omöjliga rättelsen – oändlig kedja",
+      "provenance": "konstruerad",
+      "section": "Del II §1",
+      "sourceNote": "Konstruerat Babel-Stoner-exempel från sammanställningen. Inte ett återgivet verkligt samtal.",
+      "turns": [
+        {
+          "role": "fråga",
+          "text": "Varför gjorde du inte det vi kom överens om?"
+        },
+        {
+          "role": "svar",
+          "text": "Varför säger du att jag inte bryr mig?"
+        },
+        {
+          "role": "rättelse",
+          "text": "Det har jag inte sagt."
+        },
+        {
+          "role": "svar",
+          "text": "Nu förnekar du till och med vad du själv säger."
+        }
+      ],
+      "result": "Ursprunglig fråga obesvarad. Diskussionens längd har ökat med 300 %. Rikard har förklarat sig oskyldig."
+    },
+    {
+      "id": "EX-03",
+      "title": "Den omvända ansvarskedjan",
+      "provenance": "konstruerad",
+      "section": "Del II §3",
+      "text": "Du hade inte behövt upprepa frågan om jag hade svarat. Men eftersom du upprepade frågan kan jag inte svara, och det är därför ditt fel att frågan fortfarande är obesvarad.",
+      "sourceNote": "Sammanställningen anger detta som exempel på konstruerad Babel-Stoner-dialog. Cirkulär konstruktion med komiskt värde, inte ett återgivet verkligt samtal."
+    },
+    {
+      "id": "EX-05",
+      "title": "Löftets självupphävande",
+      "provenance": "konstruerad",
+      "section": "Del II §5",
+      "text": "Jag hade tänkt hålla mitt löfte, men när du påminde mig om det kändes det som att du inte litade på mig. Därför blev det omöjligt att hålla löftet, vilket visar att du borde ha litat på mig.",
+      "sourceNote": "Konstruerat mönsterexempel för translatorn utifrån citat om löften och tillit. Inte ett återgivet verkligt samtal."
+    },
+    {
+      "id": "EX-ILLOGICAL-01",
+      "title": "Fullständig Illogical-översättning",
+      "provenance": "konstruerad",
+      "section": "Del III – exempel",
+      "original": "Du lovade att ringa mig igår.",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Jag förstår faktiskt inte varför du alltid måste dra upp det förflutna. Jag tänkte ringa, och det borde väl vara viktigare än att jag faktiskt gjorde det? När du nu anklagar mig för att inte ha ringt känner jag ännu mindre för att ringa. Och om du verkligen hade velat prata med mig hade du kunnat ringa själv. Men det gjorde du inte, eftersom du tydligen förväntade dig att jag skulle hålla mitt löfte. Det är ganska orättvist. Rikard håller med.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Nej"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "3"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "0 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Exceptionell"
+          }
+        ]
+      },
+      "sourceNote": "Dialogen är nyskriven för appen, inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "disclaimer": "Observationerna i Del II är hypoteser och samtalsmönster för satirisk dialoggenerering. De är inte fastställda psykologiska fakta om någon person. Babel-Stoner är en satirisk samtalsmotor, inte ett diagnostiskt verktyg, och ställer inga diagnoser och tillskriver inga verkliga personer motiv.",
+  "rules": [
+    {
+      "id": "BS-01",
+      "function": "Omvandla sakfråga till personfråga",
+      "basis": "Den omöjliga rättelsen",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [
+        "PAT-01"
+      ]
+    },
+    {
+      "id": "BS-02",
+      "function": "Flytta ansvar från handling till reaktion",
+      "basis": "Tonfall och upprepning",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [
+        "PAT-03"
+      ]
+    },
+    {
+      "id": "BS-03",
+      "function": "Förneka motsägelsen utan att lösa den",
+      "basis": "Sjuk/frisk-paradoxen",
+      "relatedQuoteIds": [
+        "P-002"
+      ],
+      "relatedPatternIds": [
+        "PAT-02"
+      ],
+      "note": "Underlaget i tabellen är titeln på P-002, inte citat-id:t."
+    },
+    {
+      "id": "BS-04",
+      "function": "Gör minnet av ett löfte till problemet",
+      "basis": "Tillit och löften",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [
+        "PAT-05"
+      ],
+      "note": "Tabellen anger underlaget som temat \"Tillit och löften\", inte enskilda citat-id. Relevanta original i den kategorin är bland annat C-006 och C-007.",
+      "thematicQuoteIds": [
+        "C-006",
+        "C-007",
+        "C-008",
+        "C-009"
+      ]
+    },
+    {
+      "id": "BS-05",
+      "function": "Använd skam för att undvika handling",
+      "basis": "P-007",
+      "relatedQuoteIds": [
+        "P-007"
+      ],
+      "relatedPatternIds": [
+        "PAT-04"
+      ]
+    },
+    {
+      "id": "BS-06",
+      "function": "Förklara att frånvaro av insikt bevisar oskuld",
+      "basis": "P-004 och P-005",
+      "relatedQuoteIds": [
+        "P-004",
+        "P-005"
+      ],
+      "relatedPatternIds": []
+    },
+    {
+      "id": "BS-07",
+      "function": "Byt ståndpunkt och förneka bytet",
+      "basis": "Bubblan och rättelserna",
+      "relatedQuoteIds": [
+        "P-006"
+      ],
+      "relatedPatternIds": [
+        "PAT-01"
+      ],
+      "note": "\"Bubblan\" motsvarar P-006. \"Rättelserna\" syftar på mönstret Den omöjliga rättelsen (PAT-01)."
+    },
+    {
+      "id": "BS-08",
+      "function": "Återvänd till samtalets början efter flera varv",
+      "basis": "Cirkulär argumentation",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [
+        "PAT-01",
+        "PAT-03"
+      ]
+    },
+    {
+      "id": "BS-09",
+      "function": "Inför Rikard som ansvarig utan logisk koppling",
+      "basis": "R-001 och R-002",
+      "relatedQuoteIds": [
+        "R-001",
+        "R-002"
+      ],
+      "relatedPatternIds": []
+    },
+    {
+      "id": "BS-10",
+      "function": "Ge ett korrekt svar på en helt annan fråga",
+      "basis": "Illogical-konceptet",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": []
+    }
+  ],
+  "patterns": [
+    {
+      "id": "PAT-01",
+      "title": "Den omöjliga rättelsen",
+      "section": "Del II §1",
+      "status": "hypotes",
+      "isEstablishedPsychologicalFact": false,
+      "description": "Sammanställningen återger en beskrivning att en stor del av kommunikationen under relationen gått åt till att förklara hur något sades eller menades, så att den ursprungliga ståndpunkten inte får diskuteras.",
+      "mechanism": "En person får inte diskutera sin ursprungliga ståndpunkt, eftersom samtalet hela tiden handlar om att korrigera hur den har återgivits.",
+      "relatedRuleIds": [
+        "BS-01",
+        "BS-07",
+        "BS-08"
+      ],
+      "relatedExampleIds": [
+        "EX-01",
+        "EX-01-FORMULERING"
+      ],
+      "sourceNote": "Samtalsmönster och hypotes för satirisk dialoggenerering utifrån beskrivningar i sammanställningen. Inte ett fastställt psykologiskt faktum om någon person."
+    },
+    {
+      "id": "PAT-02",
+      "title": "Självbildens försvar",
+      "section": "Del II §2",
+      "status": "hypotes",
+      "isEstablishedPsychologicalFact": false,
+      "description": "Återkommande beskrivning att vissa reaktioner inte behöver vara medvetet illvilliga, utan kan vara automatiska försök att skydda en skör självbild.",
+      "babelStonerRule": "Om ett påstående riskerar att framkalla skam, behandla själva påståendet som ett angrepp och undvik sakfrågan.",
+      "relatedRuleIds": [
+        "BS-03"
+      ],
+      "sourceNote": "Sammanställningen säger uttryckligen att detta är en användbar hypotes för satirisk dialoggenerering, men inte ett fastställt psykologiskt faktum om en viss person."
+    },
+    {
+      "id": "PAT-03",
+      "title": "Den omvända ansvarskedjan",
+      "section": "Del II §3",
+      "status": "hypotes",
+      "isEstablishedPsychologicalFact": false,
+      "description": "Beskrivning av situationer där det ursprungliga problemet försvinner bakom diskussioner om tonfall, upprepningar eller hur en fråga framfördes.",
+      "relatedRuleIds": [
+        "BS-02",
+        "BS-08"
+      ],
+      "relatedExampleIds": [
+        "EX-03"
+      ],
+      "sourceNote": "Samtalsmönster för satirisk dialoggenerering. Inte ett fastställt psykologiskt faktum om någon person."
+    },
+    {
+      "id": "PAT-04",
+      "title": "Skammens dubbla bokföring",
+      "section": "Del II §4",
+      "status": "hypotes",
+      "isEstablishedPsychologicalFact": false,
+      "description": "P-007 beskriver hur rädsla för misslyckande kan leda till att man undviker att satsa fullt ut.",
+      "relatedQuoteIds": [
+        "P-007",
+        "RED-P-007"
+      ],
+      "relatedRuleIds": [
+        "BS-05"
+      ],
+      "sourceNote": "Mönstret bygger på originalcitatet P-007 och en redaktionell sammanfattning (RED-P-007). Sammanfattningen är inte ett originalcitat. Mönstret är en hypotes, inte ett fastställt psykologiskt faktum om någon person."
+    },
+    {
+      "id": "PAT-05",
+      "title": "Löftets självupphävande",
+      "section": "Del II §5",
+      "status": "hypotes",
+      "isEstablishedPsychologicalFact": false,
+      "description": "Mönster utgående från citat om löften och tillit: argumentationen förstör sin egen förutsättning.",
+      "relatedQuoteIds": [
+        "C-007",
+        "C-006"
+      ],
+      "relatedRuleIds": [
+        "BS-04"
+      ],
+      "relatedExampleIds": [
+        "EX-05",
+        "EX-ILLOGICAL-01"
+      ],
+      "sourceNote": "Samtalsmönster för translatorn, härlett ur citat om löften och tillit. Inte ett fastställt psykologiskt faktum om någon person. Exempeldialogen är konstruerad."
+    }
+  ]
+}
