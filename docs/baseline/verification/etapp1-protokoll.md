@@ -2,7 +2,7 @@
 
 | Fält | Värde |
 |---|---|
-| Datum | 2026-11-20, kring 23.30 (Europe/Stockholm, UTC+1) |
+| Datum | 2026-11-20, testkörningen startade 22.48.36 (Europe/Stockholm, UTC+1) |
 | Kod-commit som provades | `baf40b4a5dd629961187d533b6eea15c06df131f` (gren `etapp1/illogical-engine`) |
 | Bas | `main` @ `c0fb94b` (G0-grindbeslutet, PR #4) |
 | Byggare | Grok Bot |
