@@ -82,6 +82,230 @@
         ]
       },
       "sourceNote": "Dialogen är nyskriven för appen, inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-01",
+      "title": "Munchiehorisonten",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Var ligger närmaste munchie station?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Det beror på om du menar närmast i kilometer, i hunger eller i sannolikhet. Den närmaste stationen är samtidigt öppen, stängd och stänger om fem minuter. Jag rekommenderar att du följer kartan, som faktiskt vet var den ligger, och låter mig sköta den kosmiska osäkerheten. Rikard menar att pommes frites var hans idé.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Delvis"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "2"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "4 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Hög"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-02",
+      "title": "Löftet som inte tål att nämnas",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Kan du hålla vad du lovade den här gången?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Att du frågar visar att du inte litar på att jag ska hålla det, och utan tillit blir löftet ju omöjligt att hålla. Alltså vore det bättre om du inte frågade. Då hade jag kunnat hålla det i teorin, vilket är nästan samma sak. I praktiken tänker jag fortfarande göra det, bara inte under observation.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Nej"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "3"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "0 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Hög"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-03",
+      "title": "Tre minuter, mer eller mindre",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Vi är framme om tre minuter, eller hur?",
+      "babelStonerMode": "POETIC",
+      "response": "Kartan säger tre minuter, och kartan har rätt. Jag säger att vi i en mer poetisk mening redan var framme i förrgår, vilket inte ändrar ankomsttiden med en sekund. Kör vidare. Firandet kan ske i Poetic Mode när Practical Mode har parkerat.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Ja"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "1"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "0 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Måttlig"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-04",
+      "title": "Vänster som koncept",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Varför står det att vi ska svänga vänster?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Jag ifrågasätter inte svängen. Sväng vänster, precis som instruktionen säger. Jag ifrågasätter bara vänster som evigt väderstreck, eftersom universum inte har skrivit under på att vänster förblir vänster om man tänker tillräckligt länge. Tänk gärna, men sväng nu.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Ja"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "1"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "0 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Måttlig"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-05",
+      "title": "Handdukens jurisdiktion",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Har du handduken med?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Om jag har den är vi inom handduksradien och ingenting riktigt allvarligt kan hända. Om jag inte har den är frågan redan ett bevis på att något allvarligt är på väg, vilket gör att jag borde ha den, vilket i sin tur betyder att jag nästan har den. Kolla handskfacket. Rikard har inte lånat den. Officiellt.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Delvis"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "2"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "8 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Hög"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-06",
+      "title": "Mat som forskningsprojekt",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Kan vi stanna och äta?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Optimering säger att första öppna ställe räcker. Forskning säger att vi bör jämföra en tredje kandidat, justera hungermarkörer i loop och mäta utan att veta vad som är mätt nog. Jag föreslår en kompromiss: följ kartans närmaste munchie station och låt forskningen ske i kön. Kön är troligen en vogonkö.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Ja"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "1"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "0 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Hög"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
+    },
+    {
+      "id": "EX-F-07",
+      "title": "Ansvar utan koppling",
+      "provenance": "konstruerad",
+      "author": "Grok Bot (förslag)",
+      "section": "Förslag 20 november 2026",
+      "original": "Vem har ansvaret den här gången?",
+      "babelStonerMode": "MAXIMAL ILLOGICAL",
+      "response": "Rikard, självklart. Inte för att han var där, utan just därför. En frånvarande ansvarig är den mest flexibla typen av ansvarig. Om du vill ha ett mer jordnära svar: den som håller i ratten styr, kartan visar vägen, och jag sköter skuldbokföringen i en annan kolumn.",
+      "logicAnalysis": {
+        "note": "Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden eller mått.",
+        "labels": [
+          {
+            "label": "Ursprunglig fråga besvarad",
+            "value": "Delvis"
+          },
+          {
+            "label": "Ansvarsförskjutningar",
+            "value": "2"
+          },
+          {
+            "label": "Rikards relevans",
+            "value": "100 %"
+          },
+          {
+            "label": "Galaktisk absurditet",
+            "value": "Exceptionell"
+          }
+        ]
+      },
+      "sourceNote": "Nyskriven för appen som förslag från Grok Bot, 20 november 2026. Inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden."
     }
   ]
 }

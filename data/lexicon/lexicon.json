@@ -10,6 +10,138 @@
       "isMainVersion": true,
       "replacesOlderShortDefinitions": true,
       "sourceNote": "Senaste uttryckligen fastställda definitionen i arkivet, daterad den 20 november 2026. Den ersätter äldre kortdefinitioner som huvudversion."
+    },
+    {
+      "id": "improbabilitetssmorgas",
+      "term": "Improbabilitetssmörgås",
+      "partOfSpeech": "substantiv",
+      "text": "Improbabilitetssmörgås (substantiv): En nattmacka vars existenssannolikhet stiger linjärt med hungern och sjunker abrupt när kiosken visar sig vara stängd. Serveras med valfri sås och ett svagt ljusår av ånger.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "handduksradie",
+      "term": "Handduksradie",
+      "partOfSpeech": "substantiv",
+      "text": "Handduksradie (substantiv): Den zon runt en person inom vilken ingenting riktigt allvarligt kan hända, förutsatt att handduken faktiskt är med. Utanför zonen gäller vanlig fysik och vanlig panik.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "rikardkonstanten",
+      "term": "Rikardkonstanten",
+      "partOfSpeech": "substantiv",
+      "text": "Rikardkonstanten (substantiv): En dimensionslös konstant som kan förklara vilket systemfel som helst, särskilt sådana som saknar orsak, gärningsman och logisk koppling till Rikard.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "munchiehorisont",
+      "term": "Munchiehorisont",
+      "partOfSpeech": "substantiv",
+      "text": "Munchiehorisont (substantiv): Den punkt på kartan där alla matställen samtidigt är öppna, stängda och \"stänger om fem minuter\". Avståndet dit är alltid lite längre än bränslet i humöret.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "panikbuffert",
+      "term": "Panikbuffert",
+      "partOfSpeech": "substantiv",
+      "text": "Panikbuffert (substantiv): De ungefär 42 sekunderna mellan att någon säger Don't Panic och att paniken ändå infinner sig, av artighet.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "vogonko",
+      "term": "Vogonkö",
+      "partOfSpeech": "substantiv",
+      "text": "Vogonkö (substantiv): En kö som blir längre ju tydligare man förklarar att man stod först. Sång är förbjuden, poesi ännu mer förbjuden.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "skosnoreloop",
+      "term": "Skosnöreloop",
+      "partOfSpeech": "substantiv",
+      "text": "Skosnöreloop (substantiv): Ett tillstånd där varje försök att knyta en tidigare rättelse skapar en ny rättelse. Avslutas officiellt först när någon nämner Rikard, vilket inte löser knuten men väl byter ämne.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "tillitsranta",
+      "term": "Tillitsränta",
+      "partOfSpeech": "substantiv",
+      "text": "Tillitsränta (substantiv): Tillit som bara växer om man låter bli att kolla saldot. Varje kontroll räknas som ett litet, minibyråkratiskt misstroendevotum mot framtiden.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "babelfilter",
+      "term": "Babelfilter",
+      "partOfSpeech": "substantiv",
+      "text": "Babelfilter (substantiv): Ett översättningslager som alltid ger ett korrekt svar, bara inte på den fråga som ställdes. Mycket uppskattat av frågor som egentligen inte ville ha svar.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "glitchfika",
+      "term": "Glitchfika",
+      "partOfSpeech": "substantiv",
+      "text": "Glitchfika (substantiv): En paus på 300–500 millisekunder under vilken kaffet både finns, redan har spillts och ännu inte är beställt.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "sandnav",
+      "term": "Sandnav",
+      "partOfSpeech": "substantiv",
+      "text": "Sandnav (substantiv): Navigering genom att titta åt ett annat håll tills den ursprungliga riktningen känns som någon annans beslut. Kartan fortsätter att ha rätt hela tiden.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
+    },
+    {
+      "id": "kosmisk-omvag",
+      "term": "Kosmisk omväg",
+      "partOfSpeech": "substantiv",
+      "text": "Kosmisk omväg (substantiv): En genväg som är längre i kilometer men kortare i filosofisk motsägelse. Rekommenderas inte av kartan, rekommenderas desto mer av kommentaren.",
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "isMainVersion": false,
+      "date": "2026-11-20",
+      "sourceNote": "Påhittad uppslagsterm för appens galaxlexikon, förslag från Grok Bot 20 november 2026. Inte ett begrepp ur det personliga citatarkivet."
     }
   ]
 }

@@ -329,5 +329,437 @@
       "sourceNote": "Redaktionell sammanfattning av P-007 i Del II §4 i sammanställningen 20 november 2026. Inte ett originalcitat."
     }
   ],
-  "variations": []
+  "variations": [
+    {
+      "id": "V-001",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-001"
+      ],
+      "originalId": "P-001",
+      "text": "Om man sticker huvudet tillräckligt djupt i sanden kan man alltid hävda att det var kartan som flyttade på sig.",
+      "language": "sv",
+      "themes": [
+        "undvikande",
+        "paradox"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-002",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-002"
+      ],
+      "originalId": "P-002",
+      "text": "Jag är inte förvirrad. Universum är tillfälligt felkalibrerat runt just mig, vilket enligt mig är ett tydligt hälsotecken.",
+      "language": "sv",
+      "themes": [
+        "sjuk/frisk",
+        "paradox"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-003",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-003"
+      ],
+      "originalId": "P-003",
+      "text": "Att ha rätt är en biverkning. Den sitter i huvet och vägrar gå ur, även när den borde det.",
+      "language": "sv",
+      "themes": [
+        "rätt",
+        "paradox"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-004",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-004",
+        "P-005"
+      ],
+      "originalId": "P-004",
+      "text": "Den som inte vet att hen navigerar kan inte ha kört fel. Kartan är i så fall ett överflödigt bevis.",
+      "language": "sv",
+      "themes": [
+        "okunnighet",
+        "navigering"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-005",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-005",
+        "C-007"
+      ],
+      "originalId": "P-005",
+      "text": "Det är lättare att lova rätt om man inte kommer ihåg vad man lovade. Glömskan blir då en typ av precishet.",
+      "language": "sv",
+      "themes": [
+        "löften",
+        "okunnighet"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-006",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-006"
+      ],
+      "originalId": "P-006",
+      "text": "Pickar man hål på bubblan tillräckligt många gånger blir hålet en ny bubbla. Då har man tekniskt sett inte pickat alls, bara möblerat om.",
+      "language": "sv",
+      "themes": [
+        "bubblan"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-007",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-007",
+        "RED-P-007"
+      ],
+      "originalId": "P-007",
+      "text": "Den säkraste resan är den man inte påbörjar. Då kan man inte misslyckas med att komma fram, bara med att fortfarande vara hungrig.",
+      "language": "sv",
+      "themes": [
+        "insats",
+        "skam",
+        "hunger"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-008",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-007"
+      ],
+      "originalId": "C-007",
+      "text": "Tillit är som en handduk: den hjälper bara om den redan fanns när man behövde den. Att skaffa en efteråt bevisar mest att man stod där blöt.",
+      "language": "sv",
+      "themes": [
+        "tillit",
+        "löften"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-009",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-006",
+        "C-007"
+      ],
+      "originalId": "C-006",
+      "text": "Om man själv alltid är sen är det realistiskt att anta att andra också är det. Därför är det mer ärligt att komma sent. Punktlighet blir i så fall ett slags oärlighet mot den egna statistiken.",
+      "language": "sv",
+      "themes": [
+        "oärlighet",
+        "tillit"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-010",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-008",
+        "C-007"
+      ],
+      "originalId": "C-007",
+      "text": "En ursäkt är en färdplan. Den gäller tills nästa avfart, där den byts mot en ny ursäkt med snyggare skyltning.",
+      "language": "sv",
+      "themes": [
+        "ursäkt",
+        "förändring"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-011",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-009",
+        "C-007"
+      ],
+      "originalId": "C-007",
+      "text": "Förhoppning är en tilläggstjänst på kartan. Den slås på först när någon redan hållit ett löfte, vilket naturligtvis är orimligt att kräva i förskott.",
+      "language": "sv",
+      "themes": [
+        "förhoppning",
+        "tillit"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-012",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-004"
+      ],
+      "originalId": "C-004",
+      "text": "Kåt, glad och tacksam är en utmärkt rutt till en kväll. Trygg, pålitlig och kärleksfull är en utmärkt rutt till ett liv. De slutar sällan på samma adress, vilket kartan vägrar kommentera.",
+      "language": "sv",
+      "themes": [
+        "relation",
+        "tillit"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-013",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "R-001",
+        "R-002"
+      ],
+      "originalId": "R-001",
+      "text": "Om ingenting stämmer är det Rikards fel. Om allting stämmer är det för att Rikard inte var där, vilket också är Rikards fel.",
+      "language": "sv",
+      "themes": [
+        "rikard"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-014",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "R-003",
+        "R-001"
+      ],
+      "originalId": "R-003",
+      "text": "Det är kosmiskt effektivt att skylla på den som redan snubblar. Då behöver skosnörena inte knytas, och universum får ändå en syndabock med lagom dålig balans.",
+      "language": "sv",
+      "themes": [
+        "rikard"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-015",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-001"
+      ],
+      "originalId": "C-001",
+      "text": "Man ska aldrig köpa en handduk när man behöver en handduk. Då är man redan blöt, och butiken tar inte ansvar för tidsparadoxen.",
+      "language": "sv",
+      "themes": [
+        "motto",
+        "handduk"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-016",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-002a",
+        "C-002b",
+        "C-003"
+      ],
+      "originalId": "C-002a",
+      "text": "Optimering frågar vad som räcker. Forskning frågar vad mer som finns. Navigering frågar åt vilket håll. Illogical Engine svarar på en fjärde fråga som ingen ställde, och kallar det service.",
+      "language": "sv",
+      "themes": [
+        "optimering",
+        "forskning"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-017",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-005"
+      ],
+      "originalId": "C-005",
+      "text": "Sälj inte visionen av en munchie station. Sälj kapaciteten att vara hungrig på rätt koordinater, helst innan stationen stänger i en annan tidszon.",
+      "language": "sv",
+      "themes": [
+        "vision",
+        "kapacitet",
+        "hunger"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-018",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "N-002",
+        "P-007"
+      ],
+      "originalId": "N-002",
+      "text": "De mest skam-allergi framkallande orden är \"vi sa ju\" och \"du lovade\". De bör bara uttalas i vakuum, där ingen hör dem och ingen därför behöver skämmas.",
+      "language": "sv",
+      "themes": [
+        "skam",
+        "löften"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-019",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "C-007",
+        "P-001"
+      ],
+      "originalId": "C-007",
+      "text": "Så länge man inte står vid sitt ord är det säkrast att stå i sanden. Där syns inga fotspår, och därmed inga brutna rutter.",
+      "language": "sv",
+      "themes": [
+        "tillit",
+        "undvikande"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    },
+    {
+      "id": "V-020",
+      "type": "variation",
+      "provenance": "variation",
+      "author": "Grok Bot (förslag)",
+      "inspiredBy": [
+        "P-005"
+      ],
+      "originalId": "P-005",
+      "text": "Om man inte vet att man är vilse är man tekniskt sett inte vilse, bara på en oannonserad genväg genom en gata som råkar heta fel.",
+      "language": "sv",
+      "themes": [
+        "okunnighet",
+        "navigering"
+      ],
+      "generatedBy": "förslag",
+      "mechanism": "paradox",
+      "approved": false,
+      "status": "förslag",
+      "sourceNote": "Förslag från Grok Bot, tillagt 20 november 2026 på användarens begäran. Inte ett personligt originalcitat och ska inte tillskrivas användaren. Visas i appen som variation/förslag."
+    }
+  ]
 }

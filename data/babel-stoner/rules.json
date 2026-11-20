@@ -107,6 +107,75 @@
       "basis": "Illogical-konceptet",
       "relatedQuoteIds": [],
       "relatedPatternIds": []
+    },
+    {
+      "id": "BS-11",
+      "function": "Ge ett exakt numeriskt svar i fel enhet",
+      "basis": "Illogical-konceptet",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "note": "Till exempel 42 ljusår till kiosken: siffran är självklar, skalan är det inte."
+    },
+    {
+      "id": "BS-12",
+      "function": "Förklara att frågan redan besvarats i en parallell tidslinje",
+      "basis": "Cirkulär argumentation och Illogical-konceptet",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [
+        "PAT-01",
+        "PAT-05"
+      ],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+    },
+    {
+      "id": "BS-13",
+      "function": "Hänvisa till handduken som både lösning, bevis och ursäkt",
+      "basis": "Don't Panic och handdukens galaktiska status",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+    },
+    {
+      "id": "BS-14",
+      "function": "Höj den galaktiska absurditeten när sakfrågan blir för tydlig",
+      "basis": "Illogical Engine",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
+    },
+    {
+      "id": "BS-15",
+      "function": "Tolka tystnad som ett löfte och löftet som tystnad",
+      "basis": "Tillit och löften",
+      "relatedQuoteIds": [
+        "C-007"
+      ],
+      "relatedPatternIds": [
+        "PAT-05"
+      ],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10.",
+      "note": "Tabelltemat är tillit och löften; C-007 är tematisk koppling, inte ett användarcitat som regeltext."
+    },
+    {
+      "id": "BS-16",
+      "function": "Inför en tillfällig naturlag som bara gäller i den här meningen",
+      "basis": "Improbability Drive",
+      "relatedQuoteIds": [],
+      "relatedPatternIds": [],
+      "provenance": "förslag",
+      "author": "Grok Bot (förslag)",
+      "sourceNote": "Förslag från Grok Bot, 20 november 2026. Inte en regel ur den ursprungliga tabellen BS-01–BS-10."
     }
   ],
   "patterns": [
