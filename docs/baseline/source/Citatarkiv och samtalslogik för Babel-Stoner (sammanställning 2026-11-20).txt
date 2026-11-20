@@ -1,0 +1,239 @@
+Arbetade i 26s
+
+### 📚 Citatarkiv och samtalslogik för Babel-Stoner
+
+Källbaserad sammanställning · 20 november 2026
+
+Jag har hittat dokumentet `Citat_och_paradoxer_falsifiering.md` i ditt personliga arkiv samt ett separat bokunderlag med ordagrant återgivna uttalanden. Jag har också återfunnit formuleringar från tidigare samtal.
+
+Jag delar upp materialet i tre kategorier:
+
+* Dokumenterade originalcitat och paradoxer – formuleringar som ska bevaras utan omskrivning.
+
+* Uttalanden och observationer om mänskligt beteende – material för Babel-Stoners samtalslogik.
+
+* Härledda dialogmönster – programmeringsregler som bygger på materialet, men inte ska tillskrivas dig som citat.
+
+En viktig skillnad är att dokumenterad formulering inte automatiskt innebär verifierat upphov eller att en psykologisk tolkning av en annan person är fastställd.
+
+### Del I – Citatarkivet
+
+### A. Paradoxer och mänsklig irrationalitet
+
+P-001 · Undvikandets paradox
+
+> Om sticker huvudet tillräckligt djupt i sanden kommer det tillslut upp i arlset på en själv.
+
+Originalstavning enligt arkivet. Den normaliserade versionen använder ”Om man ... arslet”.
+
+P-002 · Sjuk/frisk-paradoxen
+
+> är detta sjukt? Ja, Är jag sjuk? Troligen. Men hade jag varit frisk hade jag blivit så sjuk att jag aldrig blivit frisk igen
+
+P-003 · Att ha rätt
+
+> Så sjuk i huvet så att jag hade rätt.
+
+P-004 · Omedveten manipulation
+
+> den bäste manipulatören är den som inte själv vet om att den manipulerar
+
+P-005 · Okunnighetens paradox
+
+> Det är lättare att göra fel om man inte vet att man gör fel.
+
+P-006 · Bubblan
+
+> hon är tillbaka i sin bubbla och pickar man hål på den så går det aldrig någonsin att picka på samma ställe
+
+P-007 · Insats, förlust och skam
+
+> när det blir bra då ska jag satsa vara med och bidra,men vi bara bråkar. om man satsar helhjärtat på något och det inte fungerar vad får man då? skämmas. om maninte satsar dåförlorar man inte heller.
+
+Dessa sju poster finns i den daterade arkivsamlingen. Flera är återgivna från tidigare chattindex snarare än kontrollerade mot en råexport.
+
+### B. Tillit, löften och relationer
+
+C-004 – Relationens kvaliteter
+
+> Trygg pålitlig och kärleksfull är väl lite mer än kåt glad och tacksam
+
+C-006 – Oärlighet och förväntningar
+
+> Är man oärlig själv utgår man från att andra är det
+
+C-007 – Tillitens paradox
+
+> Och så länge man själv inte står vid sitt ord kommer rädslan för att bli sviken alltid vara större än viljan att bygga tillit.
+
+Det sista citatet begärde du uttryckligen sparat den 18 november 2026.
+
+C-008 – Ursäkten och förändringen
+
+> Jag hör att du är ledsen för det som varit. Men en ursäkt betyder trots allt något först när den också leder till att man gör annorlunda.
+
+Detta kommer från den gemensamt bearbetade meddelandetexten den 17 november, och ska därför registreras som en godkänd textformulering snarare än ett säkert självständigt originalcitat.
+
+C-009 – Förhoppningens förutsättning
+
+> Så frågan är egentligen inte om jag har någon förhoppning. Frågan är vad du ger mig för anledning att ha det.
+
+Även detta kommer från den bearbetade meddelandetexten.
+
+### C. Rikard, självinsikt och svart humor
+
+R-001
+
+> Allt ont kommer från dig Rikard.
+
+R-002
+
+> Du ska inte leka med den där Rikard.
+
+R-003
+
+> Och det är väl tacksamt och pissa på någon som gasar på och inte alltid knytit skorna ordentligt så att han snubblar på skonörena
+
+De tre återges i bokprojektets arkivunderlag som ordagranna användaruttalanden.
+
+Rikard har därmed en faktisk bakgrund i materialet: han har återkommande fått skulden, även för sådant han enligt din berättelse inte varit närvarande vid. Det är en betydligt starkare komisk grund än att bara använda honom som ett slumpmässigt namn.
+
+### D. Övriga citat med potential för appen
+
+| ID     | Återgiven formulering                                                                                                          |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| C-001  | ”Motto man ska aldrig köpa något när man behöver det”                                                                          |
+| C-002a | ”Optimering frågar vad som räcker för det här ändamålet”                                                                       |
+| C-002b | ”Forskning är när man börjar leta efter en tredje kandidat, justera markörer i loop, eller mäta utan att veta vad som räcker.” |
+| C-003  | ”Skriv vad du hittar, inte vad du antar.”                                                                                      |
+| C-005  | ”vi ska inte sälja vision plattformen ska sälja kapacitet och kompetens”                                                       |
+| N-002  | ”skam-allergi framkallande ord”                                                                                                |
+
+Dessa är registrerade i arkivdokumentet som användarformuleringar eller utdrag.
+
+### E. Garderobsknullis – definitiv uppslagsdefinition
+
+Det här är ett eget begrepp som bör få en särskild plats i appens lexikon.
+
+> Garderobsknullis (substantiv): En person som någon har en sexuell eller kärleksfull relation med, men inte förmår stå för öppet på grund av skuld, skam eller rädsla för omgivningens reaktioner. Skammen kan ha sitt ursprung i omständigheterna kring relationens början och leva kvar långt efter att dessa förändrats. Den kan med tiden överföras på partnern, vars person, brister och tillkortakommanden blir föremål för samma skam. Den som en gång hölls hemlig får därmed fortsätta bära konsekvenserna av den andres olösta skam, trots att relationen i sig inte längre är hemlig.
+
+Detta är den senaste uttryckligen fastställda definitionen i arkivet, daterad den 20 november 2026. Den ersätter äldre kortdefinitioner som huvudversion.
+
+### Del II – Uttalanden och observationer som kan bygga Babel-Stoner
+
+Det här materialet är minst lika viktigt som citaten. Det beskriver återkommande samtalsmönster och motsägelser.
+
+### 1\. Den omöjliga rättelsen
+
+Du har beskrivit att en stor del av kommunikationen under relationen gått åt till att förklara:
+
+> Nej Bonnie, det var inte så jag sa … inte så jag menade.
+
+Samtalsmekanism: En person får inte diskutera sin ursprungliga ståndpunkt, eftersom samtalet hela tiden handlar om att korrigera hur den har återgivits.
+
+Babel-Stoner ska kunna skapa en oändlig kedja:
+
+Fråga: Varför gjorde du inte det vi kom överens om?
+
+Svar: Varför säger du att jag inte bryr mig?
+
+Rättelse: Det har jag inte sagt.
+
+Svar: Nu förnekar du till och med vad du själv säger.
+
+Resultat: Ursprunglig fråga obesvarad. Diskussionens längd har ökat med 300 %. Rikard har förklarat sig oskyldig.
+
+### 2\. Självbildens försvar
+
+Din återkommande beskrivning är att vissa reaktioner inte behöver vara medvetet illvilliga, utan kan vara automatiska försök att skydda en skör självbild.
+
+Det är en användbar hypotes för satirisk dialoggenerering, men inte ett fastställt psykologiskt faktum om en viss person.
+
+Babel-Stoner-regel: Om ett påstående riskerar att framkalla skam, behandla själva påståendet som ett angrepp och undvik sakfrågan.
+
+### 3\. Den omvända ansvarskedjan
+
+Du har beskrivit situationer där det ursprungliga problemet försvinner bakom diskussioner om tonfall, upprepningar eller hur en fråga framfördes.
+
+Exempel på konstruerad Babel-Stoner-dialog:
+
+> Du hade inte behövt upprepa frågan om jag hade svarat. Men eftersom du upprepade frågan kan jag inte svara, och det är därför ditt fel att frågan fortfarande är obesvarad.
+
+Det är en cirkulär konstruktion med ett tydligt komiskt värde.
+
+### 4\. Skammens dubbla bokföring
+
+P-007 beskriver hur rädsla för misslyckande kan leda till att man undviker att satsa fullt ut.
+
+Den logiska motsägelsen är:
+
+> För att undvika risken att misslyckas med något man vill lyckas med, låter man bli att göra det som krävs för att lyckas.
+
+Redaktionell sammanfattning av P-007, inte ett originalcitat.
+
+### 5\. Löftets självupphävande
+
+Utifrån dina citat om löften och tillit kan translatorn använda följande mönster:
+
+> Jag hade tänkt hålla mitt löfte, men när du påminde mig om det kändes det som att du inte litade på mig. Därför blev det omöjligt att hålla löftet, vilket visar att du borde ha litat på mig.
+
+Här förstör argumentationen sin egen förutsättning.
+
+### Del III – Babel-Stoners samtalsmotor
+
+Jag föreslår följande grundläggande regelbibliotek.
+
+| Regel | Funktion                                        | Underlag                |
+| ----- | ----------------------------------------------- | ----------------------- |
+| BS-01 | Omvandla sakfråga till personfråga              | Den omöjliga rättelsen  |
+| BS-02 | Flytta ansvar från handling till reaktion       | Tonfall och upprepning  |
+| BS-03 | Förneka motsägelsen utan att lösa den           | Sjuk/frisk-paradoxen    |
+| BS-04 | Gör minnet av ett löfte till problemet          | Tillit och löften       |
+| BS-05 | Använd skam för att undvika handling            | P-007                   |
+| BS-06 | Förklara att frånvaro av insikt bevisar oskuld  | P-004 och P-005         |
+| BS-07 | Byt ståndpunkt och förneka bytet                | Bubblan och rättelserna |
+| BS-08 | Återvänd till samtalets början efter flera varv | Cirkulär argumentation  |
+| BS-09 | Inför Rikard som ansvarig utan logisk koppling  | R-001 och R-002         |
+| BS-10 | Ge ett korrekt svar på en helt annan fråga      | Illogical-konceptet     |
+
+### Ett exempel på fullständig Illogical-översättning
+
+ORIGINAL
+
+"Du lovade att ringa mig igår."
+
+BABEL-STONER · MAXIMAL ILLOGICAL
+
+"Jag förstår faktiskt inte varför du alltid måste dra upp det förflutna. Jag tänkte ringa, och det borde väl vara viktigare än att jag faktiskt gjorde det? När du nu anklagar mig för att inte ha ringt känner jag ännu mindre för att ringa. Och om du verkligen hade velat prata med mig hade du kunnat ringa själv. Men det gjorde du inte, eftersom du tydligen förväntade dig att jag skulle hålla mitt löfte. Det är ganska orättvist. Rikard håller med."
+
+AUTOMATISK LOGIKANALYS
+
+Ursprunglig fråga besvarad
+
+Nej
+
+Ansvarsförskjutningar
+
+3
+
+Rikards relevans
+
+0 %
+
+Galaktisk absurditet
+
+Exceptionell
+
+Dialogen är nyskriven för appen, inte ett återgivet verkligt samtal. Bedömningarna är satiriska etiketter, inte vetenskapliga mätvärden.
+
+### Bedömning av materialet
+
+Det finns redan en användbar kärna med dokumenterade paradoxer, egna formuleringar, ett egenmyntat relationsbegrepp och konkreta beskrivningar av motsägelsefull kommunikation.
+
+Det som framför allt behöver utvinnas ytterligare är faktiska samtalssekvenser ur chattar och transkriptioner: vad som frågades, vad som svarades, hur frågan förändrades och om den någonsin besvarades.
+
+Det skulle ge Babel-Stoner betydligt mer särpräglad logik än generiska beskrivningar av narcissism.
+
+Arkivstatus: Detta är en sammanställning från återfunna arkivdokument och tidigare samtalskontext, inte en fullständig inventering av samtliga meddelanden, ljudtranskriptioner och dokument. Jag har inte skrivit tillbaka någon ny fil till ditt personliga arkiv.
+
+Den bästa fortsättningen är att bygga ett källspårbart dialogbibliotek där originalcitat, verkliga samtalsutdrag och påhittade Illogical-svar hålls strikt åtskilda.
