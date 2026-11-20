@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "valuePairs": [
+    { "id": "frihet-trygghet", "a": "frihet", "b": "trygghet" },
+    { "id": "kaos-kontroll", "a": "kaos", "b": "kontroll" }
+  ],
+  "originals": [
+    {
+      "id": "orig-0001",
+      "type": "original",
+      "text": "Och så länge man själv inte står vid sitt ord kommer rädslan för att bli sviken alltid vara större än viljan att bygga tillit.",
+      "language": "sv",
+      "themes": ["tillit", "löften"],
+      "valuePairs": [],
+      "source": "personligt citatarkiv"
+    }
+  ],
+  "variations": []
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="sv"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Babel-Stoner Translator | Pundarens Vän</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-dim": "#f3778f",
+              "primary-fixed-dim": "#b075ff",
+              "on-tertiary-fixed": "#390011",
+              "secondary-container": "#66298a",
+              "primary-fixed": "#ba88ff",
+              "outline-variant": "#484848",
+              "inverse-primary": "#7e29df",
+              "error-container": "#a70138",
+              "on-secondary-container": "#ebc1ff",
+              "outline": "#757575",
+              "surface-bright": "#2c2c2c",
+              "tertiary-container": "#f67992",
+              "on-secondary-fixed": "#511076",
+              "on-secondary": "#4d0972",
+              "on-secondary-fixed-variant": "#713495",
+              "on-tertiary-fixed-variant": "#71112e",
+              "secondary-fixed-dim": "#e4b0ff",
+              "on-background": "#ffffff",
+              "tertiary-fixed": "#ff8fa3",
+              "inverse-on-surface": "#555555",
+              "on-tertiary": "#620324",
+              "secondary-fixed": "#ecc3ff",
+              "on-primary-fixed-variant": "#3f007c",
+              "on-error": "#490013",
+              "surface-container-lowest": "#000000",
+              "on-primary-container": "#330066",
+              "primary": "#c59aff",
+              "surface-container-low": "#131313",
+              "background": "#0e0e0e",
+              "inverse-surface": "#f9f9f9",
+              "on-primary-fixed": "#000000",
+              "tertiary-fixed-dim": "#f97c94",
+              "on-primary": "#420082",
+              "surface-tint": "#c59aff",
+              "secondary": "#d896fe",
+              "surface": "#0e0e0e",
+              "on-surface-variant": "#ababab",
+              "surface-dim": "#0e0e0e",
+              "on-tertiary-container": "#4d001a",
+              "secondary-dim": "#ca89ef",
+              "surface-container-high": "#1f1f1f",
+              "surface-container": "#191919",
+              "primary-container": "#ba88ff",
+              "surface-variant": "#262626",
+              "on-surface": "#ffffff",
+              "error-dim": "#d73357",
+              "surface-container-highest": "#262626",
+              "on-error-container": "#ffb2b9",
+              "error": "#ff6e84",
+              "tertiary": "#ff8ba0",
+              "primary-dim": "#9547f7"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0e0e0e;
+        color: #ffffff;
+        font-family: 'Manrope', sans-serif;
+        overflow-x: hidden;
+      }
+      .glass-card {
+        background: rgba(25, 25, 25, 0.4);
+        backdrop-filter: blur(16px);
+      }
+      .cosmic-gradient {
+        background: linear-gradient(135deg, #c59aff 0%, #9547f7 100%);
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: #c59aff;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(197, 154, 255, 0.6);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-neutral-950/80 backdrop-blur-xl shadow-[0_0_20px_rgba(157,80,255,0.1)] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-purple-400">sensors</span>
+<h1 class="font-['Space_Grotesk'] tracking-tighter uppercase font-bold text-xl font-black text-purple-500 italic">Handdukssensorn</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-purple-400 cursor-pointer hover:text-purple-300 hover:scale-105 transition-transform">emergency_home</span>
+</div>
+</header>
+<main class="flex-1 pt-24 pb-32 px-6 max-w-4xl mx-auto w-full flex flex-col gap-8">
+<!-- Header Hero Section -->
+<div class="space-y-2">
+<span class="text-tertiary font-headline font-bold tracking-[0.2em] text-xs uppercase">Babel-Stoner v2.4</span>
+<h2 class="text-5xl font-headline font-bold text-white leading-none tracking-tight">Translate your <span class="text-primary italic">reality</span>.</h2>
+</div>
+<!-- Input Area Shard -->
+<div class="surface-container rounded-lg p-1 glass-card shadow-2xl">
+<div class="bg-surface-container-low rounded-lg p-6 space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label text-sm font-bold text-on-surface-variant uppercase tracking-widest">Boring Earth Text</label>
+<span class="material-symbols-outlined text-outline-variant text-lg">public</span>
+</div>
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-xl font-body text-on-surface placeholder:text-outline p-0 h-32 resize-none" placeholder="E.g. 'I am going to the store to buy some snacks...'"></textarea>
+</div>
+</div>
+<!-- Control Center (Asymmetric Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- Intensity Slider -->
+<div class="md:col-span-3 surface-container-high rounded-full px-8 py-6 flex flex-col justify-center gap-4">
+<div class="flex justify-between items-center">
+<span class="font-label text-[10px] font-extrabold text-on-surface-variant uppercase tracking-[0.2em]">Intensity: Mild</span>
+<span class="font-label text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">Full Cosmic Madness</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-full appearance-none cursor-pointer" max="100" min="1" type="range" value="70"/>
+</div>
+<!-- Translate Button -->
+<button class="md:col-span-2 cosmic-gradient text-on-primary-fixed font-headline font-bold text-lg rounded-full py-6 px-4 shadow-[0_0_30px_rgba(149,71,247,0.3)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+<span>Translate to Intergalactic Slang</span>
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</div>
+<!-- Output Result Shard -->
+<div class="relative mt-4">
+<div class="absolute -top-6 -left-2 bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest z-10 shadow-lg">
+                Decrypted Output
+            </div>
+<div class="surface-container-highest rounded-lg p-12 min-h-[200px] flex flex-col items-center justify-center text-center relative overflow-hidden group">
+<!-- Background decorative elements -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img alt="Abstract cosmic nebula background with purple and pink swirls" class="w-full h-full object-cover" data-alt="abstract swirling nebula of deep purples and pinks with faint grid lines and stars cinematic lighting grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6bYXqc4AdXliykvY-tG5OwewNQBsSGjZmDuLlFQ7tD-tH-8sfm2FA0GoIjhVL7J1KVMIA0SbbERFg0f5mHTyAjwbqmOF4Hn70dAvLEOSOtwP5pmaCqnY3LVz3W1xO89yE2sTCNhRyms2bZftdNlp07abXnYlMu45EhcHzWg_rU5NgomKzC5HPXkdZjXk-2-HlRvigQXvb8Ymo_l_EMMxpBkCvgw9c5kMSq9v51oGxNgVCx6Mm9zibscQnbsA7XBj23VTwqXTgxdVN"/>
+</div>
+<p class="text-4xl md:text-5xl font-headline font-bold italic tracking-tight leading-snug text-transparent bg-clip-text bg-gradient-to-br from-white via-primary to-secondary relative z-10">
+                    "Rymden väntar, men chipsen är här."
+                </p>
+<div class="mt-8 flex gap-4 relative z-10">
+<button class="p-4 bg-surface-variant hover:bg-surface-bright text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+<button class="p-4 bg-surface-variant hover:bg-surface-bright text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Decorative Info Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="surface-container-low rounded-lg p-6 flex gap-4 items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Neural Linking</h4>
+<p class="text-xs text-on-surface-variant">Connecting directly to your sub-ethereal vibe frequency.</p>
+</div>
+</div>
+<div class="surface-container-low rounded-lg p-6 flex gap-4 items-center">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Hyper-Drive</h4>
+<p class="text-xs text-on-surface-variant">Powered by the Heart of Gold's improbability engine.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-neutral-950/90 backdrop-blur-2xl rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Home</span>
+</a>
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Map</span>
+</a>
+<!-- Translate (Active) -->
+<a class="flex flex-col items-center justify-center bg-purple-500/20 text-purple-300 rounded-full px-6 py-2 ring-1 ring-purple-500/30" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">translate</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Translate</span>
+</a>
+<!-- Vibe -->
+<a class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Vibe</span>
+</a>
+</nav>
+<!-- Navigation Drawer Hidden Trigger (Simulated for layout completeness) -->
+<div class="hidden md:flex fixed top-0 right-0 h-full w-2 z-[60] hover:bg-primary/20 transition-colors group">
+<!-- Visual hint for drawer -->
+</div>
+</body></html>

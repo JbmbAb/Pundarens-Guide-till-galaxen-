@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="sv"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@200;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-dim": "#f3778f",
+              "primary-fixed-dim": "#b075ff",
+              "on-tertiary-fixed": "#390011",
+              "secondary-container": "#66298a",
+              "primary-fixed": "#ba88ff",
+              "outline-variant": "#484848",
+              "inverse-primary": "#7e29df",
+              "error-container": "#a70138",
+              "on-secondary-container": "#ebc1ff",
+              "outline": "#757575",
+              "surface-bright": "#2c2c2c",
+              "tertiary-container": "#f67992",
+              "on-secondary-fixed": "#511076",
+              "on-secondary": "#4d0972",
+              "on-secondary-fixed-variant": "#713495",
+              "on-tertiary-fixed-variant": "#71112e",
+              "secondary-fixed-dim": "#e4b0ff",
+              "on-background": "#ffffff",
+              "tertiary-fixed": "#ff8fa3",
+              "inverse-on-surface": "#555555",
+              "on-tertiary": "#620324",
+              "secondary-fixed": "#ecc3ff",
+              "on-primary-fixed-variant": "#3f007c",
+              "on-error": "#490013",
+              "surface-container-lowest": "#000000",
+              "on-primary-container": "#330066",
+              "primary": "#c59aff",
+              "surface-container-low": "#131313",
+              "background": "#0e0e0e",
+              "inverse-surface": "#f9f9f9",
+              "on-primary-fixed": "#000000",
+              "tertiary-fixed-dim": "#f97c94",
+              "on-primary": "#420082",
+              "surface-tint": "#c59aff",
+              "secondary": "#d896fe",
+              "surface": "#0e0e0e",
+              "on-surface-variant": "#ababab",
+              "surface-dim": "#0e0e0e",
+              "on-tertiary-container": "#4d001a",
+              "secondary-dim": "#ca89ef",
+              "surface-container-high": "#1f1f1f",
+              "surface-container": "#191919",
+              "primary-container": "#ba88ff",
+              "surface-variant": "#262626",
+              "on-surface": "#ffffff",
+              "error-dim": "#d73357",
+              "surface-container-highest": "#262626",
+              "on-error-container": "#ffb2b9",
+              "error": "#ff6e84",
+              "tertiary": "#ff8ba0",
+              "primary-dim": "#9547f7"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hud-scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(197, 154, 255, 0.05) 51%, transparent 51%);
+            background-size: 100% 4px;
+        }
+        .glitch-anim {
+            animation: glitch 1.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 1px); }
+            40% { transform: translate(-2px, -1px); }
+            60% { transform: translate(2px, 1px); }
+            80% { transform: translate(2px, -1px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body overflow-hidden h-screen select-none">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-neutral-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full shadow-[0_0_20px_rgba(157,80,255,0.1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-purple-400" data-icon="sensors">sensors</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase font-bold text-on-surface">Handdukssensorn</span>
+</div>
+<div class="text-xl font-black text-purple-500 italic">NAVIGATOR</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-full border border-purple-500/20">
+<span class="material-symbols-outlined text-error text-xs glitch-anim" data-icon="wifi_off">wifi_off</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold text-error tracking-widest">Rikard Signal: Unstable</span>
+</div>
+<span class="material-symbols-outlined text-purple-400 hover:text-purple-300 hover:scale-105 transition-transform cursor-pointer" data-icon="emergency_home">emergency_home</span>
+</div>
+</nav>
+<!-- Main Content Canvas (Map Screen) -->
+<main class="relative w-full h-full pt-16 pb-28 overflow-hidden">
+<!-- Interactive Map Layer -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale opacity-60 mix-blend-screen" data-alt="Dark aesthetic satellite view of a futuristic neon city grid with glowing purple ley lines and ethereal cosmic nebulae overlays" data-location="The Cosmic Void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYeTfEpKUPEyUxSz2v3C4Go1pE9f9Q5Co7QWkzaJnPNDFJDfyb3qxEEhkzd45Y3--3IJ-Azr9l_JBEFSmCSiLHb4s5D0HOjZ9UaHOiWRxaHl1sp5beq1XZax2C9L0t85pqwyj_S8YniKYi0GpD84vAypQttteKt-Ut3fQu232rwtN5xOZft-GkQZTKEyQcWVos_WSJhjAlksluHAkiw5rUnS3jlLPN-3-GL9Dbzm7xy8Y_eV3aKtY4KDr_l_mZTYTliv1IUJOfMpOs"/>
+<div class="absolute inset-0 hud-scanline pointer-events-none opacity-40"></div>
+<!-- Map Markers / Data Shards -->
+<!-- Munchie Station 1 -->
+<div class="absolute top-[30%] left-[25%] group cursor-pointer">
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+<div class="relative bg-surface-container-highest/80 backdrop-blur-md p-3 rounded-full border border-primary/30 flex flex-col items-center shadow-lg">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-surface-container-high px-4 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold tracking-tighter text-primary">Munchie Station: Orbit-Kebab</span>
+</div>
+</div>
+</div>
+<!-- Rest Area 1 -->
+<div class="absolute top-[60%] right-[30%] group cursor-pointer">
+<div class="relative">
+<div class="absolute -inset-4 bg-tertiary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+<div class="relative bg-surface-container-highest/80 backdrop-blur-md p-3 rounded-full border border-tertiary/30 flex flex-col items-center shadow-lg">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="hotel" style="font-variation-settings: 'FILL' 1;">hotel</span>
+</div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-surface-container-high px-4 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold tracking-tighter text-tertiary">Rest Area: Towel Cloud 9</span>
+</div>
+</div>
+</div>
+<!-- Munchie Station 2 -->
+<div class="absolute bottom-[40%] left-[55%] group cursor-pointer">
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+<div class="relative bg-surface-container-highest/80 backdrop-blur-md p-3 rounded-full border border-primary/30 flex flex-col items-center shadow-lg">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="fastfood" style="font-variation-settings: 'FILL' 1;">fastfood</span>
+</div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-surface-container-high px-4 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold tracking-tighter text-primary">Munchie Station: The Deep Fryer of Eternity</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Overlay HUD Elements -->
+<div class="relative z-10 w-full h-full pointer-events-none p-6 flex flex-col justify-between">
+<!-- Anti-Navigation HUD Banner -->
+<div class="w-full flex justify-center mt-4 pointer-events-auto">
+<div class="bg-surface-container-lowest/90 backdrop-blur-2xl px-8 py-4 rounded-full border border-purple-500/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] max-w-2xl text-center">
+<p class="font-headline text-lg italic tracking-tight text-purple-200">
+                        "Höger är en fälla. Framåt är en illusion. Vänster är det enda som återstår."
+                    </p>
+<div class="flex justify-center gap-4 mt-2">
+<div class="h-1 w-12 bg-primary rounded-full animate-pulse"></div>
+<div class="h-1 w-12 bg-purple-900 rounded-full"></div>
+<div class="h-1 w-12 bg-purple-900 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Side Overlay Shards -->
+<div class="flex justify-between items-end w-full">
+<!-- Probability Shard -->
+<div class="pointer-events-auto bg-surface-container-highest/40 backdrop-blur-2xl p-6 rounded-full border border-white/5 flex flex-col items-start gap-1">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Probability of Snacks</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-5xl font-black text-primary">87%</span>
+<span class="font-label text-xs text-primary/60">CHANCE</span>
+</div>
+<div class="mt-2 w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[87%] shadow-[0_0_10px_#c59aff]"></div>
+</div>
+</div>
+<!-- Navigation Focus Shard -->
+<div class="pointer-events-auto flex flex-col items-end gap-3">
+<button class="w-16 h-16 rounded-full bg-surface-container-highest/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="my_location">my_location</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-primary shadow-lg shadow-primary/20 flex items-center justify-center text-on-primary hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-neutral-950/90 backdrop-blur-2xl rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
+<div class="absolute inset-0 bg-gradient-to-t from-purple-900/10 to-transparent rounded-t-[40px] -z-10"></div>
+<div class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-purple-500/20 text-purple-300 rounded-full px-6 py-2 ring-1 ring-purple-500/30 scale-90 transition-transform duration-150 cursor-default">
+<span class="material-symbols-outlined" data-icon="map" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Translate</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-600 p-2 hover:bg-neutral-800/50 rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-['Manrope'] text-[10px] font-bold tracking-widest uppercase mt-1">Vibe</span>
+</div>
+</nav>
+<!-- Drawer Trigger (Hidden, for design integrity) -->
+<div class="hidden">
+<div class="header_layout:left_align">
+<span class="profile_title">Pundarens Vän</span>
+<span class="sub_text">Towel Status: SECURED</span>
+</div>
+</div>
+</body></html>

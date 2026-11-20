@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="sv"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Babel-Stoner Translator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#c799ff",
+              "on-primary-fixed": "#000000",
+              "secondary-dim": "#33e9d5",
+              "primary-fixed": "#bc87fe",
+              "on-secondary-fixed-variant": "#00655b",
+              "secondary-container": "#006a60",
+              "surface-container-high": "#1c2028",
+              "secondary": "#4af8e3",
+              "inverse-on-surface": "#52555c",
+              "inverse-primary": "#7744b5",
+              "surface-container-highest": "#22262f",
+              "tertiary-container": "#fb899c",
+              "on-tertiary-fixed": "#390010",
+              "on-secondary-container": "#dcfff8",
+              "primary-container": "#bc87fe",
+              "secondary-fixed": "#4af8e3",
+              "surface-bright": "#282c36",
+              "on-primary-fixed-variant": "#40007a",
+              "inverse-surface": "#f9f9ff",
+              "tertiary-dim": "#eb7c8f",
+              "on-tertiary-fixed-variant": "#6c192e",
+              "error-dim": "#d73357",
+              "surface-container": "#161a21",
+              "primary-fixed-dim": "#af7aef",
+              "on-tertiary-container": "#5b0a22",
+              "tertiary": "#ff9dac",
+              "on-error": "#490013",
+              "outline": "#73757d",
+              "background": "#0b0e14",
+              "on-secondary": "#005b51",
+              "on-tertiary": "#69162c",
+              "surface-container-lowest": "#000000",
+              "primary-dim": "#ba85fb",
+              "secondary-fixed-dim": "#33e9d5",
+              "on-primary-container": "#340064",
+              "error": "#ff6e84",
+              "surface-variant": "#22262f",
+              "on-surface": "#ecedf6",
+              "surface-container-low": "#10131a",
+              "outline-variant": "#45484f",
+              "primary": "#c799ff",
+              "on-primary": "#440080",
+              "surface-dim": "#0b0e14",
+              "on-surface-variant": "#a9abb3",
+              "on-secondary-fixed": "#00463f",
+              "error-container": "#a70138",
+              "tertiary-fixed": "#ff8fa2",
+              "tertiary-fixed-dim": "#f18194",
+              "on-error-container": "#ffb2b9",
+              "on-background": "#ecedf6",
+              "surface": "#0b0e14"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .noise-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #4af8e3;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(74, 248, 227, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- Background Texture -->
+<div class="fixed inset-0 noise-overlay pointer-events-none"></div>
+<div class="fixed inset-0 bg-gradient-to-tr from-surface-container-lowest via-background to-surface-container-low opacity-50 pointer-events-none"></div>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-[#0b0e14]/60 backdrop-blur-3xl shadow-[0_40px_0_0_rgba(236,237,246,0.08)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-on-primary shadow-lg shadow-primary/20 transform -rotate-12">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<h1 class="font-headline text-xl tracking-tight italic text-[#c799ff] font-bold tracking-tighter uppercase">Cosmic HUD</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#22262f]/50 transition-colors text-on-surface-variant scale-95 active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</button>
+</div>
+</header>
+<main class="relative pt-24 pb-32 px-6 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Hero Wisdom Section -->
+<section class="lg:col-span-12 mb-4">
+<p class="font-headline text-on-surface-variant text-sm tracking-widest uppercase mb-2">Pundarens vän till galaxen</p>
+<h2 class="font-headline text-4xl md:text-6xl font-bold leading-tight tracking-tight italic">
+                Babel-Stoner <span class="text-secondary">Translator</span>
+</h2>
+<div class="mt-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="fluid">fluid</span>
+<span class="text-xs font-medium uppercase tracking-widest font-body">Sentient Archive Version 4.2.0</span>
+</div>
+</section>
+<!-- Translation Interface Grid -->
+<div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+<!-- Input Area -->
+<div class="group relative bg-surface-container-low p-6 rounded-xl rounded-tr-[3rem] transition-all duration-300 hover:bg-surface-container-high ring-1 ring-white/5">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span> Standard Text
+                    </span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="keyboard">keyboard</span>
+</div>
+<textarea class="w-full h-64 bg-transparent border-none focus:ring-0 text-on-surface font-body text-lg resize-none placeholder:text-outline-variant" placeholder="Enter boring, earthly sentences here..."></textarea>
+<div class="absolute bottom-4 right-6 text-outline-variant text-[10px] font-label uppercase tracking-tighter">
+                    Buffer: Low Frequency
+                </div>
+</div>
+<!-- Output Area -->
+<div class="relative bg-surface-container p-6 rounded-xl rounded-bl-[3rem] shadow-2xl ring-1 ring-primary/20 overflow-hidden">
+<!-- Signature Gradient Background -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Intergalactic Slang
+                        </span>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="h-64 font-headline text-2xl md:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-on-surface to-secondary leading-relaxed italic overflow-y-auto">
+                        "Mannen, hela kosmos bara vibbar liksom... fattar du? Det är som om galaxen är en gigantisk lava-lampa och vi är bara bubblorna som flyter runt."
+                    </div>
+<div class="mt-4 flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container shadow-inner"></div>
+<div class="w-6 h-6 rounded-full bg-secondary-container shadow-inner"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Rhythmic Sync Active</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Controls Bento Section -->
+<div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Intensity Slider -->
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-center ring-1 ring-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Vibe Intensity</label>
+<span class="text-secondary font-headline italic font-bold">Cosmic Madness</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-full appearance-none cursor-pointer custom-slider" max="100" min="0" type="range" value="85"/>
+<div class="flex justify-between mt-3 text-[10px] uppercase font-bold tracking-tighter text-outline">
+<span>Mild Buzzed</span>
+<span>Zen Matrix</span>
+<span>Universal Ego Death</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-col gap-4">
+<button class="flex-1 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline text-lg font-extrabold uppercase tracking-widest rounded-full py-4 flex items-center justify-center gap-3 shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+                    Translate
+                </button>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface-container-high text-secondary font-bold uppercase text-[10px] tracking-widest rounded-full py-3 flex items-center justify-center gap-2 border border-secondary/20 hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="share" data-weight="fill" style="font-variation-settings: 'FILL' 1;">share</span>
+                        Share Slang
+                    </button>
+<button class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Visual Decorative Elements -->
+<div class="lg:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-tertiary">
+<p class="text-[10px] uppercase font-black text-tertiary mb-1">Random Nebula Fact</p>
+<p class="text-xs text-on-surface-variant">The Crab Nebula smells like ozone and faint patchouli in this dimension.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-secondary">
+<p class="text-[10px] uppercase font-black text-secondary mb-1">Active Listeners</p>
+<p class="text-xs text-on-surface-variant">4,201 entities currently syncing via Babel-Stoner.</p>
+</div>
+<div class="hidden md:block col-span-2 relative rounded-xl overflow-hidden group">
+<img alt="abstract space nebula" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-700" data-alt="cinematic deep space nebula with swirling neon pink and blue gasses and bright distant stars in a grainy vintage sci-fi style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdjKsQYh3Twjc3WMVmUP03adNhtO_LhMmfzTM6WlBm5EcdNotdgFGqqL-CBsa_e6b2DMNgwcRXp9XwE3_zbgTgux-nONCUQ-mg-9dSbxrC5toTBD__5_ooBhmPuD7ASuZPYNG33q4I10pv9GOjO7WYG8s72isOh6i8DrOUlll40gFQTV7MxOTglU8m3oke2iNisPv3xrlhZ8kyb_cmRp9Od72RjzdbJv_wc0DrJ4P119Et_-K8IPIf2c0u9_BCzpIwi-PwFFnLRg5i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute bottom-3 left-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface/60">Live feed from Sector 7G</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-6 pt-2 bg-[#0b0e14]/60 backdrop-blur-3xl rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-[#ecedf6]/50 p-3 hover:text-[#4af8e3] transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#ecedf6]/50 p-3 hover:text-[#4af8e3] transition-all">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-gradient-to-br from-[#c799ff] to-[#bc87fe] text-[#440080] rounded-full p-3 shadow-[0_0_15px_rgba(199,153,255,0.5)] animate-pulse-slow active:scale-75">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#ecedf6]/50 p-3 hover:text-[#4af8e3] transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+</nav>
+<!-- Navigation Overlay (Web Only) -->
+<div class="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 bg-surface-variant/60 backdrop-blur-3xl rounded-full px-6 py-3 items-center gap-8 shadow-2xl ring-1 ring-white/10 z-50">
+<button class="text-on-surface-variant hover:text-primary flex items-center gap-2 group">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest hidden group-hover:block transition-all">Home</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary flex items-center gap-2 group">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-widest hidden group-hover:block transition-all">Archive</span>
+</button>
+<button class="text-primary flex items-center gap-2 group">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Babel</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary flex items-center gap-2 group">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-widest hidden group-hover:block transition-all">HUD</span>
+</button>
+</div>
+</body></html>
