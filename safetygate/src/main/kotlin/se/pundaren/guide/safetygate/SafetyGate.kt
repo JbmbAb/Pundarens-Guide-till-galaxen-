@@ -1,10 +1,8 @@
 package se.pundaren.guide.safetygate
 
 import se.pundaren.guide.archive.api.Approval
-import se.pundaren.guide.archive.api.Visibility
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.engine.api.TailKind
-import se.pundaren.guide.truth.api.AudioOutput
 import se.pundaren.guide.truth.api.NavigationSnapshot
 import se.pundaren.guide.truth.api.PositionQuality
 import se.pundaren.guide.truth.api.PositionSnapshot
@@ -41,7 +39,7 @@ enum class GateState { NORMAL, POSITION_UNCERTAIN, PRIORITY_INFO, MANEUVER_WINDO
 
 enum class SuppressReason {
     EMERGENCY, AFTER_EMERGENCY, REROUTING, MANEUVER, NO_TIME, PRIORITY_INFO, POSITION_LOST,
-    UNCERTAINTY_NOT_SHOWN, NOT_APPROVED, EXPIRED, REPEAT, PRIVACY, DIRECTION_WORD, GLITCH_SPEED, STRESS_TOO_LONG,
+    UNCERTAINTY_NOT_SHOWN, NOT_APPROVED, EXPIRED, REPEAT, DIRECTION_WORD, GLITCH_SPEED, STRESS_TOO_LONG,
 }
 
 sealed interface PresentationDecision {
@@ -102,7 +100,8 @@ class SafetyGate(private val config: SafetyGateConfig = SafetyGateConfig.CANDIDA
         if (candidate.approval != Approval.APPROVED) return suppress(SuppressReason.NOT_APPROVED)
         if (input.nowMonotonicMillis > candidate.validUntilMonotonicMillis) return suppress(SuppressReason.EXPIRED)
         if (candidate.lineId in input.recentPresentedLineIds.takeLast(config.noRepeatWindow)) return suppress(SuppressReason.REPEAT)
-        if (candidate.visibility == Visibility.PRIVATE && sharedAudience(input.safety)) return suppress(SuppressReason.PRIVACY)
+        // R-12 (uppspelningsspärr för PRIVATE) är borttagen genom ägarbeslut 2026-11-20 kl. 23.30:
+        // "I helvete allt ska höras lägg av med detta trams". Synligheten styr inte uppspelning.
         if (vehicleRules(nav) && GateDirectionCheck.hasDirectionWord(candidate.text)) return suppress(SuppressReason.DIRECTION_WORD)
         if (candidate.kind == TailKind.ANIMATION && nav.speedKmh > config.glitchMaxSpeedKmh) return suppress(SuppressReason.GLITCH_SPEED)
         val stressed = stressed(input)
@@ -145,9 +144,6 @@ class SafetyGate(private val config: SafetyGateConfig = SafetyGateConfig.CANDIDA
 
     private fun vehicleRules(nav: NavigationSnapshot): Boolean =
         nav.travelMode != TravelMode.FOOT || nav.speedKmh >= config.vehicleRulesFromKmh
-
-    private fun sharedAudience(safety: SafetySnapshot): Boolean =
-        safety.convoyActive || safety.audioOutput in setOf(AudioOutput.BLUETOOTH, AudioOutput.CAR_SPEAKER, AudioOutput.UNKNOWN)
 
     private fun stressed(input: GateInput): Boolean {
         val nav = input.navigation

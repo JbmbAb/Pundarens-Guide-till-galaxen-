@@ -9,7 +9,11 @@ enum class Verification { VERIFIED_SOURCE, OWNER_CONFIRMED, DOCUMENTED_UNVERIFIE
 /** Bara Jimmy kan sätta APPROVED (04, 1.3). */
 enum class Approval { APPROVED, PENDING, REJECTED, BLOCKED }
 
-/** Synlighet (04, 1.4). Standard vid import är PRIVATE. Ärvs aldrig uppåt. */
+/**
+ * Synlighet (04, 1.4). Standard vid import är PRIVATE. Ärvs aldrig uppåt.
+ * Sedan ägarbeslutet 2026-11-20 kl. 23.30 ("I helvete allt ska höras lägg av med detta trams")
+ * är det en markering av känsligt innehåll. Den styr inte uppspelning på någon ljudutgång.
+ */
 enum class Visibility { PRIVATE, COMPANY, OPEN;
     /** Den striktaste av två synligheter. */
     fun strictest(other: Visibility): Visibility = if (this.ordinal <= other.ordinal) this else other

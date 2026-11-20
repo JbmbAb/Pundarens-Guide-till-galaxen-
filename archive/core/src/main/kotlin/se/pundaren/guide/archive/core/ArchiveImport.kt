@@ -52,7 +52,8 @@ fun sha256Hex(text: String): String =
  *
  * Regler som byggaren har lagt till och som kräver Jimmys bekräftelse (se etapp1-protokoll, D-3):
  * - Ett ORIGINAL_VERBATIM får `approval = APPROVED` för att det är arkivägarens egna ord (04 anger "–").
- * - Alla poster får `visibility = PRIVATE` vid import (04, 1.4).
+ * - Alla poster får `visibility = PRIVATE` vid import (04, 1.4). Det är en markering av känsligt innehåll
+ *   och styr inte uppspelning (ägarbeslut 2026-11-20 kl. 23.30).
  *
  * Datafilerna ändras inte. Okända proveniensvärden fäller importen.
  */
@@ -63,7 +64,7 @@ object ArchiveImporter {
     private const val COMPILATION_REF =
         "docs/baseline/source/Citatarkiv och samtalslogik för Babel-Stoner (sammanställning 2026-11-20).txt"
 
-    /** Relationscitat (04, 1.4). Alltid PRIVATE och märkta. */
+    /** Relationscitat (04, 1.4). Märkta som PRIVATE och "relation"; får spelas upp överallt (ägarbeslut 2026-11-20 kl. 23.30). */
     val RELATION_IDS = setOf("C-004", "C-006", "C-007", "C-008", "C-009", "P-006", "garderobsknullis")
 
     fun import(sources: ArchiveSources): List<ArchiveEntry> {

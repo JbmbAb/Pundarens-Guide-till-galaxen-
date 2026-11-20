@@ -15,6 +15,17 @@ import se.pundaren.guide.babel.SatireMode
 import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.VoiceGuards
 import se.pundaren.guide.safetygate.GateDirectionCheck
+import se.pundaren.guide.safetygate.GateInput
+import se.pundaren.guide.safetygate.PresentationDecision
+import se.pundaren.guide.safetygate.SafetyGate
+import se.pundaren.guide.engine.api.TailCandidate
+import se.pundaren.guide.engine.api.TailKind
+import se.pundaren.guide.truth.api.AudioOutput
+import se.pundaren.guide.truth.api.NavigationSnapshot
+import se.pundaren.guide.truth.api.PositionQuality
+import se.pundaren.guide.truth.api.PositionSnapshot
+import se.pundaren.guide.truth.api.SafetySnapshot
+import se.pundaren.guide.truth.api.TravelMode
 import java.io.File
 
 /** Röstreglerna i 12 som körbara tester. Regler som inte kan testas maskinellt står som NOT_VERIFIED i protokollet. */
@@ -61,9 +72,23 @@ class VoiceRulesTest {
         listOf("vogonkö", "Don't Panic", "handduken", "42").forEach { assertTrue(it, VoiceGuards.hasBorrowedName(it)) }
     }
 
-    @Test fun `RR-11 bara APPROVED och relationscitat är PRIVATE`() {
+    @Test fun `RR-11 bara APPROVED, relationscitat märkta, och privata rader hörs överallt`() {
         assertTrue(bank.lines.all { it.approval == Approval.APPROVED })
+        // Markeringen finns kvar som uppgift om känsligt innehåll.
         assertTrue(archive.all().filter { "relation" in it.tags }.all { it.visibility == Visibility.PRIVATE })
+        // Ägarbeslut 2026-11-20 kl. 23.30: "I helvete allt ska höras lägg av med detta trams".
+        val gate = SafetyGate()
+        val privateLine = bank.lines.first { "relation" in it.tags }
+        val c = TailCandidate("TAIL-${privateLine.id}", privateLine.text, privateLine.id, privateLine.originClass, privateLine.approval,
+            privateLine.visibility, TailKind.SPOKEN, privateLine.mechanisms, false, 2_000, "EV-1", 20_000)
+        AudioOutput.entries.forEach { out ->
+            listOf(false, true).forEach { convoy ->
+                val i = GateInput(1_000, SafetySnapshot(false, null, 80, convoy, false, out),
+                    NavigationSnapshot(true, TravelMode.PASSENGER, 30.0, 120.0, 90_000, false, false),
+                    PositionSnapshot(PositionQuality.GOOD, 5.0, 1.0, null))
+                assertTrue("$out konvoj=$convoy", gate.decide(i, c) is PresentationDecision.Present)
+            }
+        }
     }
 
     @Test fun `RR-13 Babel-grepp finns inte i navigatorns radbank`() {

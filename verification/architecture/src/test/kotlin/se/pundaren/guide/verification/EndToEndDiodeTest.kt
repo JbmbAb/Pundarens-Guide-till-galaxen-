@@ -47,11 +47,12 @@ class EndToEndDiodeTest {
         var truth = Truth(
             NavigationSnapshot(true, TravelMode.PASSENGER, 30.0, 120.0, 90_000, false, false),
             PositionSnapshot(PositionQuality.GOOD, 5.0, 1.0, null),
-            SafetySnapshot(false, null, 80, false, false, AudioOutput.WIRED_HEADPHONES),
+            SafetySnapshot(false, null, 80, false, false, AudioOutput.CAR_SPEAKER), // bilhögtalare: allt ska höras (ägarbeslut 23.30)
         )
         var memory = EngineMemory()
         var presented = 0
         var suppressed = 0
+        val reasons = sortedMapOf<String, Int>()
         val t0 = Instant.parse("2026-11-20T21:00:00Z")
         val rnd = java.util.SplittableRandom(20261120)
         var ms = 0L
@@ -81,11 +82,12 @@ class EndToEndDiodeTest {
                         presented++
                         memory = memory.withPresented(PresentedTail(c.id, c.lineId, ms))
                     }
+                    is PresentationDecision.Suppress -> { suppressed++; val r = (gate.decide(input, c) as PresentationDecision.Suppress).reason.name; reasons[r] = (reasons[r] ?: 0) + 1 }
                     else -> suppressed++
                 }
             }
             assertTrue("sanningen ändrades av tramslagret", before == truth)
         }
-        println("E2E: 200 händelser, $presented svansar presenterade, $suppressed stoppade")
+        println("E2E: 200 händelser, $presented svansar presenterade, $suppressed stoppade, skäl: $reasons")
     }
 }

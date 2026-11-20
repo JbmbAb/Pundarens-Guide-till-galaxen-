@@ -54,11 +54,11 @@ Ingen post får i dag `VERIFIED_SOURCE`, eftersom råkällorna saknas (M-04, M-0
 
 | `visibility` | Betydelse | Standard för |
 |---|---|---|
-| `PRIVATE` | Visas och läses upp bara för ägaren, och bara när ingen konvoj är aktiv och ljudet inte går till en delad högtalare (se 06, regel R-12) | **Alla poster vid import.** Särskilt relationscitat (C-004, C-006–C-009, P-006, R-*, Garderobsknullis) |
+| `PRIVATE` | Markering av känsligt innehåll. ~~Visas och läses upp bara för ägaren, och bara när ingen konvoj är aktiv och ljudet inte går till en delad högtalare (se 06, regel R-12)~~ Styr inte längre uppspelning: ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm), "I helvete allt ska höras lägg av med detta trams". Accepterad risk: passagerare och konvojdeltagare kan höra privata namn och relationsinnehåll. | **Alla poster vid import.** Särskilt relationscitat (C-004, C-006–C-009, P-006, R-*, Garderobsknullis) |
 | `COMPANY` | Får läsas upp i sällskap eller konvoj | Bara efter Jimmys uttryckliga val per post |
 | `OPEN` | Får visas för vem som helst | Bara efter Jimmys uttryckliga val per post |
 
-Synlighet ärvs aldrig uppåt. En variation av ett `PRIVATE`-original är också `PRIVATE`.
+Synlighet ärvs aldrig uppåt. En variation av ett `PRIVATE`-original är också `PRIVATE`. Sedan ägarbeslutet 2026-11-20 kl. 23.30 (Europe/Stockholm) påverkar synligheten inte vad som får spelas upp eller på vilken ljudutgång (se 10, avsnitt 7).
 
 ### 1.5 Tabeller (SQLite)
 

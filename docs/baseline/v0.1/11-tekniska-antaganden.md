@@ -37,7 +37,7 @@ Alla antaganden har status NOT_VERIFIED. Ett antagande blir ACCEPT först när g
 | R-02 | valhalla-mobile är ett litet projekt (84 stjärnor 2026-11-20) | Underhållsrisk | Lås version, följ releaser, behåll möjligheten att bygga själv (MIT) |
 | R-03 | Svensk talsyntes utan Google kan låta dåligt | Rösten är kärnan | G4 tidigt och parallellt |
 | R-04 | Rösten är inte rolig | Byggplanen: "är den inte rolig spelar resten ingen roll" | Etapp 2 före kartan. Jimmy granskar radbanken rad för rad. |
-| R-05 | Verkliga personer i arkivet (Rikard, Bonnie) | Integritet och juridik | Allt `PRIVATE`. Ingen spridning före samtycke. Verkliga utdrag inte i appen. |
+| R-05 | Verkliga personer i arkivet (Rikard, Bonnie) | Integritet och juridik | Allt märks `PRIVATE`. Ingen spridning före samtycke. Verkliga utdrag inte i appen (R-001–R-003 utanför radbanken, D-8). Repot förblir privat på GitHub. **Ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm), ordagrant "I helvete allt ska höras lägg av med detta trams":** märkningen stoppar inte längre uppspelning; allt får höras på alla ljudutgångar. Accepterad risk: passagerare kan höra privata namn och relationsinnehåll. |
 | R-06 | Oberoende granskare saknades (M-14) | Säkerhetsgrindar kan inte bli ACCEPT utan granskning enligt F-07 | Jimmy har utsett GPT-6, oberoende från byggaren, med kraven i F-07. Granskning och protokoll saknas fortfarande. |
 | R-07 | `:app` ser alla moduler | Kan visa en svans som om den vore ett besked | SafetyGate renderar svansar bara i svansytan, plus granskning |
 

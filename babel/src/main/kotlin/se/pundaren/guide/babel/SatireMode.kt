@@ -44,7 +44,7 @@ class SatireMode(archive: ArchiveReader, private val config: Config = Config()) 
         val ruleBasis: String?,
         /** Den inmatning regeln tillämpas på. Vid BS-08 är det samtalets första replik. */
         val appliedTo: String,
-        /** En godkänd arkivrad som regeln pekar på, eller null. Alltid PRIVATE (04, 1.4). */
+        /** En godkänd arkivrad som regeln pekar på, eller null. Märkt PRIVATE (04, 1.4); styr inte uppspelning. */
         val exampleLineId: String?,
         val exampleText: String?,
         val session: Session,

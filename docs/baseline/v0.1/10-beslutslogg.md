@@ -150,3 +150,18 @@ Inget här gör G0 till ACCEPT. Alla grindar förblir NOT_VERIFIED. Ingen implem
 | A-13 | Uppskjutet | Lagring bakom gränssnitt. Triggerna i 04 prövas mot SQLite i test. Room eller SQLDelight väljs senare. |
 | G5-gränser | Öppen | Måste sättas före G5. |
 | F-03, F-04 | Precisering respektive verifiering öppen | Ingen karta och ingen enhetsberoende kod i nästa etapp. |
+
+<a id="allt-ska-horas"></a>
+## 7. Ägarbeslut 2026-11-20 kl. 23.30 (Europe/Stockholm): allt ska höras
+
+Ägarens beslut ordagrant: "I helvete allt ska höras lägg av med detta trams". Svaret gällde frågan om vad `PRIVATE` innebär, alltså att rader inte spelas upp via bil, Bluetooth eller okänd ljudutgång.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| R-12 (06) | REJECT genom ägarbeslut med accepterad risk | Uppspelningsspärren för `PRIVATE` är borttagen ur SafetyGate. Alla rader får spelas upp på alla ljudutgångar och i konvoj. **Accepterad risk: passagerare och konvojdeltagare kan höra privata namn och relationsinnehåll.** |
+| `visibility` (04) | REVISE | Fältet och markeringen `PRIVATE` finns kvar som uppgift om känsligt innehåll, men styr inte uppspelning. |
+| RR-11 (12), R-05 (11) | REVISE | Uppdaterade efter beslutet. |
+| Gäller inte | – | F-11 (Grok Bots förslag med `approved: false` används fortfarande inte), D-8 (R-001–R-003 står kvar som öppen fråga), skrivskyddet för original, SafetyGates säkerhetsregler (manöverfönster, nödläge, omräkning, position, batteri, konvojkontakt, stress, upprepning, godkännande) och att repot är privat på GitHub. |
+
+Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 8.
+

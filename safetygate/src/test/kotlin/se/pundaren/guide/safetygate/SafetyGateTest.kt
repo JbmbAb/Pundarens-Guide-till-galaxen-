@@ -125,14 +125,23 @@ class SafetyGateTest {
     @Test fun `SG-15 glitch i 40 km per h stoppas`() =
         assertEquals(SuppressReason.GLITCH_SPEED, reason(gate.decide(input(speed = 40.0), tail(kind = TailKind.ANIMATION, ms = 500))))
 
-    @Test fun `SG-16 privat citat med aktiv konvoj stoppas`() =
-        assertEquals(SuppressReason.PRIVACY, reason(gate.decide(input(convoy = true), tail(visibility = Visibility.PRIVATE))))
+    // SG-16 och SG-17 är ändrade genom ägarbeslutet 2026-11-20 kl. 23.30 ("I helvete allt ska höras
+    // lägg av med detta trams"): privata rader spelas upp på alla ljudutgångar och i konvoj.
+    @Test fun `SG-16 privat rad med aktiv konvoj spelas upp`() =
+        assertTrue(gate.decide(input(convoy = true), tail(visibility = Visibility.PRIVATE)) is Present)
 
-    @Test fun `SG-17 privat citat via bilens högtalare eller okänd utgång stoppas`() {
-        listOf(AudioOutput.CAR_SPEAKER, AudioOutput.BLUETOOTH, AudioOutput.UNKNOWN).forEach {
-            assertEquals(SuppressReason.PRIVACY, reason(gate.decide(input(audio = it), tail(visibility = Visibility.PRIVATE))))
+    @Test fun `SG-17 privat rad spelas upp på alla ljudutgångar`() {
+        AudioOutput.entries.forEach {
+            assertTrue("$it", gate.decide(input(audio = it), tail(visibility = Visibility.PRIVATE)) is Present)
         }
-        assertTrue(gate.decide(input(audio = AudioOutput.WIRED_HEADPHONES), tail(visibility = Visibility.PRIVATE)) is Present)
+    }
+
+    @Test fun `ägarbeslutet tar inte bort säkerhetsreglerna för privata rader`() {
+        val p = tail(visibility = Visibility.PRIVATE)
+        assertEquals(SuppressReason.EMERGENCY, reason(gate.decide(input(audio = AudioOutput.CAR_SPEAKER, emergency = true), p)))
+        assertEquals(SuppressReason.REROUTING, reason(gate.decide(input(audio = AudioOutput.CAR_SPEAKER, rerouting = true), p)))
+        assertEquals(SuppressReason.MANEUVER, reason(gate.decide(input(audio = AudioOutput.CAR_SPEAKER, toManeuver = 5.0), p)))
+        assertEquals(SuppressReason.NOT_APPROVED, reason(gate.decide(input(audio = AudioOutput.CAR_SPEAKER), tail(visibility = Visibility.PRIVATE, approval = Approval.PENDING))))
     }
 
     @Test fun `SG-18 samma rad som för fem svansar sedan stoppas`() =
