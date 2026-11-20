@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="se.pundaren.guide.verification.ArchitectureTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:33:38" hostname="grok-bot-vm-328085215" time="0.188">
+<testsuite name="se.pundaren.guide.verification.ArchitectureTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:41:47" hostname="grok-bot-vm-328085215" time="0.209">
   <properties/>
-  <testcase name="G-4 TailCandidate bär inga sanningstyper och inga callbacks" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.021"/>
-  <testcase name="motorn gör ingen I-O" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.018"/>
-  <testcase name="G-9 och SG-23 SafetyGate returnerar bara beslut och har inga sanningsberoenden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.001"/>
-  <testcase name="inget Google-beroende någonstans i bygget" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.017"/>
-  <testcase name="händelserna är oföränderliga värden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.117"/>
+  <testcase name="G-4 TailCandidate bär inga sanningstyper och inga callbacks" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.02"/>
+  <testcase name="motorn gör ingen I-O" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.02"/>
+  <testcase name="G-9 och SG-23 SafetyGate returnerar bara beslut och har inga sanningsberoenden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.002"/>
+  <testcase name="inget Google-beroende någonstans i bygget" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.027"/>
+  <testcase name="händelserna är oföränderliga värden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.127"/>
   <testcase name="G-3 sanningsgränssnitten är bara läsning" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.004"/>
-  <testcase name="G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.002"/>
-  <testcase name="motorns gränssnitt har ingen väg tillbaka till sanningen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.001"/>
+  <testcase name="G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.003"/>
+  <testcase name="motorns gränssnitt har ingen väg tillbaka till sanningen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.0"/>
   <testcase name="G-6 beroendegrafen i byggfilerna saknar förbjudna kanter" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.003"/>
-  <testcase name="G-8 rena moduler har varken Android, Google eller nätverk" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.002"/>
+  <testcase name="G-8 rena moduler har varken Android, Google eller nätverk" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

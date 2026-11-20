@@ -1,4 +1,4 @@
-# Kört 2026-11-20 23:33:14 CET på commit b9d33ac3df2cbbca1184fefbe9028417ae072cd4
+# Kört 2026-11-20 23:41:22 CET på commit 4c77cff536bfecf3d9b9eca29f1dc807e547da09
 # --: line 1: java: command not found ; JAVA_HOME=/opt/jdk17
 # Kommando: ./gradlew --no-daemon --console=plain clean check
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
@@ -131,15 +131,17 @@ verifyModuleGraph: 0 överträdelser. Rapport: build/reports/module-graph.txt
 
 > Task :babel:test
 
-SatireModeTest > svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning PASSED
+SatireModeTest > bara godkända regler BS-01 till BS-16 används PASSED
 
-SatireModeTest > bara BS-01 till BS-10 används PASSED
+SatireModeTest > svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning PASSED
 
 SatireModeTest > samma inmatning, session och seed ger samma svar PASSED
 
+SatireModeTest > repliker är godkända exempel och fotrader används inte i fordon PASSED
+
 SatireModeTest > BS-08 återvänder till samtalets början efter flera varv PASSED
 
-SatireModeTest > Rikard-utdrag och väntande förslag används aldrig som exempel PASSED
+SatireModeTest > Rikard-utdrag, blockerade och väntande poster används aldrig PASSED
 
 > Task :babel:check
 > Task :archive:core:compileTestKotlin
@@ -150,13 +152,17 @@ SatireModeTest > Rikard-utdrag och väntande förslag används aldrig som exempe
 
 ArchiveImportTest > relationscitat och Rikard-utdrag är märkta PASSED
 
-ArchiveImportTest > Grok Bots förslag är aldrig original och aldrig godkända PASSED
+ArchiveImportTest > BS-01 till BS-16 är godkända regler PASSED
 
-ArchiveImportTest > BS-01 till BS-10 är godkända regler och BS-11 till BS-16 väntar PASSED
+ArchiveImportTest > Grok Bots förslag är godkända av Jimmy men aldrig original PASSED
 
 ArchiveImportTest > okänd proveniens fäller importen PASSED
 
+ArchiveImportTest > konstruerade exempel ur sammanställningen är fortfarande inte godkända PASSED
+
 ArchiveImportTest > alla poster är PRIVATE vid import PASSED
+
+ArchiveImportTest > approved true utan Jimmy som godkännare räknas inte PASSED
 
 ArchiveImportTest > datafilerna ändras inte av importen PASSED
 
@@ -198,7 +204,6 @@ SqliteTriggerTest > uppgradering till original stoppas PASSED
 > Task :safetygate:compileTestKotlin
 > Task :safetygate:compileTestJava NO-SOURCE
 > Task :safetygate:testClasses UP-TO-DATE
-> Task :engine:compileTestKotlin
 
 > Task :safetygate:test
 
@@ -223,6 +228,8 @@ SafetyGateTest > SG-05 riktningsord till fots utan manöver tillåts PASSED
 SafetyGateTest > SG-01 normalt läge ger Present PASSED
 
 SafetyGateTest > SG-02 manöver om 10 s i fordon ger NO_TIME PASSED
+
+SafetyGateTest > F-11 rad bara till fots stoppas i fordon och släpps till fots PASSED
 
 SafetyGateTest > SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW PASSED
 
@@ -256,8 +263,11 @@ SafetyGateTest > R-16 ingen svans de första 60 s efter nödläge PASSED
 
 SafetyGateTest > kandidatvärdena är märkta som ofrysta PASSED
 
+> Task :safetygate:check
+> Task :engine:compileTestKotlin
 > Task :engine:compileTestJava NO-SOURCE
 > Task :engine:testClasses UP-TO-DATE
+> Task :verification:architecture:compileTestKotlin
 
 > Task :engine:test
 
@@ -271,23 +281,29 @@ IllogicalEngineTest > samma händelse, minne och seed ger samma utdata PASSED
 
 IllogicalEngineTest > varje svans uppfyller svarskontraktet i 05 PASSED
 
+IllogicalEngineTest > godkänd syntetisk satir når motorn PASSED
+
+IllogicalEngineTest > ej godkända rader och regler når aldrig motorn PASSED
+
+IllogicalEngineTest > navigationskommentarer följer sin situation PASSED
+
 IllogicalEngineTest > ingen rad upprepas inom tio presenterade repliker PASSED
 
 IllogicalEngineTest > inga svansar vid avvikelse, nödläge, batteri eller konvojhändelser PASSED
 
-IllogicalEngineTest > ej godkända rader och syntetisk text når aldrig motorn PASSED
+IllogicalEngineTest > rader bara till fots föreslås aldrig i fordonsläge men till fots PASSED
 
-LineBankTest > inga Grok Bot-förslag kommer in i radbanken PASSED
+LineBankTest > godkända variationer och navigationskommentarer finns i radbanken PASSED
+
+LineBankTest > märkta rader är bara till fots PASSED
 
 LineBankTest > Rikard-utdrag, regler, lexikon och arkivposter hålls utanför PASSED
 
 LineBankTest > det finns inga förnekelserader i dagens data PASSED
 
-LineBankTest > radbanken innehåller bara godkända original och godkända bearbetningar PASSED
+LineBankTest > radbanken innehåller bara godkända poster och inga regler PASSED
 
 > Task :engine:check
-> Task :safetygate:check
-> Task :verification:architecture:compileTestKotlin
 > Task :verification:architecture:compileTestJava NO-SOURCE
 > Task :verification:architecture:testClasses UP-TO-DATE
 
@@ -319,8 +335,6 @@ VoiceRulesTest > RR-05 spärrlistan omfattar böjningar men inte högre PASSED
 
 VoiceRulesTest > RR-01 varje rad i radbanken bär minst en mekanism PASSED
 
-VoiceRulesTest > RR-10 lånade namn kommer inte in i radbanken PASSED
-
 VoiceRulesTest > RR-08 förslag och variationer kan inte vara original PASSED
 
 VoiceRulesTest > RR-13 Babel-grepp finns inte i navigatorns radbank PASSED
@@ -329,7 +343,9 @@ VoiceRulesTest > RR-06 rader som skyller på användaren spärras PASSED
 
 VoiceRulesTest > RR-09 satiren är märkt som satir PASSED
 
-VoiceRulesTest > RR-04 inga rader i radbanken låter som besked PASSED
+VoiceRulesTest > RR-04 rader som låter som besked finns bara som rader till fots PASSED
+
+VoiceRulesTest > RR-10 lånade namn finns bara som märkta arbetsnamn PASSED
 
 VoiceRulesTest > RR-07 Rikard hörs aldrig och verkliga utdrag läses inte upp PASSED
 
@@ -345,6 +361,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 23s
+BUILD SUCCESSFUL in 25s
 41 actionable tasks: 41 executed
 EXIT=0

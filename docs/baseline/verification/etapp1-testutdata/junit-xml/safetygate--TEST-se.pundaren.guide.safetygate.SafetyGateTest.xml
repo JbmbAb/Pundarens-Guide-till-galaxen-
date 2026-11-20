@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="se.pundaren.guide.safetygate.SafetyGateTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:33:37" hostname="grok-bot-vm-328085215" time="0.197">
+<testsuite name="se.pundaren.guide.safetygate.SafetyGateTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:41:45" hostname="grok-bot-vm-328085215" time="0.242">
   <properties/>
-  <testcase name="SG-18 samma rad som för fem svansar sedan stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.019"/>
+  <testcase name="SG-18 samma rad som för fem svansar sedan stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.017"/>
   <testcase name="SG-06 nödläge avbryter och stoppar sedan allt" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-05b till fots i fordonsfart gäller fordonsreglerna" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.007"/>
+  <testcase name="SG-05b till fots i fordonsfart gäller fordonsreglerna" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.006"/>
   <testcase name="ägarbeslutet tar inte bort säkerhetsreglerna för privata rader" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-16 privat rad med aktiv konvoj spelas upp" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-03 pågående svans avbryts när manövern går in i tyst fönster" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
-  <testcase name="SG-07 nödläge och 1000 slumpade kandidater ger alltid EMERGENCY" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.012"/>
-  <testcase name="SG-15 glitch i 40 km per h stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="SG-16 privat rad med aktiv konvoj spelas upp" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="SG-03 pågående svans avbryts när manövern går in i tyst fönster" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
+  <testcase name="SG-07 nödläge och 1000 slumpade kandidater ger alltid EMERGENCY" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.011"/>
+  <testcase name="SG-15 glitch i 40 km per h stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-05 riktningsord till fots utan manöver tillåts" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-01 normalt läge ger Present" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-02 manöver om 10 s i fordon ger NO_TIME" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.107"/>
+  <testcase name="F-11 rad bara till fots stoppas i fordon och släpps till fots" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.119"/>
   <testcase name="SG-02b manöver inom tyst fönster utan känd talinstruktion ger MANEUVER" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
   <testcase name="SG-12 batteri 12 procent ger PRIORITY_INFO" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-13 förlorad konvojkontakt ger PRIORITY_INFO" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
+  <testcase name="SG-13 förlorad konvojkontakt ger PRIORITY_INFO" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
   <testcase name="SG-17 privat rad spelas upp på alla ljudutgångar" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
-  <testcase name="SG-04 riktningsord i fordonsläge stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="SG-04 riktningsord i fordonsläge stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-20 svans från V-012 med PENDING stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-21 samma indata 10000 gånger ger samma beslut" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.042"/>
+  <testcase name="SG-21 samma indata 10000 gånger ger samma beslut" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.08"/>
   <testcase name="SG-10 förlorad position under aktiv rutt stoppar" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
   <testcase name="SG-11 osäkerhet visad i 3 s tillåter Rikard-svans" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-14 i 70 km per h stoppas en svans på 3 s" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="SG-09 efter första nya beskedet tillåts svans igen" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="SG-09 efter första nya beskedet tillåts svans igen" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-19 utgången svans stoppas" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="SG-08 avvikelse ger REROUTING" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <testcase name="R-16 ingen svans de första 60 s efter nödläge" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
-  <testcase name="kandidatvärdena är märkta som ofrysta" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.001"/>
+  <testcase name="kandidatvärdena är märkta som ofrysta" classname="se.pundaren.guide.safetygate.SafetyGateTest" time="0.0"/>
   <system-out><![CDATA[SG-22: 50000 slumpade lägen, 26703 i EMERGENCY/REROUTING/MANEUVER_WINDOW, 0 Present där
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

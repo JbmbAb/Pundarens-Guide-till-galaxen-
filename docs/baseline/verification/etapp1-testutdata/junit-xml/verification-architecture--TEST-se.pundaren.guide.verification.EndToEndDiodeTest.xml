@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="se.pundaren.guide.verification.EndToEndDiodeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:33:38" hostname="grok-bot-vm-328085215" time="0.088">
+<testsuite name="se.pundaren.guide.verification.EndToEndDiodeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-20T22:41:48" hostname="grok-bot-vm-328085215" time="0.168">
   <properties/>
-  <testcase name="tvåhundra simulerade händelser genom motor och SafetyGate" classname="se.pundaren.guide.verification.EndToEndDiodeTest" time="0.088"/>
+  <testcase name="tvåhundra simulerade händelser genom motor och SafetyGate" classname="se.pundaren.guide.verification.EndToEndDiodeTest" time="0.168"/>
   <system-out><![CDATA[E2E: 200 händelser, 2 svansar presenterade, 158 stoppade, skäl: {AFTER_EMERGENCY=97, EMERGENCY=58, REROUTING=1, STRESS_TOO_LONG=2}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
