@@ -69,7 +69,7 @@ Var vägnumren kommer ifrån: Valhalla hänger på OSM-taggen `ref` efter gatuna
 | E3-K08 | Uppläsning med svensk offlineröst, ljudfokus och duckning | Kräver Samsungs motor; finns inte i emulatorn. | målenhet | **NOT_VERIFIED** |
 | G4 | Tal och avbrott (08) | Ingen uppläsning hörd, inga avbrott provade. | – | **NOT_VERIFIED** |
 
-APK för målenheten: `offlinekedja-etapp3-tal-arm64-debug.apk`, 137 288 298 byte, SHA-256 `af00a9d76f91095e3b1d9cc44b1714247d7750e4e1060937243a1d41e43c6892`, F-03-paketet (`f03-sex-kommuner-20261121-0619`) inbyggt. Privat förhandsrelease i repot (ägaren godkände GitHub-förhandsreleaser som leveransväg 2026-11-21 08.33).
+APK för målenheten: `offlinekedja-etapp3-tal-arm64-debug.apk`, 137 288 298 byte, SHA-256 `af00a9d76f91095e3b1d9cc44b1714247d7750e4e1060937243a1d41e43c6892`, F-03-paketet (`f03-sex-kommuner-20261121-0619`) inbyggt. Privat förhandsrelease i repot: <https://github.com/JbmbAb/Pundarens-Guide-till-galaxen-/releases/tag/etapp3-tal-prov-7b10de2> (tagg på `7b10de2`; ägaren godkände GitHub-förhandsreleaser som leveransväg 2026-11-21 08.33). GitHub anger samma SHA-256 för den uppladdade filen.
 
 ## 5. Iakttagelser
 
@@ -81,7 +81,7 @@ APK för målenheten: `offlinekedja-etapp3-tal-arm64-debug.apk`, 137 288 298 byt
 ## 6. Vad ägaren gör på målenheten (G4)
 
 1. **Svensk röst offline:** Inställningar › Allmän hantering › Text till tal. Välj **Samsungs talmotor** som motor. Tryck på kugghjulet vid motorn › Installera röstdata › **Svenska** och ladda ner rösten. Gör det med nät, före flygplansläget.
-2. Ladda ner APK:n från förhandsreleasen (länken i PR:en) medan plattan har nät och installera den. Den ersätter den förra prototypen.
+2. Ladda ner APK:n från förhandsreleasen `etapp3-tal-prov-7b10de2` (länken i avsnitt 4) medan plattan har nät och installera den. Den ersätter den förra prototypen.
 3. Slå på flygplansläge och stäng av wifi. Starta "Offlinekedja (etapp 2)".
 4. Överst i loggen på skärmen ska det stå `TAL REDO: <röstnamn>, offline`. Står det `TAL FEL: …` är rösten eller motorn inte installerad; gör om steg 1.
 5. Kör **Orsa → Grönklitt (passagerare)** och lyssna: besked ska höras på svenska. Spela gärna musik samtidigt och kontrollera att musiken sänks under beskedet och kommer tillbaka efteråt.
