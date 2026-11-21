@@ -138,7 +138,7 @@ På målenheten SM-X900: allt för F-03-APK:n. För första omgångens APK finns
 
 ### Enhetsfakta (F-04)
 
-Avlästa ur ägarens skärmbild av Inställningar › Om surfplattan › Programvaruinformation, tagen 2026-11-21 kl. 08.38 och skickad i chatten. Skärmbilden är inte incheckad (se nedan).
+Avlästa ur ägarens skärmbild av Inställningar › Om surfplattan › Programvaruinformation, tagen 2026-11-21 kl. 08.38 och skickad i chatten. Skärmbilden ligger i [`etapp2-testutdata/malenhet-programvaruinformation-2026-11-21-0838.jpg`](etapp2-testutdata/malenhet-programvaruinformation-2026-11-21-0838.jpg). Den är granskad och visar bara enhetsuppgifter, inga privata uppgifter.
 
 | Uppgift | Värde |
 |---|---|
