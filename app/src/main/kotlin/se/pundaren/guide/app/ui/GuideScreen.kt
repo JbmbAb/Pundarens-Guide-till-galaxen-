@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import kotlinx.coroutines.launch
+import se.pundaren.guide.app.ConvoyPhase
+import se.pundaren.guide.convoy.Freshness
 import se.pundaren.guide.app.AppGraph
 import se.pundaren.guide.app.MapController
 import se.pundaren.guide.app.MapStyle
@@ -76,7 +78,7 @@ private data class Proposal(
 )
 
 /** Panelerna som kan ligga över kartan, en i taget. */
-private enum class Sheet { DESTINATION, SETTINGS, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, BABEL, ENCYCLOPEDIA }
+private enum class Sheet { DESTINATION, SETTINGS, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, BABEL, ENCYCLOPEDIA, CONVOY }
 
 /**
  * Huvudskärmen. Uppifrån och ned: sanningsremsan (sant, turkost), kartan, och ovanpå kartan
@@ -96,6 +98,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
     val places by navigator.places.collectAsState()
     val activePackage by navigator.activePackage.collectAsState()
     val track by navigator.track.collectAsState()
+    val convoy by graph.convoy.view.collectAsState()
     val voiceStatus by graph.voice.status.collectAsState()
     val shownTail by graph.stage.shown.collectAsState()
     val settings by graph.settings.value.collectAsState()
@@ -165,6 +168,10 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
         map.setPosition(mapData.snappedPosition ?: mapData.position, navigating)
     }
     LaunchedEffect(track) { map.setTrack(track.line) }
+    LaunchedEffect(convoy.peer) {
+        val peer = convoy.peer
+        map.setPeer(peer?.takeIf { it.presentation.showOnMap }?.point, peer?.presentation?.freshness ?: Freshness.STALE)
+    }
     LaunchedEffect(proposal) {
         map.setPreview(proposal?.plan?.line.orEmpty())
         map.setDestination(mapData.destination ?: proposal?.plan?.destination)
@@ -287,6 +294,14 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         if (!following) PillButton("Centrera") { map.recenter() }
                         if (!navigator.hasLocationPermission()) PillButton("Tillåt position") { onRequestLocation() }
                         PillButton("Protokoll") { sheet = Sheet.PROTOCOL }
+                        PillButton(
+                            when {
+                                convoy.peerEmergencyAtUtc != null -> "Convoy: NÖD"
+                                convoy.phase == ConvoyPhase.SHARING -> "Convoy: delar"
+                                else -> "Convoy"
+                            },
+                            primary = convoy.peerEmergencyAtUtc != null,
+                        ) { sheet = Sheet.CONVOY }
                         // Babel-Stoner och encyklopedin nås bara när ingen tur pågår (greppen stannar utanför navigatorn).
                         if (!busy) {
                             PillButton("Babel") { sheet = Sheet.BABEL }
@@ -350,6 +365,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
             onDismiss = { sheet = null },
         )
         Sheet.BABEL -> BabelDialog(graph, onDismiss = { sheet = null })
+        Sheet.CONVOY -> ConvoyDialog(graph, own = mapData.position, onShowPeer = { map.showPoint(it) }, onDismiss = { sheet = null })
         Sheet.ENCYCLOPEDIA -> EncyclopediaDialog(
             graph = graph, position = mapData.position.takeIf { !simulating && position.quality != PositionQuality.LOST }, places = places,
             onDismiss = { sheet = null },

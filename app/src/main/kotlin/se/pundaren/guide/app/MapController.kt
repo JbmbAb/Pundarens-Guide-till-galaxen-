@@ -21,6 +21,7 @@ import org.maplibre.android.style.layers.LineLayer
 import org.maplibre.android.style.layers.PropertyFactory
 import org.maplibre.android.style.layers.SymbolLayer
 import org.maplibre.android.style.sources.GeoJsonSource
+import se.pundaren.guide.convoy.Freshness
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.core.platser.PlaceIndex
 import se.pundaren.guide.truth.core.platser.PlaceKind
@@ -47,6 +48,8 @@ class MapController(private val context: Context, private val log: (String) -> U
     private var previewLine: List<GeoPoint> = emptyList()
     private var trackLine: List<GeoPoint> = emptyList()
     private var position: GeoPoint? = null
+    private var peer: GeoPoint? = null
+    private var peerFreshness: Freshness = Freshness.FRESH
     private var destination: GeoPoint? = null
     private var places: PlaceIndex = PlaceIndex.EMPTY
 
@@ -107,6 +110,7 @@ class MapController(private val context: Context, private val log: (String) -> U
             s.addSource(GeoJsonSource(SRC_PREVIEW)); s.addSource(GeoJsonSource(SRC_ROUTE))
             s.addSource(GeoJsonSource(SRC_DESTINATION)); s.addSource(GeoJsonSource(SRC_POSITION))
             s.addSource(GeoJsonSource(SRC_TRACK))
+            s.addSource(GeoJsonSource(SRC_PEER))
             for (rank in 0..2) s.addSource(GeoJsonSource(SRC_PLACES + rank))
             // Det egna spåret: prickad linje under rutten, så att vägen tillbaka syns även utan rutt.
             s.addLayer(LineLayer("spar-kant", SRC_TRACK).withProperties(
@@ -131,6 +135,9 @@ class MapController(private val context: Context, private val log: (String) -> U
                     PropertyFactory.iconImage(Expression.get("bild")), PropertyFactory.iconAllowOverlap(false),
                     PropertyFactory.iconPadding(6f)).apply { setMinZoom(minZoom[rank]) })
             }
+            s.addLayer(CircleLayer(LAYER_PEER, SRC_PEER).withProperties(
+                PropertyFactory.circleColor("#4af8e3"), PropertyFactory.circleRadius(9f),
+                PropertyFactory.circleStrokeColor("#4af8e3"), PropertyFactory.circleStrokeWidth(3f)))
             s.addLayer(CircleLayer("position-punkt", SRC_POSITION).withProperties(
                 PropertyFactory.circleColor("#ffffff"), PropertyFactory.circleRadius(8f),
                 PropertyFactory.circleStrokeColor("#000000"), PropertyFactory.circleStrokeWidth(3f)))
@@ -182,6 +189,32 @@ class MapController(private val context: Context, private val log: (String) -> U
         if (line == trackLine) return
         trackLine = line
         style?.getSourceAs<GeoJsonSource>(SRC_TRACK)?.setGeoJson(lineJson(line))
+    }
+
+    /**
+     * Den andra i konvojen (07, 3.5): fylld prick när positionen är färsk, blekare när den är upp till
+     * två minuter gammal, ihålig upp till en kvart. Äldre än så ritas den inte alls (anropa med null).
+     */
+    fun setPeer(point: GeoPoint?, freshness: Freshness) {
+        if (point == peer && freshness == peerFreshness) return
+        peer = point
+        peerFreshness = freshness
+        drawPeer()
+    }
+
+    private fun drawPeer() {
+        val s = style ?: return
+        s.getSourceAs<GeoJsonSource>(SRC_PEER)?.setGeoJson(pointJson(peer))
+        val fill = when (peerFreshness) { Freshness.FRESH -> 1f; Freshness.RECENT -> 0.45f; else -> 0f }
+        s.getLayerAs<CircleLayer>(LAYER_PEER)?.setProperties(PropertyFactory.circleOpacity(fill))
+    }
+
+    /** Flyttar kartan till en punkt. Kartan slutar följa positionen tills man centrerar. */
+    fun showPoint(point: GeoPoint) {
+        val m = map ?: return
+        following = false
+        onFollowingChanged(false)
+        m.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.lat, point.lon), maxOf(m.cameraPosition.zoom, 13.5)), 700)
     }
 
     /** Ramar in en linje, t.ex. det egna spåret. Kartan slutar följa positionen tills man centrerar. */
@@ -242,6 +275,7 @@ class MapController(private val context: Context, private val log: (String) -> U
         s.getSourceAs<GeoJsonSource>(SRC_TRACK)?.setGeoJson(lineJson(trackLine))
         s.getSourceAs<GeoJsonSource>(SRC_DESTINATION)?.setGeoJson(pointJson(destination))
         s.getSourceAs<GeoJsonSource>(SRC_POSITION)?.setGeoJson(pointJson(position))
+        drawPeer()
         drawPlaces()
     }
 
@@ -308,6 +342,8 @@ class MapController(private val context: Context, private val log: (String) -> U
         const val SRC_ROUTE = "rutt"
         const val SRC_PREVIEW = "forslag"
         const val SRC_TRACK = "spar"
+        const val SRC_PEER = "konvoj"
+        const val LAYER_PEER = "konvoj-punkt"
         const val SRC_DESTINATION = "mal"
         const val SRC_POSITION = "position"
         const val SRC_PLACES = "ortnamn-"

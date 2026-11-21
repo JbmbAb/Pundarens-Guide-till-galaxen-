@@ -232,3 +232,13 @@ Fortfarande öppet för Convoy: var servern ska köras (F-15) och om appen får 
 | F-15, var servern körs | **Öppet** | Inte beslutat. Ägaren har upplyst om att datorn `mimer` och Tailscale redan finns som alternativ. Vilken väg telefonerna når reläet på är också öppet. |
 
 Inget av detta är byggt än. G7 är oförändrat NOT_VERIFIED.
+
+## 13. Ägarbeslut 2026-11-21 kl. 18.29 (Europe/Stockholm): Google-förbudet gäller kostnader
+
+Ägarens ord, ordagrant: "ÄNDRA BYGGREGEL DET HANDLAR OM GOOGLES KOSTNADER ÄR DET GRATIS INGA PROBLEM". Det var svaret på byggarens fråga om Convoy-skärmen fick byggas med QR-kod, ZXing och CameraX.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| Byggregeln för Google-bibliotek | ÄNDRAD genom ägarbeslut | Gratis bibliotek från Google får användas utan nytt beslut. Kontrollen i `build.gradle.kts` som fällde bygget för varje ogranskad `com.google`-modul är borttagen. |
+| ZXing och CameraX | ACCEPT genom ägarbeslut | Convoy-inbjudan visas och läses som QR-kod. ZXing (Apache 2.0) ritar och läser koden, CameraX ger kamerabilden. Appen får kamerabehörighet, som bara används medan skanningsrutan är öppen. |
+| Listan över förbjudna Google-tjänster | Oförändrad, byggarens tolkning | Play-tjänster, Firebase, Google Maps med flera fäller fortfarande bygget. Byggaren tolkar beslutet som att just de tjänsterna är de som kostar eller kan börja kosta. Ägaren har inte uttalat sig om listan. |

@@ -9,7 +9,8 @@ echo "# storlek: $(stat -c %s "$APK") byte"
 echo "# sha256: $(sha256sum "$APK" | cut -d' ' -f1)"
 echo "== badging"; "$BT/aapt2" dump badging "$APK" | grep -E "^package|sdkVersion|targetSdk|native-code|application-label:"
 echo "== behörigheter"; "$BT/aapt2" dump permissions "$APK"
-if "$BT/aapt2" dump permissions "$APK" | grep -q "android.permission.INTERNET"; then echo "FEL: INTERNET finns"; exit 1; else echo "OK: ingen INTERNET-behörighet"; fi
+# INTERNET finns sedan etapp 6 och får bara användas av Convoy (beslutsloggen, avsnitt 12).
+if "$BT/aapt2" dump permissions "$APK" | grep -q "android.permission.INTERNET"; then echo "OK: INTERNET finns (Convoy)"; else echo "FEL: INTERNET saknas, Convoy kan inte nå reläet"; exit 1; fi
 echo "== inbyggda bibliotek"; unzip -l "$APK" | grep -E "\.so$" | awk '{print $1, $4}'
 echo "== tillgångar"; unzip -l "$APK" | grep -E "assets/" | awk '{print $1, $4}'
 T=$(mktemp -d); unzip -q -o "$APK" 'classes*.dex' -d "$T"

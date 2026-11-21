@@ -2,17 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Ingen nätverksåtkomst vid körning i version 1. Biblioteken (MapLibre, Ferrostar) begär INTERNET
-         i sina manifest; här tas behörigheten bort ur det sammanslagna manifestet, så att Android själv
-         stoppar alla uttag. Kontrolleras på APK:n med aapt2 (tools/verkstad/07-kontrollera-apk.sh).
-         ACCESS_NETWORK_STATE får ligga kvar: den ger bara läsning av nätstatus, och utan den kraschar
-         MapLibres ConnectivityReceiver (etapp2-protokollet, E2-D6). -->
-    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <!-- Nätverk bara för Convoy (ägarbeslut 2026-11-21, beslutsloggen avsnitt 12). Den enda koden som
+         öppnar en förbindelse är :convoy:http, och bara mot reläet över https. Navigering, karta, röst
+         och Guiden fungerar utan nät: MapLibre är satt i frånkopplat läge (MapController), och
+         arkitekturtestet fäller bygget om någon annan modul börjar använda nätet.
+         ACCESS_NETWORK_STATE ger bara läsning av nätstatus, och utan den kraschar MapLibres
+         ConnectivityReceiver (etapp2-protokollet, E2-D6). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Kameran används bara medan skanningsrutan för Convoy-inbjudan är öppen. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
 
     <application
         android:label="Pundarens Guide"
         android:allowBackup="false"
+        android:usesCleartextTraffic="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:theme="@android:style/Theme.Material.NoActionBar"
         tools:ignore="MissingApplicationIcon">

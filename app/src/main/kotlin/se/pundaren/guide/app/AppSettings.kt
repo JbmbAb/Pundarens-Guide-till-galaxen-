@@ -28,6 +28,8 @@ data class Settings(
     /** Vald röst för beskeden respektive Guiden (namn ur talmotorn). Null betyder appens eget val. */
     val instructionVoice: String? = null,
     val tailVoice: String? = null,
+    /** Adressen till Convoy-reläet (https). Tom tills ägaren har skrivit in den. */
+    val convoyRelayUrl: String = "",
 )
 
 /** Inställningarna, sparade i appens privata lagring. Ingenting här lämnar enheten. */
@@ -50,6 +52,7 @@ class AppSettings(context: Context) {
             home = if (lat != null && lon != null) GeoPoint(lat, lon) else null,
             instructionVoice = prefs.getString("instruction_voice", null),
             tailVoice = prefs.getString("tail_voice", null),
+            convoyRelayUrl = prefs.getString("convoy_relay_url", null).orEmpty(),
         )
     }
 
@@ -64,6 +67,7 @@ class AppSettings(context: Context) {
             .putBoolean("instructions_muted", next.instructionsMuted)
             .putString("instruction_voice", next.instructionVoice)
             .putString("tail_voice", next.tailVoice)
+            .putString("convoy_relay_url", next.convoyRelayUrl)
             .apply {
                 if (next.home != null) putString("home_lat", next.home.lat.toString()).putString("home_lon", next.home.lon.toString())
                 else remove("home_lat").remove("home_lon")

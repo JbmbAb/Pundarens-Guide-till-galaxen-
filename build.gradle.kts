@@ -44,7 +44,7 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     // Kompositionsroten ser allt (03, kvarstående risk R-07).
     ":app" to setOf(
         ":truth:api", ":truth:core", ":truth:device", ":engine:api", ":engine", ":archive:api", ":archive:core",
-        ":safetygate", ":conductor", ":voice", ":babel", ":encyclopedia",
+        ":safetygate", ":conductor", ":voice", ":babel", ":encyclopedia", ":convoy:api", ":convoy:http",
     ),
     // Testmodulen får se allt rent, men bara i testkonfigurationer.
     ":verification:architecture" to setOf(
@@ -71,7 +71,8 @@ val forbiddenGroupPrefixes = listOf("com.google", "com.android", "androidx", "co
 
 // Android-moduler: ingen Google-tjänst får finnas i appen (F-06, startprompten). Samma listor som
 // etapp 2-prototypens verifieraIngenGoogle. Ägarbeslut 2026-11-21 06.15 (E2-D3): förbudet gäller
-// Googles TJÄNSTER; gson och listenablefuture får vara kvar. Nya rader kräver nytt ägarbeslut.
+// Googles TJÄNSTER. Ägarbeslut 2026-11-21 18.29 (beslutsloggen, avsnitt 13): förbudet handlar om
+// Googles kostnader, så gratis bibliotek från Google (till exempel ZXing) är tillåtna utan nytt beslut.
 val forbiddenServiceGroups = listOf(
     "com.google.android.gms",          // Play-tjänster
     "com.google.firebase",             // Firebase
@@ -79,10 +80,6 @@ val forbiddenServiceGroups = listOf(
     "com.google.android.libraries.maps", "com.google.maps", "com.google.android.libraries.places", // Google Maps
     "com.google.android.play",         // Play Core
     "com.google.mlkit", "com.google.android.datatransport", "com.google.android.libraries",
-)
-val reviewedOpenLibraries = mapOf(
-    "com.google.code.gson:gson" to "JSON-läsare som MapLibres GeoJSON-modul (android-sdk-geojson 6.0.1) kräver",
-    "com.google.guava:listenablefuture" to "tom markörartefakt (ett gränssnitt) som androidx.concurrent kräver",
 )
 
 subprojects {
@@ -165,8 +162,6 @@ subprojects {
                         report.append("${module.path} [${conf.name}] $group:$name:$version\n")
                         if (forbiddenServiceGroups.any { group == it || group.startsWith("$it.") }) {
                             violations += "${module.path} [${conf.name}] FÖRBJUDEN Google-tjänst $group:$name:$version"
-                        } else if (group.startsWith("com.google") && "$group:$name" !in reviewedOpenLibraries) {
-                            violations += "${module.path} [${conf.name}] com.google-modul som inte är granskad: $group:$name:$version"
                         }
                     }
                 }

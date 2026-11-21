@@ -134,7 +134,9 @@ class ArchitectureTest {
         forbidden.forEach { (m, bad) -> assertEquals("$m", emptySet<String>(), deps(m).intersect(bad)) }
     }
 
-    @Test fun `inget Google-beroende någonstans i bygget`() {
+    // Ägarbeslut 2026-11-21 kl. 18.29 (beslutsloggen, avsnitt 13): förbudet gäller Googles tjänster, som
+    // kan kosta. Gratis bibliotek från Google (ZXing) är tillåtna.
+    @Test fun `ingen Google-tjänst någonstans i bygget`() {
         val files = root.walkTopDown()
             .onEnter { it.name !in setOf(".git", "build", ".gradle", "docs", "data", ".kotlin") }
             .filter { it.isFile && (it.extension in setOf("kts", "toml", "properties", "kt")) }
@@ -146,7 +148,11 @@ class ArchitectureTest {
             .filterNot { it == root.resolve("prototyp/offline-kedja/app/build.gradle.kts") }
             .filterNot { it == root.resolve("prototyp/offline-kedja/app/src/test/java/se/pundaren/guide/prototyp/arkitektur/ArkitekturTest.kt") }
             .toList()
-        val hits = files.filter { f -> val t = f.readText(); listOf("com.google", "gms", "firebase", "googleapis").any { t.contains(it) } }
+        val services = listOf(
+            "com.google.android.gms", "com.google.firebase", "com.google.crypto.tink", "com.google.maps", "com.google.android.libraries",
+            "com.google.android.play", "com.google.mlkit", "com.google.android.datatransport", "gms", "firebase", "googleapis",
+        )
+        val hits = files.filter { f -> val t = f.readText(); services.any { t.contains(it) } }
         assertEquals(emptyList<File>(), hits)
     }
 }

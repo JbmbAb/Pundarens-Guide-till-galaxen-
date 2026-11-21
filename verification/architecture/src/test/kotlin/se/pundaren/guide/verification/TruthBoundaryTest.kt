@@ -107,15 +107,30 @@ class TruthBoundaryTest {
         }
     }
 
-    @Test fun `appen saknar INTERNET-behörighet och ingen modul lägger till den`() {
-        val manifests = root.walkTopDown()
-            .onEnter { it.name !in setOf(".git", "build", ".gradle", "docs", "data", ".kotlin", "lokalt", "prototyp") }
-            .filter { it.name == "AndroidManifest.xml" }.toList()
+    @Test fun `nätet används bara av Convoy-transporten, bara över https, och kartan är frånkopplad`() {
+        val skipped = setOf(".git", "build", ".gradle", "docs", "data", ".kotlin", "lokalt", "prototyp")
+        val manifests = root.walkTopDown().onEnter { it.name !in skipped }.filter { it.name == "AndroidManifest.xml" }.toList()
         assertTrue("manifesten hittas", manifests.size >= 3)
+        // Bara appens eget manifest begär INTERNET (ägarbeslut 2026-11-21, beslutsloggen avsnitt 12).
         val adds = Regex("""<uses-permission\s+android:name="android\.permission\.INTERNET"\s*/>""")
-        assertEquals(emptyList<String>(), manifests.filter { adds.containsMatchIn(it.readText()) }.map { it.relativeTo(root).invariantSeparatorsPath })
-        val app = root.resolve("app/src/main/AndroidManifest.xml").readText()
-        assertTrue(Regex("""android\.permission\.INTERNET"\s+tools:node="remove"""").containsMatchIn(app))
+        assertEquals(
+            listOf("app/src/main/AndroidManifest.xml"),
+            manifests.filter { adds.containsMatchIn(it.readText()) }.map { it.relativeTo(root).invariantSeparatorsPath },
+        )
+        assertTrue(root.resolve("app/src/main/AndroidManifest.xml").readText().contains("""android:usesCleartextTraffic="false""""))
+
+        // Ingen annan källkod än :convoy:http öppnar en nätförbindelse.
+        val network = Regex("""HttpURLConnection|HttpsURLConnection|java\.net\.Socket|java\.net\.http|okhttp3|io\.ktor|\.toURL\(\)|\.openConnection\(|\bURL\(""")
+        val users = root.walkTopDown().onEnter { it.name !in skipped && it.name != "test" }
+            .filter { it.extension == "kt" && it.invariantSeparatorsPath.contains("/src/main/") }
+            .filter { network.containsMatchIn(it.readText()) }
+            .map { it.relativeTo(root).invariantSeparatorsPath }.toList()
+        assertEquals(listOf("convoy/http/src/main/kotlin/se/pundaren/guide/convoy/http/RelayClient.kt"), users)
+
+        // Appen godtar bara ett relä med https, och kartbiblioteket hämtar aldrig något.
+        val controller = root.resolve("app/src/main/kotlin/se/pundaren/guide/app/ConvoyController.kt").readText()
+        assertTrue(Regex("""startsWith\("https://"\)""").findAll(controller).count() >= 2)
+        assertTrue(root.resolve("app/src/main/kotlin/se/pundaren/guide/app/MapController.kt").readText().contains("MapLibre.setConnected(false)"))
     }
 
     @Test fun `kartstilarna har samma lager, inga nätadresser och ingen sanningsfärg`() {

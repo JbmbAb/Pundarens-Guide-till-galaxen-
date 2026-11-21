@@ -83,6 +83,17 @@ class AppGraph(context: Context) : AutoCloseable {
     /** Expeditionsprotokollet (etapp 5). Fakta ur händelsebussen, satir ur det Guiden faktiskt sa. */
     val protocols = ProtocolKeeper(File(app.getExternalFilesDir(null) ?: app.filesDir, "protokoll"), log::line)
 
+    /** Convoy för två (etapp 6). Det enda i appen som använder nätet. */
+    val convoy = ConvoyController(scope, ::convoyFix, log::line)
+
+    /** Bara en verklig position med känd noggrannhet får delas. En provtur delar ingenting. */
+    private fun convoyFix(): OwnFix? {
+        if (navigator.simulating.value) return null
+        val point = navigator.display.map.value.position ?: return null
+        val quality = navigator.state.position.value
+        return OwnFix(point, quality.accuracyMeters ?: return null, quality.fixAgeSeconds ?: return null)
+    }
+
     init {
         log.line("START ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL} Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT}), app ${BuildInfo.VERSION}")
         log.line("ARKIV ${archive.all().size} poster, radbank ${lineBank.lines.size} rader (${lineBank.excluded.size} uteslutna), seed $seed")
@@ -107,6 +118,10 @@ class AppGraph(context: Context) : AutoCloseable {
                 navigator.setTravelMode(s.travelMode)
                 voice.setPreferredVoices(s.instructionVoice, s.tailVoice)
             }
+        }
+        // Nödkortet sänder nödsignalen till den andra, om en delning pågår (07, 3.6).
+        scope.launch {
+            navigator.state.safety.map { it.emergencyActive }.distinctUntilChanged().collect { if (it) convoy.sendEmergency() }
         }
         scope.launch { navigator.prepare() }
     }
@@ -154,5 +169,5 @@ class AppGraph(context: Context) : AutoCloseable {
 }
 
 object BuildInfo {
-    const val VERSION = "0.5-etapp5"
+    const val VERSION = "0.6-etapp6"
 }

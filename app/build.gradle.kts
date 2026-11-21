@@ -17,8 +17,8 @@ android {
         applicationId = "se.pundaren.guide"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.5-etapp5"
+        versionCode = 5
+        versionName = "0.6-etapp6"
         // Målenheten SM-X900 är arm64. Bara den ABI:n packas. För emulatorprov: -Pabi=x86_64.
         ndk { abiFilters += listOf(providers.gradleProperty("abi").orNull ?: "arm64-v8a") }
     }
@@ -85,6 +85,15 @@ dependencies {
     implementation(project(":conductor"))
     implementation(project(":babel"))
     implementation(project(":encyclopedia"))
+    implementation(project(":convoy:api"))
+    implementation(project(":convoy:http"))
+
+    // Convoy: QR-koden ritas och läses med ZXing (Apache 2.0), kamerabilden kommer från CameraX (AOSP).
+    implementation(libs.zxing.core)
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
 
     // Kartvisning (BSD-2), läser pmtiles:// sedan 11.7.0.
     implementation(libs.maplibre)
