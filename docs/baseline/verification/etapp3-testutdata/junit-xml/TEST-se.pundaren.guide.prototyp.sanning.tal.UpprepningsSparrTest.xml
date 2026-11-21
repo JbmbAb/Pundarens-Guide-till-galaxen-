@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-21T08:23:42.805Z" hostname="grok-bot-vm-328085215" time="0.001">
+  <properties/>
+  <testcase name="tre omräkningar i rad som i etapp2-emulatorn ger ett enda besked" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.001"/>
+  <testcase name="nytt besked efter omräkning släpps och nollställer spärren" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.0"/>
+  <testcase name="ny tur nollställer" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.0"/>
+  <testcase name="jämförelsen bryr sig inte om versaler och mellanslag" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.0"/>
+  <testcase name="upprepning utan omräkning släpps igenom" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.0"/>
+  <testcase name="samma besked direkt efter omräkning stoppas" classname="se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparrTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

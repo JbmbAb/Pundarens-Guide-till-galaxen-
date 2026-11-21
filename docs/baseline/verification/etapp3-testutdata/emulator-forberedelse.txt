@@ -1,0 +1,16 @@
+# 2026-11-21 09:15:56 CET emulator etapp2-AVD (TCG), etapp3-APK x86_64 2f1d83ad6fb50d6c5236d890042648fa5eb81f946729366699cf1c6af53087b8
+cmd: Can't find service: phone
+airplane_mode_on=1
+connect: Network is unreachable
+== talmotorer (TTS_SERVICE)
+== installerad talmotor-inställning: null
+Success
+install start 09:16:40
+Performing Streamed Install
+Success
+install slut 09:19:38
+# 2026-11-21 09:24:03 CET ominstallation efter ändring 4, x86_64 5d353ebac99eeb785faaee2963d9122c8c49ee9bb4447b5b6004bb3d1749b474
+Performing Streamed Install
+Success
+install slut 09:24:31
+airplane_mode_on=1

@@ -1,0 +1,40 @@
+### Negativt prov: com.google.android.gms:play-services-location:21.3.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-location:21.3.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-tasks:18.2.0
+  releaseRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  releaseRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+EXIT=1
+### Negativt prov: com.google.firebase:firebase-analytics:22.1.2
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-ads-identifier:18.0.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-measurement-api:22.1.2
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-measurement-base:22.1.2
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-measurement-impl:22.1.2
+EXIT=1
+### Negativt prov: com.google.crypto.tink:tink-android:1.15.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.crypto.tink:tink-android:1.15.0
+  debugRuntimeClasspath: com.google-modul som inte är granskad: com.google.code.findbugs:jsr305:3.0.2
+  debugRuntimeClasspath: com.google-modul som inte är granskad: com.google.errorprone:error_prone_annotations:2.22.0
+  releaseRuntimeClasspath: FÖRBJUDEN com.google.crypto.tink:tink-android:1.15.0
+  releaseRuntimeClasspath: com.google-modul som inte är granskad: com.google.code.findbugs:jsr305:3.0.2
+  releaseRuntimeClasspath: com.google-modul som inte är granskad: com.google.errorprone:error_prone_annotations:2.22.0
+EXIT=1
+### Negativt prov: com.google.android.gms:play-services-maps:19.0.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-maps:19.0.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-tasks:18.2.0
+  releaseRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  releaseRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+EXIT=1
+### Negativt prov: com.stadiamaps.ferrostar:google-play-services:0.59.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-base:18.5.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-basement:18.4.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-location:21.3.0
+  debugRuntimeClasspath: FÖRBJUDEN com.google.android.gms:play-services-tasks:18.2.0
+  debugRuntimeClasspath: com.google-modul som inte är granskad: com.google.android.material:material:1.13.0
+  debugRuntimeClasspath: com.google-modul som inte är granskad: com.google.errorprone:error_prone_annotations:2.15.0
+EXIT=1

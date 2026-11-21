@@ -1,0 +1,31 @@
+# logcat -s Etapp2:I, emulatorn (TCG, flygplansläge, ingen talmotor installerad), APK byggd på b4d67b5, FÖRE ändring 4. Tider i UTC.
+--------- beginning of main
+11-21 08:20:11.581  2549  2549 I Etapp2  : 08:20:11.500 START unknown Android SDK built for x86_64 Android 15 (API 35)
+11-21 08:20:11.677  2549  2549 I Etapp2  : 08:20:11.645 INTERNET-behörighet: saknas (som avsett)
+11-21 08:20:14.245  2549  2660 I Etapp2  : 08:20:14.119 PAKET läses från APK:ns tillgångar
+11-21 08:20:48.253  2549  2660 I Etapp2  : 08:20:48.230 PAKET f03-sex-kommuner-20261121-0619 installerat atomärt på 33978 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB
+11-21 08:20:48.693  2549  2549 I Etapp2  : 08:20:48.660 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+11-21 08:21:44.176  2549  2660 I Etapp2  : 08:21:44.160 VALHALLA startad på 55421 ms
+11-21 08:22:20.069  2549  2660 I Etapp2  : 08:22:20.054 RUTT PASSAGERARE 2 punkter: 3709 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15.73 km
+11-21 08:22:21.921  2549  2549 I Etapp2  : 08:22:21.919 TAL RÅTT: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+11-21 08:22:21.955  2549  2549 I Etapp2  : 08:22:21.945 TAL EJ REDO: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+11-21 08:22:21.978  2549  2549 I Etapp2  : 08:22:21.975 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid []
+11-21 08:22:22.503  2549  2549 I Etapp2  : 08:22:22.500 STEG kvar 17: Slaggatan
+11-21 08:22:34.075  2549  2549 I Etapp2  : 08:22:34.062 TAL RÅTT: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+11-21 08:22:34.126  2549  2549 I Etapp2  : 08:22:34.124 TAL EJ REDO: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+11-21 08:22:36.709  2549  2549 I Etapp2  : 08:22:36.697 TAL EJ REDO: Sväng höger in på Skyttsvägen.
+11-21 08:22:36.762  2549  2549 I Etapp2  : 08:22:36.760 STEG kvar 16: Skyttsvägen
+11-21 08:22:41.465  2549  2549 I Etapp2  : 08:22:41.453 STEG kvar 15: Moravägen
+11-21 08:22:45.506  2549  2549 I Etapp2  : 08:22:45.493 TAL EJ REDO: Sväng höger in på Moravägen.
+11-21 08:22:50.661  2549  2549 I Etapp2  : 08:22:50.654 STEG kvar 14: Kaplansgatan
+11-21 08:22:52.756  2549  2549 I Etapp2  : 08:22:52.745 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+11-21 08:22:52.794  2549  2549 I Etapp2  : 08:22:52.792 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+11-21 08:23:01.802  2549  2549 I Etapp2  : 08:23:01.799 TAL RÅTT: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+11-21 08:23:01.882  2549  2549 I Etapp2  : 08:23:01.880 TAL EJ REDO: Kör ut ur rondellen in på Kaplansgatan.
+11-21 08:23:01.941  2549  2549 I Etapp2  : 08:23:01.939 STEG kvar 13: Kaplansgatan
+11-21 08:23:03.538  2549  2549 I Etapp2  : 08:23:03.535 STEG kvar 12: Parkgatan
+11-21 08:23:14.714  2549  2549 I Etapp2  : 08:23:14.712 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+11-21 08:23:14.742  2549  2549 I Etapp2  : 08:23:14.733 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+11-21 08:23:16.034  2549  2549 I Etapp2  : 08:23:15.853 STOPP
+11-21 08:23:16.812  2549  2549 I Etapp2  : 08:23:16.800 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+11-21 08:23:16.850  2549  2549 I Etapp2  : 08:23:16.847 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.

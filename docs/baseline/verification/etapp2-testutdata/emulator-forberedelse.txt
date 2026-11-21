@@ -1,0 +1,11 @@
+# 2026-11-21 06:24:27 CET emulator etapp2 (TCG), F-03-paketet
+cmd: Can't find service: phone
+airplane_mode_on=1
+connect: Network is unreachable
+Success
+install start 06:25:02
+Performing Streamed Install
+Success
+install slut 06:28:07
+google-paket: 0
+x86_64-APK sha256 b71d1ed8ff72d817b434339e6a940e50b74056db9cc4869b82a4ada4a7f699a7

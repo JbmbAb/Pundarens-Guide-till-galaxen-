@@ -1,0 +1,22 @@
+{
+ "locations": [
+  {
+   "lat": 61.1201175,
+   "lon": 14.6222536
+  },
+  {
+   "lat": 61.2077132,
+   "lon": 14.5377551
+  }
+ ],
+ "costing": "pedestrian",
+ "format": "osrm",
+ "language": "sv-SE",
+ "voice_instructions": true,
+ "banner_instructions": true,
+ "units": "kilometers",
+ "directions_options": {
+  "language": "sv-SE",
+  "units": "kilometers"
+ }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Ingen nätverksåtkomst vid körning. Biblioteken (MapLibre, Ferrostar) begär INTERNET i sina
+         manifest; här tas behörigheten bort ur det sammanslagna manifestet, så att Android själv
+         stoppar alla uttag. Kontrolleras på APK:n med aapt2 (tools/verkstad/07-kontrollera-apk.sh).
+         ACCESS_NETWORK_STATE får ligga kvar: den ger bara läsning av nätstatus, och utan den kraschar
+         MapLibres ConnectivityReceiver (SecurityException, sett i emulatorprovet 2026-11-21). -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
+
+    <!-- Etapp 3: Android 11+ döljer andra appars tjänster. Utan den här raden ser appen inte
+         Samsungs talmotor (com.samsung.SMT) och TextToSpeech får ingen motor alls. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="Offlinekedja (etapp 2)"
+        android:allowBackup="false"
+        android:theme="@android:style/Theme.Material.NoActionBar"
+        tools:ignore="MissingApplicationIcon">
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:screenOrientation="unspecified">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

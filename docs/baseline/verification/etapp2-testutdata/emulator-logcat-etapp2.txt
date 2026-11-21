@@ -1,0 +1,74 @@
+# logcat -s Etapp2:I, emulator etapp2 (TCG, flygplansläge), F-03-paketet, hämtad 2026-11-21 06:47:45 CET. Tider i loggen är UTC (emulatorns tidszon).
+--------- beginning of main
+11-21 05:28:40.841  2373  2373 I Etapp2  : 05:28:40.778 START unknown Android SDK built for x86_64 Android 15 (API 35)
+11-21 05:28:41.042  2373  2373 I Etapp2  : 05:28:41.003 INTERNET-behörighet: saknas (som avsett)
+11-21 05:28:43.212  2373  2469 I Etapp2  : 05:28:42.962 PAKET läses från APK:ns tillgångar
+11-21 05:29:16.906  2373  2469 I Etapp2  : 05:29:16.815 PAKET f03-sex-kommuner-20261121-0619 installerat atomärt på 33598 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB
+11-21 05:29:17.831  2373  2373 I Etapp2  : 05:29:17.796 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+11-21 05:31:48.483  2373  2469 I Etapp2  : 05:31:48.320 VALHALLA startad på 150430 ms
+11-21 05:42:51.402  2373  2469 I Etapp2  : 05:42:51.367 RUTT PASSAGERARE 2 punkter: 2469 ms i valhalla-mobile, 1 rutt(er), 11 steg, 124.10 km
+11-21 05:42:52.338  2373  2373 I Etapp2  : 05:42:52.334 TAL #1: Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan.
+11-21 05:42:52.395  2373  2373 I Etapp2  : 05:42:52.393 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid []
+11-21 05:42:52.790  2373  2373 I Etapp2  : 05:42:52.773 STEG kvar 11: Stensgatan
+11-21 05:43:09.321  2373  2471 I Etapp2  : 05:43:09.313 TAL #2: Sväng höger in på Stensgatan. Därefter Sväng vänster in på Barkgatan.
+11-21 05:43:12.533  2373  2470 I Etapp2  : 05:43:12.511 TAL #3: Sväng vänster in på Barkgatan.
+11-21 05:43:12.602  2373  2373 I Etapp2  : 05:43:12.591 STEG kvar 10: Barkgatan
+11-21 05:43:15.508  2373  2373 I Etapp2  : 05:43:15.497 STEG kvar 9: Stormyrvägen
+11-21 05:43:21.629  2373  2471 I Etapp2  : 05:43:21.622 TAL #4: Sväng höger in på Stormyrvägen.
+11-21 05:43:27.509  2373  2373 I Etapp2  : 05:43:27.499 STEG kvar 8: Inlandsvägen
+11-21 05:43:47.775  2373  3340 I Etapp2  : 05:43:47.766 TAL #5: Sväng vänster in på E 45, Inlandsvägen.
+11-21 05:44:00.645  2373  3340 I Etapp2  : 05:44:00.641 TAL #6: Fortsätt på E 45 i 111 kilometer.
+11-21 05:44:00.782  2373  2373 I Etapp2  : 05:44:00.771 STEG kvar 7: Inlandsvägen
+11-21 05:44:34.471  2373  2373 I Etapp2  : 05:44:34.446 STOPP
+11-21 05:44:41.534  2373  3340 I Etapp2  : 05:44:41.510 RUTT PASSAGERARE 2 punkter: 813 ms i valhalla-mobile, 1 rutt(er), 22 steg, 16.07 km
+11-21 05:44:42.008  2373  2373 I Etapp2  : 05:44:41.986 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid [60, 200, 340]
+11-21 05:44:42.142  2373  2373 I Etapp2  : 05:44:42.135 STEG kvar 22: –
+11-21 05:44:42.188  2373  2373 I Etapp2  : 05:44:42.168 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=976.7333491562287))
+11-21 05:44:43.222  2373  3340 I Etapp2  : 05:44:43.217 RUTT PASSAGERARE 2 punkter: 1100 ms i valhalla-mobile, 1 rutt(er), 19 steg, 16.54 km
+11-21 05:44:45.245  2373  2373 I Etapp2  : 05:44:45.227 STEG kvar 19: –
+11-21 05:44:45.477  2373  2373 I Etapp2  : 05:44:45.427 STEG kvar 22: –
+11-21 05:44:46.657  2373  3339 I Etapp2  : 05:44:46.646 TAL #1: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+11-21 05:44:47.017  2373  2373 I Etapp2  : 05:44:47.011 PÅ RUTTEN igen
+11-21 05:44:49.142  2373  2469 I Etapp2  : 05:44:49.135 RUTT PASSAGERARE 2 punkter: 2944 ms i valhalla-mobile, 1 rutt(er), 22 steg, 16.06 km
+11-21 05:44:53.315  2373  3339 I Etapp2  : 05:44:53.313 TAL #2: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+11-21 05:44:55.937  2373  3339 I Etapp2  : 05:44:55.925 TAL #3: Sväng höger in på Skyttsvägen.
+11-21 05:44:56.145  2373  2373 I Etapp2  : 05:44:56.135 STEG kvar 21: Skyttsvägen
+11-21 05:44:59.331  2373  2373 I Etapp2  : 05:44:59.329 STEG kvar 20: Moravägen
+11-21 05:45:01.714  2373  3339 I Etapp2  : 05:45:01.711 TAL #4: Sväng vänster in på Moravägen.
+11-21 05:45:06.370  2373  2373 I Etapp2  : 05:45:06.355 STEG kvar 19: E 45
+11-21 05:45:07.985  2373  3339 I Etapp2  : 05:45:07.979 AVVIKELSE försök 1: tre positioner 250 m från rutten vid steg 60
+11-21 05:45:09.366  2373  2373 I Etapp2  : 05:45:09.349 OMRÄKNING pågår
+11-21 05:45:09.430  2373  2373 I Etapp2  : 05:45:09.423 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.7397752759926))
+11-21 05:45:10.139  2373  2373 I Etapp2  : 05:45:10.138 OMRÄKNING pågår
+11-21 05:45:10.554  2373  2373 I Etapp2  : 05:45:10.539 OMRÄKNING pågår
+11-21 05:45:10.749  2373  3339 I Etapp2  : 05:45:10.743 RUTT PASSAGERARE 2 punkter: 1237 ms i valhalla-mobile, 1 rutt(er), 21 steg, 15.85 km
+11-21 05:45:11.123  2373  2373 I Etapp2  : 05:45:11.121 OMRÄKNING pågår
+11-21 05:45:11.168  2373  2373 I Etapp2  : 05:45:11.158 PÅ RUTTEN igen
+11-21 05:45:11.522  2373  3339 I Etapp2  : 05:45:11.514 TAL #5: Kör västerut  Slaggatan. Därefter Sväng vänster in på Skyttsvägen.
+11-21 05:45:11.778  2373  2373 I Etapp2  : 05:45:11.766 STEG kvar 21: Skyttsvägen
+11-21 05:45:11.794  2373  2373 I Etapp2  : 05:45:11.793 AVVIKELSE upptäckt: Deviation(kind=OffStepOnRoute(deviationFromStepLine=194.35790582264863))
+11-21 05:45:11.830  2373  2373 I Etapp2  : 05:45:11.822 STEG kvar 19: E 45
+11-21 05:45:11.842  2373  2373 I Etapp2  : 05:45:11.841 PÅ RUTTEN igen
+11-21 05:45:12.914  2373  2471 I Etapp2  : 05:45:12.907 RUTT PASSAGERARE 2 punkter: 1015 ms i valhalla-mobile, 1 rutt(er), 19 steg, 15.52 km
+11-21 05:45:15.650  2373  2469 I Etapp2  : 05:45:15.646 TAL #6: Kör in i rondellen och ta den 2:a avfarten in på E 45, Moravägen.
+11-21 05:45:21.609  2373  2469 I Etapp2  : 05:45:21.606 TAL #7: Kör ut ur rondellen in på E 45, Moravägen.
+11-21 05:45:21.890  2373  2373 I Etapp2  : 05:45:21.881 STEG kvar 18: Moravägen
+11-21 05:45:22.214  2373  2469 I Etapp2  : 05:45:22.205 TAL #8: Fortsätt på E 45 i 11 kilometer.
+11-21 05:45:22.438  2373  2373 I Etapp2  : 05:45:22.427 STEG kvar 17: Inlandsvägen
+11-21 05:45:58.023  2373  3374 I Etapp2  : 05:45:57.953 AVVIKELSE försök 2: tre positioner 250 m från rutten vid steg 200
+11-21 05:45:58.720  2373  2373 I Etapp2  : 05:45:58.707 OMRÄKNING pågår
+11-21 05:45:58.743  2373  2373 I Etapp2  : 05:45:58.741 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.71700746701202))
+11-21 05:45:59.550  2373  2373 I Etapp2  : 05:45:59.548 OMRÄKNING pågår
+11-21 05:45:59.858  2373  2373 I Etapp2  : 05:45:59.851 OMRÄKNING pågår
+11-21 05:45:59.914  2373  2373 I Etapp2  : 05:45:59.907 OMRÄKNING pågår
+11-21 05:45:59.938  2373  2373 I Etapp2  : 05:45:59.934 PÅ RUTTEN igen
+11-21 05:46:00.486  2373  2471 I Etapp2  : 05:46:00.466 RUTT PASSAGERARE 2 punkter: 1462 ms i valhalla-mobile, 1 rutt(er), 19 steg, 14.52 km
+11-21 05:46:47.442  2373  3339 I Etapp2  : 05:46:47.434 AVVIKELSE försök 3: tre positioner 250 m från rutten vid steg 340
+11-21 05:46:47.993  2373  2373 I Etapp2  : 05:46:47.986 OMRÄKNING pågår
+11-21 05:46:48.027  2373  2373 I Etapp2  : 05:46:48.014 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.73515171371588))
+11-21 05:46:48.717  2373  2373 I Etapp2  : 05:46:48.714 OMRÄKNING pågår
+11-21 05:46:49.132  2373  2373 I Etapp2  : 05:46:49.122 OMRÄKNING pågår
+11-21 05:46:49.547  2373  3339 I Etapp2  : 05:46:49.503 RUTT PASSAGERARE 2 punkter: 1156 ms i valhalla-mobile, 1 rutt(er), 20 steg, 14.19 km
+11-21 05:46:49.950  2373  2373 I Etapp2  : 05:46:49.949 PÅ RUTTEN igen
+11-21 05:47:41.204  2373  2373 I Etapp2  : 05:47:41.172 STOPP
+11-21 05:47:41.627  2373  3374 I Etapp2  : 05:47:41.607 TAL #9: Fortsätt på E 45 i 11 kilometer.

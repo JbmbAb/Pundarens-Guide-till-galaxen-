@@ -1,0 +1,72 @@
+# Kört 2026-11-21 09:23:20 CET på commit 7b10de24b2d5c5db3015a045225ffebf23e7484a
+# paket: /workspace/verkstad/ut/paket/f03-sex-kommuner-20261121-0619
+openjdk version "17.0.21.1" 2026-11-17
+OpenJDK Runtime Environment Temurin-17.0.21.1+2 (build 17.0.21.1+2)
+OpenJDK 64-Bit Server VM Temurin-17.0.21.1+2 (build 17.0.21.1+2, mixed mode, sharing)
+# ./gradlew clean :app:verifieraIngenGoogle :app:testDebugUnitTest :app:assembleDebug -PpaketKatalog=/workspace/verkstad/ut/paket/f03-sex-kommuner-20261121-0619
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:clean
+
+> Task :app:verifieraIngenGoogle
+verifieraIngenGoogle: OK. Inga förbjudna moduler. Granskade undantag: [com.google.code.gson:gson:2.10.1, com.google.guava:listenablefuture:1.0]. Rapport: /workspace/pundarens-guide-repo/prototyp/offline-kedja/app/build/rapporter/beroenden.txt
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:javaPreCompileDebug
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:parseDebugLocalResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugRFile
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:kopieraPaket
+> Task :app:mergeDebugAssets
+> Task :app:processDebugManifestForPackage
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:processDebugResources
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:compressDebugAssets
+> Task :app:mergeDebugNativeLibs
+> Task :app:l8DexDesugarLibDebug
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libferrostar.so, libjnidispatch.so, libmaplibre.so, libvalhalla-wrapper.so. Run with --info option to learn more.
+
+> Task :app:mergeExtDexDebug
+> Task :app:compileDebugKotlin
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:processDebugJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 22s
+46 actionable tasks: 46 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

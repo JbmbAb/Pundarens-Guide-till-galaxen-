@@ -1,0 +1,42 @@
+# APK: /workspace/verkstad/apk/offlinekedja-etapp2-arm64-debug.apk
+# storlek: 137276668 byte
+# sha256: 631ca10a97072459dff62988aef78620b658b5db6d8ae23289c28181d199ef2b
+== badging
+package: name='se.pundaren.guide.prototyp.offlinekedja' versionCode='1' versionName='0.1-etapp2' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+targetSdkVersion:'36'
+application-label:'Offlinekedja (etapp 2)'
+native-code: 'arm64-v8a'
+== behörigheter
+package: se.pundaren.guide.prototyp.offlinekedja
+uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'
+uses-permission: name='android.permission.ACCESS_FINE_LOCATION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+permission: se.pundaren.guide.prototyp.offlinekedja.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission: name='se.pundaren.guide.prototyp.offlinekedja.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+OK: ingen INTERNET-behörighet
+== inbyggda bibliotek
+2791728 lib/arm64-v8a/libferrostar.so
+176520 lib/arm64-v8a/libjnidispatch.so
+13022424 lib/arm64-v8a/libmaplibre.so
+133191576 lib/arm64-v8a/libvalhalla-wrapper.so
+== tillgångar
+132737 assets/PublicSuffixDatabase.list
+77023128 assets/paket/karta.pmtiles
+1341 assets/paket/manifest.json
+19947520 assets/paket/valhalla_tiles.tar
+4326 assets/stil/mork.json
+== dex-klasser per förbjudet prefix
+Lcom/google/android/gms/ 0
+Lcom/google/firebase/ 0
+Lcom/google/crypto/tink/ 0
+Lcom/google/android/libraries/maps/ 0
+Lcom/google/maps/ 0
+Lcom/google/android/play/ 0
+== övriga com.google-klasser (granskade undantag förväntas: gson, listenablefuture)
+      1 com/google/common/util
+      6 com/google/gson/annotations
+    149 com/google/gson/internal
+      1 com/google/gson/package
+      2 com/google/gson/reflect
+      7 com/google/gson/stream
+OK: inga förbjudna Google-klasser i dex
