@@ -18,7 +18,6 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import com.stadiamaps.ferrostar.core.FerrostarCore
-import com.stadiamaps.ferrostar.core.SpokenInstructionObserver
 import com.stadiamaps.ferrostar.core.http.HttpClientProvider
 import com.stadiamaps.ferrostar.core.http.IResponse
 import com.valhalla.valhalla.Valhalla
@@ -31,8 +30,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.maplibre.android.MapLibre
@@ -57,7 +54,6 @@ import uniffi.ferrostar.GeographicCoordinate
 import uniffi.ferrostar.NavigationControllerConfig
 import uniffi.ferrostar.RouteDeviation
 import uniffi.ferrostar.RouteDeviationTracking
-import uniffi.ferrostar.SpokenInstruction
 import uniffi.ferrostar.TripState
 import uniffi.ferrostar.UserLocation
 import uniffi.ferrostar.Waypoint
@@ -95,7 +91,7 @@ class MainActivity : Activity() {
     private var core: FerrostarCore? = null
     private val position = ProvPositionskalla { logg(it) }
     private lateinit var loggFil: File
-    private var talRaknare = 0
+    private var tal: SvenskTalObserver? = null
     private var stegForut = -1
     private var avvikelseForut = false
     private val tid = SimpleDateFormat("HH:mm:ss.SSS", Locale.forLanguageTag("sv-SE"))
@@ -111,6 +107,7 @@ class MainActivity : Activity() {
         logg("START ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL} Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
         val internet = checkSelfPermission(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED
         logg("INTERNET-behörighet: ${if (internet) "BEVILJAD (fel!)" else "saknas (som avsett)"}")
+        tal = SvenskTalObserver(this, ::logg) // startar Samsungs talmotor; fel loggas, navigeringen går ändå
         scope.launch { forbered() }
     }
 
@@ -207,15 +204,9 @@ class MainActivity : Activity() {
             }
         }
         val c = FerrostarCore(rk, ingetNatverk, position, config)
-        c.spokenInstructionObserver = object : SpokenInstructionObserver {
-            private val tyst = MutableStateFlow(false)
-            override fun onSpokenInstructionTrigger(spokenInstruction: SpokenInstruction) {
-                talRaknare++; logg("TAL #$talRaknare: ${spokenInstruction.text}")
-            }
-            override fun stopAndClearQueue() {}
-            override fun setMuted(isMuted: Boolean) { tyst.value = isMuted }
-            override val muteState: StateFlow<Boolean> = tyst
-        }
+        // Etapp 3: sanningslagrets navigeringsröst (ägarens SvenskTalObserver, Samsungs talmotor offline).
+        // Skild från Guidens röst och Illogical Engine; loggraderna TAL REDO/FEL/#n går till etapp2-logg.txt.
+        c.spokenInstructionObserver = tal
         core = c
         scope.launch {
             c.state.collect { st ->
@@ -242,7 +233,7 @@ class MainActivity : Activity() {
     private fun navigera(mal: Pair<Double, Double>, profil: ValhallaRuttkalla.Profil, avvikelseVid: Set<Int>) {
         val c = core ?: return logg("Inte redo än")
         ruttkalla?.profil = profil
-        talRaknare = 0; stegForut = -1
+        stegForut = -1
         scope.launch {
             try {
                 val start = UserLocation(GeographicCoordinate(ORSA.first, ORSA.second), 5.0, null, java.time.Instant.now(), null)
@@ -288,6 +279,6 @@ class MainActivity : Activity() {
     override fun onLowMemory() { super.onLowMemory(); mapView.onLowMemory() }
     override fun onSaveInstanceState(outState: Bundle) { super.onSaveInstanceState(outState); mapView.onSaveInstanceState(outState) }
     override fun onDestroy() {
-        core?.stopNavigation(); valhalla?.close(); scope.cancel(); mapView.onDestroy(); super.onDestroy()
+        core?.stopNavigation(); tal?.close(); tal = null; valhalla?.close(); scope.cancel(); mapView.onDestroy(); super.onDestroy()
     }
 }
