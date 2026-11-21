@@ -5,8 +5,9 @@ skriver manifest.json med SHA-256 och storlek för varje fil. Appen installerar 
 import hashlib, json, os, shutil, subprocess, sys, datetime
 
 UT = os.environ.get("UT", "/workspace/verkstad/ut")
-OMRADE = os.environ.get("OMRADE", "orsa-prov")
-BBOX = os.environ.get("BBOX", "14.20,60.90,15.20,61.65")
+OMRADE = os.environ["OMRADE"]
+BBOX = os.environ["BBOX"]
+POLYGON = os.environ.get("POLYGON", "")
 OSM = os.environ.get("OSM_KALLA", "/workspace/verkstad/osm/sweden-latest.osm.pbf")
 
 def sha256(p):
@@ -35,7 +36,10 @@ def main():
         "format": "pundarens-offlinepaket/1",
         "version": version,
         "omrade": {"namn": OMRADE, "bbox_wgs84": [float(x) for x in BBOX.split(",")],
-                   "not": "Provområde runt Orsa. F-03 (exakta grannkommuner) är öppen."},
+                   "polygon": os.path.basename(POLYGON) if POLYGON else None,
+                   "polygon_sha256": sha256(POLYGON) if POLYGON and os.path.exists(POLYGON) else None,
+                   "not": ("Ägarbeslut F-03 2026-11-21 06.15: Orsa, Mora, Rättvik, Ljusdal, Härjedalen och Älvdalen (OSM admin_level 7, buffert 0,02°)"
+                           if POLYGON else "Rektangel runt Orsa (äldre provområde)")},
         "skapad": nu.isoformat(timespec="seconds"),
         "kallor": {"osm": {"fil": os.path.basename(OSM), "geofabrik_md5": md5,
                            "replikering": ut(["osmium", "fileinfo", "-g", "header.option.osmosis_replication_timestamp", OSM]),

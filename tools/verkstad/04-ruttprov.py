@@ -9,10 +9,18 @@ PUNKTER = {  # koordinater ur OSM-utdraget (place-noder), se etapp2-protokollet
     "Orsa": (61.1201175, 14.6222536),
     "Grönklitt": (61.2077132, 14.5377551),
     "Mora": (61.0086787, 14.5442519),
+    # Grannkommunernas centralorter (F-03, ägarbeslut 2026-11-21 06.15), place=town ur OSM-utdraget
+    "Älvdalen": (61.2298989, 14.0373946),
+    "Rättvik": (60.8837542, 15.1226783),
+    "Ljusdal": (61.8293755, 16.0953598),
+    "Sveg": (62.0360709, 14.3598392),
+    "Idre": (61.8584278, 12.7168462),
 }
 PROV = [("Orsa", "Grönklitt", "auto"), ("Orsa", "Mora", "auto"),
         ("Orsa", "Grönklitt", "pedestrian"), ("Orsa", "Mora", "pedestrian"),
-        ("Mora", "Orsa", "auto")]
+        ("Mora", "Orsa", "auto"),
+        ("Orsa", "Älvdalen", "auto"), ("Orsa", "Rättvik", "auto"), ("Orsa", "Ljusdal", "auto"),
+        ("Orsa", "Sveg", "auto"), ("Älvdalen", "Idre", "auto"), ("Orsa", "Älvdalen", "pedestrian")]
 
 def natverk():
     try:
@@ -31,7 +39,7 @@ def main(conf, ut):
                "costing": prof, "format": "osrm", "language": "sv-SE",
                "voice_instructions": True, "banner_instructions": True,
                "units": "kilometers", "directions_options": {"language": "sv-SE", "units": "kilometers"}}
-        namn = f"{a}-{b}-{prof}".lower().replace("ö", "o").replace("å", "a")
+        namn = f"{a}-{b}-{prof}".lower().replace("ö", "o").replace("å", "a").replace("ä", "a")
         try:
             svar = json.loads(actor.route(json.dumps(req)))
         except Exception as e:
