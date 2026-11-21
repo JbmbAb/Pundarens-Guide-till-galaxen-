@@ -3,6 +3,8 @@ dependencies {
     "testImplementation"(libs.junit)
     "testImplementation"(libs.kotlin.reflect)
     "testImplementation"(project(":truth:api"))
+    "testImplementation"(project(":truth:core"))
+    "testImplementation"(project(":conductor"))
     "testImplementation"(project(":engine:api"))
     "testImplementation"(project(":engine"))
     "testImplementation"(project(":archive:api"))

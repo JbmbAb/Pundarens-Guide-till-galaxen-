@@ -123,6 +123,7 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
     private var emergencyClearedAtMono: Long? = null
     private var audioOutput = AudioOutput.UNKNOWN
     private var dayPhase: DayPhase? = null
+    private var anchorPoint: GeoPoint? = config.fallbackPosition
 
     private var sequence = 0L
 
@@ -270,12 +271,17 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
         publish(stamp)
     }
 
+    /**
+     * En ny position. [fixMonotonicMillis] är när positionen togs (Location.elapsedRealtimeNanos),
+     * så att en gammal sparad position inte ser färsk ut bara för att den levereras nu.
+     */
     @TruthInput @Synchronized
-    fun positionFix(stamp: Stamp, fix: PositionFix) {
+    fun positionFix(stamp: Stamp, fix: PositionFix, fixMonotonicMillis: Long = stamp.monotonicMillis) {
         val previous = lastFix
         val previousMono = lastFixMono
+        if (previousMono != null && fixMonotonicMillis < previousMono) return // äldre än den vi redan har
         val derived = if (previous != null && previousMono != null) {
-            val dt = (stamp.monotonicMillis - previousMono) / 1000.0
+            val dt = (fixMonotonicMillis - previousMono) / 1000.0
             if (dt in 0.2..10.0) Geo.distanceMeters(previous.point, fix.point) / dt else null
         } else null
         val raw = fix.speedMps ?: derived
@@ -284,9 +290,15 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
             speedKnown = true
         }
         lastFix = fix
-        lastFixMono = stamp.monotonicMillis
+        lastFixMono = fixMonotonicMillis
         evaluateQuality(stamp)
         publish(stamp)
+    }
+
+    /** Plats för solens läge innan första positionen finns (offlinepaketets mittpunkt). */
+    @TruthInput @Synchronized
+    fun anchor(point: GeoPoint) {
+        anchorPoint = point
     }
 
     /** Anropas ungefär en gång per sekund. Driver allt som beror på att tiden går. */
@@ -386,7 +398,7 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
     }
 
     private fun evaluateDayPhase(stamp: Stamp) {
-        val where = lastFix?.point ?: config.fallbackPosition ?: return
+        val where = lastFix?.point ?: anchorPoint ?: return
         val now = Sun.phase(stamp.wallClockUtc, where)
         val before = dayPhase
         dayPhase = now

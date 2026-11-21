@@ -33,4 +33,8 @@ include(
 )
 
 // Android-moduler.
-// TILLFALLIGT_AV include(":truth:device", ":voice", ":app")
+include(
+    ":truth:device",
+    ":voice",
+    ":app",
+)

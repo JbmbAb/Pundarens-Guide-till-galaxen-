@@ -23,7 +23,8 @@ class ArkitekturTest {
     }
 
     @Test fun `navigeringsrösten i sanning tal är ren Kotlin utan Android, UI eller Guiden`() {
-        val tal = kallor.filter { it.path.contains("/sanning/tal/") }
+        // invariantSeparatorsPath: på Windows har sökvägen bakstreck och testet hittade då inga filer.
+        val tal = kallor.filter { it.invariantSeparatorsPath.contains("/sanning/tal/") }
         assertTrue("sanning/tal finns", tal.size >= 2)
         val forbjudet = Regex("""^import (android\.|androidx\.|se\.pundaren\.guide\.prototyp\.ui|se\.pundaren\.guide\.(engine|babel))""", RegexOption.MULTILINE)
         assertEquals(emptyList<String>(), tal.filter { forbjudet.containsMatchIn(it.readText()) }.map { it.path })

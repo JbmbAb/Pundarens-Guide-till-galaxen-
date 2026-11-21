@@ -34,15 +34,19 @@ class ArchitectureTest {
     private val android = listOf("android.", "androidx.", "com.google", "com.android")
 
     @Test fun `G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen`() {
-        val truthCore = listOf("se.pundaren.guide.truth.core", "se.pundaren.guide.convoy")
-        listOf("engine", "babel", "safetygate", "engine/api").forEach { assertNoImports(it, truthCore) }
+        val truthCore = listOf(
+            "se.pundaren.guide.truth.core", "se.pundaren.guide.truth.device", "se.pundaren.guide.convoy", "se.pundaren.guide.voice",
+        )
+        listOf("engine", "babel", "safetygate", "engine/api", "conductor").forEach { assertNoImports(it, truthCore) }
+        // Dirigenten kopplar ihop motor och SafetyGate men får inte se motorns implementation eller Babel.
+        assertNoImports("conductor", listOf("se.pundaren.guide.engine.Default", "se.pundaren.guide.engine.LineBank", "se.pundaren.guide.engine.VoiceGuards", "se.pundaren.guide.babel"))
         // SafetyGate får se :engine:api (typen TailCandidate) men inte motorns implementation eller dess spärrlista.
         assertNoImports("safetygate", listOf("se.pundaren.guide.engine.Default", "se.pundaren.guide.engine.LineBank", "se.pundaren.guide.engine.VoiceGuards", "se.pundaren.guide.engine.TailContract"))
         assertNoImports("babel", listOf("se.pundaren.guide.truth", "se.pundaren.guide.safetygate", "se.pundaren.guide.engine"))
     }
 
     @Test fun `G-8 rena moduler har varken Android, Google eller nätverk`() {
-        listOf("truth/api", "engine/api", "engine", "archive/api", "archive/core", "safetygate", "babel").forEach {
+        listOf("truth/api", "truth/core", "engine/api", "engine", "archive/api", "archive/core", "safetygate", "conductor", "babel").forEach {
             assertNoImports(it, network + android)
         }
     }
@@ -119,6 +123,13 @@ class ArchitectureTest {
             "babel" to setOf(":truth:api", ":truth:core", ":safetygate", ":engine", ":engine:api"),
             "truth/api" to setOf(":engine", ":engine:api", ":archive:api", ":safetygate", ":babel"),
             "archive/api" to setOf(":engine", ":truth:api"),
+            // Etapp 4: sanningskärnan och dess Android-adaptrar känner inget av tramslagret.
+            "truth/core" to setOf(":engine", ":engine:api", ":archive:api", ":archive:core", ":safetygate", ":conductor", ":babel", ":voice", ":app"),
+            "truth/device" to setOf(":engine", ":engine:api", ":archive:api", ":archive:core", ":safetygate", ":conductor", ":babel", ":voice", ":app"),
+            // Rösten ser bara sanningens port för besked.
+            "voice" to setOf(":engine", ":engine:api", ":archive:api", ":truth:core", ":truth:device", ":safetygate", ":conductor", ":babel", ":app"),
+            // Dirigenten läser sanningen genom :truth:api och når aldrig kärnan eller enheten.
+            "conductor" to setOf(":truth:core", ":truth:device", ":voice", ":babel", ":app"),
         )
         forbidden.forEach { (m, bad) -> assertEquals("$m", emptySet<String>(), deps(m).intersect(bad)) }
     }

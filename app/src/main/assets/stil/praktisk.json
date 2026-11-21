@@ -1,0 +1,317 @@
+{
+ "version": 8,
+ "name": "Pundarens Guide – Praktisk",
+ "metadata": {
+  "not": "Byggd av tools/verkstad/09-kartstilar.py. Inga textlager, glyfer eller sprite."
+ },
+ "sources": {
+  "karta": {
+   "type": "vector",
+   "url": "{{KARTA}}",
+   "attribution": "© OpenStreetMap contributors"
+  }
+ },
+ "layers": [
+  {
+   "id": "bakgrund",
+   "type": "background",
+   "paint": {
+    "background-color": "#0e0e0e"
+   }
+  },
+  {
+   "id": "marktacke",
+   "type": "fill",
+   "source": "karta",
+   "source-layer": "landcover",
+   "paint": {
+    "fill-color": [
+     "match",
+     [
+      "get",
+      "class"
+     ],
+     "wood",
+     "#14201a",
+     "grass",
+     "#161d16",
+     "wetland",
+     "#141c1f",
+     "farmland",
+     "#1a1a14",
+     "#151515"
+    ],
+    "fill-opacity": 0.9
+   }
+  },
+  {
+   "id": "markanvandning",
+   "type": "fill",
+   "source": "karta",
+   "source-layer": "landuse",
+   "paint": {
+    "fill-color": "#1b1b1e",
+    "fill-opacity": 0.8
+   }
+  },
+  {
+   "id": "park",
+   "type": "fill",
+   "source": "karta",
+   "source-layer": "park",
+   "paint": {
+    "fill-color": "#14201a",
+    "fill-opacity": 0.6
+   }
+  },
+  {
+   "id": "vatten",
+   "type": "fill",
+   "source": "karta",
+   "source-layer": "water",
+   "paint": {
+    "fill-color": "#0d2233"
+   }
+  },
+  {
+   "id": "vattendrag",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "waterway",
+   "paint": {
+    "line-color": "#0d2233",
+    "line-width": 1.2
+   }
+  },
+  {
+   "id": "byggnader",
+   "type": "fill",
+   "source": "karta",
+   "source-layer": "building",
+   "minzoom": 13,
+   "paint": {
+    "fill-color": "#232327",
+    "fill-outline-color": "#2c2c31"
+   }
+  },
+  {
+   "id": "granser",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "boundary",
+   "filter": [
+    "<=",
+    [
+     "get",
+     "admin_level"
+    ],
+    7
+   ],
+   "paint": {
+    "line-color": "#3a3346",
+    "line-dasharray": [
+     3,
+     2
+    ],
+    "line-width": 1
+   }
+  },
+  {
+   "id": "vag-stig",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "transportation",
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#4a4a50",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.5
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     0.24,
+     14,
+     0.8,
+     18,
+     4.8
+    ]
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "path",
+      "track"
+     ]
+    ]
+   ],
+   "minzoom": 12
+  },
+  {
+   "id": "vag-liten",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "transportation",
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#6a6a72",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.5
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     0.42,
+     14,
+     1.4,
+     18,
+     8.4
+    ]
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "service",
+      "minor"
+     ]
+    ]
+   ],
+   "minzoom": 10
+  },
+  {
+   "id": "vag-mellan",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "transportation",
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#8f8f98",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.5
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     0.66,
+     14,
+     2.2,
+     18,
+     13.2
+    ]
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "tertiary",
+      "secondary"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "vag-stor",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "transportation",
+   "layout": {
+    "line-cap": "round",
+    "line-join": "round"
+   },
+   "paint": {
+    "line-color": "#b4b4be",
+    "line-width": [
+     "interpolate",
+     [
+      "exponential",
+      1.5
+     ],
+     [
+      "zoom"
+     ],
+     8,
+     0.9,
+     14,
+     3.0,
+     18,
+     18.0
+    ]
+   },
+   "filter": [
+    "in",
+    [
+     "get",
+     "class"
+    ],
+    [
+     "literal",
+     [
+      "primary",
+      "trunk",
+      "motorway"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "jarnvag",
+   "type": "line",
+   "source": "karta",
+   "source-layer": "transportation",
+   "filter": [
+    "==",
+    [
+     "get",
+     "class"
+    ],
+    "rail"
+   ],
+   "paint": {
+    "line-color": "#4a4a52",
+    "line-width": 1,
+    "line-dasharray": [
+     2,
+     2
+    ]
+   }
+  }
+ ]
+}

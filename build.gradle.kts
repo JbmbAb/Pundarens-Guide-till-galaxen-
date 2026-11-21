@@ -125,8 +125,11 @@ subprojects {
                 module.configurations.forEach { conf ->
                     conf.dependencies.withType(ProjectDependency::class.java).forEach { dep ->
                         val target = dep.path
+                        // Android lägger till modulen själv i sina testkonfigurationer (koden under test).
+                        if (target == module.path) return@forEach
                         report.append("${module.path} -[${conf.name}]-> $target\n")
-                        val isTestConf = conf.name.startsWith("test") || conf.name.startsWith("androidTest")
+                        val isTestConf = conf.name.startsWith("test") || conf.name.startsWith("androidTest") ||
+                            conf.name.contains("UnitTest") || conf.name.contains("AndroidTest")
                         val testOnly = if (isTestConf) allowedTestOnlyEdges[module.path].orEmpty() else emptySet()
                         if (target !in allowed && target !in testOnly) violations += "${module.path} -> $target (${conf.name}) är förbjuden"
                     }

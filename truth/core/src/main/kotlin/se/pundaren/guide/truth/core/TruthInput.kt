@@ -10,6 +10,6 @@ package se.pundaren.guide.truth.core
     level = RequiresOptIn.Level.ERROR,
     message = "Bara :truth:device får mata sanningskärnan (03, G-2).",
 )
-@Retention(AnnotationRetention.BINARY)
+@Retention(AnnotationRetention.RUNTIME) // läses också av arkitekturtestet (TruthBoundaryTest)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS, AnnotationTarget.CONSTRUCTOR)
 annotation class TruthInput

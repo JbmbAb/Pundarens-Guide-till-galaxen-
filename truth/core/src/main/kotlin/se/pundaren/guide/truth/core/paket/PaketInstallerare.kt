@@ -1,7 +1,10 @@
 package se.pundaren.guide.truth.core.paket
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -36,13 +39,19 @@ class PaketInstallerare(private val rot: File) {
 
     data class Fil(val namn: String, val storlek: Long, val sha256: String)
 
-    /** Manifestet. [ratext] är filens ordagranna innehåll; [uppgifter] är hela JSON-objektet för visning. */
+    /**
+     * Manifestet. [ratext] är filens ordagranna innehåll. [omradeBbox] är täckningens gränsrektangel
+     * i WGS84 (väst, syd, öst, nord) om manifestet anger den.
+     */
     data class Manifest(
         val format: String,
         val version: String,
         val filer: List<Fil>,
         val ratext: String,
-        val uppgifter: JsonObject,
+        val omradeNamn: String? = null,
+        val omradeBbox: List<Double>? = null,
+        val skapad: String? = null,
+        val osmReplikering: String? = null,
     )
 
     data class Paket(val version: String, val katalog: File, val manifest: Manifest) {
@@ -84,7 +93,16 @@ class PaketInstallerare(private val rot: File) {
             }
             require(filer.isNotEmpty()) { "manifestet saknar filer" }
             require(filer.map { it.namn }.toSet().size == filer.size) { "dubbla filnamn i manifestet" }
-            return Manifest(format, version, filer, text, j)
+            val omrade = j["omrade"] as? JsonObject
+            val bbox = (omrade?.get("bbox_wgs84") as? JsonArray)?.mapNotNull { (it as? JsonPrimitive)?.doubleOrNull }?.takeIf { it.size == 4 }
+            val osm = ((j["kallor"] as? JsonObject)?.get("osm") as? JsonObject)
+            return Manifest(
+                format, version, filer, text,
+                omradeNamn = (omrade?.get("namn") as? JsonPrimitive)?.content,
+                omradeBbox = bbox,
+                skapad = (j["skapad"] as? JsonPrimitive)?.content,
+                osmReplikering = (osm?.get("replikering") as? JsonPrimitive)?.content,
+            )
         }
     }
 

@@ -215,6 +215,21 @@ class TruthKernelTest {
         assertEquals(21.0, events<PositionQualityChanged>().last().fixAgeSeconds, 1e-9)
     }
 
+    @Test fun `en gammal sparad position ser inte färsk ut`() {
+        // Levereras vid 100 s men togs vid 10 s: 90 s gammal, alltså LOST från början.
+        kernel.positionFix(stamp(100_000), PositionFix(orsa, 5.0), fixMonotonicMillis = 10_000)
+        assertEquals(PositionQuality.LOST, kernel.position.value.quality)
+        assertEquals(90.0, kernel.position.value.fixAgeSeconds!!, 1e-9)
+        assertTrue(events<PositionQualityChanged>().isEmpty())
+        assertEquals(orsa, kernel.map.value.position) // visas ändå på kartan, med sin ålder
+        // En äldre position än den vi har kastas.
+        kernel.positionFix(stamp(101_000), PositionFix(gronklitt, 5.0), fixMonotonicMillis = 5_000)
+        assertEquals(orsa, kernel.map.value.position)
+        // En färsk position gör läget GOOD.
+        kernel.positionFix(stamp(102_000), PositionFix(orsa, 5.0))
+        assertEquals(PositionQuality.GOOD, kernel.position.value.quality)
+    }
+
     @Test fun `farten härleds ur positionerna när GNSS inte anger den`() {
         val p2 = se.pundaren.guide.truth.core.geo.Geo.destination(orsa, 0.0, 14.0)
         kernel.positionFix(stamp(0), PositionFix(orsa, 5.0))

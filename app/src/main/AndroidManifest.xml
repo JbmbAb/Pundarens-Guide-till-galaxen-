@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Ingen nätverksåtkomst vid körning i version 1. Biblioteken (MapLibre, Ferrostar) begär INTERNET
+         i sina manifest; här tas behörigheten bort ur det sammanslagna manifestet, så att Android själv
+         stoppar alla uttag. Kontrolleras på APK:n med aapt2 (tools/verkstad/07-kontrollera-apk.sh).
+         ACCESS_NETWORK_STATE får ligga kvar: den ger bara läsning av nätstatus, och utan den kraschar
+         MapLibres ConnectivityReceiver (etapp2-protokollet, E2-D6). -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
+
+    <application
+        android:label="Pundarens Guide"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:theme="@android:style/Theme.Material.NoActionBar"
+        tools:ignore="MissingApplicationIcon">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|smallestScreenSize|density|uiMode"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
