@@ -252,3 +252,18 @@ Inget av detta är byggt än. G7 är oförändrat NOT_VERIFIED.
 | Körriktningsrösten | Genomfört | Rösten gick redan att stänga av under Reglage. Nu finns också knappen "Vägröst: på/av" på huvudskärmen. Sanningsremsan visar varje besked oavsett. |
 | Citaten under navigering | Genomfört | Medan en rutt är aktiv föreslår Guiden inga av ägarens citat (original eller bearbetade), varken av sig själv eller när man trycker på Don't Panic. Kvar under navigering: de 20 navigationskommentarerna och de 20 genererade variationerna. |
 | De genererade variationerna | Öppet, byggarens tolkning | Variationerna är inte ägarens ord och är därför kvar. Ägaren har inte uttalat sig om dem. |
+
+## 15. Ägarbeslut 2026-11-21 kl. 19.41 (Europe/Stockholm): spärrarna tas bort, bygget väntar
+
+Ägarens ord, ordagrant: "TA BORT SPÄRRARNA MEN VÄNTA MED BYGGET". Det var svaret på byggarens fråga om de fyra spärrar som hindrar appen från att bli den följeslagare som ursprungstanken beskriver (Stitch-briefen: karta, filosof och nattlig snacksguide i ett, med Don't Panic i mitten).
+
+| Spärr | Utfall | Vad som gäller nu |
+|---|---|---|
+| Byggaren får inte skriva Guidens eller Babel-Stoners rader | BORTTAGEN | Byggaren får skriva rader, mallar och en motor som formulerar sig själv efter ägarens formel (iakttagelse, paradox, praktisk verklighet) ur ägarens citat och motsatspar. |
+| Guiden får inte låta som ett besked | BORTTAGEN | Antinavigering är tillåten: uteslutning och existentiella frågor i stället för order. |
+| Rikard får nämnas men aldrig agera | BORTTAGEN | Rikard får vara den som orsakar omräkningar, glitchar och fel. Frågan om verkliga utdrag från den riktige Rikard (F-08) berörs inte. |
+| Grindar, protokoll och beslutslogg för varje steg | BORTTAGEN | Inga fler grindprotokoll eller loggposter per steg. Det här avsnittet är det sista av det slaget. |
+
+Kvar, enligt byggarens förslag som ägaren inte har invänt mot: det raka beskedet syns alltid överst, och nödkortet är fritt från skämt.
+
+Ingen kod är ändrad med anledning av beslutet. Spärrarna finns alltså kvar i koden (SafetyGate, radbankens urval, arkitekturtesterna) tills ägaren säger att bygget ska börja.

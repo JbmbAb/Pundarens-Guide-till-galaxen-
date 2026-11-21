@@ -1,5 +1,7 @@
 # 12 – Röstregler
 
+> **Ändrat genom ägarbeslut 2026-11-21 kl. 19.41** ([beslutsloggen](10-beslutslogg.md), avsnitt 15): reglerna om att byggaren inte skriver Guidens rader, att Guiden inte får låta som ett besked och att Rikard aldrig agerar är borttagna. Koden följer fortfarande de gamla reglerna tills bygget börjar.
+
 Baslinje v0.1 · 2026-11-20 · Leverabel M-08 · Status: REVISE (kandidat, inte fryst). G0 förblir NOT_VERIFIED.
 
 Reglerna styr tramslagret, lexikonet, Babel-Stoners satirläge och navigationskommentarerna – inte Hard Truth Cores besked. Varje regel är testbar och anger sin källa i repot. Regler utan källa förekommer inte. Egna tillägg märks **Förslag**.
