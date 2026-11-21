@@ -1,6 +1,363 @@
-# Kört 2026-11-21 01:48:33 CET på arbetskopia ovanpå commit 79d2b962b3f11c4655e01687c4c43467867d8f10 (undantag för prototypens spärrfiler i ArchitectureTest)
+# Kört 2026-11-21 06:20:58 CET på commit 2812a60b9c2f4bc1cceed9da9bcedfb8bc29b24b
+# ./gradlew clean check
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :archive:clean
+> Task :babel:clean
+> Task :engine:clean
+> Task :safetygate:clean
+> Task :truth:clean
+> Task :verification:clean
+> Task :archive:api:clean
+> Task :archive:core:clean
+> Task :engine:api:clean
+> Task :truth:api:clean
+> Task :verification:architecture:clean
 
-BUILD SUCCESSFUL in 23s
+> Task :verifyModuleGraph
+verifyModuleGraph: 0 överträdelser. Rapport: build/reports/module-graph.txt
+
+> Task :archive:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :archive:compileKotlin NO-SOURCE
+> Task :archive:compileJava NO-SOURCE
+> Task :archive:processResources NO-SOURCE
+> Task :archive:classes UP-TO-DATE
+> Task :archive:jar
+> Task :archive:compileTestKotlin NO-SOURCE
+> Task :archive:compileTestJava NO-SOURCE
+> Task :archive:processTestResources NO-SOURCE
+> Task :archive:testClasses UP-TO-DATE
+> Task :archive:test NO-SOURCE
+> Task :archive:check UP-TO-DATE
+> Task :babel:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :archive:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :archive:api:processResources NO-SOURCE
+> Task :babel:processResources NO-SOURCE
+> Task :archive:core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :archive:core:processResources
+> Task :babel:processTestResources NO-SOURCE
+> Task :engine:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :engine:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :truth:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :truth:api:processResources NO-SOURCE
+> Task :engine:api:processResources NO-SOURCE
+> Task :engine:processResources NO-SOURCE
+> Task :engine:processTestResources NO-SOURCE
+> Task :safetygate:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :safetygate:processResources NO-SOURCE
+> Task :safetygate:processTestResources NO-SOURCE
+> Task :truth:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :truth:compileKotlin NO-SOURCE
+> Task :truth:compileJava NO-SOURCE
+> Task :truth:processResources NO-SOURCE
+> Task :truth:classes UP-TO-DATE
+> Task :truth:jar
+> Task :truth:compileTestKotlin NO-SOURCE
+> Task :truth:compileTestJava NO-SOURCE
+> Task :truth:processTestResources NO-SOURCE
+> Task :truth:testClasses UP-TO-DATE
+> Task :truth:test NO-SOURCE
+> Task :truth:check UP-TO-DATE
+> Task :verification:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :verification:compileKotlin NO-SOURCE
+> Task :verification:compileJava NO-SOURCE
+> Task :verification:processResources NO-SOURCE
+> Task :verification:classes UP-TO-DATE
+> Task :verification:jar
+> Task :verification:compileTestKotlin NO-SOURCE
+> Task :verification:compileTestJava NO-SOURCE
+> Task :verification:processTestResources NO-SOURCE
+> Task :verification:testClasses UP-TO-DATE
+> Task :verification:test NO-SOURCE
+> Task :verification:check UP-TO-DATE
+> Task :archive:api:processTestResources NO-SOURCE
+> Task :archive:core:processTestResources NO-SOURCE
+> Task :engine:api:processTestResources NO-SOURCE
+> Task :truth:api:processTestResources NO-SOURCE
+> Task :verification:architecture:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :verification:architecture:compileKotlin NO-SOURCE
+> Task :verification:architecture:compileJava NO-SOURCE
+> Task :verification:architecture:processResources NO-SOURCE
+> Task :verification:architecture:classes UP-TO-DATE
+> Task :verification:architecture:jar
+> Task :verification:architecture:processTestResources NO-SOURCE
+> Task :archive:api:compileKotlin
+> Task :archive:api:compileJava NO-SOURCE
+> Task :archive:api:classes UP-TO-DATE
+> Task :archive:api:jar
+> Task :truth:api:compileKotlin
+> Task :truth:api:compileJava NO-SOURCE
+> Task :truth:api:classes UP-TO-DATE
+> Task :truth:api:jar
+> Task :archive:api:compileTestKotlin NO-SOURCE
+> Task :archive:api:compileTestJava NO-SOURCE
+> Task :archive:api:testClasses UP-TO-DATE
+> Task :archive:api:test NO-SOURCE
+> Task :archive:api:check UP-TO-DATE
+> Task :truth:api:compileTestKotlin NO-SOURCE
+> Task :truth:api:compileTestJava NO-SOURCE
+> Task :truth:api:testClasses UP-TO-DATE
+> Task :truth:api:test NO-SOURCE
+> Task :truth:api:check UP-TO-DATE
+> Task :engine:api:compileKotlin
+> Task :engine:api:compileJava NO-SOURCE
+> Task :engine:api:classes UP-TO-DATE
+> Task :engine:api:jar
+> Task :engine:api:compileTestKotlin NO-SOURCE
+> Task :engine:api:compileTestJava NO-SOURCE
+> Task :engine:api:testClasses UP-TO-DATE
+> Task :engine:api:test NO-SOURCE
+> Task :engine:api:check UP-TO-DATE
+> Task :babel:compileKotlin
+> Task :babel:compileJava NO-SOURCE
+> Task :babel:classes UP-TO-DATE
+> Task :babel:jar
+> Task :archive:core:compileKotlin
+> Task :archive:core:compileJava NO-SOURCE
+> Task :archive:core:classes
+> Task :archive:core:jar
+> Task :safetygate:compileKotlin
+> Task :safetygate:compileJava NO-SOURCE
+> Task :safetygate:classes UP-TO-DATE
+> Task :safetygate:jar
+> Task :engine:compileKotlin
+> Task :engine:compileJava NO-SOURCE
+> Task :engine:classes UP-TO-DATE
+> Task :engine:jar
+> Task :babel:compileTestKotlin
+> Task :babel:compileTestJava NO-SOURCE
+> Task :babel:testClasses UP-TO-DATE
+
+> Task :babel:test
+
+SatireModeTest > bara godkända regler BS-01 till BS-16 används PASSED
+
+SatireModeTest > svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning PASSED
+
+SatireModeTest > samma inmatning, session och seed ger samma svar PASSED
+
+SatireModeTest > repliker är godkända exempel och fotrader används inte i fordon PASSED
+
+SatireModeTest > BS-08 återvänder till samtalets början efter flera varv PASSED
+
+SatireModeTest > Rikard-utdrag, blockerade och väntande poster används aldrig PASSED
+
+> Task :babel:check
+> Task :archive:core:compileTestKotlin
+> Task :archive:core:compileTestJava NO-SOURCE
+> Task :archive:core:testClasses UP-TO-DATE
+
+> Task :archive:core:test
+
+ArchiveImportTest > relationscitat och Rikard-utdrag är märkta PASSED
+
+ArchiveImportTest > BS-01 till BS-16 är godkända regler PASSED
+
+ArchiveImportTest > Grok Bots förslag är godkända av Jimmy men aldrig original PASSED
+
+ArchiveImportTest > okänd proveniens fäller importen PASSED
+
+ArchiveImportTest > konstruerade exempel ur sammanställningen är fortfarande inte godkända PASSED
+
+ArchiveImportTest > alla poster är PRIVATE vid import PASSED
+
+ArchiveImportTest > approved true utan Jimmy som godkännare räknas inte PASSED
+
+ArchiveImportTest > datafilerna ändras inte av importen PASSED
+
+ArchiveImportTest > originalen importeras byte för byte ur quotes json PASSED
+
+ArchiveImportTest > F-10 och F-09 ger APPROVED_EDIT och originalen ligger kvar PASSED
+
+ArchiveImportTest > F-12 och K-15 håller EX-01-FORMULERING och mönstren i arkivet PASSED
+
+ArchiveImportTest > verifieringsstatus följer 04 PASSED
+
+ArchiveStoreTest > ingen post kan uppgraderas till original PASSED
+
+ArchiveStoreTest > fel kontrollsumma stoppas vid import PASSED
+
+ArchiveStoreTest > syntetisk text får ändras genom ny revision PASSED
+
+ArchiveStoreTest > synlighetsändring är tillåten och loggas PASSED
+
+ArchiveStoreTest > original med samma id kan inte importeras igen PASSED
+
+ArchiveStoreTest > original kan inte ändras i text PASSED
+
+ArchiveStoreTest > original kan inte raderas PASSED
+
+SqliteTriggerTest > syntetisk post får ändras PASSED
+
+SqliteTriggerTest > ombyggnad av tabellen tappar triggerna och upptäcks PASSED
+
+SqliteTriggerTest > revisionshistoriken är bara tillägg PASSED
+
+SqliteTriggerTest > delete av original stoppas PASSED
+
+SqliteTriggerTest > update av originaltext stoppas PASSED
+
+SqliteTriggerTest > uppgradering till original stoppas PASSED
+
+> Task :archive:core:check
+> Task :safetygate:compileTestKotlin
+> Task :safetygate:compileTestJava NO-SOURCE
+> Task :safetygate:testClasses UP-TO-DATE
+
+> Task :safetygate:test
+
+SafetyGateTest > SG-18 samma rad som för fem svansar sedan stoppas PASSED
+
+SafetyGateTest > SG-06 nödläge avbryter och stoppar sedan allt PASSED
+
+SafetyGateTest > SG-05b till fots i fordonsfart gäller fordonsreglerna PASSED
+
+SafetyGateTest > ägarbeslutet tar inte bort säkerhetsreglerna för privata rader PASSED
+
+SafetyGateTest > SG-16 privat rad med aktiv konvoj spelas upp PASSED
+
+SafetyGateTest > SG-03 pågående svans avbryts när manövern går in i tyst fönster PASSED
+
+SafetyGateTest > SG-07 nödläge och 1000 slumpade kandidater ger alltid EMERGENCY PASSED
+
+SafetyGateTest > SG-15 glitch i 40 km per h stoppas PASSED
+
+SafetyGateTest > SG-05 riktningsord till fots utan manöver tillåts PASSED
+
+SafetyGateTest > SG-01 normalt läge ger Present PASSED
+
+SafetyGateTest > SG-02 manöver om 10 s i fordon ger NO_TIME PASSED
+
+SafetyGateTest > F-11 rad bara till fots stoppas i fordon och släpps till fots PASSED
+
+SafetyGateTest > SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW PASSED
+
+SafetyGateTest > SG-02b manöver inom tyst fönster utan känd talinstruktion ger MANEUVER PASSED
+
+SafetyGateTest > SG-12 batteri 12 procent ger PRIORITY_INFO PASSED
+
+SafetyGateTest > SG-13 förlorad konvojkontakt ger PRIORITY_INFO PASSED
+
+SafetyGateTest > SG-17 privat rad spelas upp på alla ljudutgångar PASSED
+
+SafetyGateTest > SG-04 riktningsord i fordonsläge stoppas PASSED
+
+SafetyGateTest > SG-20 svans från V-012 med PENDING stoppas PASSED
+
+SafetyGateTest > SG-21 samma indata 10000 gånger ger samma beslut PASSED
+
+SafetyGateTest > SG-10 förlorad position under aktiv rutt stoppar PASSED
+
+SafetyGateTest > SG-11 osäkerhet visad i 3 s tillåter Rikard-svans PASSED
+
+SafetyGateTest > SG-14 i 70 km per h stoppas en svans på 3 s PASSED
+
+SafetyGateTest > SG-09 efter första nya beskedet tillåts svans igen PASSED
+
+SafetyGateTest > SG-19 utgången svans stoppas PASSED
+
+SafetyGateTest > SG-08 avvikelse ger REROUTING PASSED
+
+SafetyGateTest > R-16 ingen svans de första 60 s efter nödläge PASSED
+
+SafetyGateTest > kandidatvärdena är märkta som ofrysta PASSED
+
+> Task :safetygate:check
+> Task :engine:compileTestKotlin
+> Task :engine:compileTestJava NO-SOURCE
+> Task :engine:testClasses UP-TO-DATE
+> Task :verification:architecture:compileTestKotlin
+
+> Task :engine:test
+
+IllogicalEngineTest > motsägelseminnet förnekar bara presenterade yttranden PASSED
+
+IllogicalEngineTest > G1-kriteriet med hundra simulerade händelser PASSED
+
+IllogicalEngineTest > riktningsord väljs bort i fordonsläge men inte till fots PASSED
+
+IllogicalEngineTest > samma händelse, minne och seed ger samma utdata PASSED
+
+IllogicalEngineTest > varje svans uppfyller svarskontraktet i 05 PASSED
+
+IllogicalEngineTest > godkänd syntetisk satir når motorn PASSED
+
+IllogicalEngineTest > ej godkända rader och regler når aldrig motorn PASSED
+
+IllogicalEngineTest > navigationskommentarer följer sin situation PASSED
+
+IllogicalEngineTest > ingen rad upprepas inom tio presenterade repliker PASSED
+
+IllogicalEngineTest > inga svansar vid avvikelse, nödläge, batteri eller konvojhändelser PASSED
+
+IllogicalEngineTest > rader bara till fots föreslås aldrig i fordonsläge men till fots PASSED
+
+LineBankTest > godkända variationer och navigationskommentarer finns i radbanken PASSED
+
+LineBankTest > märkta rader är bara till fots PASSED
+
+LineBankTest > Rikard-utdrag, regler, lexikon och arkivposter hålls utanför PASSED
+
+LineBankTest > det finns inga förnekelserader i dagens data PASSED
+
+LineBankTest > radbanken innehåller bara godkända poster och inga regler PASSED
+
+> Task :engine:check
+> Task :verification:architecture:compileTestJava NO-SOURCE
+> Task :verification:architecture:testClasses UP-TO-DATE
+
+> Task :verification:architecture:test
+
+ArchitectureTest > G-4 TailCandidate bär inga sanningstyper och inga callbacks PASSED
+
+ArchitectureTest > motorn gör ingen I-O PASSED
+
+ArchitectureTest > G-9 och SG-23 SafetyGate returnerar bara beslut och har inga sanningsberoenden PASSED
+
+ArchitectureTest > inget Google-beroende någonstans i bygget PASSED
+
+ArchitectureTest > händelserna är oföränderliga värden PASSED
+
+ArchitectureTest > G-3 sanningsgränssnitten är bara läsning PASSED
+
+ArchitectureTest > G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen PASSED
+
+ArchitectureTest > motorns gränssnitt har ingen väg tillbaka till sanningen PASSED
+
+ArchitectureTest > G-6 beroendegrafen i byggfilerna saknar förbjudna kanter PASSED
+
+ArchitectureTest > G-8 rena moduler har varken Android, Google eller nätverk PASSED
+
+EndToEndDiodeTest > tvåhundra simulerade händelser genom motor och SafetyGate PASSED
+
+VoiceRulesTest > RR-05 spärrlistan omfattar böjningar men inte högre PASSED
+
+VoiceRulesTest > RR-01 varje rad i radbanken bär minst en mekanism PASSED
+
+VoiceRulesTest > RR-08 förslag och variationer kan inte vara original PASSED
+
+VoiceRulesTest > RR-13 Babel-grepp finns inte i navigatorns radbank PASSED
+
+VoiceRulesTest > RR-06 rader som skyller på användaren spärras PASSED
+
+VoiceRulesTest > RR-09 satiren är märkt som satir PASSED
+
+VoiceRulesTest > RR-04 rader som låter som besked finns bara som rader till fots PASSED
+
+VoiceRulesTest > RR-10 lånade namn finns bara som märkta arbetsnamn PASSED
+
+VoiceRulesTest > RR-07 Rikard hörs aldrig och verkliga utdrag läses inte upp PASSED
+
+VoiceRulesTest > RR-11 bara APPROVED, relationscitat märkta, och privata rader hörs överallt PASSED
+
+> Task :verification:architecture:check
+> Task :check
+[Incubating] Problems report is available at: file:///workspace/pundarens-guide-repo/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 28s
 41 actionable tasks: 41 executed
-EXIT=0
-rot: tester 96 fel 0

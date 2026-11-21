@@ -1,22 +1,24 @@
 {
   "format": "pundarens-offlinepaket/1",
-  "version": "orsa-prov-20261121-0117",
+  "version": "f03-sex-kommuner-20261121-0619",
   "omrade": {
-    "namn": "orsa-prov",
+    "namn": "f03-sex-kommuner",
     "bbox_wgs84": [
-      14.2,
-      60.9,
-      15.2,
-      61.65
+      12.036,
+      60.645,
+      16.652,
+      62.785
     ],
-    "not": "Provområde runt Orsa. F-03 (exakta grannkommuner) är öppen."
+    "polygon": "f03-sex-kommuner.geojson",
+    "polygon_sha256": "ae8c237a7cf89f7e57bb4fa9941bfef47cc43ca36db6574fdf12e2a588085c07",
+    "not": "Ägarbeslut F-03 2026-11-21 06.15: Orsa, Mora, Rättvik, Ljusdal, Härjedalen och Älvdalen (OSM admin_level 7, buffert 0,02°)"
   },
-  "skapad": "2026-11-21T01:17:32+01:00",
+  "skapad": "2026-11-21T06:19:08+01:00",
   "kallor": {
     "osm": {
       "fil": "sweden-latest.osm.pbf",
-      "geofabrik_md5": "5a43dbaadcf307f8d5da7404972da054",
-      "replikering": "2026-11-19T21:22:20Z",
+      "geofabrik_md5": "955c818ced0a5b5362d8746579f7c738",
+      "replikering": "2026-11-20T21:21:21Z",
       "licens": "ODbL 1.0, © OpenStreetMap contributors"
     }
   },
@@ -30,14 +32,14 @@
     {
       "namn": "karta.pmtiles",
       "roll": "karta",
-      "storlek": 11591336,
-      "sha256": "caca679aa88ff076b7951e54e3c62d6d21428b05e60c396bd867cbbdf4396ad9"
+      "storlek": 77023128,
+      "sha256": "cac979885ab9aaf4c22f6706d5a5eeeb3fa23da1430c75aac4228972823b7253"
     },
     {
       "namn": "valhalla_tiles.tar",
       "roll": "ruttning",
-      "storlek": 4526080,
-      "sha256": "2c28c12aecb9de2f63126ad1171d7b39790cb96d69453d8026a96072ac1c0de9"
+      "storlek": 19947520,
+      "sha256": "5312a8d8d7f7d3dec6541c0cf99b26c5921d60ca71f6b612232b74434acada6c"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # APK: /workspace/verkstad/apk/offlinekedja-etapp2-arm64-debug.apk
-# storlek: 64480736 byte
-# sha256: e670e33b2c77c1d3e2f9866a5a35a471c296c443c889f007c1064380c5538b2b
+# storlek: 137276668 byte
+# sha256: 631ca10a97072459dff62988aef78620b658b5db6d8ae23289c28181d199ef2b
 == badging
 package: name='se.pundaren.guide.prototyp.offlinekedja' versionCode='1' versionName='0.1-etapp2' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
 targetSdkVersion:'36'
@@ -21,9 +21,9 @@ OK: ingen INTERNET-behörighet
 133191576 lib/arm64-v8a/libvalhalla-wrapper.so
 == tillgångar
 132737 assets/PublicSuffixDatabase.list
-11591336 assets/paket/karta.pmtiles
-1121 assets/paket/manifest.json
-4526080 assets/paket/valhalla_tiles.tar
+77023128 assets/paket/karta.pmtiles
+1341 assets/paket/manifest.json
+19947520 assets/paket/valhalla_tiles.tar
 4326 assets/stil/mork.json
 == dex-klasser per förbjudet prefix
 Lcom/google/android/gms/ 0

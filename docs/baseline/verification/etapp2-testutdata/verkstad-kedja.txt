@@ -1,27 +1,38 @@
-# Kört 2026-11-21 01:17:06 CET på commit 93af26336fe4e4f340ba37e9777e5c7745b42a89
+# Kört 2026-11-21 06:17:26 CET på commit 187752517916bba2a018148058bdf1f4654582f7
 
 === 01 hämta OSM (Geofabrik, MD5)
 sweden-latest.osm.pbf: OK
-2026-11-19T21:22:20Z
+2026-11-20T21:21:21Z
 
-=== 02 klipp provområdet (14.20,60.90,15.20,61.65)
+=== 00 områdespolygon ur kommungränserna
+Orsa kommun: bbox [14.304, 61.05, 15.093, 61.595]
+Mora kommun: bbox [13.543, 60.664, 15.04, 61.621]
+Rättviks kommun: bbox [14.835, 60.812, 15.762, 61.596]
+Ljusdals kommun: bbox [14.446, 61.484, 16.633, 62.343]
+Härjedalens kommun: bbox [12.056, 61.564, 15.429, 62.765]
+Älvdalens kommun: bbox [12.138, 61.032, 14.355, 62.267]
+POLYGON /workspace/pundarens-guide-repo/tools/verkstad/omrade/f03-sex-kommuner.geojson
+BBOX 12.036,60.645,16.652,62.785
+
+=== 02 klipp provområdet (f03-sex-kommuner, 12.036,60.645,16.652,62.785)
+polygon: /workspace/pundarens-guide-repo/tools/verkstad/omrade/f03-sex-kommuner.geojson
   Bounding boxes:
-  Bounding box: (13.542627,60.5117764,15.6573667,61.8771744)
-  Number of nodes: 1104393
-  Number of ways: 74267
-  Number of relations: 3798
+  Bounding box: (11.8078634,59.38995,16.7913311,63.3132883)
+  Number of nodes: 6281477
+  Number of ways: 365054
+  Number of relations: 26573
   All objects have following metadata attributes: version+timestamp
   Some objects have following metadata attributes: version+timestamp
 
 === 03 Valhalla-rutor
--rw-r--r-- 1 box box 4526080 Nov 21 01:17 /workspace/verkstad/ut/valhalla/valhalla_tiles.tar
-30
+-rw-r--r-- 1 box box 19947520 Nov 21 06:18 /workspace/verkstad/ut/valhalla/valhalla_tiles.tar
+143
 
 === 05 PMTiles
--rw-r--r-- 1 box box 11591336 Nov 21 01:17 /workspace/verkstad/ut/karta/karta.pmtiles
+-rw-r--r-- 1 box box 77023128 Nov 21 06:19 /workspace/verkstad/ut/karta/karta.pmtiles
 
 === 06 paket och manifest
-/workspace/verkstad/ut/paket/orsa-prov-20261121-0117/manifest.json
+/workspace/verkstad/ut/paket/f03-sex-kommuner-20261121-0619/manifest.json
 
 === 04 ruttprov utan nätverk (unshare -rn)
 NÄTVERK: inget nätverk (OSError)
@@ -30,12 +41,30 @@ orsa-mora-auto: code=Ok avstånd=16.07 km tid=15.2 min steg=22 röst=28 banner=2
 orsa-gronklitt-pedestrian: code=Ok avstånd=12.42 km tid=146.3 min steg=17 röst=36 banner=16 exempel="Gå norrut på Hantverkargatan."
 orsa-mora-pedestrian: code=Ok avstånd=15.60 km tid=183.5 min steg=31 röst=64 banner=30 exempel="Gå söderut på Hantverkargatan."
 mora-orsa-auto: code=Ok avstånd=16.34 km tid=15.5 min steg=22 röst=28 banner=21 exempel="Kör västerut  Dalagatan. Därefter, i 100 meter, Sväng höger in på Badstugatan."
+orsa-alvdalen-auto: code=Ok avstånd=45.50 km tid=40.2 min steg=19 röst=27 banner=18 exempel="Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan."
+orsa-rattvik-auto: code=Ok avstånd=48.38 km tid=37.9 min steg=22 röst=32 banner=21 exempel="Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan."
+orsa-ljusdal-auto: code=Ok avstånd=144.54 km tid=111.6 min steg=19 röst=30 banner=18 exempel="Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan."
+orsa-sveg-auto: code=Ok avstånd=124.10 km tid=85.1 min steg=11 röst=17 banner=10 exempel="Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan."
+alvdalen-idre-auto: code=Ok avstånd=112.04 km tid=79.5 min steg=5 röst=6 banner=4 exempel="Kör norrut på Dalgatan, 70."
+orsa-alvdalen-pedestrian: code=Ok avstånd=40.92 km tid=481.7 min steg=35 röst=84 banner=34 exempel="Gå norrut på Hantverkargatan."
 
 === Ferrostar-prov utan nätverk (OSRM-parser, simulering, avvikelse)
+alvdalen-idre-auto.osrm.json: rutter=1 steg=5 talinstruktioner_i_rutten=6 bildinstruktioner=4 | simulering: positioner=11686 stegbyten=4 utlösta_tal=6 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör norrut på Dalgatan, 70.
+    tal: Om 500 meter, Sväng höger in på Bergevägen.
+    tal: Sväng höger in på Bergevägen, W 1063. Därefter Sväng vänster in på Smedjevägen.
 mora-orsa-auto.osrm.json: rutter=1 steg=22 talinstruktioner_i_rutten=28 bildinstruktioner=21 | simulering: positioner=1813 stegbyten=21 utlösta_tal=28 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
     tal: Kör västerut  Dalagatan. Därefter, i 100 meter, Sväng höger in på Badstugatan.
     tal: Sväng höger in på Badstugatan, 70.04. Därefter Kör in i rondellen och ta den 2:a avfarten in på Älvgatan.
     tal: Kör in i rondellen och ta den 2:a avfarten in på Älvgatan, 70.
+orsa-alvdalen-auto.osrm.json: rutter=1 steg=19 talinstruktioner_i_rutten=27 bildinstruktioner=18 | simulering: positioner=5183 stegbyten=18 utlösta_tal=27 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+    tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+    tal: Sväng höger in på Skyttsvägen.
+orsa-alvdalen-pedestrian.osrm.json: rutter=1 steg=35 talinstruktioner_i_rutten=84 bildinstruktioner=34 | simulering: positioner=4513 stegbyten=34 utlösta_tal=82 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Gå norrut på Hantverkargatan.
+    tal: Om 50 meter, Sväng vänster.
+    tal: Sväng vänster.
 orsa-gronklitt-auto.osrm.json: rutter=1 steg=17 talinstruktioner_i_rutten=25 bildinstruktioner=16 | simulering: positioner=1751 stegbyten=16 utlösta_tal=25 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
     tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
     tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
@@ -44,6 +73,10 @@ orsa-gronklitt-pedestrian.osrm.json: rutter=1 steg=17 talinstruktioner_i_rutten=
     tal: Gå norrut på Hantverkargatan.
     tal: Om 50 meter, Sväng vänster.
     tal: Sväng vänster.
+orsa-ljusdal-auto.osrm.json: rutter=1 steg=19 talinstruktioner_i_rutten=30 bildinstruktioner=18 | simulering: positioner=15444 stegbyten=18 utlösta_tal=30 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan.
+    tal: Sväng höger in på Stensgatan. Därefter Sväng vänster in på Barkgatan.
+    tal: Sväng vänster in på Barkgatan.
 orsa-mora-auto.osrm.json: rutter=1 steg=22 talinstruktioner_i_rutten=28 bildinstruktioner=21 | simulering: positioner=1773 stegbyten=21 utlösta_tal=28 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
     tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
     tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
@@ -52,4 +85,12 @@ orsa-mora-pedestrian.osrm.json: rutter=1 steg=31 talinstruktioner_i_rutten=64 bi
     tal: Gå söderut på Hantverkargatan.
     tal: Om 50 meter, Sväng vänster in på Slaggatan.
     tal: Sväng vänster in på Slaggatan.
+orsa-rattvik-auto.osrm.json: rutter=1 steg=22 talinstruktioner_i_rutten=32 bildinstruktioner=21 | simulering: positioner=5128 stegbyten=21 utlösta_tal=32 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+    tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+    tal: Sväng höger in på Skyttsvägen.
+orsa-sveg-auto.osrm.json: rutter=1 steg=11 talinstruktioner_i_rutten=17 bildinstruktioner=10 | simulering: positioner=13012 stegbyten=10 utlösta_tal=17 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan.
+    tal: Sväng höger in på Stensgatan. Därefter Sväng vänster in på Barkgatan.
+    tal: Sväng vänster in på Barkgatan.
 TOTALT FEL: 0

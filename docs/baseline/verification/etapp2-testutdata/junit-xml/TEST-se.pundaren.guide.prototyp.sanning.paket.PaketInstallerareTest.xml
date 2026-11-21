@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-21T00:47:34.385Z" hostname="grok-bot-vm-328085215" time="0.119">
+<testsuite name="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-21T05:20:21.593Z" hostname="grok-bot-vm-328085215" time="0.117">
   <properties/>
-  <testcase name="farliga namn i manifestet avvisas" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.024"/>
+  <testcase name="farliga namn i manifestet avvisas" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.021"/>
   <testcase name="samma version installeras inte om" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.036"/>
-  <testcase name="ny version byter pekaren, föregående sparas för återställning, äldre tas bort" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.019"/>
-  <testcase name="installerar och pekar ut aktivt paket" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.011"/>
-  <testcase name="avbrott mitt i kopieringen lämnar det gamla paketet aktivt och städas vid nästa start" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.01"/>
+  <testcase name="ny version byter pekaren, föregående sparas för återställning, äldre tas bort" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.024"/>
+  <testcase name="installerar och pekar ut aktivt paket" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.009"/>
+  <testcase name="avbrott mitt i kopieringen lämnar det gamla paketet aktivt och städas vid nästa start" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.007"/>
   <testcase name="trasig pekare ger inget aktivt paket" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.005"/>
-  <testcase name="fel kontrollsumma avvisas och det gamla paketet ligger kvar" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.01"/>
+  <testcase name="fel kontrollsumma avvisas och det gamla paketet ligger kvar" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.011"/>
   <testcase name="fel storlek avvisas" classname="se.pundaren.guide.prototyp.sanning.paket.PaketInstallerareTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

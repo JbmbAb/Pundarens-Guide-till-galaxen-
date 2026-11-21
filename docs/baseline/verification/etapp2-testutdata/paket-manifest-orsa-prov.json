@@ -1,0 +1,43 @@
+{
+  "format": "pundarens-offlinepaket/1",
+  "version": "orsa-prov-20261121-0117",
+  "omrade": {
+    "namn": "orsa-prov",
+    "bbox_wgs84": [
+      14.2,
+      60.9,
+      15.2,
+      61.65
+    ],
+    "not": "Provområde runt Orsa. F-03 (exakta grannkommuner) är öppen."
+  },
+  "skapad": "2026-11-21T01:17:32+01:00",
+  "kallor": {
+    "osm": {
+      "fil": "sweden-latest.osm.pbf",
+      "geofabrik_md5": "5a43dbaadcf307f8d5da7404972da054",
+      "replikering": "2026-11-19T21:22:20Z",
+      "licens": "ODbL 1.0, © OpenStreetMap contributors"
+    }
+  },
+  "verktyg": {
+    "osmium": "osmium version 1.18.0",
+    "tilemaker": "tilemaker 3.0.0",
+    "valhalla": "pyvalhalla 3.9.1"
+  },
+  "valhalla_mobile_forvantad": "0.6.6 (Valhalla 3.9.2)",
+  "filer": [
+    {
+      "namn": "karta.pmtiles",
+      "roll": "karta",
+      "storlek": 11591336,
+      "sha256": "caca679aa88ff076b7951e54e3c62d6d21428b05e60c396bd867cbbdf4396ad9"
+    },
+    {
+      "namn": "valhalla_tiles.tar",
+      "roll": "ruttning",
+      "storlek": 4526080,
+      "sha256": "2c28c12aecb9de2f63126ad1171d7b39790cb96d69453d8026a96072ac1c0de9"
+    }
+  ]
+}
