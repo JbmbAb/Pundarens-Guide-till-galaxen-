@@ -70,7 +70,9 @@ class SvenskTalObserver(
         motor = TextToSpeech(
             context.applicationContext,
             { status ->
-                paHuvudtrad { initiera(status) }
+                // Ändring 4: posta alltid. Utan installerad motor anropar Android lyssnaren synkront
+                // inifrån konstruktorn; då är motor ännu null och felet försvann tyst (sett i emulatorn).
+                huvudtrad.post { initiera(status) }
             },
             "com.samsung.SMT"
         )
