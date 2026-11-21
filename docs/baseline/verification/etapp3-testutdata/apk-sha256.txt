@@ -1,0 +1,2 @@
+af00a9d76f91095e3b1d9cc44b1714247d7750e4e1060937243a1d41e43c6892  offlinekedja-etapp3-tal-arm64-debug.apk
+5d353ebac99eeb785faaee2963d9122c8c49ee9bb4447b5b6004bb3d1749b474  offlinekedja-etapp3-tal-x86_64-debug.apk

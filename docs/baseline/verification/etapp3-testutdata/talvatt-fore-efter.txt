@@ -1,0 +1,500 @@
+# SvenskTalTvatt på alla unika talbesked i etapp2-testutdata/ruttprov (11 rutter). Ändrade 166 av 241; övriga oförändrade.
+
+FÖRE:  Fortsätt i 1.5 kilometer.
+EFTER: Fortsätt i 1,5 kilometer.
+
+FÖRE:  Fortsätt i 2.5 kilometer.
+EFTER: Fortsätt i 2,5 kilometer.
+
+FÖRE:  Fortsätt på 310 i 37 kilometer.
+EFTER: Fortsätt på väg 310 i 37 kilometer.
+
+FÖRE:  Fortsätt på 84 i 1.5 kilometer.
+EFTER: Fortsätt på väg 84 i 1,5 kilometer.
+
+FÖRE:  Fortsätt på 84 i 17 kilometer.
+EFTER: Fortsätt på väg 84 i 17 kilometer.
+
+FÖRE:  Fortsätt på E 45 i 11 kilometer.
+EFTER: Fortsätt på E45 i 11 kilometer.
+
+FÖRE:  Fortsätt på E 45 i 111 kilometer.
+EFTER: Fortsätt på E45 i 111 kilometer.
+
+FÖRE:  Fortsätt på E 45 i 62 kilometer.
+EFTER: Fortsätt på E45 i 62 kilometer.
+
+FÖRE:  Fortsätt på E 45, 70 i 1.5 kilometer.
+EFTER: Fortsätt på E45, väg 70 i 1,5 kilometer.
+
+FÖRE:  Fortsätt på E 45, 70 i 300 meter.
+EFTER: Fortsätt på E45, väg 70 i 300 meter.
+
+FÖRE:  Fortsätt på Inlandsvägen, 84 i 10 kilometer.
+EFTER: Fortsätt på Inlandsvägen i 10 kilometer.
+
+FÖRE:  Fortsätt på W 1000 i 1 kilometer.
+EFTER: Fortsätt på väg 1000 i 1 kilometer.
+
+FÖRE:  Fortsätt på W 1000 i 2 kilometer.
+EFTER: Fortsätt på väg 1000 i 2 kilometer.
+
+FÖRE:  Fortsätt på W 1000 i 7 kilometer.
+EFTER: Fortsätt på väg 1000 i 7 kilometer.
+
+FÖRE:  Håll höger för att stanna kvar på E 45, Inlandsvägen.
+EFTER: Håll höger för att stanna kvar på E45, Inlandsvägen.
+
+FÖRE:  Håll höger för att stanna kvar på E 45.
+EFTER: Håll höger för att stanna kvar på E45.
+
+FÖRE:  Håll höger för att ta Våmhusvägen, W 1000.
+EFTER: Håll höger för att ta Våmhusvägen.
+
+FÖRE:  Håll vänster för att ta E 45, 70.
+EFTER: Håll vänster för att ta E45, väg 70.
+
+FÖRE:  Håll vänster för att ta E 45, Inlandsvägen.
+EFTER: Håll vänster för att ta E45, Inlandsvägen.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på 70, Riksvägen.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på väg 70, Riksvägen.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på 70.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på väg 70.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på 83, 84.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på väg 83, väg 84.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Badstugatan, 70.04.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Badstugatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Centralgatan, 301.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Centralgatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Dalgatan, 70.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Dalgatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på E 45, 70.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på E45, väg 70.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på E 45, Inlandsvägen.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på E45, Inlandsvägen.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på E 45, Moravägen.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på E45, Moravägen.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Inlandsvägen, 84.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Inlandsvägen.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Kyrkogatan, 84.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Kyrkogatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Norra Järnvägsgatan, 84.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Norra Järnvägsgatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+
+FÖRE:  Kör in i rondellen och ta den 2:a avfarten in på Älvgatan, 70.
+EFTER: Kör in i rondellen och ta den 2:a avfarten in på Älvgatan.
+
+FÖRE:  Kör in på Noretrondellen och ta den 2:a avfarten in på E 45, 70.
+EFTER: Kör in på Noretrondellen och ta den 2:a avfarten in på E45, väg 70.
+
+FÖRE:  Kör in på Noretrondellen och ta den 2:a avfarten in på E 45, Inlandsvägen.
+EFTER: Kör in på Noretrondellen och ta den 2:a avfarten in på E45, Inlandsvägen.
+
+FÖRE:  Kör norrut  Hantverkargatan. Därefter, i 200 meter, Sväng höger in på Stensgatan.
+EFTER: Kör norrut på Hantverkargatan. Därefter, i 200 meter, sväng höger in på Stensgatan.
+
+FÖRE:  Kör norrut på Dalgatan, 70.
+EFTER: Kör norrut på Dalgatan.
+
+FÖRE:  Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+EFTER: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+
+FÖRE:  Kör ut ur rondellen in på 70, Riksvägen.
+EFTER: Kör ut ur rondellen in på väg 70, Riksvägen.
+
+FÖRE:  Kör ut ur rondellen in på 70.
+EFTER: Kör ut ur rondellen in på väg 70.
+
+FÖRE:  Kör ut ur rondellen in på 83, 84.
+EFTER: Kör ut ur rondellen in på väg 83, väg 84.
+
+FÖRE:  Kör ut ur rondellen in på Badstugatan, 70.04. Därefter, i 100 meter, Sväng vänster in på Dalagatan.
+EFTER: Kör ut ur rondellen in på Badstugatan. Därefter, i 100 meter, sväng vänster in på Dalagatan.
+
+FÖRE:  Kör ut ur rondellen in på Centralgatan, 301.
+EFTER: Kör ut ur rondellen in på Centralgatan.
+
+FÖRE:  Kör ut ur rondellen in på Dalgatan, 70.
+EFTER: Kör ut ur rondellen in på Dalgatan.
+
+FÖRE:  Kör ut ur rondellen in på E 45, 70.
+EFTER: Kör ut ur rondellen in på E45, väg 70.
+
+FÖRE:  Kör ut ur rondellen in på E 45, Inlandsvägen.
+EFTER: Kör ut ur rondellen in på E45, Inlandsvägen.
+
+FÖRE:  Kör ut ur rondellen in på E 45, Moravägen.
+EFTER: Kör ut ur rondellen in på E45, Moravägen.
+
+FÖRE:  Kör ut ur rondellen in på Inlandsvägen, 84.
+EFTER: Kör ut ur rondellen in på Inlandsvägen.
+
+FÖRE:  Kör ut ur rondellen in på Kaplansgatan, W 1000.
+EFTER: Kör ut ur rondellen in på Kaplansgatan.
+
+FÖRE:  Kör ut ur rondellen in på Kyrkogatan, 84.
+EFTER: Kör ut ur rondellen in på Kyrkogatan.
+
+FÖRE:  Kör ut ur rondellen in på Norra Järnvägsgatan, 84. Därefter Sväng vänster in på Tingsgatan.
+EFTER: Kör ut ur rondellen in på Norra Järnvägsgatan. Därefter sväng vänster in på Tingsgatan.
+
+FÖRE:  Kör ut ur rondellen in på Parkgatan, W 1000.
+EFTER: Kör ut ur rondellen in på Parkgatan.
+
+FÖRE:  Kör ut ur rondellen in på Älvgatan, 70.
+EFTER: Kör ut ur rondellen in på Älvgatan.
+
+FÖRE:  Kör västerut  Dalagatan. Därefter, i 100 meter, Sväng höger in på Badstugatan.
+EFTER: Kör västerut på Dalagatan. Därefter, i 100 meter, sväng höger in på Badstugatan.
+
+FÖRE:  Om 1 kilometer, Kör in i rondellen och ta den 2:a avfarten in på Inlandsvägen.
+EFTER: Om 1 kilometer, kör in i rondellen och ta den 2:a avfarten in på Inlandsvägen.
+
+FÖRE:  Om 300 meter, Kör in i rondellen och ta den 2:a avfarten in på Dalgatan.
+EFTER: Om 300 meter, kör in i rondellen och ta den 2:a avfarten in på Dalgatan.
+
+FÖRE:  Om 300 meter, Sväng höger.
+EFTER: Om 300 meter, sväng höger.
+
+FÖRE:  Om 400 meter, Sväng höger.
+EFTER: Om 400 meter, sväng höger.
+
+FÖRE:  Om 50 meter, Din destination kommer att vara till höger.
+EFTER: Om 50 meter, din destination kommer att vara till höger.
+
+FÖRE:  Om 50 meter, Fortsätt.
+EFTER: Om 50 meter, fortsätt.
+
+FÖRE:  Om 50 meter, Håll höger för att stanna kvar på E 45.
+EFTER: Om 50 meter, håll höger för att stanna kvar på E45.
+
+FÖRE:  Om 50 meter, Håll höger för att stanna kvar på Moravägen.
+EFTER: Om 50 meter, håll höger för att stanna kvar på Moravägen.
+
+FÖRE:  Om 50 meter, Håll höger för att stanna kvar på Nyboletvägen.
+EFTER: Om 50 meter, håll höger för att stanna kvar på Nyboletvägen.
+
+FÖRE:  Om 50 meter, Håll höger för att stanna kvar på Rädsjövägen.
+EFTER: Om 50 meter, håll höger för att stanna kvar på Rädsjövägen.
+
+FÖRE:  Om 50 meter, Håll höger för att ta Björkvasslavägen.
+EFTER: Om 50 meter, håll höger för att ta Björkvasslavägen.
+
+FÖRE:  Om 50 meter, Håll höger för att ta Våmhusvägen.
+EFTER: Om 50 meter, håll höger för att ta Våmhusvägen.
+
+FÖRE:  Om 50 meter, Håll höger i korsningen.
+EFTER: Om 50 meter, håll höger i korsningen.
+
+FÖRE:  Om 50 meter, Håll vänster för att stanna kvar på Nyboletvägen.
+EFTER: Om 50 meter, håll vänster för att stanna kvar på Nyboletvägen.
+
+FÖRE:  Om 50 meter, Håll vänster för att stanna kvar på Södra Bäcksvägen.
+EFTER: Om 50 meter, håll vänster för att stanna kvar på Södra Bäcksvägen.
+
+FÖRE:  Om 50 meter, Håll vänster för att ta E 45.
+EFTER: Om 50 meter, håll vänster för att ta E45.
+
+FÖRE:  Om 50 meter, Håll vänster i korsningen.
+EFTER: Om 50 meter, håll vänster i korsningen.
+
+FÖRE:  Om 50 meter, Sväng höger för att stanna kvar på E 45.
+EFTER: Om 50 meter, sväng höger för att stanna kvar på E45.
+
+FÖRE:  Om 50 meter, Sväng höger för att stanna kvar på Lasarettsvägen.
+EFTER: Om 50 meter, sväng höger för att stanna kvar på Lasarettsvägen.
+
+FÖRE:  Om 50 meter, Sväng höger för att stanna kvar på Nybolsvägen.
+EFTER: Om 50 meter, sväng höger för att stanna kvar på Nybolsvägen.
+
+FÖRE:  Om 50 meter, Sväng höger för att stanna kvar på Södra Bäcksvägen.
+EFTER: Om 50 meter, sväng höger för att stanna kvar på Södra Bäcksvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Björnramsgatan.
+EFTER: Om 50 meter, sväng höger in på Björnramsgatan.
+
+FÖRE:  Om 50 meter, Sväng höger in på E 45.
+EFTER: Om 50 meter, sväng höger in på E45.
+
+FÖRE:  Om 50 meter, Sväng höger in på Fredsgatan.
+EFTER: Om 50 meter, sväng höger in på Fredsgatan.
+
+FÖRE:  Om 50 meter, Sväng höger in på Kanonvägen.
+EFTER: Om 50 meter, sväng höger in på Kanonvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Lillågatan.
+EFTER: Om 50 meter, sväng höger in på Lillågatan.
+
+FÖRE:  Om 50 meter, Sväng höger in på Lintjärnsvägen.
+EFTER: Om 50 meter, sväng höger in på Lintjärnsvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Martisbacksvägen.
+EFTER: Om 50 meter, sväng höger in på Martisbacksvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Risbacksvägen.
+EFTER: Om 50 meter, sväng höger in på Risbacksvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Skyttsvägen.
+EFTER: Om 50 meter, sväng höger in på Skyttsvägen.
+
+FÖRE:  Om 50 meter, Sväng höger in på Solgärdsvägen.
+EFTER: Om 50 meter, sväng höger in på Solgärdsvägen.
+
+FÖRE:  Om 50 meter, Sväng höger.
+EFTER: Om 50 meter, sväng höger.
+
+FÖRE:  Om 50 meter, Sväng vänster för att stanna kvar på Nyboletvägen.
+EFTER: Om 50 meter, sväng vänster för att stanna kvar på Nyboletvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Dalagatan.
+EFTER: Om 50 meter, sväng vänster in på Dalagatan.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Dragspelsvägen.
+EFTER: Om 50 meter, sväng vänster in på Dragspelsvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på E 45.
+EFTER: Om 50 meter, sväng vänster in på E45.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Grönklittvägen.
+EFTER: Om 50 meter, sväng vänster in på Grönklittvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Moravägen.
+EFTER: Om 50 meter, sväng vänster in på Moravägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Nyboletvägen.
+EFTER: Om 50 meter, sväng vänster in på Nyboletvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Nybolsvägen.
+EFTER: Om 50 meter, sväng vänster in på Nybolsvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Rädsjövägen.
+EFTER: Om 50 meter, sväng vänster in på Rädsjövägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Slaggatan.
+EFTER: Om 50 meter, sväng vänster in på Slaggatan.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Stationsvägen.
+EFTER: Om 50 meter, sväng vänster in på Stationsvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Södra Bäcksvägen.
+EFTER: Om 50 meter, sväng vänster in på Södra Bäcksvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Värdshusvägen.
+EFTER: Om 50 meter, sväng vänster in på Värdshusvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på Våmhusvägen.
+EFTER: Om 50 meter, sväng vänster in på Våmhusvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster in på gångvägen.
+EFTER: Om 50 meter, sväng vänster in på gångvägen.
+
+FÖRE:  Om 50 meter, Sväng vänster.
+EFTER: Om 50 meter, sväng vänster.
+
+FÖRE:  Om 500 meter, Kör in i rondellen och ta den 2:a avfarten in på Moravägen.
+EFTER: Om 500 meter, kör in i rondellen och ta den 2:a avfarten in på Moravägen.
+
+FÖRE:  Om 500 meter, Kör in i rondellen och ta den 2:a avfarten in på Norra Järnvägsgatan.
+EFTER: Om 500 meter, kör in i rondellen och ta den 2:a avfarten in på Norra Järnvägsgatan.
+
+FÖRE:  Om 500 meter, Sväng höger in på Bergevägen.
+EFTER: Om 500 meter, sväng höger in på Bergevägen.
+
+FÖRE:  Om 500 meter, Sväng höger in på Fryksåsvägen.
+EFTER: Om 500 meter, sväng höger in på Fryksåsvägen.
+
+FÖRE:  Om 500 meter, Sväng vänster in på Härjedalsgatan.
+EFTER: Om 500 meter, sväng vänster in på Härjedalsgatan.
+
+FÖRE:  Om 500 meter, Sväng vänster in på Våmhusvägen.
+EFTER: Om 500 meter, sväng vänster in på Våmhusvägen.
+
+FÖRE:  Om 600 meter, Kör in i rondellen och ta den 2:a avfarten in på E 45.
+EFTER: Om 600 meter, kör in i rondellen och ta den 2:a avfarten in på E45.
+
+FÖRE:  Om 600 meter, Kör in på Noretrondellen och ta den 2:a avfarten in på E 45.
+EFTER: Om 600 meter, kör in på Noretrondellen och ta den 2:a avfarten in på E45.
+
+FÖRE:  Om 600 meter, Kör in på Noretrondellen och ta den 2:a avfarten mot Enköping.
+EFTER: Om 600 meter, kör in på Noretrondellen och ta den 2:a avfarten mot Enköping.
+
+FÖRE:  Om 600 meter, Sväng höger in på Hamravägen.
+EFTER: Om 600 meter, sväng höger in på Hamravägen.
+
+FÖRE:  Om 600 meter, Sväng höger in på Härjedalsvägen.
+EFTER: Om 600 meter, sväng höger in på Härjedalsvägen.
+
+FÖRE:  Om 600 meter, Sväng höger in på Inlandsvägen.
+EFTER: Om 600 meter, sväng höger in på Inlandsvägen.
+
+FÖRE:  Om 600 meter, Sväng höger in på Kyrkogatan.
+EFTER: Om 600 meter, sväng höger in på Kyrkogatan.
+
+FÖRE:  Om 600 meter, Sväng höger in på Los Kyrkbyväg.
+EFTER: Om 600 meter, sväng höger in på Los Kyrkbyväg.
+
+FÖRE:  Om 600 meter, Sväng vänster in på Värdshusvägen.
+EFTER: Om 600 meter, sväng vänster in på Värdshusvägen.
+
+FÖRE:  Om 700 meter, Kör in i rondellen och ta den 2:a avfarten in på 70.
+EFTER: Om 700 meter, kör in i rondellen och ta den 2:a avfarten in på väg 70.
+
+FÖRE:  Om 700 meter, Sväng höger in på 70.
+EFTER: Om 700 meter, sväng höger in på väg 70.
+
+FÖRE:  Om 700 meter, Sväng höger in på Grönklittsvägen.
+EFTER: Om 700 meter, sväng höger in på Grönklittsvägen.
+
+FÖRE:  Om 800 meter, Kör in i rondellen och ta den 2:a avfarten in på 83.
+EFTER: Om 800 meter, kör in i rondellen och ta den 2:a avfarten in på väg 83.
+
+FÖRE:  Om 800 meter, Kör in i rondellen och ta den 2:a avfarten in på E 45.
+EFTER: Om 800 meter, kör in i rondellen och ta den 2:a avfarten in på E45.
+
+FÖRE:  Sväng höger för att stanna kvar på E 45. Därefter Håll höger för att ta Lasarettsvägen.
+EFTER: Sväng höger för att stanna kvar på E45. Därefter håll höger för att ta Lasarettsvägen.
+
+FÖRE:  Sväng höger för att stanna kvar på Smedjevägen. Därefter Din destination kommer att vara till höger.
+EFTER: Sväng höger för att stanna kvar på Smedjevägen. Därefter din destination kommer att vara till höger.
+
+FÖRE:  Sväng höger in på 70.
+EFTER: Sväng höger in på väg 70.
+
+FÖRE:  Sväng höger in på Badstugatan, 70.04. Därefter Kör in i rondellen och ta den 2:a avfarten in på Älvgatan.
+EFTER: Sväng höger in på Badstugatan. Därefter kör in i rondellen och ta den 2:a avfarten in på Älvgatan.
+
+FÖRE:  Sväng höger in på Bergevägen, W 1063. Därefter Sväng vänster in på Smedjevägen.
+EFTER: Sväng höger in på Bergevägen. Därefter sväng vänster in på Smedjevägen.
+
+FÖRE:  Sväng höger in på Dalgatan, 70.
+EFTER: Sväng höger in på Dalgatan.
+
+FÖRE:  Sväng höger in på E 45. Därefter Håll höger för att stanna kvar på E 45.
+EFTER: Sväng höger in på E45. Därefter håll höger för att stanna kvar på E45.
+
+FÖRE:  Sväng höger in på Fryksåsvägen, W 1002.
+EFTER: Sväng höger in på Fryksåsvägen.
+
+FÖRE:  Sväng höger in på Grönklittsvägen, W 1008.
+EFTER: Sväng höger in på Grönklittsvägen.
+
+FÖRE:  Sväng höger in på Hamravägen, 310.
+EFTER: Sväng höger in på Hamravägen.
+
+FÖRE:  Sväng höger in på Härjedalsvägen, 84.
+EFTER: Sväng höger in på Härjedalsvägen.
+
+FÖRE:  Sväng höger in på Inlandsvägen, 84.
+EFTER: Sväng höger in på Inlandsvägen.
+
+FÖRE:  Sväng höger in på Jämtlandsgatan. Därefter, i 100 meter, Din destination kommer att vara till höger.
+EFTER: Sväng höger in på Jämtlandsgatan. Därefter, i 100 meter, din destination kommer att vara till höger.
+
+FÖRE:  Sväng höger in på Kanonvägen, W 1001.
+EFTER: Sväng höger in på Kanonvägen.
+
+FÖRE:  Sväng höger in på Kyrkogatan, 84.
+EFTER: Sväng höger in på Kyrkogatan.
+
+FÖRE:  Sväng höger in på Lillågatan, W 1000.
+EFTER: Sväng höger in på Lillågatan.
+
+FÖRE:  Sväng höger in på Los Kyrkbyväg, 296.
+EFTER: Sväng höger in på Los Kyrkbyväg.
+
+FÖRE:  Sväng höger in på Stensgatan. Därefter Sväng vänster in på Barkgatan.
+EFTER: Sväng höger in på Stensgatan. Därefter sväng vänster in på Barkgatan.
+
+FÖRE:  Sväng höger in på Våmhusvägen, W 1000.
+EFTER: Sväng höger in på Våmhusvägen.
+
+FÖRE:  Sväng höger in på Älvdalsvägen, W 1000.
+EFTER: Sväng höger in på Älvdalsvägen.
+
+FÖRE:  Sväng höger. Därefter Din destination kommer att vara till vänster.
+EFTER: Sväng höger. Därefter din destination kommer att vara till vänster.
+
+FÖRE:  Sväng höger. Därefter Du kommer att anlända till din destination.
+EFTER: Sväng höger. Därefter du kommer att anlända till din destination.
+
+FÖRE:  Sväng höger. Därefter Håll vänster för att ta E 45.
+EFTER: Sväng höger. Därefter håll vänster för att ta E45.
+
+FÖRE:  Sväng höger. Därefter Sväng höger.
+EFTER: Sväng höger. Därefter sväng höger.
+
+FÖRE:  Sväng höger. Därefter Sväng vänster in på Backängsvägen.
+EFTER: Sväng höger. Därefter sväng vänster in på Backängsvägen.
+
+FÖRE:  Sväng höger. Därefter Sväng vänster in på Kyrkogatan.
+EFTER: Sväng höger. Därefter sväng vänster in på Kyrkogatan.
+
+FÖRE:  Sväng höger. Därefter Sväng vänster in på gångvägen.
+EFTER: Sväng höger. Därefter sväng vänster in på gångvägen.
+
+FÖRE:  Sväng höger. Därefter Sväng vänster.
+EFTER: Sväng höger. Därefter sväng vänster.
+
+FÖRE:  Sväng vänster in på Dalagatan. Därefter, i 100 meter, Din destination kommer att vara till höger.
+EFTER: Sväng vänster in på Dalagatan. Därefter, i 100 meter, din destination kommer att vara till höger.
+
+FÖRE:  Sväng vänster in på Dragspelsvägen. Därefter Sväng höger in på Dalgatan.
+EFTER: Sväng vänster in på Dragspelsvägen. Därefter sväng höger in på Dalgatan.
+
+FÖRE:  Sväng vänster in på E 45, 70.
+EFTER: Sväng vänster in på E45, väg 70.
+
+FÖRE:  Sväng vänster in på E 45, Inlandsvägen.
+EFTER: Sväng vänster in på E45, Inlandsvägen.
+
+FÖRE:  Sväng vänster in på Losvägen, 310.
+EFTER: Sväng vänster in på Losvägen.
+
+FÖRE:  Sväng vänster in på Slaggatan. Därefter Sväng höger in på Hantverkargatan.
+EFTER: Sväng vänster in på Slaggatan. Därefter sväng höger in på Hantverkargatan.
+
+FÖRE:  Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+EFTER: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+
+FÖRE:  Sväng vänster in på Smedjevägen. Därefter Sväng höger för att stanna kvar på Smedjevägen.
+EFTER: Sväng vänster in på Smedjevägen. Därefter sväng höger för att stanna kvar på Smedjevägen.
+
+FÖRE:  Sväng vänster in på Våmhusvägen, W 1000.
+EFTER: Sväng vänster in på Våmhusvägen.
+
+FÖRE:  Sväng vänster in på Våmhusvägen, W 1001. Därefter Sväng höger in på Älvdalsvägen.
+EFTER: Sväng vänster in på Våmhusvägen. Därefter sväng höger in på Älvdalsvägen.
+
+FÖRE:  Sväng vänster. Därefter Håll höger i korsningen.
+EFTER: Sväng vänster. Därefter håll höger i korsningen.
+
+FÖRE:  Sväng vänster. Därefter Sväng höger in på Dalgatan.
+EFTER: Sväng vänster. Därefter sväng höger in på Dalgatan.
+
+FÖRE:  Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+EFTER: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+
+FÖRE:  Sväng vänster. Därefter Sväng höger.
+EFTER: Sväng vänster. Därefter sväng höger.
+
+FÖRE:  Sväng vänster. Därefter Sväng vänster.
+EFTER: Sväng vänster. Därefter sväng vänster.
+

@@ -1,0 +1,1 @@
+verifieraIngenGoogle: OK. Inga förbjudna moduler. Granskade undantag: [com.google.code.gson:gson:2.10.1, com.google.guava:listenablefuture:1.0]. Rapport: /workspace/pundarens-guide-repo/prototyp/offline-kedja/app/build/rapporter/beroenden.txt
