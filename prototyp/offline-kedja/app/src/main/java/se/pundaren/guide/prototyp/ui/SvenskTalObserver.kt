@@ -11,6 +11,7 @@ import android.speech.tts.UtteranceProgressListener
 import com.stadiamaps.ferrostar.core.SpokenInstructionObserver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import se.pundaren.guide.prototyp.sanning.tal.SvenskTalTvatt
 import uniffi.ferrostar.SpokenInstruction
 
 class SvenskTalObserver(
@@ -137,12 +138,15 @@ class SvenskTalObserver(
     override fun onSpokenInstructionTrigger(
         spokenInstruction: SpokenInstruction
     ) {
-        val besked = spokenInstruction.text.trim()
+        val ratt = spokenInstruction.text.trim()
+        val besked = SvenskTalTvatt.tvatta(ratt) // Ändring 3c: tvätta Valhallas svenska före uppläsning
 
         paHuvudtrad {
             if (avslutad || tyst.value || besked.isEmpty()) {
                 return@paHuvudtrad
             }
+
+            if (besked != ratt) rapportera("TAL RÅTT: $ratt") // Ändring 3c: spårbarhet i loggen
 
             if (!redo) {
                 rapportera("TAL EJ REDO: $besked")
