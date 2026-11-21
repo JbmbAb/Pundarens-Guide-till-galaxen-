@@ -46,3 +46,6 @@ tools/verkstad/ferrostar-prov/target/
 
 # Lokala arbetsfiler (offlinepaket hämtade från enheten eller byggda i verkstaden) checkas inte in
 lokalt/
+
+# Python
+__pycache__/
