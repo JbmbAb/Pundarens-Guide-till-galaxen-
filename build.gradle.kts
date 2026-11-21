@@ -31,6 +31,8 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     // Svansdirigenten: händelser -> motor -> SafetyGate -> uppspelning. Läser sanningen, skriver aldrig.
     ":conductor" to setOf(":truth:api", ":engine:api", ":safetygate", ":archive:api"),
     ":babel" to setOf(":archive:api"),
+    // Convoy (07): protokollets logik ovanför transporten. Känner varken sanningen, motorn eller arkivet.
+    ":convoy:api" to emptySet(),
     // Sanningskärnans Android-adaptrar: valhalla-mobile, Ferrostar, position, batteri.
     ":truth:device" to setOf(":truth:api", ":truth:core"),
     // Rösten: en talmotor, två kanaler. Ser bara sanningens port för besked.

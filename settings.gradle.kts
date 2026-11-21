@@ -29,6 +29,7 @@ include(
     ":safetygate",
     ":conductor",
     ":babel",
+    ":convoy:api",
     ":verification:architecture",
 )
 
