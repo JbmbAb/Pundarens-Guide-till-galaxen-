@@ -1,16 +1,42 @@
+# Versionerna för Android-kedjan är de som låstes i etapp 2 (etapp2-protokollet, avsnitt 2).
+# Kotlin 2.2.10 är den version Android Gradle Plugin 9.0.1 själv använder (inbyggt Kotlin-stöd).
 [versions]
-kotlin = "2.0.21"
-coroutines = "1.9.0"
-serialization = "1.7.3"
+kotlin = "2.2.10"
+agp = "9.0.1"
+coroutines = "1.11.0"
+serialization = "1.11.0"
 junit = "4.13.2"
 sqliteJdbc = "3.41.2.2"
+valhallaMobile = "0.6.6"
+valhallaModels = "0.6.0"
+ferrostar = "0.59.0"
+maplibre = "13.7.1"
+desugar = "2.1.5"
+composeBom = "2025.12.00"
+activityCompose = "1.12.0"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
 sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version.ref = "sqliteJdbc" }
+valhalla-mobile = { module = "io.github.rallista:valhalla-mobile", version.ref = "valhallaMobile" }
+valhalla-models = { module = "io.github.rallista:valhalla-models", version.ref = "valhallaModels" }
+valhalla-models-config = { module = "io.github.rallista:valhalla-models-config", version.ref = "valhallaModels" }
+ferrostar-core = { module = "com.stadiamaps.ferrostar:core", version.ref = "ferrostar" }
+maplibre = { module = "org.maplibre.gl:android-sdk", version.ref = "maplibre" }
+desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
