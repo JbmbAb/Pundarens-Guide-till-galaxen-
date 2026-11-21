@@ -18,7 +18,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 4
-        versionName = "0.4-etapp4"
+        versionName = "0.5-etapp5"
         // Målenheten SM-X900 är arm64. Bara den ABI:n packas. För emulatorprov: -Pabi=x86_64.
         ndk { abiFilters += listOf(providers.gradleProperty("abi").orNull ?: "arm64-v8a") }
     }

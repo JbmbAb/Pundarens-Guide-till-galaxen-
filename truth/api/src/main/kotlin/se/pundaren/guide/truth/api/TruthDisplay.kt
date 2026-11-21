@@ -11,7 +11,12 @@ import java.time.Instant
 interface TruthDisplayReader {
     val guidance: StateFlow<GuidanceSnapshot>
     val map: StateFlow<MapSnapshot>
+    /** Batteriet, för avfärdskontrollen (etapp 5). */
+    val power: StateFlow<PowerSnapshot>
 }
+
+/** Enhetens batteri som Hard Truth Core senast läste av det. */
+data class PowerSnapshot(val batteryPercent: Int, val charging: Boolean)
 
 /** En punkt i WGS84 (EPSG:4326). */
 data class GeoPoint(val lat: Double, val lon: Double)
@@ -45,6 +50,10 @@ data class GuidanceSnapshot(
     /** Beräknad ankomsttid. Bara för visning. */
     val etaWallClockUtc: Instant?,
     val stepsRemaining: Int,
+    /** Sanna fakta som ingen bad om ("Fel fråga"): manövrer som återstår på rutten. */
+    val leftTurnsRemaining: Int = 0,
+    val rightTurnsRemaining: Int = 0,
+    val roundaboutsRemaining: Int = 0,
 ) {
     companion object {
         fun idle(travelMode: TravelMode = TravelMode.FOOT) = GuidanceSnapshot(

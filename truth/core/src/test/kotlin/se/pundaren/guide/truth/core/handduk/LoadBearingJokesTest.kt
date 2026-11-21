@@ -21,6 +21,7 @@ import se.pundaren.guide.truth.core.platser.PlaceKind
 import se.pundaren.guide.truth.core.protokoll.ExpeditionProtocol
 import se.pundaren.guide.truth.core.protokoll.Perspective
 import se.pundaren.guide.truth.core.protokoll.ProtocolLayer
+import se.pundaren.guide.truth.core.protokoll.WrongQuestion
 import se.pundaren.guide.truth.core.snacks.OpenState
 import se.pundaren.guide.truth.core.snacks.OpeningHours
 import se.pundaren.guide.truth.core.snacks.SnackFinder
@@ -170,6 +171,41 @@ class LoadBearingJokesTest {
         assertTrue(text.contains("[SANT]   Expeditionen avslutades vid Grönklitt efter 16 min och 16 km. Antal genomförda manövrer: 1."))
         // Ingen rad saknar märkning.
         text.lines().drop(4).filter { it.isNotBlank() }.forEach { assertTrue(it, it.contains("[SANT]") || it.contains("[GUIDEN]")) }
+    }
+
+    @Test fun `ett avbrutet protokoll säger att ingen framkomst registrerades`() {
+        val t0 = Instant.parse("2026-11-21T10:00:00Z")
+        val aborted = ExpeditionProtocol("X-2")
+        aborted.truth(RouteStarted("E1", 0, t0, "X-2", "Grönklitt", 15_730, 960, TravelMode.PASSENGER))
+        assertFalse(aborted.arrived)
+        aborted.closed(t0.plusSeconds(120))
+        assertEquals("Protokollet avslutades. Ingen framkomst registrerades.", aborted.entries.last().text)
+        assertEquals(ProtocolLayer.TRUTH, aborted.entries.last().layer)
+        aborted.closed(t0.plusSeconds(130)) // bara en gång
+        assertEquals(2, aborted.entries.size)
+
+        val done = ExpeditionProtocol("X-3")
+        done.truth(RouteStarted("E1", 0, t0, "X-3", "Grönklitt", 15_730, 960, TravelMode.PASSENGER))
+        done.truth(Arrived("E2", 962_000, t0.plusSeconds(962), "X-3", "Grönklitt", 962, 15_730))
+        assertTrue(done.arrived)
+        done.closed(t0.plusSeconds(970)) // framkomsten står redan i protokollet
+        assertEquals(2, done.entries.size)
+        // Efter avslut tas inga fler rader emot.
+        done.satire(t0.plusSeconds(980), "Verkligheten är vackrare än de dunkla fantasierna.", "C-006")
+        done.truth(OffRoute("E3", 990_000, t0.plusSeconds(990), "X-3", 250, 0))
+        assertEquals(2, done.entries.size)
+    }
+
+    @Test fun `fel fråga ger bara räknade värden`() {
+        assertEquals(
+            listOf(
+                "Vänstersvängar kvar på rutten: 6",
+                "Högersvängar kvar på rutten: 7",
+                "Rondeller kvar på rutten: 2",
+                "Steg kvar i ruttbeskrivningen: 17",
+            ),
+            WrongQuestion.facts(stepsRemaining = 17, leftTurns = 6, rightTurns = 7, roundabouts = 2),
+        )
     }
 
     @Test fun `perspektivvyn räknar andelen av universums ålder på riktigt`() {

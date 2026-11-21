@@ -59,6 +59,23 @@ internal class ValhallaRouteProvider(
             }
         }
 
+    /** Restider från flera startpunkter till ett mål. Sekunder per startpunkt, eller null där ingen väg finns. */
+    suspend fun travelSecondsTo(sources: List<GeoPoint>, target: GeoPoint, mode: TravelMode): List<Double?> =
+        withContext(Dispatchers.IO) {
+            if (sources.isEmpty()) return@withContext emptyList()
+            val request = JSONObject()
+                .put("sources", JSONArray().apply { sources.forEach { put(location(it)) } })
+                .put("targets", JSONArray().put(location(target)))
+                .put("costing", costing(mode))
+                .put("units", "kilometers")
+                .toString()
+            val rows = JSONObject(valhalla.matrixRaw(request)).getJSONArray("sources_to_targets")
+            List(sources.size) { i ->
+                val cell = rows.optJSONArray(i)?.optJSONObject(0)
+                if (cell == null || cell.isNull("time")) null else cell.getDouble("time")
+            }
+        }
+
     companion object {
         fun costing(mode: TravelMode): String = if (mode == TravelMode.FOOT) "pedestrian" else "auto"
 

@@ -25,6 +25,7 @@ import se.pundaren.guide.truth.api.OffRoute
 import se.pundaren.guide.truth.api.PositionQuality
 import se.pundaren.guide.truth.api.PositionQualityChanged
 import se.pundaren.guide.truth.api.PositionSnapshot
+import se.pundaren.guide.truth.api.PowerSnapshot
 import se.pundaren.guide.truth.api.Rerouted
 import se.pundaren.guide.truth.api.RouteStarted
 import se.pundaren.guide.truth.api.SafetySnapshot
@@ -84,6 +85,9 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
 
     private val _map = MutableStateFlow(MapSnapshot.EMPTY)
     override val map: StateFlow<MapSnapshot> = _map.asStateFlow()
+
+    private val _power = MutableStateFlow(PowerSnapshot(batteryPercent = 100, charging = false))
+    override val power: StateFlow<PowerSnapshot> = _power.asStateFlow()
 
     // --- Rutt ---
     private var mode = TravelMode.FOOT
@@ -510,7 +514,11 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
             secondsRemaining = if (navigating) secondsRemaining else null,
             etaWallClockUtc = if (navigating && secondsRemaining != null) tick!!.stamp.wallClockUtc.plusSeconds(secondsRemaining.toLong()) else null,
             stepsRemaining = if (navigating) tick!!.stepsRemaining else 0,
+            leftTurnsRemaining = if (navigating) tick!!.leftTurnsRemaining else 0,
+            rightTurnsRemaining = if (navigating) tick!!.rightTurnsRemaining else 0,
+            roundaboutsRemaining = if (navigating) tick!!.roundaboutsRemaining else 0,
         )
+        _power.value = PowerSnapshot(batteryPercent, batteryCharging)
         _map.value = MapSnapshot(
             position = lastFix?.point,
             snappedPosition = if (navigating) tick?.snappedPosition else null,

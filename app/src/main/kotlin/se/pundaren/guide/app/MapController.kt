@@ -45,6 +45,7 @@ class MapController(private val context: Context, private val log: (String) -> U
 
     private var routeLine: List<GeoPoint> = emptyList()
     private var previewLine: List<GeoPoint> = emptyList()
+    private var trackLine: List<GeoPoint> = emptyList()
     private var position: GeoPoint? = null
     private var destination: GeoPoint? = null
     private var places: PlaceIndex = PlaceIndex.EMPTY
@@ -105,7 +106,15 @@ class MapController(private val context: Context, private val log: (String) -> U
             style = s
             s.addSource(GeoJsonSource(SRC_PREVIEW)); s.addSource(GeoJsonSource(SRC_ROUTE))
             s.addSource(GeoJsonSource(SRC_DESTINATION)); s.addSource(GeoJsonSource(SRC_POSITION))
+            s.addSource(GeoJsonSource(SRC_TRACK))
             for (rank in 0..2) s.addSource(GeoJsonSource(SRC_PLACES + rank))
+            // Det egna spåret: prickad linje under rutten, så att vägen tillbaka syns även utan rutt.
+            s.addLayer(LineLayer("spar-kant", SRC_TRACK).withProperties(
+                PropertyFactory.lineColor("#000000"), PropertyFactory.lineWidth(6f), PropertyFactory.lineOpacity(0.6f),
+                PropertyFactory.lineCap("round"), PropertyFactory.lineJoin("round")))
+            s.addLayer(LineLayer("spar-linje", SRC_TRACK).withProperties(
+                PropertyFactory.lineColor("#f2f2f2"), PropertyFactory.lineWidth(3f), PropertyFactory.lineDasharray(arrayOf(0.2f, 2f)),
+                PropertyFactory.lineCap("round"), PropertyFactory.lineJoin("round")))
             s.addLayer(LineLayer("forslag-linje", SRC_PREVIEW).withProperties(
                 PropertyFactory.lineColor("#f2f2f2"), PropertyFactory.lineWidth(4f), PropertyFactory.lineOpacity(0.55f),
                 PropertyFactory.lineDasharray(arrayOf(1.5f, 1.5f))))
@@ -168,6 +177,18 @@ class MapController(private val context: Context, private val log: (String) -> U
         if (line.size >= 2) fit(line)
     }
 
+    /** Det egna spåret (sanningsdata: positionerna enheten har haft). */
+    fun setTrack(line: List<GeoPoint>) {
+        if (line == trackLine) return
+        trackLine = line
+        style?.getSourceAs<GeoJsonSource>(SRC_TRACK)?.setGeoJson(lineJson(line))
+    }
+
+    /** Ramar in en linje, t.ex. det egna spåret. Kartan slutar följa positionen tills man centrerar. */
+    fun showLine(line: List<GeoPoint>) {
+        if (line.size >= 2) fit(line)
+    }
+
     fun setDestination(point: GeoPoint?) {
         if (point == destination) return
         destination = point
@@ -218,6 +239,7 @@ class MapController(private val context: Context, private val log: (String) -> U
         val s = style ?: return
         s.getSourceAs<GeoJsonSource>(SRC_ROUTE)?.setGeoJson(lineJson(routeLine))
         s.getSourceAs<GeoJsonSource>(SRC_PREVIEW)?.setGeoJson(lineJson(previewLine))
+        s.getSourceAs<GeoJsonSource>(SRC_TRACK)?.setGeoJson(lineJson(trackLine))
         s.getSourceAs<GeoJsonSource>(SRC_DESTINATION)?.setGeoJson(pointJson(destination))
         s.getSourceAs<GeoJsonSource>(SRC_POSITION)?.setGeoJson(pointJson(position))
         drawPlaces()
@@ -285,6 +307,7 @@ class MapController(private val context: Context, private val log: (String) -> U
     private companion object {
         const val SRC_ROUTE = "rutt"
         const val SRC_PREVIEW = "forslag"
+        const val SRC_TRACK = "spar"
         const val SRC_DESTINATION = "mal"
         const val SRC_POSITION = "position"
         const val SRC_PLACES = "ortnamn-"

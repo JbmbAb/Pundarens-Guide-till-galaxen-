@@ -49,18 +49,42 @@ class ExpeditionProtocol(val expeditionId: String) {
 
     private var maneuvers = 0
 
+    /** Sant när händelsen Arrived står i protokollet. */
+    @get:Synchronized
+    var arrived = false
+        private set
+
+    /** Sant när protokollet är avslutat. Därefter tas inga fler rader emot. */
+    @get:Synchronized
+    var isClosed = false
+        private set
+
     /** För in en sanningshändelse. Händelser som inte hör hemma i ett protokoll ger ingen rad. */
     @Synchronized
     fun truth(event: TruthEvent) {
+        if (isClosed) return
         if (event is ManeuverCompleted) { maneuvers++; return }
         val text = describe(event) ?: return
         _entries += ProtocolEntry(event.wallClockUtc, ProtocolLayer.TRUTH, text, event.eventId)
+        if (event is Arrived) arrived = true
     }
 
     /** För in en replik som Guiden faktiskt presenterade. */
     @Synchronized
     fun satire(atUtc: Instant, text: String, lineId: String) {
+        if (isClosed) return
         _entries += ProtocolEntry(atUtc, ProtocolLayer.SATIRE, text, lineId)
+    }
+
+    /**
+     * Avslutar protokollet. En expedition som avbröts har ingen händelse i 05; protokollet får då en
+     * fast rad om att ingen framkomst registrerades. Raden tar ingen text utifrån.
+     */
+    @Synchronized
+    fun closed(atUtc: Instant) {
+        if (isClosed) return
+        if (!arrived) _entries += ProtocolEntry(atUtc, ProtocolLayer.TRUTH, "Protokollet avslutades. Ingen framkomst registrerades.", null)
+        isClosed = true
     }
 
     private fun describe(event: TruthEvent): String? = when (event) {
@@ -120,6 +144,19 @@ class ExpeditionProtocol(val expeditionId: String) {
         TravelMode.SNOWMOBILE -> "snöskoter"
         TravelMode.ATV -> "fyrhjuling"
     }
+}
+
+/**
+ * Fel fråga (byggplanen): sanna fakta som ingen bad om. Bara räknade värden ur ruttmotorns steg.
+ * Höjdmeter ingår inte än; det kräver höjddata i offlinepaketet.
+ */
+object WrongQuestion {
+    fun facts(stepsRemaining: Int, leftTurns: Int, rightTurns: Int, roundabouts: Int): List<String> = listOf(
+        "Vänstersvängar kvar på rutten: $leftTurns",
+        "Högersvängar kvar på rutten: $rightTurns",
+        "Rondeller kvar på rutten: $roundabouts",
+        "Steg kvar i ruttbeskrivningen: $stepsRemaining",
+    )
 }
 
 /**

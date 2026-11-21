@@ -5,6 +5,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import se.pundaren.guide.truth.api.InstructionVoice
 import se.pundaren.guide.truth.api.TruthDisplayReader
+import se.pundaren.guide.truth.api.TruthEventStream
+import se.pundaren.guide.truth.api.TruthStateReader
 import se.pundaren.guide.truth.core.TruthInput
 import se.pundaren.guide.truth.core.kernel.TruthKernel
 import java.io.File
@@ -26,9 +28,13 @@ class TruthBoundaryTest {
         root.resolve(dir).walkTopDown().filter { it.isFile && it.extension == "kt" }.toList()
 
     @Test fun `G-2 all inmatning i kärnan är märkt TruthInput`() {
-        val readOnly = setOf(
-            "getEvents", "getNavigation", "getPosition", "getSafety", "getGuidance", "getMap",
-            "equals", "hashCode", "toString", "getClass", "notify", "notifyAll", "wait",
+        // Läsning är det som står i de tre läsgränssnitten. Allt annat publikt i kärnan är inmatning.
+        val readers = listOf(TruthEventStream::class.java, TruthStateReader::class.java, TruthDisplayReader::class.java)
+        val readOnly = readers.flatMap { it.methods.toList() }.map { it.name }.toSet() +
+            setOf("equals", "hashCode", "toString", "getClass", "notify", "notifyAll", "wait")
+        assertEquals(
+            "läsgränssnitten har bara parameterlösa läsare",
+            emptyList<String>(), readers.flatMap { it.methods.toList() }.filter { it.parameterCount != 0 }.map { it.name },
         )
         val inputs = TruthKernel::class.java.methods.filter {
             Modifier.isPublic(it.modifiers) && !Modifier.isStatic(it.modifiers) && !it.isSynthetic && it.name !in readOnly

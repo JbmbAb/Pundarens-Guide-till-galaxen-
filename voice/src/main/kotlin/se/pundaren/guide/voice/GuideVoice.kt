@@ -189,20 +189,25 @@ class GuideVoice(
             log("TAL EJ REDO: $text")
             return@onMain
         }
+        // Beskedet äger rösten från första raden: det märks som pågående innan något annat händer,
+        // så att ingen svans kan lämnas in medan beskedet är på väg (speakTail vägrar då).
+        // Sett på målenheten 2026-11-21 kl. 13.03.06: svansens slutanrop kördes förut inifrån den
+        // här funktionen, dirigenten lämnade in nästa svans i samma ögonblick, och dess tidsgräns
+        // hade kunnat stoppa talmotorn mitt i beskedet.
+        counter++
+        val id = "besked-$counter"
+        instructionId = id
+        instructionStartedAt = SystemClock.elapsedRealtime()
+        _instructionSpeaking.value = true
         // Beskedet klipper svansen. QUEUE_FLUSH nedan gör det i talmotorn; här städas bokföringen.
         // Den klippta svansens id sparas så att motorns kvitto kan tidsättas (R-01: inom 100 ms).
         cutTailId = tailId
-        cutTailAt = SystemClock.elapsedRealtime()
+        cutTailAt = instructionStartedAt
         finishTail(finished = false, cutBy = "besked")
-        counter++
-        val id = "besked-$counter"
         tts.voice = voice
         tts.setSpeechRate(INSTRUCTION_RATE)
         tts.setPitch(INSTRUCTION_PITCH)
         requestFocus(id)
-        instructionId = id
-        instructionStartedAt = SystemClock.elapsedRealtime()
-        _instructionSpeaking.value = true
         if (tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, id) != TextToSpeech.SUCCESS) {
             log("TAL FEL: Uppläsning misslyckades")
             instructionId = null
@@ -226,13 +231,13 @@ class GuideVoice(
     /**
      * Läser upp en svans. [onDone] anropas alltid exakt en gång på huvudtråden: `true` om svansen
      * lästes färdigt, `false` om den klipptes (av ett besked, av tidsgränsen eller av [stopTail])
-     * eller aldrig kunde börja.
+     * eller aldrig kunde börja. Anropet kommer alltid efteråt, aldrig inifrån det här anropet.
      */
     fun speakTail(id: String, text: String, maxMillis: Int, onDone: (finished: Boolean) -> Unit) = onMain {
         val tts = engine
         val voice = tailVoice
-        if (closed || !ready || tts == null || voice == null || text.isBlank() || _instructionSpeaking.value || maxMillis <= 0) {
-            onDone(false)
+        if (closed || !ready || tts == null || voice == null || text.isBlank() || instructionId != null || _instructionSpeaking.value || maxMillis <= 0) {
+            main.post { onDone(false) }
             return@onMain
         }
         finishTail(finished = false, cutBy = "ny svans")
@@ -250,7 +255,8 @@ class GuideVoice(
         }
         val timeout = Runnable {
             if (tailId == utterance) {
-                engine?.stop()
+                // En svans tidsgräns får aldrig stoppa talmotorn medan ett besked spelas.
+                if (instructionId == null) engine?.stop()
                 finishTail(finished = false, cutBy = "tidsgräns $maxMillis ms")
             }
         }
@@ -275,7 +281,9 @@ class GuideVoice(
         abandonFocus(id)
         val millis = SystemClock.elapsedRealtime() - tailStartedAt
         log(if (finished) "SVANS KLAR: $millis ms" else "SVANS KLIPPT ($cutBy) efter $millis ms")
-        done?.invoke(finished)
+        // Slutanropet postas alltid och körs aldrig inifrån den som klippte svansen. Annars kan
+        // mottagaren (dirigenten) lämna in nästa svans mitt i ett pågående anrop här.
+        if (done != null) main.post { done(finished) }
     }
 
     // ------------------------------------------------------------------------------------

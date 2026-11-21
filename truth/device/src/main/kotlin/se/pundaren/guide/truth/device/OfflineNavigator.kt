@@ -43,11 +43,17 @@ import se.pundaren.guide.truth.core.kernel.Stamp
 import se.pundaren.guide.truth.core.kernel.TruthKernel
 import se.pundaren.guide.truth.core.paket.PaketInstallerare
 import se.pundaren.guide.truth.core.platser.PlaceIndex
+import se.pundaren.guide.truth.core.spar.TrackPoint
+import se.pundaren.guide.truth.core.spar.TrackRecorder
+import se.pundaren.guide.truth.core.spar.TrackSnapshot
+import se.pundaren.guide.truth.core.spar.WayBack
 import se.pundaren.guide.truth.core.tal.InstructionAnnouncer
 import se.pundaren.guide.truth.core.tal.SvenskTalTvatt
 import uniffi.ferrostar.CourseFiltering
 import uniffi.ferrostar.DeviationKind
 import uniffi.ferrostar.GeographicCoordinate
+import uniffi.ferrostar.ManeuverModifier
+import uniffi.ferrostar.ManeuverType
 import uniffi.ferrostar.NavigationControllerConfig
 import uniffi.ferrostar.Route
 import uniffi.ferrostar.RouteDeviation
@@ -129,6 +135,18 @@ class OfflineNavigator(
     /** Sant under en provtur (simulerad position). Visas i sanningsremsan. */
     val simulating: StateFlow<Boolean> get() = locations.simulating
 
+    // --- Eget spår (etapp 5, hemväg) ---
+    private val trackStore = TrackStore(File(appContext.filesDir, "spar"), log)
+    private val realTrack = TrackRecorder()
+    private var realTrackThinnings = 0
+
+    /** Provturens spår. Finns bara under provturen, sparas aldrig och blandas aldrig med det verkliga. */
+    private var testTrack: TrackRecorder? = null
+
+    private val _track = MutableStateFlow(TrackSnapshot.EMPTY)
+    /** Det egna spåret: positionerna enheten faktiskt har haft, för vägen tillbaka. */
+    val track: StateFlow<TrackSnapshot> = _track.asStateFlow()
+
     private var valhalla: Valhalla? = null
     private var routes: ValhallaRouteProvider? = null
     private var core: FerrostarCore? = null
@@ -182,6 +200,15 @@ class OfflineNavigator(
 
     init {
         appContext.registerReceiver(battery, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        // Det sparade spåret läses in innan första positionen kan komma, så att ordningen stämmer.
+        val saved = trackStore.load()
+        saved.forEach { realTrack.add(it.point, it.accuracyMeters, it.atUtc) }
+        realTrackThinnings = realTrack.thinnings
+        if (saved.isNotEmpty()) {
+            if (realTrack.size != saved.size) trackStore.rewrite(realTrack.points)
+            _track.value = realTrack.snapshot(simulated = false)
+            log("SPÅR ${realTrack.size} punkter inlästa, %.2f km".format(realTrack.lengthMeters / 1000))
+        }
         scope.launch { locations.locations.collect(::onLocation) }
         scope.launch { voice.instructionSpeaking.collect { kernel.instructionSpeaking(now(), it) } }
         scope.launch {
@@ -363,15 +390,46 @@ class OfflineNavigator(
         kernel.routeStopped(now())
         // Provturens simulerade position får inte ligga kvar som enhetens senast kända plats.
         if (wasTestDrive) kernel.positionForgotten(now())
+        // Detsamma gäller provturens spår: det verkliga spåret visas igen.
+        if (testTrack != null) {
+            testTrack = null
+            _track.value = realTrack.snapshot(simulated = false)
+        }
         log("STOPP")
     }
+
+    /**
+     * Börjar på ett nytt spår. Det gamla läggs undan på enheten, det raderas inte. Under en provtur
+     * nollställs bara provturens spår.
+     */
+    fun newTrack() {
+        val test = testTrack
+        if (test != null) {
+            test.clear()
+            _track.value = test.snapshot(simulated = true)
+            return
+        }
+        trackStore.archive(realTrack.startedUtc)
+        realTrack.clear()
+        _track.value = realTrack.snapshot(simulated = false)
+        log("SPÅR nytt spår påbörjat")
+    }
+
+    /** Vägen tillbaka längs spåret som visas, från den spårpunkt som ligger närmast positionen. */
+    fun wayBack(): WayBack? = (testTrack ?: realTrack).wayBack(display.map.value.position)
 
     /** Nödläget (Don't Panic, långt tryck). Undertrycker all satir via SafetyGate. */
     fun setEmergency(active: Boolean) = kernel.emergency(now(), active, EmergencySource.USER)
 
     /** Restider från [from] till flera mål, sekunder per mål eller null där ingen väg finns. */
     suspend fun travelSeconds(from: GeoPoint, targets: List<GeoPoint>, mode: TravelMode): List<Double?> =
-        routes?.travelSeconds(from, targets, mode) ?: List(targets.size) { null }
+        runCatching { routes?.travelSeconds(from, targets, mode) }.onFailure { log("FEL i restidsmatris: $it") }.getOrNull()
+            ?: List(targets.size) { null }
+
+    /** Restider från flera startpunkter till [target], sekunder per startpunkt eller null där ingen väg finns. */
+    suspend fun travelSecondsTo(sources: List<GeoPoint>, target: GeoPoint, mode: TravelMode): List<Double?> =
+        runCatching { routes?.travelSecondsTo(sources, target, mode) }.onFailure { log("FEL i restidsmatris: $it") }.getOrNull()
+            ?: List(sources.size) { null }
 
     // ------------------------------------------------------------------------------------
     // Från enheten till kärnan
@@ -379,17 +437,48 @@ class OfflineNavigator(
 
     private fun onLocation(location: Location) {
         val fixMono = location.elapsedRealtimeNanos / 1_000_000
+        val point = GeoPoint(location.latitude, location.longitude)
+        val accuracy = if (location.hasAccuracy()) location.accuracy.toDouble() else 999.0
         kernel.positionFix(
             now(),
             PositionFix(
-                point = GeoPoint(location.latitude, location.longitude),
-                accuracyMeters = if (location.hasAccuracy()) location.accuracy.toDouble() else 999.0,
+                point = point,
+                accuracyMeters = accuracy,
                 speedMps = if (location.hasSpeed()) location.speed.toDouble() else null,
                 bearingDegrees = if (location.hasBearing()) location.bearing.toDouble() else null,
                 altitudeMeters = if (location.hasAltitude()) location.altitude else null,
             ),
             fixMonotonicMillis = if (fixMono > 0) fixMono else SystemClock.elapsedRealtime(),
         )
+        recordTrack(location, point, accuracy, fixMono)
+    }
+
+    /** För in positionen i det egna spåret. Simulerade positioner går till provturens eget spår. */
+    private fun recordTrack(location: Location, point: GeoPoint, accuracy: Double, fixMono: Long) {
+        val at = if (location.time > 0) Instant.ofEpochMilli(location.time) else Instant.now()
+        if (location.provider == DeviceLocations.SIMULATED_PROVIDER) {
+            // Provturen kan gå många gånger fortare än verklig tid; fartspärren gäller inte där.
+            val test = testTrack ?: TrackRecorder(TrackRecorder.Config(maxSpeedMps = Double.MAX_VALUE)).also { testTrack = it }
+            if (test.add(point, accuracy, at)) _track.value = test.snapshot(simulated = true)
+            return
+        }
+        // En gammal sparad position (senast kända) hör inte hemma i spåret.
+        if (fixMono <= 0 || SystemClock.elapsedRealtime() - fixMono > TRACK_MAX_FIX_AGE_MILLIS) return
+        // Efter ett långt uppehåll är det en ny tur: det gamla spåret läggs undan och ett nytt börjar.
+        val last = realTrack.lastUtc
+        if (last != null && at.toEpochMilli() - last.toEpochMilli() > TRACK_NEW_AFTER_MILLIS) {
+            trackStore.archive(realTrack.startedUtc)
+            realTrack.clear()
+            log("SPÅR nytt spår efter uppehåll")
+        }
+        if (!realTrack.add(point, accuracy, at)) return
+        if (realTrack.thinnings != realTrackThinnings) {
+            realTrackThinnings = realTrack.thinnings
+            trackStore.rewrite(realTrack.points)
+        } else {
+            trackStore.append(TrackPoint(point, accuracy, at))
+        }
+        if (testTrack == null) _track.value = realTrack.snapshot(simulated = false)
     }
 
     private fun onNavigationState(navState: NavigationState) {
@@ -438,6 +527,11 @@ class OfflineNavigator(
                 else -> 0.0
             }
         }
+        // "Fel fråga": manövrer som återstår, räknade ur varje stegs skylt. Rondeller räknas för sig.
+        val banners = trip.remainingSteps.mapNotNull { it.visualInstructions.firstOrNull()?.primaryContent }
+        val turns = banners
+            .filter { it.maneuverType != ManeuverType.ROUNDABOUT && it.maneuverType != ManeuverType.ROTARY && it.maneuverType != ManeuverType.ARRIVE }
+            .mapNotNull { it.maneuverModifier }
         return NavTick(
             stamp = stamp,
             phase = NavPhase.NAVIGATING,
@@ -458,6 +552,9 @@ class OfflineNavigator(
             recalculating = recalculating,
             snappedPosition = GeoPoint(trip.snappedUserLocation.coordinates.lat, trip.snappedUserLocation.coordinates.lng),
             bearingDegrees = trip.snappedUserLocation.courseOverGround?.degrees?.toDouble(),
+            leftTurnsRemaining = turns.count { it == ManeuverModifier.LEFT || it == ManeuverModifier.SLIGHT_LEFT || it == ManeuverModifier.SHARP_LEFT },
+            rightTurnsRemaining = turns.count { it == ManeuverModifier.RIGHT || it == ManeuverModifier.SLIGHT_RIGHT || it == ManeuverModifier.SHARP_RIGHT },
+            roundaboutsRemaining = banners.count { it.maneuverType == ManeuverType.ROUNDABOUT || it.maneuverType == ManeuverType.ROTARY },
         )
     }
 
@@ -497,5 +594,11 @@ class OfflineNavigator(
          */
         const val VEHICLE_TEST_SPEED_MPS = 12.5
         const val FOOT_TEST_SPEED_MPS = 1.4
+
+        /** Äldre positioner än så här förs inte in i spåret. */
+        const val TRACK_MAX_FIX_AGE_MILLIS = 10_000L
+
+        /** Uppehåll längre än så här mellan två positioner börjar ett nytt spår. Kandidatvärde. */
+        const val TRACK_NEW_AFTER_MILLIS = 24 * 3_600_000L
     }
 }

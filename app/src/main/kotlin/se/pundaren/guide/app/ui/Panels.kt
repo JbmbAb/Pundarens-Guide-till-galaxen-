@@ -57,7 +57,7 @@ fun originLabel(origin: OriginClass): String = when (origin) {
 }
 
 @Composable
-private fun Panel(onDismiss: () -> Unit, content: @Composable () -> Unit) {
+internal fun Panel(onDismiss: () -> Unit, content: @Composable () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Column(
             Modifier.widthIn(max = 640.dp).clip(RoundedCornerShape(28.dp)).background(GuideColors.Surface).padding(22.dp),
@@ -102,7 +102,7 @@ fun DestinationDialog(places: PlaceIndex, near: GeoPoint?, onPick: (Place) -> Un
     }
 }
 
-private fun kindLabel(p: Place): String = when (p.kind) {
+internal fun kindLabel(p: Place): String = when (p.kind) {
     PlaceKind.SETTLEMENT -> when (p.subKind) { "city" -> "stad"; "town" -> "tätort"; "village" -> "by"; "hamlet" -> "småort"; else -> "plats" }
     PlaceKind.FOOD -> "matställe"
     PlaceKind.SHOP -> "butik"
@@ -152,7 +152,7 @@ private fun TruthButton(text: String, onClick: () -> Unit) {
     )
 }
 
-/** Probability Drive: reglage som bara rör Guiden, plus läget för paket, röst och logg. */
+/** Reglagen (underlagets Probability Drive): rör bara Guiden. Dessutom läget för paket, röst och logg. */
 @Composable
 fun DriveDialog(
     graph: AppGraph, settings: Settings, status: NavigatorStatus, voiceStatus: VoiceStatus, position: GeoPoint?, mapCenter: GeoPoint?,
@@ -161,7 +161,7 @@ fun DriveDialog(
     val history by graph.history.collectAsState()
     Panel(onDismiss) {
         Column(Modifier.heightIn(max = 620.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("Osannolikhetsdriften", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+            Text("Reglage", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
             Text("Reglagen rör bara Guiden. Rutten, beskeden och nödkortet påverkas aldrig.", color = GuideColors.OnSurfaceVariant, fontSize = 14.sp)
 
             SwitchRow("Guiden pratar", settings.guideEnabled) { on -> graph.settings.update { it.copy(guideEnabled = on) } }

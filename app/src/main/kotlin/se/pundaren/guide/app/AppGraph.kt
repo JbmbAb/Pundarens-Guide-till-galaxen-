@@ -9,6 +9,8 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import se.pundaren.guide.archive.api.ArchiveReader
@@ -24,8 +26,11 @@ import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.safetygate.SafetyGate
+import se.pundaren.guide.truth.api.GuidancePhase
 import se.pundaren.guide.truth.device.OfflineNavigator
 import se.pundaren.guide.voice.GuideVoice
+import java.io.File
+import java.time.Instant
 
 /**
  * Kompositionsroten (03): här, och bara här, möts sanningslagret och tramslagret.
@@ -65,12 +70,26 @@ class AppGraph(context: Context) : AutoCloseable {
 
     private var wisdomRequests = 0
 
+    /** Expeditionsprotokollet (etapp 5). Fakta ur händelsebussen, satir ur det Guiden faktiskt sa. */
+    val protocols = ProtocolKeeper(File(app.getExternalFilesDir(null) ?: app.filesDir, "protokoll"), log::line)
+
     init {
         log.line("START ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL} Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT}), app ${BuildInfo.VERSION}")
         log.line("ARKIV ${archive.all().size} poster, radbank ${lineBank.lines.size} rader (${lineBank.excluded.size} uteslutna), seed $seed")
         stage.onFinished = { tailId -> conductor.onTailFinished(tailId, SystemClock.elapsedRealtime()) }
         ConductorLoop.start(scope, conductor, navigator.events, navigator.state, SystemClock::elapsedRealtime)
-        scope.launch { navigator.events.events.collect { log.line("HÄNDELSE ${describe(it)}") } }
+        scope.launch {
+            navigator.events.events.collect {
+                log.line("HÄNDELSE ${describe(it)}")
+                protocols.onEvent(it)
+            }
+        }
+        // Protokollet avslutas när turen kvitteras eller avbryts (remsan går tillbaka till viloläge).
+        scope.launch {
+            navigator.display.guidance.map { it.phase }.distinctUntilChanged().collect { phase ->
+                if (phase == GuidancePhase.IDLE) protocols.close(Instant.now())
+            }
+        }
         scope.launch {
             settings.value.collect { s ->
                 conductor.settings = ConductorSettings(enabled = s.guideEnabled, chattinessPerMille = s.chattinessPercent * 10)
@@ -92,7 +111,10 @@ class AppGraph(context: Context) : AutoCloseable {
 
     private fun record(r: ConductorRecord) {
         when (r) {
-            is ConductorRecord.Presented -> _history.update { (it + r.tail).takeLast(30) }
+            is ConductorRecord.Presented -> {
+                _history.update { (it + r.tail).takeLast(30) }
+                protocols.onPresented(r.tail, Instant.now())
+            }
             is ConductorRecord.Waiting -> log.line("SVANS VÄNTAR (${r.reason}): ${r.tail.lineId}")
             is ConductorRecord.Dropped -> log.line("SVANS STRUKEN (${r.reason}): ${r.tail.lineId}")
             is ConductorRecord.Interrupted, is ConductorRecord.Finished -> {}
@@ -122,5 +144,5 @@ class AppGraph(context: Context) : AutoCloseable {
 }
 
 object BuildInfo {
-    const val VERSION = "0.4-etapp4"
+    const val VERSION = "0.5-etapp5"
 }

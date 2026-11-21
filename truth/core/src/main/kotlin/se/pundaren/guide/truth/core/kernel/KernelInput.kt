@@ -45,6 +45,10 @@ data class NavTick(
     val recalculating: Boolean = false,
     val snappedPosition: GeoPoint? = null,
     val bearingDegrees: Double? = null,
+    /** Manövrer som återstår på rutten, räknade ur ruttmotorns steg. */
+    val leftTurnsRemaining: Int = 0,
+    val rightTurnsRemaining: Int = 0,
+    val roundaboutsRemaining: Int = 0,
 )
 
 /** En position från enhetens GNSS (eller från provturens simulering). */

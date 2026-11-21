@@ -341,6 +341,25 @@ class TruthKernelTest {
         seen.forEach { e -> assertEquals(1, e.schemaVersion); assertEquals(t0.plusMillis(e.monotonicMillis), e.wallClockUtc) }
     }
 
+    @Test fun `remsans bild bär antalet kvarvarande manövrer bara under navigering`() {
+        start()
+        kernel.navTick(tick(100, steps = 17).copy(leftTurnsRemaining = 6, rightTurnsRemaining = 7, roundaboutsRemaining = 2))
+        val g = kernel.guidance.value
+        assertEquals(6, g.leftTurnsRemaining); assertEquals(7, g.rightTurnsRemaining); assertEquals(2, g.roundaboutsRemaining)
+        kernel.routeStopped(stamp(200))
+        val idle = kernel.guidance.value
+        assertEquals(0, idle.leftTurnsRemaining); assertEquals(0, idle.rightTurnsRemaining); assertEquals(0, idle.roundaboutsRemaining)
+    }
+
+    @Test fun `batteriets nivå och laddning går att läsa för avfärdskontrollen`() {
+        assertEquals(100, kernel.power.value.batteryPercent)
+        kernel.battery(stamp(100), 42, charging = true)
+        assertEquals(42, kernel.power.value.batteryPercent); assertTrue(kernel.power.value.charging)
+        kernel.battery(stamp(200), 41, charging = false)
+        assertEquals(41, kernel.power.value.batteryPercent); assertFalse(kernel.power.value.charging)
+        assertEquals(41, kernel.safety.value.batteryPercent)
+    }
+
     @Test fun `samma indata ger samma händelser`() {
         fun run(): List<String> {
             val k = TruthKernel(KernelConfig(fallbackPosition = orsa))
