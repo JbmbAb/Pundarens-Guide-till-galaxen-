@@ -1,0 +1,336 @@
+06:17:58.916 START samsung SM-X900 Android 16 (API 36)
+06:17:58.921 INTERNET-behörighet: saknas (som avsett)
+06:17:58.960 PAKET läses från APK:ns tillgångar
+06:17:59.185 PAKET orsa-prov-20261121-0117 installerat atomärt på 222 ms: karta.pmtiles 11319 kB, valhalla_tiles.tar 4420 kB
+06:17:59.193 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+06:18:00.619 VALHALLA startad på 1424 ms
+06:18:19.877 RUTT PASSAGERARE 2 punkter: 100 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+06:18:19.897 TAL #1: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+06:18:19.898 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid []
+06:18:19.901 STEG kvar 17: Slaggatan
+06:18:23.959 TAL #2: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+06:18:25.523 TAL #3: Sväng höger in på Skyttsvägen.
+06:18:25.526 STEG kvar 16: Skyttsvägen
+06:18:28.078 STEG kvar 15: Moravägen
+06:18:30.394 TAL #4: Sväng höger in på Moravägen.
+06:18:33.999 STEG kvar 14: Kaplansgatan
+06:18:35.795 TAL #5: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+06:18:40.165 TAL #6: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+06:18:40.173 STEG kvar 13: Kaplansgatan
+06:18:41.447 STEG kvar 12: Parkgatan
+06:18:49.653 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+06:18:50.049 STOPP
+06:19:04.751 RUTT PASSAGERARE 2 punkter: 14 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+06:19:04.765 TAL #1: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+06:19:04.766 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid []
+06:19:04.775 STEG kvar 17: Slaggatan
+06:19:04.776 AVVIKELSE upptäckt: Deviation(kind=OffStepOnRoute(deviationFromStepLine=358.38260230021035))
+06:19:04.778 RUTT PASSAGERARE 2 punkter: 10 ms i valhalla-mobile, 1 rutt(er), 12 steg, 14,75 km
+06:19:04.784 TAL #2: Kör mot nordväst  Kaplansgatan, W 1000. Därefter Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+06:19:04.788 STEG kvar 12: Parkgatan
+06:19:04.789 PÅ RUTTEN igen
+06:19:05.300 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=374.06963005913656))
+06:19:09.950 OMRÄKNING pågår
+06:19:09.963 RUTT PASSAGERARE 2 punkter: 9 ms i valhalla-mobile, 1 rutt(er), 16 steg, 15,54 km
+06:19:09.968 TAL #3: Kör österut  Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+06:19:09.970 STEG kvar 16: Skyttsvägen
+06:19:09.970 PÅ RUTTEN igen
+06:19:11.761 TAL #4: Sväng höger in på Skyttsvägen.
+06:19:12.788 STEG kvar 15: Moravägen
+06:19:15.096 TAL #5: Sväng höger in på Moravägen.
+06:19:18.683 STEG kvar 14: Kaplansgatan
+06:19:20.473 TAL #6: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+06:19:24.833 TAL #7: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+06:19:24.851 STEG kvar 13: Kaplansgatan
+06:19:26.133 STEG kvar 12: Parkgatan
+06:19:34.370 TAL #8: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+06:19:38.999 TAL #9: Kör ut ur rondellen in på Parkgatan, W 1000.
+06:19:39.008 STEG kvar 11: Parkgatan
+06:19:41.065 STEG kvar 10: Lillågatan
+06:19:43.361 TAL #10: Sväng höger in på Lillågatan, W 1000.
+06:19:47.222 TAL #11: Fortsätt på W 1000 i 2 kilometer.
+06:19:47.235 STEG kvar 9: Sväng höger.
+06:20:38.299 TAL #12: Om 400 meter, Sväng höger.
+06:20:45.785 TAL #13: Sväng höger. Därefter Sväng vänster.
+06:20:49.385 TAL #14: Sväng vänster. Därefter Sväng vänster.
+06:20:49.397 STEG kvar 8: Sväng vänster.
+06:20:50.663 TAL #15: Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+06:20:50.672 STEG kvar 7: Sväng vänster.
+06:20:52.713 TAL #16: Sväng höger in på Våmhusvägen, W 1000.
+06:20:52.721 STEG kvar 6: Våmhusvägen
+06:20:52.968 TAL #17: Fortsätt i 800 meter.
+06:20:52.979 STEG kvar 5: Fryksåsvägen
+06:21:02.507 TAL #18: Om 500 meter, Sväng höger in på Fryksåsvägen.
+06:21:12.053 TAL #19: Sväng höger in på Fryksåsvägen, W 1002.
+06:21:17.460 TAL #20: Fortsätt i 9 kilometer.
+06:21:17.477 STEG kvar 4: Grönklittsvägen
+06:26:03.233 TAL #21: Om 700 meter, Sväng höger in på Grönklittsvägen.
+08:15:33.558 TAL #22: Sväng höger in på Grönklittsvägen, W 1008.
+08:15:39.354 TAL #23: Fortsätt i 2.5 kilometer.
+08:15:39.367 STEG kvar 3: Värdshusvägen
+08:16:27.221 TAL #24: Om 600 meter, Sväng vänster in på Värdshusvägen.
+08:16:41.446 TAL #25: Sväng vänster in på Värdshusvägen.
+08:16:46.539 STEG kvar 2: Du har anlänt till din destination.
+08:16:47.550 TAL #26: Du har anlänt till din destination.
+08:16:50.600 STEG kvar 1: –
+08:16:50.857 FRAMME (Complete)
+08:16:51.100 SIMULERING slut efter 1750 steg
+08:19:02.873 RUTT TILL_FOTS 2 punkter: 75 ms i valhalla-mobile, 1 rutt(er), 31 steg, 15,60 km
+08:19:02.892 NAVIGERING startad (TILL_FOTS), simulerad position, avvikelseförsök vid []
+08:19:02.895 STEG kvar 31: –
+08:19:02.896 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=10739.299141821068))
+08:19:02.932 RUTT TILL_FOTS 2 punkter: 29 ms i valhalla-mobile, 1 rutt(er), 27 steg, 25,19 km
+08:19:02.944 TAL #1: Gå västerut på Värdshusvägen. Därefter Sväng vänster in på Södra Stugvägen.
+08:19:02.953 STEG kvar 27: Södra Stugvägen
+08:19:02.954 PÅ RUTTEN igen
+08:19:03.188 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=10751.169117787966))
+08:19:06.106 STEG kvar 27: –
+08:19:06.112 RUTT TILL_FOTS 2 punkter: 14 ms i valhalla-mobile, 1 rutt(er), 31 steg, 15,60 km
+08:19:06.121 TAL #1: Sväng vänster in på Slaggatan.
+08:19:06.121 NAVIGERING startad (TILL_FOTS), simulerad position, avvikelseförsök vid []
+08:19:06.122 STEG kvar 31: Slaggatan
+08:19:06.122 PÅ RUTTEN igen
+08:19:06.271 TAL #2: Gå söderut på Hantverkargatan.
+08:19:07.971 TAL #3: Om 50 meter, Sväng vänster in på Slaggatan.
+08:19:08.900 STEG kvar 30: Skyttsvägen
+08:19:09.288 TAL #4: Om 50 meter, Sväng höger in på Skyttsvägen.
+08:19:09.420 TAL #5: Sväng höger in på Skyttsvägen.
+08:19:10.206 STEG kvar 29: Moravägen
+08:19:10.332 TAL #6: Fortsätt i 200 meter.
+08:19:12.333 TAL #7: Om 50 meter, Sväng vänster in på Moravägen.
+08:19:12.463 TAL #8: Sväng vänster in på Moravägen.
+08:19:13.254 TAL #9: Fortsätt i 300 meter.
+08:19:13.261 STEG kvar 28: Moravägen
+08:19:16.279 TAL #10: Om 50 meter, Håll höger för att stanna kvar på Moravägen.
+08:19:16.416 TAL #11: Håll höger för att stanna kvar på Moravägen.
+08:19:17.217 STEG kvar 27: E 45
+08:19:17.351 TAL #12: Om 50 meter, Sväng höger in på E 45.
+08:19:17.484 TAL #13: Sväng höger in på E 45. Därefter Håll höger för att stanna kvar på E 45.
+08:19:18.676 TAL #14: Håll höger för att stanna kvar på E 45.
+08:19:18.684 STEG kvar 26: Moravägen
+08:19:18.805 TAL #15: Fortsätt i 11 kilometer.
+08:19:18.814 STEG kvar 25: Inlandsvägen
+08:21:51.628 TAL #16: Om 50 meter, Håll vänster för att ta E 45.
+08:21:51.757 TAL #17: Håll vänster för att ta E 45, Inlandsvägen.
+08:21:52.534 STEG kvar 24: Sväng vänster.
+08:21:52.661 TAL #18: Om 50 meter, Sväng vänster.
+08:21:52.789 TAL #19: Sväng vänster. Därefter Håll höger i korsningen.
+08:21:53.693 TAL #20: Håll höger i korsningen.
+08:21:53.701 STEG kvar 23: Håll höger i korsningen.
+08:21:53.828 TAL #21: Sväng höger. Därefter Håll vänster för att ta E 45.
+08:21:53.837 STEG kvar 22: Sväng höger.
+08:21:54.212 TAL #22: Håll vänster för att ta E 45, Inlandsvägen.
+08:21:54.222 STEG kvar 21: Inlandsvägen
+08:21:54.469 TAL #23: Fortsätt i 400 meter.
+08:21:54.479 STEG kvar 20: Inlandsvägen
+08:21:59.497 TAL #24: Om 50 meter, Håll höger för att stanna kvar på E 45.
+08:21:59.627 TAL #25: Håll höger för att stanna kvar på E 45, Inlandsvägen.
+08:22:00.397 STEG kvar 19: E 45
+08:22:00.779 TAL #26: Om 50 meter, Sväng höger för att stanna kvar på E 45.
+08:22:00.907 TAL #27: Sväng höger för att stanna kvar på E 45. Därefter Håll höger för att ta Lasarettsvägen.
+08:22:01.935 TAL #28: Håll höger för att ta Lasarettsvägen.
+08:22:01.945 STEG kvar 18: Lasarettsvägen
+08:22:02.063 TAL #29: Fortsätt i 700 meter.
+08:22:02.072 STEG kvar 17: Lasarettsvägen
+08:22:12.243 TAL #30: Om 50 meter, Sväng höger för att stanna kvar på Lasarettsvägen.
+08:22:12.499 TAL #31: Sväng höger för att stanna kvar på Lasarettsvägen.
+08:22:13.400 TAL #32: Fortsätt i 300 meter.
+08:22:13.410 STEG kvar 16: Sväng höger.
+08:22:17.762 TAL #33: Om 50 meter, Sväng höger.
+08:22:17.892 TAL #34: Sväng höger.
+08:22:18.539 TAL #35: Sväng vänster in på Wikmansvägen.
+08:22:18.551 STEG kvar 15: Wikmansvägen
+08:22:19.178 TAL #36: Fortsätt i 200 meter.
+08:22:19.189 STEG kvar 14: Solgärdsvägen
+08:22:21.619 TAL #37: Om 50 meter, Sväng höger in på Solgärdsvägen.
+08:22:21.746 TAL #38: Sväng höger in på Solgärdsvägen.
+08:22:22.395 STEG kvar 13: Inlandsvägen
+08:22:22.908 TAL #39: Om 50 meter, Sväng vänster in på E 45.
+08:22:23.170 TAL #40: Sväng vänster in på E 45, 70.
+08:22:23.939 TAL #41: Fortsätt på E 45, 70 i 300 meter.
+08:22:23.948 STEG kvar 12: Vasagatan
+08:22:26.508 TAL #42: Om 50 meter, Håll vänster för att ta E 45.
+08:22:26.637 TAL #43: Håll vänster för att ta E 45, 70.
+08:22:27.405 TAL #44: Fortsätt i 200 meter.
+08:22:27.416 STEG kvar 11: Stationsvägen
+08:22:30.106 TAL #45: Om 50 meter, Sväng vänster in på Stationsvägen.
+08:22:30.362 TAL #46: Sväng vänster in på Stationsvägen.
+08:22:31.387 TAL #47: Sväng höger för att stanna kvar på Stationsvägen.
+08:22:31.397 STEG kvar 10: Stationsvägen
+08:22:31.772 TAL #48: Fortsätt i 300 meter.
+08:22:31.783 STEG kvar 9: Sväng vänster in på gångvägen.
+08:22:34.980 TAL #49: Om 50 meter, Sväng vänster in på gångvägen.
+08:22:35.106 TAL #50: Sväng vänster in på gångvägen.
+08:22:35.876 TAL #51: Sväng höger in på gångvägen.
+08:22:35.887 STEG kvar 8: Sväng höger in på gångvägen.
+08:22:36.917 STEG kvar 7: Fortsätt.
+08:22:37.172 TAL #52: Om 50 meter, Fortsätt.
+08:22:37.298 TAL #53: Fortsätt.
+08:22:37.944 STEG kvar 6: Håll höger i korsningen.
+08:22:38.455 TAL #54: Om 50 meter, Håll höger i korsningen.
+08:22:38.584 TAL #55: Håll höger i korsningen.
+08:22:39.356 TAL #56: Fortsätt i 500 meter.
+08:22:39.367 STEG kvar 5: Fredsgatan
+08:22:45.395 TAL #57: Om 50 meter, Sväng höger in på Fredsgatan.
+08:22:45.522 TAL #58: Sväng höger in på Fredsgatan.
+08:22:46.299 TAL #59: Fortsätt i 200 meter.
+08:22:46.311 STEG kvar 4: Björnramsgatan
+08:22:48.231 TAL #60: Om 50 meter, Sväng höger in på Björnramsgatan.
+08:22:48.361 TAL #61: Sväng höger in på Björnramsgatan.
+08:22:49.135 STEG kvar 3: Dalagatan
+08:22:49.262 TAL #62: Om 50 meter, Sväng vänster in på Dalagatan.
+08:22:49.519 TAL #63: Sväng vänster in på Dalagatan.
+08:22:50.171 STEG kvar 2: Din destination är till vänster.
+08:22:50.427 STEG kvar 1: –
+08:22:50.552 FRAMME (Complete)
+08:22:50.677 SIMULERING slut efter 1725 steg
+08:22:56.683 RUTT PASSAGERARE 2 punkter: 27 ms i valhalla-mobile, 1 rutt(er), 22 steg, 16,07 km
+08:22:56.699 TAL #1: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+08:22:56.700 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid [60, 200, 340]
+08:22:56.707 STEG kvar 22: Slaggatan
+08:22:56.708 AVVIKELSE upptäckt: Deviation(kind=OffStepOnRoute(deviationFromStepLine=12903.575786543159))
+08:22:56.720 RUTT PASSAGERARE 2 punkter: 17 ms i valhalla-mobile, 1 rutt(er), 2 steg, 0,00 km
+08:22:56.723 TAL #2: Du har anlänt till din destination.
+08:22:56.746 STEG kvar 2: Du har anlänt till din destination.
+08:22:56.747 PÅ RUTTEN igen
+08:22:57.231 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=13066.933409183))
+08:23:00.464 RUTT PASSAGERARE 2 punkter: 20 ms i valhalla-mobile, 1 rutt(er), 22 steg, 16,07 km
+08:23:00.485 TAL #1: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+08:23:00.487 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid [60, 200, 340]
+08:23:00.489 STEG kvar 22: Slaggatan
+08:23:00.489 PÅ RUTTEN igen
+08:23:04.362 TAL #2: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+08:23:05.897 TAL #3: Sväng höger in på Skyttsvägen.
+08:23:05.911 STEG kvar 21: Skyttsvägen
+08:23:08.462 STEG kvar 20: Moravägen
+08:23:10.771 TAL #4: Sväng vänster in på Moravägen.
+08:23:14.379 STEG kvar 19: E 45
+08:23:15.909 AVVIKELSE försök 1: tre positioner 250 m från rutten vid steg 60
+08:23:16.167 OMRÄKNING pågår
+08:23:16.172 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.7397752759926))
+08:23:16.197 RUTT PASSAGERARE 2 punkter: 21 ms i valhalla-mobile, 1 rutt(er), 21 steg, 15,85 km
+08:23:16.218 STEG kvar 21: –
+08:23:16.932 TAL #5: Kör västerut  Slaggatan. Därefter Sväng vänster in på Skyttsvägen.
+08:23:21.294 OMRÄKNING pågår
+08:23:21.312 RUTT PASSAGERARE 2 punkter: 16 ms i valhalla-mobile, 1 rutt(er), 19 steg, 15,38 km
+08:23:21.317 TAL #6: Kör österut  Moravägen. Därefter Kör in i rondellen och ta den 2:a avfarten in på E 45.
+08:23:21.323 STEG kvar 19: E 45
+08:23:21.324 PÅ RUTTEN igen
+08:23:23.851 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på E 45, Moravägen.
+08:23:25.644 TAL #8: Kör ut ur rondellen in på E 45, Moravägen.
+08:23:25.663 STEG kvar 18: Moravägen
+08:23:25.903 TAL #9: Fortsätt på E 45 i 11 kilometer.
+08:23:25.915 STEG kvar 17: Inlandsvägen
+08:23:52.614 AVVIKELSE försök 2: tre positioner 250 m från rutten vid steg 200
+08:23:52.880 OMRÄKNING pågår
+08:23:52.882 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.71700746701202))
+08:23:52.908 RUTT PASSAGERARE 2 punkter: 24 ms i valhalla-mobile, 1 rutt(er), 19 steg, 14,52 km
+08:23:52.914 STEG kvar 19: –
+08:23:56.211 TAL #10: Sväng höger in på Backvägen. Därefter Sväng vänster in på E 45.
+08:23:58.020 OMRÄKNING pågår
+08:23:58.039 RUTT PASSAGERARE 2 punkter: 17 ms i valhalla-mobile, 1 rutt(er), 17 steg, 14,15 km
+08:23:58.045 TAL #11: Kör söderut på E 45, Moravägen.
+08:23:58.047 STEG kvar 17: Inlandsvägen
+08:23:58.047 PÅ RUTTEN igen
+08:24:29.310 AVVIKELSE försök 3: tre positioner 250 m från rutten vid steg 340
+08:24:29.577 OMRÄKNING pågår
+08:24:29.581 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.73515171371588))
+08:24:29.593 RUTT PASSAGERARE 2 punkter: 16 ms i valhalla-mobile, 1 rutt(er), 20 steg, 14,19 km
+08:24:29.598 TAL #12: Kör mot nordöst  Bingbyvägen. Därefter, i 300 meter, Sväng vänster in på Gamla Postvägen.
+08:24:29.612 STEG kvar 20: Gamla Postvägen
+08:24:29.613 PÅ RUTTEN igen
+08:24:30.335 AVVIKELSE upptäckt: Deviation(kind=OffStepOnRoute(deviationFromStepLine=230.23639867342993))
+08:24:34.685 OMRÄKNING pågår
+08:24:34.698 RUTT PASSAGERARE 2 punkter: 13 ms i valhalla-mobile, 1 rutt(er), 17 steg, 12,81 km
+08:24:34.703 TAL #13: Kör söderut på E 45, Moravägen.
+08:24:34.713 STEG kvar 17: Inlandsvägen
+08:24:34.714 PÅ RUTTEN igen
+08:28:08.322 TAL #14: Om 800 meter, Kör in i rondellen och ta den 2:a avfarten in på E 45.
+08:28:24.684 TAL #15: Kör in i rondellen och ta den 2:a avfarten in på E 45, Inlandsvägen.
+08:28:31.075 TAL #16: Kör ut ur rondellen in på E 45, Inlandsvägen.
+08:28:31.086 STEG kvar 16: Inlandsvägen
+08:28:32.611 STEG kvar 15: Inlandsvägen
+08:28:41.786 TAL #17: Kör in i rondellen och ta den 2:a avfarten in på E 45, Inlandsvägen.
+08:28:47.412 TAL #18: Kör ut ur rondellen in på E 45, Inlandsvägen.
+08:28:47.431 STEG kvar 14: Inlandsvägen
+08:28:49.449 TAL #19: Fortsätt i 700 meter.
+08:28:49.465 STEG kvar 13: E 45; 70
+08:28:54.043 TAL #20: Om 600 meter, Kör in på Noretrondellen och ta den 2:a avfarten in på E 45.
+08:29:05.785 TAL #21: Kör in på Noretrondellen och ta den 2:a avfarten in på E 45, 70.
+08:29:10.640 TAL #22: Kör ut ur rondellen in på E 45, 70.
+08:29:10.658 STEG kvar 12: Inlandsvägen
+08:29:10.894 TAL #23: Fortsätt på E 45, 70 i 1.5 kilometer.
+08:29:10.912 STEG kvar 11: Vasagatan
+08:29:31.041 TAL #24: Om 600 meter, Kör in i rondellen och ta den 2:a avfarten in på E 45.
+08:29:42.511 TAL #25: Kör in i rondellen och ta den 2:a avfarten in på E 45, 70.
+08:29:47.863 TAL #26: Kör ut ur rondellen in på E 45, 70.
+08:29:47.882 STEG kvar 10: Vasagatan
+08:29:49.401 STEG kvar 9: Vasagatan
+08:29:55.247 TAL #27: Kör in i rondellen och ta den 2:a avfarten in på E 45, 70.
+08:30:00.080 TAL #28: Kör ut ur rondellen in på E 45, 70.
+08:30:00.099 STEG kvar 8: Vasagatan
+08:30:01.106 STEG kvar 7: Älvgatan
+08:30:07.198 TAL #29: Kör in i rondellen och ta den 2:a avfarten in på Älvgatan, 70.
+08:30:11.263 TAL #30: Kör ut ur rondellen in på Älvgatan, 70.
+08:30:11.282 STEG kvar 6: Älvgatan
+08:30:12.538 STEG kvar 5: Badstugatan
+08:30:21.434 TAL #31: Kör in i rondellen och ta den 2:a avfarten in på Badstugatan, 70.04.
+08:30:26.765 TAL #32: Kör ut ur rondellen in på Badstugatan, 70.04. Därefter, i 100 meter, Sväng vänster in på Dalagatan.
+08:30:26.788 STEG kvar 4: Badstugatan
+08:30:30.066 TAL #33: Sväng vänster in på Dalagatan. Därefter, i 100 meter, Du kommer att anlända till din destination.
+08:30:30.084 STEG kvar 3: Dalagatan
+08:30:33.364 STEG kvar 2: Du har anlänt till din destination.
+08:30:33.613 TAL #34: Du har anlänt till din destination.
+08:30:35.899 STEG kvar 1: –
+08:30:36.153 FRAMME (Complete)
+08:30:36.404 SIMULERING slut efter 1772 steg
+08:31:35.147 STOPP
+08:31:36.991 STOPP
+08:58:48.172 START samsung SM-X900 Android 16 (API 36)
+08:58:48.177 INTERNET-behörighet: saknas (som avsett)
+08:58:48.223 PAKET läses från APK:ns tillgångar
+08:58:49.057 PAKET f03-sex-kommuner-20261121-0619 installerat atomärt på 831 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB
+08:58:49.062 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+08:58:50.070 VALHALLA startad på 1007 ms
+09:05:43.904 START samsung SM-X900 Android 16 (API 36)
+09:05:43.907 INTERNET-behörighet: saknas (som avsett)
+09:05:43.944 PAKET läses från APK:ns tillgångar
+09:05:43.958 PAKET f03-sex-kommuner-20261121-0619 redan aktivt på 12 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB
+09:05:44.013 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+09:05:44.205 VALHALLA startad på 206 ms
+09:05:57.584 RUTT PASSAGERARE 2 punkter: 113 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+09:05:57.609 TAL #1: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+09:05:57.610 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid []
+09:05:57.614 STEG kvar 17: Slaggatan
+09:06:01.652 TAL #2: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+09:06:03.224 TAL #3: Sväng höger in på Skyttsvägen.
+09:06:03.235 STEG kvar 16: Skyttsvägen
+09:06:05.861 STEG kvar 15: Moravägen
+09:06:08.194 TAL #4: Sväng höger in på Moravägen.
+09:06:11.818 STEG kvar 14: Kaplansgatan
+09:06:13.611 TAL #5: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+09:06:17.999 TAL #6: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+09:06:18.002 STEG kvar 13: Kaplansgatan
+09:06:19.284 STEG kvar 12: Parkgatan
+09:06:27.497 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+09:06:32.120 TAL #8: Kör ut ur rondellen in på Parkgatan, W 1000.
+09:06:32.132 STEG kvar 11: Parkgatan
+09:06:34.174 STEG kvar 10: Lillågatan
+09:06:36.496 TAL #9: Sväng höger in på Lillågatan, W 1000.
+09:06:40.373 TAL #10: Fortsätt på W 1000 i 2 kilometer.
+09:06:40.384 STEG kvar 9: Sväng höger.
+09:07:31.319 TAL #11: Om 400 meter, Sväng höger.
+09:07:38.798 TAL #12: Sväng höger. Därefter Sväng vänster.
+09:07:42.405 TAL #13: Sväng vänster. Därefter Sväng vänster.
+09:07:42.416 STEG kvar 8: Sväng vänster.
+09:07:43.696 TAL #14: Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+09:07:43.702 STEG kvar 7: Sväng vänster.
+09:07:45.760 TAL #15: Sväng höger in på Våmhusvägen, W 1000.
+09:07:45.767 STEG kvar 6: Våmhusvägen
+09:07:46.015 TAL #16: Fortsätt i 800 meter.
+09:07:46.023 STEG kvar 5: Fryksåsvägen
+09:07:55.554 TAL #17: Om 500 meter, Sväng höger in på Fryksåsvägen.
+09:08:05.104 TAL #18: Sväng höger in på Fryksåsvägen, W 1002.
+09:08:10.526 TAL #19: Fortsätt i 9 kilometer.
+09:08:10.536 STEG kvar 4: Grönklittsvägen
+09:12:04.634 TAL #20: Om 700 meter, Sväng höger in på Grönklittsvägen.

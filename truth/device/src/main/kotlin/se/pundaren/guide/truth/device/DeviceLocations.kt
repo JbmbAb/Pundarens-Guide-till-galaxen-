@@ -144,14 +144,14 @@ internal class DeviceLocations(
         }
     }
 
-    /** Avslutar provturen. Nästa position kommer från GNSS. */
-    fun stopSimulation() {
+    /** Avslutar provturen. Nästa position kommer från GNSS. Sant om en provtur pågick. */
+    fun stopSimulation(): Boolean {
         simulation?.cancel()
         simulation = null
-        if (_simulating.value) {
-            _simulating.value = false
-            latest = null
-        }
+        if (!_simulating.value) return false
+        _simulating.value = false
+        latest = null
+        return true
     }
 
     private fun publish(location: Location) {

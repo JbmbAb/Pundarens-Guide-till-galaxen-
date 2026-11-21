@@ -230,6 +230,33 @@ class TruthKernelTest {
         assertEquals(PositionQuality.GOOD, kernel.position.value.quality)
     }
 
+    @Test fun `utan någon position alls räknas osäkerheten som visad från första klockslaget`() {
+        assertNull(kernel.position.value.uncertaintyShownSinceMonotonicMillis)
+        kernel.clockTick(stamp(1_000))
+        kernel.clockTick(stamp(2_000))
+        assertEquals(PositionQuality.LOST, kernel.position.value.quality)
+        assertEquals(1_000L, kernel.position.value.uncertaintyShownSinceMonotonicMillis)
+        kernel.positionFix(stamp(3_000), PositionFix(orsa, 5.0))
+        assertNull(kernel.position.value.uncertaintyShownSinceMonotonicMillis)
+    }
+
+    @Test fun `en glömd position lämnar inget kvar som ser ut som en känd plats`() {
+        kernel.positionFix(stamp(1_000), PositionFix(orsa, 5.0, speedMps = 12.5))
+        assertEquals(PositionQuality.GOOD, kernel.position.value.quality)
+        kernel.positionForgotten(stamp(2_000))
+        assertEquals(PositionQuality.LOST, kernel.position.value.quality)
+        assertNull(kernel.position.value.accuracyMeters)
+        assertNull(kernel.position.value.fixAgeSeconds)
+        assertNull(kernel.map.value.position)
+        assertEquals(0.0, kernel.navigation.value.speedKmh, 0.0)
+        kernel.clockTick(stamp(30_000))
+        assertNull(kernel.map.value.position)
+        // Nästa riktiga position gäller som vanligt.
+        kernel.positionFix(stamp(31_000), PositionFix(gronklitt, 6.0))
+        assertEquals(PositionQuality.GOOD, kernel.position.value.quality)
+        assertEquals(gronklitt, kernel.map.value.position)
+    }
+
     @Test fun `farten härleds ur positionerna när GNSS inte anger den`() {
         val p2 = se.pundaren.guide.truth.core.geo.Geo.destination(orsa, 0.0, 14.0)
         kernel.positionFix(stamp(0), PositionFix(orsa, 5.0))

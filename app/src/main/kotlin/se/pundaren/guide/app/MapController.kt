@@ -81,6 +81,7 @@ class MapController(private val context: Context, private val log: (String) -> U
                 }
             }
             m.addOnMapLongClickListener { p -> onLongPress(GeoPoint(p.latitude, p.longitude)); true }
+            applyStart()
             applyStyle()
         }
     }
@@ -130,10 +131,25 @@ class MapController(private val context: Context, private val log: (String) -> U
         }
     }
 
-    /** Första kameraläget innan någon position finns: paketets mitt. */
+    private var startCamera: CameraPosition? = null
+    private var startApplied = false
+
+    /**
+     * Första kameraläget innan någon position finns: paketets mitt. Kartan kan bli klar före eller
+     * efter det här anropet, så läget sparas och sätts när båda finns (annars står kameran kvar på
+     * noll grader, sett på målenheten 2026-11-21).
+     */
     fun startAt(center: GeoPoint, zoom: Double) {
-        if (position != null) return
-        map?.cameraPosition = CameraPosition.Builder().target(LatLng(center.lat, center.lon)).zoom(zoom).build()
+        startCamera = CameraPosition.Builder().target(LatLng(center.lat, center.lon)).zoom(zoom).build()
+        applyStart()
+    }
+
+    private fun applyStart() {
+        val m = map ?: return
+        val camera = startCamera ?: return
+        if (startApplied || position != null) return
+        startApplied = true
+        m.cameraPosition = camera
     }
 
     fun setRoute(line: List<GeoPoint>) {

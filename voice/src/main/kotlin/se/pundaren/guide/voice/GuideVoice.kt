@@ -1,7 +1,6 @@
 package se.pundaren.guide.voice
 
 import android.content.Context
-import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
@@ -10,6 +9,7 @@ import android.os.Looper
 import android.os.SystemClock
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.speech.tts.Voice
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,12 +18,13 @@ import se.pundaren.guide.truth.api.InstructionVoice
 /** Röstens läge, för sanningsremsan och loggen. */
 sealed interface VoiceStatus {
     data object Starting : VoiceStatus
-    data class Ready(val voiceName: String) : VoiceStatus
+    data class Ready(val engine: String, val instructionVoice: String, val tailVoice: String) : VoiceStatus
     data class Failed(val reason: String) : VoiceStatus
 }
 
 /**
- * Appens enda röst: Samsungs talmotor med svensk offlineröst. En talmotor, två kanaler (03, 4.4):
+ * Appens enda röst: enhetens talmotor med en svensk röst som läses upp helt på enheten.
+ * En talmotor, två kanaler (03, 4.4):
  *
  * - **Kanal B (besked)** – [speakInstruction]. Sanningslagrets navigeringsröst. Läses alltid upp
  *   med `QUEUE_FLUSH`, som klipper allt annat den här rösten håller på med, även en svans.
@@ -32,11 +33,21 @@ sealed interface VoiceStatus {
  *
  * Båda kanalerna går genom samma `TextToSpeech`-objekt. Det är avsiktligt: Androids talmotor
  * tömmer bara den egna anroparens kö, så med två objekt hade ett besked fått vänta bakom en svans.
+ * Kanalerna får olika röster när enheten har mer än en svensk röst, så att det hörs vem som talar
+ * (RR-12).
  *
- * Motorval, röstval (svenska, kräver inte nät, `SE` först), takt 0,95, tonhöjd 1,0, ljudattribut
- * för navigationsvägledning, kortvarigt ljudfokus med duckning och felvägarna kommer från ägarens
- * `SvenskTalObserver.kt` (etapp 3) och dess ändringar 1–4. Nytt här: svanskanalen, kontrollen att
- * den anslutna motorn verkligen är Samsungs och en andra väg in via systemets standardmotor ([connect]).
+ * **Vilken motor.** Ägarens `SvenskTalObserver.kt` (etapp 3) bad uttryckligen om Samsungs motor
+ * `com.samsung.SMT`. På målenheten SM-X900 (One UI 8.0, Samsung TTS 3.5.02.46) är den en privat
+ * motor som avvisar appen ("is not allowed to bind to private engine"), och Android ansluter då
+ * tyst den högst rankade öppna motorn, som där är Googles (logcat 2026-11-21). Ägarbeslut samma dag:
+ * förbudet mot Google gäller Googles API:er, inte Google i övrigt, och enhetens talmotor får
+ * användas. Appen använder därför systemets talmotor, vilken den än är.
+ *
+ * **Bara på enheten.** Bara röster som inte kräver nät väljs, och helst motorns uttryckligt lokala
+ * röster ("…-local"). Texten som läses upp (gatunamn, citat) ska inte lämna enheten.
+ *
+ * Takt 0,95, tonhöjd 1,0, ljudattribut för navigationsvägledning, kortvarigt ljudfokus med duckning
+ * och felvägarna kommer från ägarens fil och dess ändringar 1–4.
  */
 class GuideVoice(
     context: Context,
@@ -49,10 +60,20 @@ class GuideVoice(
     private val _status = MutableStateFlow<VoiceStatus>(VoiceStatus.Starting)
     val status: StateFlow<VoiceStatus> = _status.asStateFlow()
 
+    private val _voices = MutableStateFlow<List<String>>(emptyList())
+    /** Namnen på enhetens svenska röster som läses upp utan nät, i den ordning de föredras. */
+    val voices: StateFlow<List<String>> = _voices.asStateFlow()
+
     private val _instructionSpeaking = MutableStateFlow(false)
     override val instructionSpeaking: StateFlow<Boolean> = _instructionSpeaking.asStateFlow()
 
     private var engine: TextToSpeech? = null
+    private var engineName = "okänd"
+    private var swedish: List<Voice> = emptyList()
+    private var instructionVoice: Voice? = null
+    private var tailVoice: Voice? = null
+    private var preferredInstruction: String? = null
+    private var preferredTail: String? = null
     private var ready = false
     private var closed = false
     private var counter = 0L
@@ -66,6 +87,10 @@ class GuideVoice(
     private var tailDone: ((finished: Boolean) -> Unit)? = null
     private var tailStartedAt = 0L
     private var tailTimeout: Runnable? = null
+
+    /** En svans som just klippts av ett besked, tills talmotorn har kvitterat att den tystnat. */
+    private var cutTailId: String? = null
+    private var cutTailAt = 0L
 
     private val audio = appContext.getSystemService(AudioManager::class.java)
     private val audioAttributes = AudioAttributes.Builder()
@@ -90,89 +115,58 @@ class GuideVoice(
         override fun onStop(utteranceId: String?, interrupted: Boolean) = onMain { ended(utteranceId, finished = false) }
     }
 
-    /** Sant medan anslutningen görs med motorn uttryckligen angiven, falskt när systemets standardmotor prövas. */
-    private var explicitAttempt = true
-
     init {
-        if (!samsungEngineInstalled()) {
-            // Finns inte Samsungs motor ska ingen annan motor få ta över (F-06: ingen Google).
-            main.post { fail("Samsungs talmotor ($SAMSUNG_ENGINE) finns inte på enheten") }
-        } else {
-            connect(explicit = true)
-        }
+        engine = TextToSpeech(
+            appContext,
+            // Ändring 4 (etapp 3): posta alltid. Utan installerad motor anropar Android lyssnaren
+            // synkront inifrån konstruktorn, när engine ännu är null.
+            { status -> main.post { initialize(status) } },
+        )
     }
-
-    /**
-     * Två vägar till Samsungs motor:
-     *
-     * 1. Uttryckligen, som i ägarens `SvenskTalObserver.kt`: `TextToSpeech(…, "com.samsung.SMT")`.
-     * 2. Genom systemets standardmotor, om användaren har valt Samsungs motor som önskad motor.
-     *
-     * Väg 2 behövs på målenheten: SM-X900 med One UI 8.0 och Samsung TTS 3.5.02.46 avvisar väg 1
-     * för appar utanför Samsungs egen lista ("is not allowed to bind to private engine", logcat
-     * 2026-11-21). Oavsett väg godtas rösten bara om den anslutna motorn är Samsungs.
-     */
-    private fun connect(explicit: Boolean) {
-        explicitAttempt = explicit
-        // Ändring 4 (etapp 3): posta alltid. Utan installerad motor anropar Android lyssnaren
-        // synkront inifrån konstruktorn, när engine ännu är null.
-        val listener = TextToSpeech.OnInitListener { status -> main.post { initialize(status) } }
-        engine = if (explicit) TextToSpeech(appContext, listener, SAMSUNG_ENGINE) else TextToSpeech(appContext, listener)
-    }
-
-    private fun samsungEngineInstalled(): Boolean = runCatching {
-        val intent = Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE).setPackage(SAMSUNG_ENGINE)
-        appContext.packageManager.queryIntentServices(intent, 0).isNotEmpty()
-    }.getOrDefault(false)
 
     private fun initialize(status: Int) {
         if (closed) return
         val tts = engine ?: return
         if (status != TextToSpeech.SUCCESS) {
-            if (explicitAttempt) {
-                log("TAL: Samsungs talmotor tog inte emot en uttrycklig anslutning (status $status). Provar systemets standardmotor.")
-                tts.shutdown()
-                engine = null
-                connect(explicit = false)
-            } else {
-                fail("Ingen talmotor kunde startas")
-            }
+            fail("Ingen talmotor kunde startas")
             return
         }
-        // Om bindningen till den begärda motorn misslyckas kan Android i tysthet ansluta en annan motor
-        // (standardmotorn eller den högst rankade). Listan över installerade motorer avslöjar inte det.
-        // Därför prövas både systemets standardmotor och rösten själv (F-06: ingen Google).
-        val defaultEngine = runCatching { tts.defaultEngine }.getOrNull()
-        val allVoices = runCatching { tts.voices }.getOrNull().orEmpty()
-        val swedish = allVoices
-            .filter { it.locale.language == "sv" && !it.isNetworkConnectionRequired }
-            .sortedWith(compareBy({ it.locale.country != "SE" }, { it.name }))
-        log(
-            "TAL ansluten ${if (explicitAttempt) "uttryckligen" else "via standardmotorn"}: standardmotor=$defaultEngine, " +
-                "${allVoices.size} röster, svenska offline: ${swedish.joinToString { it.name }.ifEmpty { "inga" }}",
-        )
-        if (!explicitAttempt && defaultEngine != SAMSUNG_ENGINE) {
-            fail("Systemets talmotor är $defaultEngine. Välj Samsungs text-till-tal-motor under Inställningar › Allmän hantering › Text till tal")
-            return
-        }
-        if (allVoices.isNotEmpty() && allVoices.all { looksLikeGoogleVoiceName(it.name) }) {
-            fail("Den anslutna talmotorn är inte Samsungs")
-            return
-        }
-        val voice = swedish.firstOrNull { !looksLikeGoogleVoiceName(it.name) }
-        if (voice == null) {
-            fail("Ingen svensk offlineröst i Samsungs talmotor. Installera svenska under Text till tal › Samsungs motor › Installera röstdata")
-            return
-        }
-        if (tts.setVoice(voice) != TextToSpeech.SUCCESS) {
-            fail("Den svenska rösten ${voice.name} kunde inte väljas")
+        engineName = runCatching { tts.defaultEngine }.getOrNull() ?: "okänd"
+        val all = runCatching { tts.voices }.getOrNull().orEmpty()
+        swedish = all
+            .filter { it.locale.language == "sv" && !it.isNetworkConnectionRequired && !isNetworkVoiceName(it.name) }
+            .sortedWith(compareBy({ !isLocalVoiceName(it.name) }, { it.locale.country != "SE" }, { it.name }))
+        _voices.value = swedish.map { it.name }
+        log("TAL motor $engineName, ${all.size} röster, svenska utan nät: ${swedish.joinToString { it.name }.ifEmpty { "inga" }}")
+        if (swedish.isEmpty()) {
+            fail("Ingen svensk röst som läses upp på enheten. Installera svensk röstdata under Inställningar › Allmän hantering › Text till tal")
             return
         }
         tts.setAudioAttributes(audioAttributes)
         tts.setOnUtteranceProgressListener(progress)
+        chooseVoices()
         ready = true
-        _status.value = VoiceStatus.Ready(voice.name)
-        log("TAL REDO: ${voice.name}, offline (${swedish.size} svenska offlineröster: ${swedish.joinToString { it.name }})")
+    }
+
+    /** Väljer röst per kanal: användarens val om det finns, annars två olika röster om enheten har flera. */
+    private fun chooseVoices() {
+        val first = swedish.firstOrNull() ?: return
+        val instruction = swedish.firstOrNull { it.name == preferredInstruction } ?: first
+        val tail = swedish.firstOrNull { it.name == preferredTail }
+            ?: swedish.lastOrNull { it.name != instruction.name && isLocalVoiceName(it.name) == isLocalVoiceName(instruction.name) }
+            ?: swedish.firstOrNull { it.name != instruction.name }
+            ?: instruction
+        instructionVoice = instruction
+        tailVoice = tail
+        _status.value = VoiceStatus.Ready(engineName, instruction.name, tail.name)
+        log("TAL REDO: besked ${instruction.name}, Guiden ${tail.name}, motor $engineName, utan nät")
+    }
+
+    /** Användarens val av röster (namn ur [voices]). Null betyder appens eget val. */
+    fun setPreferredVoices(instruction: String?, tail: String?) = onMain {
+        preferredInstruction = instruction
+        preferredTail = tail
+        if (ready) chooseVoices()
     }
 
     private fun fail(reason: String) {
@@ -190,14 +184,19 @@ class GuideVoice(
     override fun speakInstruction(text: String) = onMain {
         if (closed || text.isBlank()) return@onMain
         val tts = engine
-        if (!ready || tts == null) {
+        val voice = instructionVoice
+        if (!ready || tts == null || voice == null) {
             log("TAL EJ REDO: $text")
             return@onMain
         }
         // Beskedet klipper svansen. QUEUE_FLUSH nedan gör det i talmotorn; här städas bokföringen.
+        // Den klippta svansens id sparas så att motorns kvitto kan tidsättas (R-01: inom 100 ms).
+        cutTailId = tailId
+        cutTailAt = SystemClock.elapsedRealtime()
         finishTail(finished = false, cutBy = "besked")
         counter++
         val id = "besked-$counter"
+        tts.voice = voice
         tts.setSpeechRate(INSTRUCTION_RATE)
         tts.setPitch(INSTRUCTION_PITCH)
         requestFocus(id)
@@ -231,14 +230,16 @@ class GuideVoice(
      */
     fun speakTail(id: String, text: String, maxMillis: Int, onDone: (finished: Boolean) -> Unit) = onMain {
         val tts = engine
-        if (closed || !ready || tts == null || text.isBlank() || _instructionSpeaking.value || maxMillis <= 0) {
+        val voice = tailVoice
+        if (closed || !ready || tts == null || voice == null || text.isBlank() || _instructionSpeaking.value || maxMillis <= 0) {
             onDone(false)
             return@onMain
         }
         finishTail(finished = false, cutBy = "ny svans")
         val utterance = "svans-$id"
+        tts.voice = voice
         tts.setSpeechRate(TAIL_RATE)
-        tts.setPitch(TAIL_PITCH)
+        tts.setPitch(if (voice.name == instructionVoice?.name) TAIL_PITCH_SAME_VOICE else TAIL_PITCH)
         requestFocus(utterance)
         tailId = utterance
         tailDone = onDone
@@ -282,7 +283,11 @@ class GuideVoice(
     // ------------------------------------------------------------------------------------
 
     private fun started(utteranceId: String?) {
-        if (utteranceId != null && utteranceId == instructionId) instructionStartedAt = SystemClock.elapsedRealtime()
+        if (utteranceId != null && utteranceId == instructionId) {
+            // Tiden från begäran till att motorn börjar tala: så länge kan en klippt svans som mest höras.
+            log("TAL BÖRJAR: ${SystemClock.elapsedRealtime() - instructionStartedAt} ms efter begäran")
+            instructionStartedAt = SystemClock.elapsedRealtime()
+        }
         if (utteranceId != null && utteranceId == tailId) tailStartedAt = SystemClock.elapsedRealtime()
     }
 
@@ -295,6 +300,10 @@ class GuideVoice(
             log("TAL KLART: ${SystemClock.elapsedRealtime() - instructionStartedAt} ms${if (finished) "" else " (klippt)"}")
         } else if (utteranceId == tailId) {
             finishTail(finished, cutBy = if (finished) null else "talmotorn")
+        } else if (utteranceId == cutTailId) {
+            // Talmotorns kvitto på att den klippta svansen har tystnat.
+            log("SVANS TYST: ${SystemClock.elapsedRealtime() - cutTailAt} ms efter beskedets begäran")
+            cutTailId = null
         }
     }
 
@@ -329,26 +338,22 @@ class GuideVoice(
     }
 
     companion object {
-        const val SAMSUNG_ENGINE = "com.samsung.SMT"
-
         /** Ägarens värden för beskedet (SvenskTalObserver.kt). */
         const val INSTRUCTION_RATE = 0.95f
         const val INSTRUCTION_PITCH = 1.0f
 
         /**
          * Guidens röst ska gå att skilja från beskedet med örat (RR-12). Kandidatvärden: något
-         * långsammare och mörkare. Avgörs i lyssningstestet (G4).
+         * långsammare, och mörkare när samma röst måste användas för båda. Avgörs i lyssningstestet (G4).
          */
         const val TAIL_RATE = 0.90f
-        const val TAIL_PITCH = 0.82f
+        const val TAIL_PITCH = 0.95f
+        const val TAIL_PITCH_SAME_VOICE = 0.80f
 
-        /**
-         * Googles talmotor namnger sina röster "sv-se-x-lfs-local", "sv-se-x-cfg-network" eller
-         * "sv-SE-language". En sådan röst godtas aldrig (F-06), vilken väg anslutningen än tog.
-         */
-        fun looksLikeGoogleVoiceName(name: String): Boolean {
-            val n = name.lowercase()
-            return n.contains("-x-") || n.endsWith("-language") || n.endsWith("-local") || n.endsWith("-network")
-        }
+        /** Röster som motorn uttryckligen läser upp på enheten, t.ex. "sv-se-x-lfs-local". */
+        fun isLocalVoiceName(name: String): Boolean = name.lowercase().endsWith("-local")
+
+        /** Röster som motorn hämtar från nätet, t.ex. "sv-se-x-lfs-network". Väljs aldrig. */
+        fun isNetworkVoiceName(name: String): Boolean = name.lowercase().endsWith("-network")
     }
 }

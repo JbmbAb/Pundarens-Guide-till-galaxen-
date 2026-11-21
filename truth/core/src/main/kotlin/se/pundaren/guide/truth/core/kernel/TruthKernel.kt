@@ -295,6 +295,23 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
         publish(stamp)
     }
 
+    /**
+     * Glömmer den senaste positionen. Används när en provtur avslutas: en simulerad position får
+     * inte ligga kvar och se ut som enhetens senast kända plats.
+     */
+    @TruthInput @Synchronized
+    fun positionForgotten(stamp: Stamp) {
+        lastFix = null
+        lastFixMono = null
+        speedKnown = false
+        speedMps = 0.0
+        quality = PositionQuality.LOST
+        uncertaintySinceMono = stamp.monotonicMillis
+        stationarySinceMono = null
+        stationaryEmitted = 0
+        publish(stamp)
+    }
+
     /** Plats för solens läge innan första positionen finns (offlinepaketets mittpunkt). */
     @TruthInput @Synchronized
     fun anchor(point: GeoPoint) {
@@ -304,6 +321,9 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
     /** Anropas ungefär en gång per sekund. Driver allt som beror på att tiden går. */
     @TruthInput @Synchronized
     fun clockTick(stamp: Stamp) {
+        // Innan första positionen har kommit visar sanningsremsan "Söker position …" från start.
+        // Osäkerheten räknas som visad från första klockslaget (06, R-06).
+        if (quality != PositionQuality.GOOD && uncertaintySinceMono == null) uncertaintySinceMono = stamp.monotonicMillis
         evaluateQuality(stamp)
         evaluateStationary(stamp)
         evaluateDayPhase(stamp)
@@ -456,7 +476,11 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
         _position.value = PositionSnapshot(
             quality = quality,
             accuracyMeters = lastFix?.accuracyMeters,
-            fixAgeSeconds = if (stamp != null && fixMono != null) (stamp.monotonicMillis - fixMono) / 1000.0 else _position.value.fixAgeSeconds,
+            fixAgeSeconds = when {
+                fixMono == null -> null
+                stamp != null -> (stamp.monotonicMillis - fixMono) / 1000.0
+                else -> _position.value.fixAgeSeconds
+            },
             uncertaintyShownSinceMonotonicMillis = uncertaintySinceMono,
         )
         _safety.value = SafetySnapshot(

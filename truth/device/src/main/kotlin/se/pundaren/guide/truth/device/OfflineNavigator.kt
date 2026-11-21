@@ -138,6 +138,9 @@ class OfflineNavigator(
     private var wasCalculating = false
     private var navigating = false
 
+    /** En rutt visas: under navigeringen och efter framkomst, tills användaren kvitterar den. */
+    private var routeShown = false
+
     private val battery = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent ?: return
@@ -334,6 +337,7 @@ class OfflineNavigator(
         geometryKey = key(plan.route.geometry)
         wasCalculating = false
         navigating = true
+        routeShown = true
         if (testDrive != null) {
             val speed = if (plan.travelMode == TravelMode.FOOT) FOOT_TEST_SPEED_MPS else VEHICLE_TEST_SPEED_MPS
             locations.startSimulation(plan.route, speed, testDrive.timeFactor.coerceIn(1, 20), testDrive.deviateAt)
@@ -347,15 +351,18 @@ class OfflineNavigator(
         )
     }
 
-    /** Avbryter navigeringen och en eventuell provtur. */
+    /** Avbryter navigeringen och en eventuell provtur, eller kvitterar en avslutad tur ("Framme"). */
     fun stop() {
-        if (!navigating && !locations.simulating.value) return
+        if (!routeShown && !navigating && !locations.simulating.value) return
         core?.stopNavigation()
         announcer.stop()
-        locations.stopSimulation()
+        val wasTestDrive = locations.stopSimulation()
         navigating = false
+        routeShown = false
         geometryKey = null
         kernel.routeStopped(now())
+        // Provturens simulerade position får inte ligga kvar som enhetens senast kända plats.
+        if (wasTestDrive) kernel.positionForgotten(now())
         log("STOPP")
     }
 
@@ -410,7 +417,7 @@ class OfflineNavigator(
                 )
                 log("FRAMME (Complete)")
                 navigating = false
-                locations.stopSimulation()
+                // En provtur räknas som pågående tills användaren kvitterar med "Klar" (remsan visar PROVTUR).
             }
             else -> {}
         }

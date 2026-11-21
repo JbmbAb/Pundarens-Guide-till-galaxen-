@@ -158,7 +158,10 @@ class SafetyGateTest {
 
     @Test fun `SG-19 utgången svans stoppas`() {
         assertEquals(SuppressReason.EXPIRED, reason(gate.decide(input(), tail(validUntil = now - 1))))
-        assertEquals(Interrupt(SuppressReason.EXPIRED), gate.checkOngoing(input(), tail(validUntil = now - 1)))
+        // En svans som redan spelas klipps inte för att livslängden går ut (etapp 4, avvikelse E4-D5);
+        // säkerhetsavbrotten gäller fortfarande för den.
+        assertEquals(PresentationDecision.Continue, gate.checkOngoing(input(), tail(validUntil = now - 1)))
+        assertEquals(Interrupt(SuppressReason.EMERGENCY), gate.checkOngoing(input(emergency = true), tail(validUntil = now - 1)))
     }
 
     @Test fun `SG-20 svans från V-012 med PENDING stoppas`() =

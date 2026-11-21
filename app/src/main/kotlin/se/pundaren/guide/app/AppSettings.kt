@@ -25,6 +25,9 @@ data class Settings(
     val instructionsMuted: Boolean = false,
     /** Hem, för nödkortets riktning och avstånd. Sparas bara på enheten. */
     val home: GeoPoint? = null,
+    /** Vald röst för beskeden respektive Guiden (namn ur talmotorn). Null betyder appens eget val. */
+    val instructionVoice: String? = null,
+    val tailVoice: String? = null,
 )
 
 /** Inställningarna, sparade i appens privata lagring. Ingenting här lämnar enheten. */
@@ -45,6 +48,8 @@ class AppSettings(context: Context) {
             chattinessPercent = prefs.getInt("chattiness", 100).coerceIn(0, 100),
             instructionsMuted = prefs.getBoolean("instructions_muted", false),
             home = if (lat != null && lon != null) GeoPoint(lat, lon) else null,
+            instructionVoice = prefs.getString("instruction_voice", null),
+            tailVoice = prefs.getString("tail_voice", null),
         )
     }
 
@@ -57,6 +62,8 @@ class AppSettings(context: Context) {
             .putBoolean("guide_enabled", next.guideEnabled)
             .putInt("chattiness", next.chattinessPercent)
             .putBoolean("instructions_muted", next.instructionsMuted)
+            .putString("instruction_voice", next.instructionVoice)
+            .putString("tail_voice", next.tailVoice)
             .apply {
                 if (next.home != null) putString("home_lat", next.home.lat.toString()).putString("home_lon", next.home.lon.toString())
                 else remove("home_lat").remove("home_lon")

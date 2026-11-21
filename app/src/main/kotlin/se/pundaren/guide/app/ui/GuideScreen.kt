@@ -45,6 +45,7 @@ import se.pundaren.guide.truth.api.GuidancePhase
 import se.pundaren.guide.truth.api.PositionQuality
 import se.pundaren.guide.truth.api.TravelMode
 import se.pundaren.guide.truth.core.geo.Geo
+import se.pundaren.guide.truth.core.platser.PlaceKind
 import se.pundaren.guide.truth.device.NavigatorStatus
 import se.pundaren.guide.truth.device.RoutePlan
 import se.pundaren.guide.truth.device.TestDrive
@@ -52,7 +53,11 @@ import se.pundaren.guide.voice.VoiceStatus
 import kotlin.math.roundToInt
 
 /** Ett valt mål som räknas eller har räknats. */
-private data class Proposal(val name: String, val plan: RoutePlan?, val error: String?, val fromRealPosition: Boolean)
+private data class Proposal(
+    val name: String, val plan: RoutePlan?, val error: String?, val fromRealPosition: Boolean,
+    /** Orten provturen startar i när ingen aktuell position finns. */
+    val startName: String? = null,
+)
 
 /**
  * Huvudskärmen. Uppifrån och ned: sanningsremsan (sant, turkost), kartan, och ovanpå kartan
@@ -84,12 +89,22 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
     val navigating = guidance.phase == GuidancePhase.NAVIGATING || guidance.phase == GuidancePhase.REROUTING
 
     fun propose(destination: GeoPoint, name: String) {
-        val real = position.quality != PositionQuality.LOST && mapData.position != null
-        val origin = if (real) mapData.position else map.center()
-        proposal = Proposal(name, null, null, real)
+        // En verklig start kräver en aktuell position som ligger inom kartpaketet.
+        val bbox = activePackage?.manifest?.omradeBbox
+        val here = mapData.position
+        val real = position.quality != PositionQuality.LOST && here != null &&
+            (bbox == null || (here.lon >= bbox[0] && here.lon <= bbox[2] && here.lat >= bbox[1] && here.lat <= bbox[3]))
+        // Annars kan rutten bara köras som provtur. Den startar då i orten närmast kartans mitt,
+        // så att starten ligger vid en väg.
+        val startPlace = if (real) null else map.center()?.let { center ->
+            places.places.filter { it.kind == PlaceKind.SETTLEMENT && it.subKind in setOf("city", "town", "village") }
+                .minByOrNull { Geo.distanceMeters(center, it.point) }
+        }
+        val origin = if (real) mapData.position else startPlace?.point ?: map.center()
+        proposal = Proposal(name, null, null, real, startPlace?.name)
         scope.launch {
             val result = navigator.plan(destination, name, from = origin)
-            proposal = Proposal(name, result.getOrNull(), result.exceptionOrNull()?.message, real)
+            proposal = Proposal(name, result.getOrNull(), result.exceptionOrNull()?.message, real, startPlace?.name)
         }
     }
 
@@ -149,6 +164,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                 proposal?.let { p ->
                     ProposalCard(
                         name = p.name, plan = p.plan, error = p.error, mode = settings.travelMode, fromRealPosition = p.fromRealPosition,
+                        startName = p.startName,
                         onStart = { p.plan?.let { navigator.start(it) }; proposal = null },
                         onTestDrive = { factor, deviate ->
                             p.plan?.let { navigator.start(it, TestDrive(factor, if (deviate) setOf(40, 120, 200) else emptySet())) }
@@ -234,7 +250,7 @@ private fun TailBubble(tail: TailCandidate, onLongPress: () -> Unit) {
 
 @Composable
 private fun ProposalCard(
-    name: String, plan: RoutePlan?, error: String?, mode: TravelMode, fromRealPosition: Boolean,
+    name: String, plan: RoutePlan?, error: String?, mode: TravelMode, fromRealPosition: Boolean, startName: String?,
     onStart: () -> Unit, onTestDrive: (factor: Int, deviate: Boolean) -> Unit, onCancel: () -> Unit, modifier: Modifier = Modifier,
 ) {
     Column(
@@ -253,18 +269,24 @@ private fun ProposalCard(
                     color = GuideColors.OnSurface, fontSize = 18.sp,
                 )
                 if (!fromRealPosition) {
-                    Text("Ingen aktuell position. Rutten är räknad från kartans mitt och kan bara köras som provtur.", color = GuideColors.OnSurfaceVariant, fontSize = 14.sp)
+                    Text(
+                        "Ingen aktuell position inom kartpaketet. Rutten är räknad från ${startName ?: "kartans mitt"} och kan bara köras som provtur.",
+                        color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
+                    )
                 }
             }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            if (plan != null) {
-                if (fromRealPosition) PillButton("Starta", primary = true, onClick = onStart)
+            if (plan != null && fromRealPosition) PillButton("Starta", primary = true, onClick = onStart)
+            PillButton("Avbryt", onClick = onCancel)
+        }
+        if (plan != null) {
+            // Provtur: simulerad position längs rutten, för att pröva appen utan att röra sig.
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 PillButton("Provtur") { onTestDrive(1, false) }
                 PillButton("Provtur ×8") { onTestDrive(8, false) }
                 PillButton("Avvikelseprov") { onTestDrive(4, true) }
             }
-            PillButton("Avbryt", onClick = onCancel)
         }
     }
 }

@@ -76,6 +76,7 @@ class AppGraph(context: Context) : AutoCloseable {
                 conductor.settings = ConductorSettings(enabled = s.guideEnabled, chattinessPerMille = s.chattinessPercent * 10)
                 navigator.setInstructionsMuted(s.instructionsMuted)
                 navigator.setTravelMode(s.travelMode)
+                voice.setPreferredVoices(s.instructionVoice, s.tailVoice)
             }
         }
         scope.launch { navigator.prepare() }

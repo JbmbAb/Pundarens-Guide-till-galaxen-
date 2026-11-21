@@ -132,14 +132,24 @@ fun EmergencyCardView(
         Text(lines.first(), color = GuideColors.Truth, fontSize = 30.sp, fontWeight = FontWeight.Bold, lineHeight = 36.sp)
         lines.drop(1).forEach { Text(it, color = GuideColors.Truth, fontSize = 26.sp, lineHeight = 32.sp) }
         Text(
-            "Läs upp koordinaterna för larmoperatören. Utan mobilnät går det inte att ringa härifrån; ta dig mot hemriktningen eller högre mark.",
+            "Läs upp koordinaterna för larmoperatören. Appen kan inte ringa och har ingen nätanslutning.",
             color = GuideColors.Truth, fontSize = 17.sp,
         )
+        // Nödkortet bär bara sanningsfärgen: inga lila knappar här (F-02: lila är Guiden).
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            PillButton("Läs upp") { onReadAloud(lines) }
-            PillButton("Avsluta nödläget", onClick = onClose)
+            TruthButton("Läs upp") { onReadAloud(lines) }
+            TruthButton("Avsluta nödläget", onClick = onClose)
         }
     }
+}
+
+/** Knapp i sanningsfärgen med raka hörn, för nödkortet. */
+@Composable
+private fun TruthButton(text: String, onClick: () -> Unit) {
+    Text(
+        text, color = GuideColors.Background, fontSize = 18.sp, fontWeight = FontWeight.Bold,
+        modifier = Modifier.background(GuideColors.Truth, RectangleShape).clickable(onClick = onClick).padding(horizontal = 22.dp, vertical = 14.dp),
+    )
 }
 
 /** Probability Drive: reglage som bara rör Guiden, plus läget för paket, röst och logg. */
@@ -158,6 +168,26 @@ fun DriveDialog(
             Text("Pratsamhet: ${settings.chattinessPercent} %", color = GuideColors.OnSurface, fontSize = 16.sp)
             Slider(value = settings.chattinessPercent.toFloat(), onValueChange = { v -> graph.settings.update { it.copy(chattinessPercent = v.toInt()) } }, valueRange = 0f..100f)
             SwitchRow("Beskedsrösten läser upp", !settings.instructionsMuted) { on -> graph.settings.update { it.copy(instructionsMuted = !on) } }
+
+            // Röstval: två olika röster gör att det hörs vem som talar (RR-12). Tryck för att byta.
+            val voices by graph.voice.voices.collectAsState()
+            if (voiceStatus is VoiceStatus.Ready && voices.isNotEmpty()) {
+                fun next(current: String) = voices[(voices.indexOf(current) + 1).mod(voices.size)]
+                Text("Röster", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    PillButton("Besked: ${voiceStatus.instructionVoice}") {
+                        graph.settings.update { it.copy(instructionVoice = next(voiceStatus.instructionVoice)) }
+                    }
+                    PillButton("Prov") { graph.voice.speakInstruction("Röstprov. Det här är beskedsrösten.") }
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    PillButton("Guiden: ${voiceStatus.tailVoice}") {
+                        graph.settings.update { it.copy(tailVoice = next(voiceStatus.tailVoice)) }
+                    }
+                    // Guidens röstprov är en rad ur arkivet och går genom SafetyGate som allt annat från Guiden.
+                    PillButton("Prov") { graph.requestWisdom() }
+                }
+            }
 
             Text("Hem", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(
@@ -179,7 +209,7 @@ fun DriveDialog(
                 NavigatorStatus.Starting -> "Startar …"
             }
             val voice = when (voiceStatus) {
-                is VoiceStatus.Ready -> "Röst: ${voiceStatus.voiceName} (Samsungs talmotor, offline)"
+                is VoiceStatus.Ready -> "Talmotor: ${voiceStatus.engine}, röster som läses upp på enheten"
                 is VoiceStatus.Failed -> "Röst saknas: ${voiceStatus.reason}"
                 VoiceStatus.Starting -> "Rösten startar …"
             }
