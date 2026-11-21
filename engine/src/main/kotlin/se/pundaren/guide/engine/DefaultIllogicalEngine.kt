@@ -1,11 +1,13 @@
 package se.pundaren.guide.engine
 
 import se.pundaren.guide.archive.api.ArchiveEntry
+import se.pundaren.guide.archive.api.EntryKind
 import se.pundaren.guide.archive.api.Mechanism
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.IllogicalEngine
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.engine.api.TailKind
+import se.pundaren.guide.engine.api.WisdomSource
 import se.pundaren.guide.truth.api.Arrived
 import se.pundaren.guide.truth.api.BatteryLow
 import se.pundaren.guide.truth.api.ConvoyContactLost
@@ -49,7 +51,7 @@ data class EngineConfig(
 class DefaultIllogicalEngine(
     private val bank: LineBank,
     private val config: EngineConfig = EngineConfig(),
-) : IllogicalEngine {
+) : IllogicalEngine, WisdomSource {
 
     override fun onEvent(event: TruthEvent, context: EngineContext): List<TailCandidate> {
         if (!mayProposeTail(event)) return emptyList()
@@ -72,8 +74,29 @@ class DefaultIllogicalEngine(
         return listOf(toCandidate(line, event, contradicts = null, extra = emptySet()))
     }
 
-    private fun toCandidate(line: ArchiveEntry, event: TruthEvent, contradicts: String?, extra: Set<Mechanism>) = TailCandidate(
-        id = "TAIL-${line.id}-${event.eventId}",
+    /**
+     * Don't Panic: en rad på begäran. Väljs bland arkivets citat (original och godkända bearbetningar)
+     * och annars bland övriga rader utan situation. Samma spärrar som i [onEvent]: ingen upprepning
+     * inom fönstret och inga rader som bara får användas till fots när läget är fordon.
+     */
+    override fun wisdom(requestId: String, nowMonotonicMillis: Long, context: EngineContext): TailCandidate? {
+        val rng = SplittableRandom(mix(context.seed, requestId))
+        val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
+        val vehicle = context.travelMode != TravelMode.FOOT
+        val usable = bank.lines.filter { e ->
+            e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && e.tags.none { it.startsWith("situation:") && it != "situation:general" }
+        }
+        val quotes = usable.filter { it.kind == EntryKind.QUOTE }
+        val pool = quotes.ifEmpty { usable }
+        if (pool.isEmpty()) return null
+        return toCandidate(pool[rng.nextInt(pool.size)], requestId, nowMonotonicMillis, contradicts = null, extra = emptySet())
+    }
+
+    private fun toCandidate(line: ArchiveEntry, event: TruthEvent, contradicts: String?, extra: Set<Mechanism>) =
+        toCandidate(line, event.eventId, event.monotonicMillis, contradicts, extra)
+
+    private fun toCandidate(line: ArchiveEntry, triggeredBy: String, atMonotonicMillis: Long, contradicts: String?, extra: Set<Mechanism>) = TailCandidate(
+        id = "TAIL-${line.id}-$triggeredBy",
         text = line.text,
         lineId = line.id,
         origin = line.originClass,
@@ -84,8 +107,8 @@ class DefaultIllogicalEngine(
         mentionsRikard = VoiceGuards.mentionsRikard(line.text),
         estimatedSpeechMillis = estimateSpeechMillis(line.text),
         footOnly = LineBank.isFootOnly(line),
-        triggeredBy = event.eventId,
-        validUntilMonotonicMillis = event.monotonicMillis + config.tailLifetimeMillis,
+        triggeredBy = triggeredBy,
+        validUntilMonotonicMillis = atMonotonicMillis + config.tailLifetimeMillis,
         contradicts = contradicts,
     )
 
