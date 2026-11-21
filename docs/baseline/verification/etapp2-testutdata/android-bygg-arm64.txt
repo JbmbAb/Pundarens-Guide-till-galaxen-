@@ -1,5 +1,5 @@
 # Kört 2026-11-21 01:47:11 CET på commit 79d2b962b3f11c4655e01687c4c43467867d8f10
-# --: line 1: java: command not found; Gradle 9.2.1 (wrapper), AGP 9.0.1, compileSdk 36
+# openjdk version "17.0.21.1" 2026-11-17 (JAVA_HOME=/opt/jdk17); Gradle 9.2.1 (wrapper), AGP 9.0.1, Kotlin 2.3.20 (stdlib), compileSdk 36
 # Kommando: ./gradlew --console=plain clean :app:verifieraIngenGoogle :app:testDebugUnitTest :app:assembleDebug -PpaketKatalog=/workspace/verkstad/ut/paket/orsa-prov-20261121-0117
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
 Daemon will be stopped at the end of the build 
