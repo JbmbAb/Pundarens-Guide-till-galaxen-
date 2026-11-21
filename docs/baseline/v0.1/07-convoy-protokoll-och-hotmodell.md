@@ -54,7 +54,7 @@ POSITION {
 }
 ```
 
-AEAD: XChaCha20-Poly1305 i libsodium (kandidat, NOT_VERIFIED i G7). Ingen egen kryptografi.
+AEAD: **AES-256-GCM ur plattformens JCA** (ägarbeslut 2026-11-21, [10](10-beslutslogg.md), avsnitt 11). Noncen är då 96 bitar, slumpad per meddelande, inte 192 som i skissen ovan. Kandidaten XChaCha20-Poly1305 i libsodium är parkerad. Fortfarande NOT_VERIFIED i G7: krypteringsdelen ska granskas av någon som inte har byggt den. Ingen egen kryptografi.
 
 ### 3.3 Mottagarens kontroller
 

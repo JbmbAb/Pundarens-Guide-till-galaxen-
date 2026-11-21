@@ -30,6 +30,8 @@ interface Aead {
  * slumpmässigt per meddelande, vilket håller så länge en nyckel används till långt färre än 2³²
  * meddelanden; en session på högst 24 timmar sänder några tiotusental. Gränssnittet [Aead] gör att
  * primitiven kan bytas utan att protokollet ändras. Granskas i G7 av någon som inte har byggt den.
+ *
+ * Ägarbeslut 2026-11-21 kl. 14.19: "Kör på AES-256-GCM" (beslutsloggen, avsnitt 11). libsodium är parkerat.
  */
 object AesGcmAead : Aead {
     override val keyBytes = 32

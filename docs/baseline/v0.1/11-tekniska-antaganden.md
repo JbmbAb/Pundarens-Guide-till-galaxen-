@@ -24,7 +24,7 @@ Alla antaganden har status NOT_VERIFIED. Ett antagande blir ACCEPT först när g
 | A-14 | Gradle-beroendegrafen kan testas automatiskt i CI (t.ex. modules-graph-assert eller eget task) | 03, G-6 | Bygg ett förbjudet beroende och se att CI fallerar | G1 | NOT_VERIFIED |
 | A-15 | En Konsist-liknande arkitekturkontroll kan hindra sanningstyper i `TailCandidate` | 03, G-7 | Negativt test | G1 | NOT_VERIFIED |
 | A-16 | `sources_to_targets` räcker för osannolikhetsdriften och mötespunkten, eftersom isokroner saknas | 08, T-06 | Prototyp i etapp 5 | G6 | NOT_VERIFIED |
-| A-17 | libsodium (t.ex. via Lazysodium) fungerar på målplattformen för XChaCha20-Poly1305 | 07 | Prototyp och granskning | G7 | NOT_VERIFIED |
+| A-17 | ~~libsodium (t.ex. via Lazysodium) fungerar på målplattformen för XChaCha20-Poly1305~~ Utgår: ägarbeslut 2026-11-21 valde AES-256-GCM ur plattformens JCA ([10](10-beslutslogg.md), avsnitt 11). Kvar att visa: att JCA:s AES-GCM ger samma resultat på målenheten som på JVM. | 07 | Test på målenheten och granskning | G7 | NOT_VERIFIED |
 | A-18 | Androids bakgrundsbegränsningar tillåter att avsändaren stoppar sändning vid sluttid även i bakgrunden | Byggplanens grind för Convoy | Test med appen i bakgrunden och i dvala | G7 | NOT_VERIFIED |
 | A-19 | En lokal språkmodell på telefonen ger användbar frågebokföring på svenska, eller så finns en LAN-maskin | Startprompten §9 | Prototyp med inklistrade testsamtal (påhittade, inte verkliga) | G8 | NOT_VERIFIED |
 | A-20 | Lantmäteriets produkter som behövs är CC0 och kan kombineras med OSM (ODbL) i samma paket med korrekt upphovsangivelse | Licenser i manifestet | Kontroll i Geotorget och licenstexter | G5 | NOT_VERIFIED |

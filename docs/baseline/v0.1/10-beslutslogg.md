@@ -208,3 +208,14 @@ Bakgrund: på målenheten avvisar Samsungs talmotor appen, och Android ansluter 
 
 Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 9.
 
+## 11. Ägarbeslut 2026-11-21 kl. 14.19 (Europe/Stockholm): krypteringen i Convoy
+
+Bakgrund: baslinjen pekar ut XChaCha20-Poly1305 i libsodium som kandidat (07, 3.2; 03, avsnitt 5; A-17). Byggaren byggde `:convoy:api` med AES-256-GCM ur plattformens JCA för att inte lägga ett nytt inbyggt bibliotek i appen utan beslut ([etapp5-7-protokollet](../verification/etapp5-7-protokoll.md), E6-D1), redogjorde för skillnaden och rekommenderade AES-256-GCM för Convoy för två. Ägarens beslut ordagrant: "Kör på AES-256-GCM".
+
+| Id | Utfall | Kort |
+|---|---|---|
+| E6-D1 | ACCEPT genom ägarbeslut | Convoy för två förseglar kuverten med AES-256-GCM ur plattformens JCA. 96 bitars nonce, slumpad per kuvert; ny nyckel per session; en session sänder som mest några tiotusental kuvert. |
+| A-17, libsodium | Parkerat | Väcks om grupper större än två eller långlivade nycklar blir aktuella. Primitiven ligger bakom gränssnittet `Aead` och kan bytas utan att protokollet ändras. |
+| G7 | Oförändrat, NOT_VERIFIED | Beslutet gäller valet av primitiv. Det ersätter inte granskningen av krypteringsdelen av någon som inte har byggt den. |
+
+Fortfarande öppet för Convoy: var servern ska köras (F-15) och om appen får nätverksbehörighet.
