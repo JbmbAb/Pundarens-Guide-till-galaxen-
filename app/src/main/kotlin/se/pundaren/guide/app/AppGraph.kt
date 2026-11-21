@@ -13,14 +13,17 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import se.pundaren.guide.archive.api.ArchiveEntry
 import se.pundaren.guide.archive.api.ArchiveReader
 import se.pundaren.guide.archive.core.ArchiveImporter
 import se.pundaren.guide.archive.core.ArchiveSources
 import se.pundaren.guide.archive.core.InMemoryArchiveStore
+import se.pundaren.guide.babel.BabelGame
 import se.pundaren.guide.conductor.ConductorLoop
 import se.pundaren.guide.conductor.ConductorRecord
 import se.pundaren.guide.conductor.ConductorSettings
 import se.pundaren.guide.conductor.TailConductor
+import se.pundaren.guide.encyclopedia.ApprovedLexicon
 import se.pundaren.guide.engine.DefaultIllogicalEngine
 import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.api.EngineContext
@@ -69,6 +72,13 @@ class AppGraph(context: Context) : AutoCloseable {
     val history: StateFlow<List<TailCandidate>> = _history.asStateFlow()
 
     private var wisdomRequests = 0
+
+    /** Babel-Stoner som spel (etapp 7). Använder bara godkända regler och rader ur arkivet. */
+    val babelGame = BabelGame(archive)
+
+    /** Encyklopedin (etapp 7): egna fältanteckningar och arkivets godkända lexikon. */
+    val fieldNotes = FieldNoteStore(File(app.filesDir, "anteckningar/anteckningar.tsv"), log::line)
+    val lexicon: List<ArchiveEntry> = ApprovedLexicon.entries(archive)
 
     /** Expeditionsprotokollet (etapp 5). Fakta ur händelsebussen, satir ur det Guiden faktiskt sa. */
     val protocols = ProtocolKeeper(File(app.getExternalFilesDir(null) ?: app.filesDir, "protokoll"), log::line)

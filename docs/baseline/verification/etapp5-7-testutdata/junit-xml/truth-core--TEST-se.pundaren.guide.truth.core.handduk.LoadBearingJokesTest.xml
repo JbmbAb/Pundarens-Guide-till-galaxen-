@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:44.364Z" hostname="MIMER" time="0.159">
+  <properties/>
+  <testcase name="fel fråga ger bara räknade värden" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.025"/>
+  <testcase name="ett avbrutet protokoll säger att ingen framkomst registrerades" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.018"/>
+  <testcase name="målet lottas bara bland dem som verkligen nås i tid" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.013"/>
+  <testcase name="okänt visas som okänt och gör inte handduken säkrad" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.004"/>
+  <testcase name="perspektivvyn räknar andelen av universums ålder på riktigt" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.004"/>
+  <testcase name="öppettider läses försiktigt och allt oklart blir okänt" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.006"/>
+  <testcase name="handduken är säkrad när alla fem punkter är godkända" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.003"/>
+  <testcase name="varje brist syns med sitt sanna värde" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.006"/>
+  <testcase name="snacks rangordnas efter omväg och säger okänd när öppettider saknas" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.028"/>
+  <testcase name="kandidaterna ligger inom rimligt avstånd och urvalet är seedat" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.036"/>
+  <testcase name="protokollet håller isär sant och satir och skrivs i myndighetsform" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.013"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

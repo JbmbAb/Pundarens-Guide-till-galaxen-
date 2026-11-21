@@ -76,7 +76,7 @@ private data class Proposal(
 )
 
 /** Panelerna som kan ligga över kartan, en i taget. */
-private enum class Sheet { DESTINATION, SETTINGS, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME }
+private enum class Sheet { DESTINATION, SETTINGS, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, BABEL, ENCYCLOPEDIA }
 
 /**
  * Huvudskärmen. Uppifrån och ned: sanningsremsan (sant, turkost), kartan, och ovanpå kartan
@@ -287,6 +287,11 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         if (!following) PillButton("Centrera") { map.recenter() }
                         if (!navigator.hasLocationPermission()) PillButton("Tillåt position") { onRequestLocation() }
                         PillButton("Protokoll") { sheet = Sheet.PROTOCOL }
+                        // Babel-Stoner och encyklopedin nås bara när ingen tur pågår (greppen stannar utanför navigatorn).
+                        if (!busy) {
+                            PillButton("Babel") { sheet = Sheet.BABEL }
+                            PillButton("Encyklopedi") { sheet = Sheet.ENCYCLOPEDIA }
+                        }
                         PillButton("Reglage") { sheet = Sheet.SETTINGS }
                     }
                 }
@@ -301,6 +306,8 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
         }
     }
 
+    // Babel-Stoner och encyklopedin är stängda så länge en tur pågår.
+    if (busy && (sheet == Sheet.BABEL || sheet == Sheet.ENCYCLOPEDIA)) sheet = null
     // Nödläget stänger alla paneler: nödkortet ska aldrig ligga under något annat.
     if (!safety.emergencyActive) when (sheet) {
         Sheet.DESTINATION -> DestinationDialog(
@@ -340,6 +347,11 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
             onSaveHere = { mapData.position?.let { here -> graph.settings.update { it.copy(home = here) } } },
             onShowTrack = { sheet = null; map.showLine(track.line) },
             onNewTrack = { navigator.newTrack() },
+            onDismiss = { sheet = null },
+        )
+        Sheet.BABEL -> BabelDialog(graph, onDismiss = { sheet = null })
+        Sheet.ENCYCLOPEDIA -> EncyclopediaDialog(
+            graph = graph, position = mapData.position.takeIf { !simulating && position.quality != PositionQuality.LOST }, places = places,
             onDismiss = { sheet = null },
         )
         null -> {}

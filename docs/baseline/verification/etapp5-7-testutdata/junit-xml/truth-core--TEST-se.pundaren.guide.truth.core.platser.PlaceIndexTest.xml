@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.platser.PlaceIndexTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:45.340Z" hostname="MIMER" time="0.014">
+  <properties/>
+  <testcase name="närmast först inom en radie" classname="se.pundaren.guide.truth.core.platser.PlaceIndexTest" time="0.009"/>
+  <testcase name="exakt träff först, sedan börjar-med, orter före annat" classname="se.pundaren.guide.truth.core.platser.PlaceIndexTest" time="0.003"/>
+  <testcase name="sökning bryr sig inte om versaler eller prickar" classname="se.pundaren.guide.truth.core.platser.PlaceIndexTest" time="0.001"/>
+  <testcase name="läser punkter med namn och hoppar över resten" classname="se.pundaren.guide.truth.core.platser.PlaceIndexTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

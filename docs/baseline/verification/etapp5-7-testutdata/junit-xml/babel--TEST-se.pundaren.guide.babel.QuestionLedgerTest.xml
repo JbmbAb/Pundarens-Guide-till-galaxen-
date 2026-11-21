@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.babel.QuestionLedgerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:24.836Z" hostname="MIMER" time="0.093">
+  <properties/>
+  <testcase name="texten delas i repliker med radnummer och talare" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.016"/>
+  <testcase name="varje fråga bokförs med rad, nästa replik och gemensamma ord" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.032"/>
+  <testcase name="innehållsord är ord med minst fyra tecken som inte är funktionsord" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.001"/>
+  <testcase name="samma regler gäller båda parter" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.009"/>
+  <testcase name="utskriften pekar varje fynd på en rad och ställer inga diagnoser" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.031"/>
+  <testcase name="repliker utan gemensamma ord med de tre föregående pekas ut med radnummer" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.002"/>
+  <testcase name="en fråga utan senare replik från någon annan bokförs så" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.0"/>
+  <testcase name="tom text och text utan frågor ger en tom bokföring" classname="se.pundaren.guide.babel.QuestionLedgerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

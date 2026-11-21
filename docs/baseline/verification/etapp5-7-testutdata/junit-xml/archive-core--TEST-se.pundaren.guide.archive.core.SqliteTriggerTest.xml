@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.archive.core.SqliteTriggerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:20.497Z" hostname="MIMER" time="1.521">
+  <properties/>
+  <testcase name="syntetisk post får ändras" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.536"/>
+  <testcase name="ombyggnad av tabellen tappar triggerna och upptäcks" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.249"/>
+  <testcase name="revisionshistoriken är bara tillägg" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.068"/>
+  <testcase name="delete av original stoppas" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.186"/>
+  <testcase name="update av originaltext stoppas" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.319"/>
+  <testcase name="uppgradering till original stoppas" classname="se.pundaren.guide.archive.core.SqliteTriggerTest" time="0.155"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

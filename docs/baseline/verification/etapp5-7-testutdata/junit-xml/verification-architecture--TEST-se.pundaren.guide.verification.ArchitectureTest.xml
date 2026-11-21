@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.verification.ArchitectureTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:47.144Z" hostname="MIMER" time="0.76">
+  <properties/>
+  <testcase name="G-4 TailCandidate bär inga sanningstyper och inga callbacks" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.045"/>
+  <testcase name="motorn gör ingen I-O" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.049"/>
+  <testcase name="G-9 och SG-23 SafetyGate returnerar bara beslut och har inga sanningsberoenden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.005"/>
+  <testcase name="inget Google-beroende någonstans i bygget" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.169"/>
+  <testcase name="händelserna är oföränderliga värden" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.369"/>
+  <testcase name="G-3 sanningsgränssnitten är bara läsning" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.014"/>
+  <testcase name="G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.04"/>
+  <testcase name="motorns gränssnitt har ingen väg tillbaka till sanningen" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.002"/>
+  <testcase name="G-6 beroendegrafen i byggfilerna saknar förbjudna kanter" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.013"/>
+  <testcase name="G-8 rena moduler har varken Android, Google eller nätverk" classname="se.pundaren.guide.verification.ArchitectureTest" time="0.053"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

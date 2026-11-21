@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.conductor.TailConductorTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:35.676Z" hostname="MIMER" time="1.765">
+  <properties/>
+  <testcase name="svansen väntar medan beskedet spelas och kommer efteråt" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.195"/>
+  <testcase name="riktningsord i fordonsläge stoppas av SafetyGate även om motorn släpper dem" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.002"/>
+  <testcase name="en svans i taget och den nyaste väntande gäller" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.005"/>
+  <testcase name="pågående svans avbryts när manöverfönstret öppnas" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.005"/>
+  <testcase name="avstängd Guide och noll pratsamhet ger inga svansar" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.017"/>
+  <testcase name="svans presenteras i normalt läge och hamnar i minnet" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.001"/>
+  <testcase name="svansen får aldrig mer tid än det som är kvar till nästa besked" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.001"/>
+  <testcase name="urvalet är deterministiskt" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.038"/>
+  <testcase name="omräkning låter svansen vänta, lågt batteri stryker den" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.001"/>
+  <testcase name="väntande svans stryks när livslängden gått ut" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.0"/>
+  <testcase name="nödläge avbryter pågående svans och stryker nya direkt" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.001"/>
+  <testcase name="tvåtusen slumpade händelser med riktig motor ger aldrig trams i förbjudna lägen" classname="se.pundaren.guide.conductor.TailConductorTest" time="1.493"/>
+  <testcase name="beställd svans går samma väg genom SafetyGate" classname="se.pundaren.guide.conductor.TailConductorTest" time="0.001"/>
+  <system-out><![CDATA[Dirigenten: 2000 händelser, 247 svansar presenterade (141 i fordonsläge), 53 avbrott
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

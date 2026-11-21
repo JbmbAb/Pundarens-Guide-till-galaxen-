@@ -84,6 +84,7 @@ dependencies {
     implementation(project(":safetygate"))
     implementation(project(":conductor"))
     implementation(project(":babel"))
+    implementation(project(":encyclopedia"))
 
     // Kartvisning (BSD-2), läser pmtiles:// sedan 11.7.0.
     implementation(libs.maplibre)

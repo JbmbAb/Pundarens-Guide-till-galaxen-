@@ -27,9 +27,9 @@ Projektets löpande numrering i grenar och protokoll skiljer sig från tabellen 
 | 3 | Etapp 2 | `etapp2/offline-karta`, PR #6 | [etapp2-protokoll](../verification/etapp2-protokoll.md) | G2, G3 NOT_VERIFIED |
 | 2–3 (G4) | Etapp 3 | `etapp3/svenskt-tal`, PR #7 | [etapp3-tal-protokoll](../verification/etapp3-tal-protokoll.md) | G4 NOT_VERIFIED. Samsungs motor fungerar inte på målenheten, se etapp 4. |
 | 4 | Etapp 4 | `etapp4/sanningskarna` | [etapp4-protokoll](../verification/etapp4-protokoll.md) | G5 NOT_VERIFIED. Appen kör på målenheten med simulerad position. |
-| 5 | – | `etapp4/sanningskarna` (bara logiken) | etapp4-protokollet avsnitt 1 | G6 NOT_VERIFIED. Sanna värden under skämten är testade på JVM, inte inkopplade i appen. |
-| 6 | – | – | – | Inte byggt. F-15 (var servern ska köras) är öppen. |
-| 7 | – | – | – | Satirläget finns sedan etapp 1. Spelet, analysläget och encyklopedin är inte byggda. |
+| 5 | – | `etapp4/sanningskarna` | [etapp5-7-protokoll](../verification/etapp5-7-protokoll.md) | G6 NOT_VERIFIED. Testat på JVM och inkopplat i appen, inte kört på målenheten. Osynlighetslagret och öppettider saknar data. |
+| 6 | – | `etapp4/sanningskarna` (bara `:convoy:api`) | [etapp5-7-protokoll](../verification/etapp5-7-protokoll.md) | G7 NOT_VERIFIED. Protokollets logik är testad på JVM. Transport, server och skärm är inte byggda; F-15 (var servern ska köras) är öppen. |
+| 7 | – | `etapp4/sanningskarna` | [etapp5-7-protokoll](../verification/etapp5-7-protokoll.md) | G8 NOT_VERIFIED. Spelet (6 av 16 grepp har godkända rader), frågebokföringen utan språkmodell och encyklopedin är testade på JVM och inkopplade i appen, inte körda på målenheten. |
 
 ## Etapp 1 i detalj (nästa steg)
 

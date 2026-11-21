@@ -6,7 +6,7 @@ En ologisk men oumbärlig digital följeslagare för Android, inspirerad av *Lif
 
 > Appen ska inte vara en förnuftig assistent som försöker vara rolig. Den ska vara en absurd, inkonsekvent, självmedvetet inkompetent galaktisk följeslagare som av misstag råkar vara användbar.
 
-**Status 2026-11-21:** appen finns och kör på målenheten (Samsung Galaxy Tab S8 Ultra) med karta, ruttning och navigering offline, svensk röst och Guiden bakom SafetyGate. Ingen grind efter G0 är godkänd: det som återstår är verkliga turer, lyssning och oberoende granskning. Läget står i protokollen under [`docs/baseline/verification/`](docs/baseline/verification/), senast [etapp 4](docs/baseline/verification/etapp4-protokoll.md).
+**Status 2026-11-21:** appen finns och kör på målenheten (Samsung Galaxy Tab S8 Ultra) med karta, ruttning och navigering offline, svensk röst och Guiden bakom SafetyGate. Ingen grind efter G0 är godkänd: det som återstår är verkliga turer, lyssning och oberoende granskning. Läget står i protokollen under [`docs/baseline/verification/`](docs/baseline/verification/), senast [etapp 4](docs/baseline/verification/etapp4-protokoll.md) och [etapp 5–7](docs/baseline/verification/etapp5-7-protokoll.md). Etapp 5–7 (skämt som bär last, Convoy-protokollets logik, Babel-Stoner och encyklopedin) är byggda och testade på dator men inte körda på målenheten.
 
 Det som gäller för bygget är baslinjen i [`docs/baseline/v0.1/`](docs/baseline/v0.1/), inte resten av den här sidan. Avsnitten nedan är den ursprungliga beskrivningen och är delvis ersatta: Google Maps används inte (MapLibre med lokal kartfil), och anti-navigering i fordon är struken.
 

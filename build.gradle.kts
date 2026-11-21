@@ -33,6 +33,8 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     ":babel" to setOf(":archive:api"),
     // Convoy (07): protokollets logik ovanför transporten. Känner varken sanningen, motorn eller arkivet.
     ":convoy:api" to emptySet(),
+    // Encyklopedin: egna fältanteckningar (med plats) och arkivets godkända lexikon.
+    ":encyclopedia" to setOf(":truth:api", ":archive:api"),
     // Sanningskärnans Android-adaptrar: valhalla-mobile, Ferrostar, position, batteri.
     ":truth:device" to setOf(":truth:api", ":truth:core"),
     // Rösten: en talmotor, två kanaler. Ser bara sanningens port för besked.
@@ -40,7 +42,7 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     // Kompositionsroten ser allt (03, kvarstående risk R-07).
     ":app" to setOf(
         ":truth:api", ":truth:core", ":truth:device", ":engine:api", ":engine", ":archive:api", ":archive:core",
-        ":safetygate", ":conductor", ":voice", ":babel",
+        ":safetygate", ":conductor", ":voice", ":babel", ":encyclopedia",
     ),
     // Testmodulen får se allt rent, men bara i testkonfigurationer.
     ":verification:architecture" to setOf(
@@ -53,6 +55,7 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
 val allowedTestOnlyEdges: Map<String, Set<String>> = mapOf(
     ":engine" to setOf(":archive:core"),
     ":babel" to setOf(":archive:core"),
+    ":encyclopedia" to setOf(":archive:core"),
     ":conductor" to setOf(":engine", ":archive:core"),
 )
 

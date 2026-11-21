@@ -136,4 +136,4 @@ G4 som grind: talmotorn är vald genom ägarbeslut, uppläsning och avbrott är 
 
 ## 10. Inte verifierat
 
-Allt som kräver en människa eller verklig rörelse: lyssning, begriplighet, verkliga turer, GNSS, flygplansläge med logg, nätverksmätning på enheten, kallstart, minne och batteri, strömavbrott under paketinstallation, liggande läge, andra appars ljud. Etapp 5-logiken är testad på JVM men inte inkopplad i appen. Convoy (etapp 6) och Babel-Stoners spel, analysläge och encyklopedi (etapp 7) är inte byggda. Oberoende granskning (F-07) saknas för allt.
+Allt som kräver en människa eller verklig rörelse: lyssning, begriplighet, verkliga turer, GNSS, flygplansläge med logg, nätverksmätning på enheten, kallstart, minne och batteri, strömavbrott under paketinstallation, liggande läge, andra appars ljud. Etapp 5–7 redovisas i [etapp5-7-protokoll.md](etapp5-7-protokoll.md). Oberoende granskning (F-07) saknas för allt.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:45.397Z" hostname="MIMER" time="0.103">
+  <properties/>
+  <testcase name="europaväg utan mellanslag" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.0"/>
+  <testcase name="liten bokstav mitt i meningen bara för instruktionsord" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.0"/>
+  <testcase name="etapp2-beskeden bevarar riktning avstånd och gatunamn" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.098"/>
+  <testcase name="avstånd 2-a avfart och orter rörs inte" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.001"/>
+  <testcase name="decimalkomma före enhet" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.0"/>
+  <testcase name="ensamt delnummer med punkt tas bort med sitt på" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.0"/>
+  <testcase name="vägnummer efter gatunamn tas bort" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.001"/>
+  <testcase name="dubbelt mellanslag och saknat på i startbeskedet" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.0"/>
+  <testcase name="ensamt vägnummer blir väg N som på skylten" classname="se.pundaren.guide.truth.core.tal.SvenskTalTvattTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
