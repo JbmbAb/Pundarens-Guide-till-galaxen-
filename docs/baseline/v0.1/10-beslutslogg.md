@@ -220,14 +220,15 @@ Bakgrund: baslinjen pekar ut XChaCha20-Poly1305 i libsodium som kandidat (07, 3.
 
 Fortfarande öppet för Convoy: var servern ska köras (F-15) och om appen får nätverksbehörighet.
 
-## 12. Ägarbeslut 2026-11-21 kl. 14.23 (Europe/Stockholm): Convoy får nätverk, och servern körs på datorn "mimer" över Tailscale
+## 12. Ägarbeslut 2026-11-21 kl. 14.23 (Europe/Stockholm): Convoy får nätverk
 
-Ägarens beslut ordagrant: "Ja till nätverk server på mimer tailscale finns något att återanvända från mimer". Det sista ledet är en fråga till byggaren och inget beslut.
+**Rättad 2026-11-21 kl. 17.40.** Avsnittet angav först att ägaren hade beslutat att servern körs på datorn "mimer" över Tailscale. Det var byggarens feltolkning. Ägaren ordagrant kl. 17.40: "tailscale har inte valts jag upplyste om att alternativet redan fanns . finns optimalare lösning?" Raden om F-15 nedan är ändrad efter det. Den felaktiga lydelsen finns kvar i incheckningen `64bcdaf`.
+
+Ägarens ord kl. 14.23, ordagrant: "Ja till nätverk server på mimer tailscale finns något att återanvända från mimer". Beslutet är det första ledet, ja till nätverk. Mellanledet är en upplysning om att ett alternativ redan finns, och det sista ledet är en fråga till byggaren.
 
 | Id | Utfall | Kort |
 |---|---|---|
-| F-15 | ACCEPT genom ägarbeslut | Convoy-servern (reläet) körs på ägarens dator med Tailscale-namnet `mimer`. Telefonerna når den över ägarens Tailscale-nät, inte över öppet internet. |
 | Nätverksbehörighet | ACCEPT genom ägarbeslut | Appen får `INTERNET`-behörighet för Convoy. Det ändrar det som visades i etapp 4 (E4-K14: ingen nätverksbehörighet). Behörigheten får bara användas av Convoy-transporten; navigering, karta, röst och Guiden ska fortsätta fungera utan nät, och arkitekturtestet som i dag kräver att behörigheten saknas skrivs om till att kräva just det. |
-| Följder som inte är beslutade | Öppet | Båda telefonerna måste vara med i Tailscale-nätet. Datorn måste vara igång under en tur. Om reläet ska ligga i det här repot eller i Mimers (byggarens förslag: här, fristående) avgörs av ägaren. |
+| F-15, var servern körs | **Öppet** | Inte beslutat. Ägaren har upplyst om att datorn `mimer` och Tailscale redan finns som alternativ. Vilken väg telefonerna når reläet på är också öppet. |
 
 Inget av detta är byggt än. G7 är oförändrat NOT_VERIFIED.
