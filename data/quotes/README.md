@@ -2,9 +2,7 @@
 
 # Citatarkivet
 
-Grunden för Illogical Engine. Används av Don't Panic, Cosmic Navigator, Babel-Stoner och citatvyerna. Se avsnitt 5 i den gällande inriktningen och, för historiken, [avsnitt 8 i den arkiverade PRD:n](../../docs/archive/PRD-fore-2026-11-21.md#8-citatarkivet-som-grund).
-
-`chatt-2026-11-21.json` är ett källutkast med återgivna formuleringar från projektchatten. Det läses inte av appen, och inget i det får ges proveniens `original` utan kontroll mot källan.
+Grunden för Illogical Engine. Används av Don't Panic, Cosmic Navigator, Babel-Stoner och citatvyerna. Se [`docs/PRD.md`, avsnitt 8](../../docs/PRD.md#8-citatarkivet-som-grund).
 
 Källan är sammanställningen *Citatarkiv och samtalslogik för Babel-Stoner* (20 november 2026). Det är en sammanställning från återfunna arkivdokument och tidigare samtalskontext, inte en fullständig inventering av samtliga meddelanden, ljudtranskriptioner och dokument.
 
