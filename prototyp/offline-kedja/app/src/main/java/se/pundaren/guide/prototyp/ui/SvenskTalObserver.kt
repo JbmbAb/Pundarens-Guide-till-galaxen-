@@ -2,9 +2,12 @@ package se.pundaren.guide.prototyp.ui
 
 import android.content.Context
 import android.media.AudioAttributes
+import android.media.AudioFocusRequest
+import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import com.stadiamaps.ferrostar.core.SpokenInstructionObserver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,6 +26,43 @@ class SvenskTalObserver(
     private var redo = false
     private var avslutad = false
     private var nummer = 0L
+
+    // Ändring 3b: kortvarigt ljudfokus med duckning runt varje besked.
+    private val ljud = context.applicationContext.getSystemService(AudioManager::class.java)
+    private val ljudattribut = AudioAttributes.Builder()
+        .setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
+        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+        .build()
+    private val fokusbegaran = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
+        .setAudioAttributes(ljudattribut)
+        .setOnAudioFocusChangeListener { }
+        .build()
+    private var fokusFor: String? = null
+
+    private fun begarFokus(id: String) {
+        val svar = ljud?.requestAudioFocus(fokusbegaran)
+        fokusFor = id
+        // Beskedet läses upp även om fokus nekas (ägarbeslut 2026-11-20 23.30: allt ska höras).
+        if (svar != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) rapportera("TAL FOKUS nekat ($svar), läser ändå")
+    }
+
+    private fun slappFokus(id: String?) {
+        if (fokusFor == null || (id != null && id != fokusFor)) return
+        fokusFor = null
+        ljud?.abandonAudioFocusRequest(fokusbegaran)
+    }
+
+    private val forlopp = object : UtteranceProgressListener() {
+        override fun onStart(utteranceId: String?) {}
+        override fun onDone(utteranceId: String?) = paHuvudtrad { slappFokus(utteranceId) }
+        @Deprecated("Krävs av API:t")
+        override fun onError(utteranceId: String?) = paHuvudtrad { slappFokus(utteranceId) }
+        override fun onError(utteranceId: String?, errorCode: Int) = paHuvudtrad {
+            rapportera("TAL FEL: motorn rapporterade fel $errorCode")
+            slappFokus(utteranceId)
+        }
+        override fun onStop(utteranceId: String?, interrupted: Boolean) = paHuvudtrad { slappFokus(utteranceId) }
+    }
 
     init {
         motor = TextToSpeech(
@@ -78,14 +118,8 @@ class SvenskTalObserver(
             return
         }
 
-        tal.setAudioAttributes(
-            AudioAttributes.Builder()
-                .setUsage(
-                    AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE
-                )
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        )
+        tal.setAudioAttributes(ljudattribut) // samma attribut som ägarens kod, delade med fokusbegäran
+        tal.setOnUtteranceProgressListener(forlopp) // Ändring 3b
         tal.setSpeechRate(0.95f)
         tal.setPitch(1.0f)
 
@@ -116,15 +150,18 @@ class SvenskTalObserver(
             }
 
             nummer++
+            val id = "navigation-$nummer"
+            begarFokus(id) // Ändring 3b
 
             val resultat = motor?.speak(
                 besked,
                 TextToSpeech.QUEUE_FLUSH,
                 null,
-                "navigation-$nummer"
+                id
             )
 
             if (resultat != TextToSpeech.SUCCESS) {
+                slappFokus(id) // Ändring 3b
                 rapportera("TAL FEL: Uppläsning misslyckades")
             } else {
                 rapportera("TAL #$nummer: $besked")
@@ -135,6 +172,7 @@ class SvenskTalObserver(
     override fun stopAndClearQueue() {
         paHuvudtrad {
             motor?.stop()
+            slappFokus(null) // Ändring 3b
         }
     }
 
@@ -143,6 +181,7 @@ class SvenskTalObserver(
             tyst.value = isMuted
             if (isMuted) {
                 motor?.stop()
+                slappFokus(null) // Ändring 3b
             }
         }
     }
@@ -154,6 +193,7 @@ class SvenskTalObserver(
             avslutad = true
             redo = false
             motor?.stop()
+            slappFokus(null) // Ändring 3b
             motor?.shutdown()
             motor = null
         }
