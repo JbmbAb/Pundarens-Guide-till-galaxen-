@@ -7,9 +7,9 @@
 | Motsvarar | Byggplanens **etapp 3** i [09](../v0.1/09-genomforandeplan.md) och grindarna **G2** och **G3** i [08](../v0.1/08-teknikverifieringsplan.md#2-grindar). Projektets löpande numrering kallar det etapp 2 (etapp 1 var Illogical Engine, PR #5). |
 | Ägarbeslut | "Klart" (2026-11-21 00.42, efter att PR #5 slogs ihop): gå vidare med nästa etapp. 2026-11-21 06.15: förbudet gäller Googles tjänster (E2-D3) och testområdet är Orsa, Mora, Rättvik, Ljusdal, Härjedalen och Älvdalen (F-03), se [10](../v0.1/10-beslutslogg.md) avsnitt 9. |
 | Utförare | Grok Bot. Ingen oberoende granskning (F-07) är gjord. |
-| Målenhet | Samsung Galaxy Tab S8 Ultra SM-X900. **Inte provad.** Allt nedan är verkstad (Debian 13, x86_64) och Android-emulator. |
+| Målenhet | Samsung Galaxy Tab S8 Ultra SM-X900, One UI 8.0, Android 16. **Provad av ägaren 2026-11-21 med första omgångens APK** (ägariakttagelse utan logg, avsnitt 9). Allt annat nedan är verkstad (Debian 13, x86_64) och Android-emulator. |
 
-Statusreglerna gäller: `ACCEPT` bara med bevis i repot, annars `NOT_VERIFIED`, `REVISE` eller `REJECT`. `ACCEPT` nedan gäller den miljö som står i kolumnen. **G2 och G3 som grindar är `NOT_VERIFIED`**, eftersom kriterierna i 08 kräver målenheten i flygplansläge.
+Statusreglerna gäller: `ACCEPT` bara med bevis i repot, annars `NOT_VERIFIED`, `REVISE` eller `REJECT`. `ACCEPT` nedan gäller den miljö som står i kolumnen. **G2 och G3 som grindar är `NOT_VERIFIED`.** Ägarens provkörning på målenheten i flygplansläge (avsnitt 9) är en ägariakttagelse, en lägre bevisgrad än logg eller inspelning, och den gäller bara första omgångens APK.
 
 ## 1. Vad som byggdes
 
@@ -79,8 +79,8 @@ bash ../../tools/verkstad/07-kontrollera-apk.sh app/build/outputs/apk/debug/app-
 | E2-K11 | Manifest med SHA-256 och atomär installation | `PaketInstallerareTest`, 8 tester gröna: lyckad installation, fel SHA-256 och fel storlek avvisas utan att det aktiva paketet rörs, avbrott mitt i kopieringen, kvarlämnade `tmp-*` städas, pekaren byts atomärt, föregående version sparas för återställning, farliga filnamn avvisas, trasig pekare ger inget paket. Emulatorn: F-03-paketet (cirka 95 MB) installerades atomärt ur APK:ns tillgångar på 33,6 s (TCG). | JVM + emulator | ACCEPT för logiken. Strömavbrott och prestanda på målenheten: NOT_VERIFIED (G5). |
 | E2-K12 | Envägsarkitekturen hålls | Prototypen innehåller ingen Illogical Engine och ingen `:babel` (`ArkitekturTest`, 5 tester). Navigeringen ligger i sanningslagret (`sanning.*`). Rotprojektets 96 tester är fortfarande gröna ([`rotprojekt-clean-check.txt`](etapp2-testutdata/rotprojekt-clean-check.txt)). | verkstad | ACCEPT |
 | E2-K13 | APK för målenheten | `offlinekedja-etapp2-arm64-debug.apk` med F-03-paketet: 137 276 668 byte, SHA-256 `631ca10a97072459dff62988aef78620b658b5db6d8ae23289c28181d199ef2b`, `native-code: arm64-v8a`, minSdk 26, targetSdk 36, debug-signerad ([`apk-sha256.txt`](etapp2-testutdata/apk-sha256.txt)). Emulatorns x86_64-variant: 137 929 180 byte, `b71d1ed8…99a7`. | verkstad | ACCEPT som bygge. Körning på målenheten: NOT_VERIFIED. |
-| G2 | Kedjan offline på målenheten (08) | Allt utom målenheten är visat ovan. Talinstruktionerna utlöses men uttalas inte (ingen talmotor, G4). Ingen skärm- eller ljudinspelning från målenheten. | – | **NOT_VERIFIED** |
-| G3 | MapLibre med lokalt kartpaket på målenheten (08) | Visat i emulatorn. Kriteriet kräver `karta.pmtiles` i `filesDir` (uppfyllt), **tre stilfiler** (bara en finns) och nätverksmätning på målenheten. | – | **NOT_VERIFIED**; stilarna: REVISE |
+| G2 | Kedjan offline på målenheten (08) | Verkstad och emulator: visat ovan. Målenheten, första omgångens APK (`e670e33b…`) i flygplansläge: ägaren körde alla tre turerna, Grönklitt nådde "Framme" och avvikelseprovet "verkade fungera" (avsnitt 9). Ingen logg, ingen inspelning, inga tider. Talinstruktionerna utlöses men uttalas inte (ingen talmotor, G4); att de utlöstes på målenheten är inte observerat. F-03-APK:n (`631ca10a…`) är inte provad på målenheten. | målenhet (ägariakttagelse) | **NOT_VERIFIED.** Ägariakttagelsen stöder rutt, navigering och framkomst offline på målenheten (gamla APK:n). Loggbevis för avvikelse och omräkning, talinstruktioner och tider saknas. |
+| G3 | MapLibre med lokalt kartpaket på målenheten (08) | Visat i emulatorn. På målenheten körde ägaren turerna i flygplansläge med kartan i appen (gamla APK:n); att kartan ritades är underförstått i "verkade fungera" men inte uttryckligen bekräftat eller fotograferat. Kriteriet kräver `karta.pmtiles` i `filesDir` (uppfyllt i koden), **tre stilfiler** (bara en finns), sanningsremsan otäckt och nätverksmätning på målenheten (inte gjord; flygplansläge är inte en mätning). | målenhet (ägariakttagelse) + emulator | **NOT_VERIFIED**; stilarna: REVISE |
 
 Enhetstester i prototypen: 14 av 14 gröna även i andra omgången ([`junit-xml/`](etapp2-testutdata/junit-xml/)). Androids instrumenterade tester finns inte.
 
@@ -123,17 +123,59 @@ Enhetstester i prototypen: 14 av 14 gröna även i andra omgången ([`junit-xml/
 - Kameran ramas in mot hela rutten när en tur startar, men knappraden och loggen täcker kartans nedre del, så Orsa→Sveg syns bara delvis.
 - Emulatorns tidszon är UTC; tiderna i `etapp2-logg.txt` och logcat är UTC (06.42 svensk tid = 05.42 i loggen).
 
-## 7. Vad ägaren behöver göra på målenheten (G2 och G3)
+## 7. Vad som återstår på målenheten (G2 och G3)
 
-1. Aktivera utvecklaralternativ och USB-felsökning på Tab S8 Ultra och anslut den till datorn.
-2. Installera: `adb install offlinekedja-etapp2-arm64-debug.apk`. **Den som ligger på Google Drive är första omgångens APK (Orsa-rektangeln, `e670e33b…8b2b`).** APK:n med F-03-området (`631ca10a…ef2b`, 137 MB) finns i verkstaden, `/workspace/verkstad/apk/`, och kan laddas upp på begäran; ingen APK ligger i git.
-3. Slå på **flygplansläge** och kontrollera att wifi också är av.
-4. Starta "Offlinekedja (etapp 2)". Vänta på "Offlinepaket … Välj en provtur."
-5. Tryck **Orsa → Grönklitt (passagerare)** och låt den gå till "Framme". Tryck sedan **Orsa → Mora (till fots)**, **Orsa → Sveg (passagerare)** (bara F-03-APK:n) och **Avvikelseprov ×3**. Tryck **Stopp** mellan turerna.
-6. Spela in skärmen (Samsungs skärminspelare) under minst en tur.
-7. Hämta loggen: `adb pull /sdcard/Android/data/se.pundaren.guide.prototyp.offlinekedja/files/` (innehåller `etapp2-logg.txt` och råa ruttsvar). Skicka loggen och inspelningen, så skrivs G2- och G3-protokollen.
-8. Notera Android-version och One UI-version (F-04).
+1. Installera F-03-APK:n från den privata förhandsreleasen [`etapp2-prov-641cf5c`](https://github.com/JbmbAb/Pundarens-Guide-till-galaxen-/releases/tag/etapp2-prov-641cf5c) (`offlinekedja-etapp2-sex-kommuner-arm64-debug.apk`, 137 MB, SHA-256 `631ca10a…ef2b`). Ladda ner innan flygplansläget slås på.
+2. Kör turerna i flygplansläge med wifi av, även **Orsa → Sveg (passagerare)**. Tryck **Stopp** mellan turerna.
+3. Hämta loggen när plattan kan kopplas till en dator: `adb pull /sdcard/Android/data/se.pundaren.guide.prototyp.offlinekedja/files/` (`etapp2-logg.txt` och råa ruttsvar). Med loggen kan avvikelse, omräkning, talinstruktioner och tider bedömas på målenheten. En skärminspelning är frivillig.
+4. GNSS på målenheten (F-04) provas med verkliga turer i G5.
 
 ## 8. Inte verifierat
 
-Allt på målenheten SM-X900: installation, kartvisning, ruttid, kallstart, minne och batteri. Nätverkstrafik mätt på enheten. Talsyntes och avbrott (G4). Tre stilfiler och textetiketter (G3). Verkliga GPS-positioner, GNSS på målenheten (F-04) och tio verkliga turer (G5). Atomär installation vid strömavbrott. Framkomst på de långa rutterna i emulatorn (bara verkstaden). Ruttning till Ljusdal, Rättvik och Älvdalen i appen (bara verkstaden). Oberoende granskning (F-07).
+På målenheten SM-X900: allt för F-03-APK:n. För första omgångens APK finns bara ägarens iakttagelse (avsnitt 9); loggbevis för kartvisning, avvikelse och omräkning, talinstruktioner, ruttid, kallstart, minne och batteri saknas. Nätverkstrafik mätt på enheten. Talsyntes och avbrott (G4). Tre stilfiler och textetiketter (G3). Verkliga GPS-positioner, GNSS på målenheten (F-04) och tio verkliga turer (G5). Atomär installation vid strömavbrott. Framkomst på de långa rutterna i emulatorn (bara verkstaden). Ruttning till Ljusdal, Rättvik och Älvdalen i appen (bara verkstaden). Oberoende granskning (F-07).
+
+## 9. Målenheten: ägarens provkörning och enhetsfakta (2026-11-21)
+
+### Enhetsfakta (F-04)
+
+Avlästa ur ägarens skärmbild av Inställningar › Om surfplattan › Programvaruinformation, tagen 2026-11-21 kl. 08.38 och skickad i chatten. Skärmbilden är inte incheckad (se nedan).
+
+| Uppgift | Värde |
+|---|---|
+| Modell | SM-X900 (Galaxy Tab S8 Ultra, Wi-Fi) |
+| One UI | 8.0 |
+| Android | 16 |
+| Säkerhetsuppdatering | 5 oktober 2026 |
+| Basband/bygge | BP2A.250605.031.A3.X900XXUBEZJ3 |
+| Kärna | 5.10.252-android12-9 |
+| Knox | 3.12 |
+| CSC | SAOMC_SM-X900_OXM_EUX_16_0002 EUX |
+
+Enheten har Samsungs standardfirmware, och där finns "Google Play-systemuppdatering" (1 oktober 2026) och en post för Google-kontot i inställningarna. Appen använder ingen av dem: den saknar INTERNET-behörighet och har inga Google-tjänster (E2-K09, E2-K10). GNSS på enheten är fortfarande inte verifierad.
+
+### Ägarens provkörning
+
+| Uppgift | Värde |
+|---|---|
+| APK | Första omgångens, Orsa-rektangeln, SHA-256 `e670e33b2c77c1d3e2f9866a5a35a471c296c443c889f007c1064380c5538b2b`, från ägarens Google Drive |
+| Läge | Flygplansläge |
+| Turer | Orsa → Grönklitt (passagerare), Orsa → Mora (till fots), Avvikelseprov ×3 |
+| Ägarens ord | "kört alla tre verkade fungera"; på frågan om Grönklitt nådde "Framme": "ja" (chatten 2026-11-21 08.36–08.40) |
+| Bevisgrad | **Ägariakttagelse.** Ingen skärminspelning, ingen logg hämtad, inga tider. |
+
+| G2/G3-kriterium | Läge på målenheten |
+|---|---|
+| Installation och start offline | Ägariakttagelse (gamla APK:n) |
+| Rutt räknas i flygplansläge och navigering med simulerad position, framkomst | Ägariakttagelse: Grönklitt nådde "Framme" |
+| Avvikelse minst 3 försök och omräkning utan nät | Ägariakttagelse ("verkade fungera"); antal upptäckta försök inte bekräftat. NOT_VERIFIED som loggbevis |
+| Talinstruktioner utlöses | NOT_VERIFIED på målenheten (ingen logg; inget uttalas förrän G4) |
+| Kartan ritas från `karta.pmtiles` | Underförstått, inte uttryckligen bekräftat. NOT_VERIFIED |
+| Tre stilfiler | REVISE (bara en finns, E2-D4) |
+| Sanningsremsan otäckt | NOT_VERIFIED på målenheten |
+| Ingen nätverkstrafik (mätt) | NOT_VERIFIED (flygplansläge, ingen mätning) |
+| Tider: paketinstallation, Valhalla-start, ruttid | NOT_VERIFIED |
+| F-03-APK:n (`631ca10a…`) | Inte provad på målenheten |
+
+### Leverans av F-03-APK:n
+
+På ägarens begäran ("Lägg APK:n som en privat release i GitHub-repot") ligger F-03-APK:n som privat förhandsrelease: <https://github.com/JbmbAb/Pundarens-Guide-till-galaxen-/releases/tag/etapp2-prov-641cf5c>, fil `offlinekedja-etapp2-sex-kommuner-arm64-debug.apk`, SHA-256 `631ca10a97072459dff62988aef78620b658b5db6d8ae23289c28181d199ef2b`. Den gick inte att lägga på Google Drive, eftersom uppladdningen dit är begränsad till 100 MB och filen är 137 MB. Den gamla APK:n på Drive är ersatt för fortsatta prov.
