@@ -48,7 +48,9 @@ class SvenskTalObserver(
         val tal = motor ?: return
 
         if (status != TextToSpeech.SUCCESS ||
-            tal.currentEngine != "com.samsung.SMT"
+            // Ändring 1 (kompilering): TextToSpeech har inget publikt currentEngine.
+            // Kontrollera i stället att Samsungs motor är installerad (getEngines()).
+            tal.engines.none { it.name == "com.samsung.SMT" }
         ) {
             rapportera("TAL FEL: Samsungs talmotor kunde inte startas")
             return
