@@ -1,0 +1,11 @@
+[package]
+name = "ferrostar-prov"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Verkstadsprov: läser Valhallas OSRM-svar med Ferrostars egen parser och kör Ferrostars navigeringskärna med simulerad position (etapp 2)."
+
+[dependencies]
+# Samma version som Android-artefakten com.stadiamaps.ferrostar:core:0.59.0
+ferrostar = "=0.59.0"
+serde_json = "1"

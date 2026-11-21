@@ -40,3 +40,6 @@ release/
 # OS
 .DS_Store
 Thumbs.db
+
+# Etapp 2: verkstadens utdata och Rust-bygge checkas inte in
+tools/verkstad/ferrostar-prov/target/
