@@ -46,6 +46,11 @@ data class EngineContext(
     val seed: Long,
     val travelMode: TravelMode,
     val memory: EngineMemory = EngineMemory(),
+    /**
+     * Sant medan en rutt är aktiv. Ägarens egna citat föreslås då inte, varken av en händelse eller på
+     * begäran (ägarbeslut 2026-11-21: "mina citat ska inte vara med i navigation läget").
+     */
+    val navigating: Boolean = false,
 )
 
 /**

@@ -64,7 +64,8 @@ class DefaultIllogicalEngine(
         val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
         val vehicle = context.travelMode != TravelMode.FOOT
 
-        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && fitsSituation(e, event)
+        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && fitsSituation(e, event) &&
+            !(context.navigating && LineBank.isOwnersQuote(e))
 
         // M2: motsägelseminnet förnekar bara yttranden som faktiskt presenterades.
         val lastPresented = context.memory.presented.lastOrNull()
@@ -82,14 +83,16 @@ class DefaultIllogicalEngine(
     /**
      * Don't Panic: en rad på begäran. Väljs bland arkivets citat (original och godkända bearbetningar)
      * och annars bland övriga rader utan situation. Samma spärrar som i [onEvent]: ingen upprepning
-     * inom fönstret och inga rader som bara får användas till fots när läget är fordon.
+     * inom fönstret, inga rader som bara får användas till fots när läget är fordon, och inga av
+     * ägarens citat medan en rutt är aktiv.
      */
     override fun wisdom(requestId: String, nowMonotonicMillis: Long, context: EngineContext): TailCandidate? {
         val rng = SplittableRandom(mix(context.seed, requestId))
         val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
         val vehicle = context.travelMode != TravelMode.FOOT
         val usable = bank.lines.filter { e ->
-            e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && e.tags.none { it.startsWith("situation:") && it != "situation:general" }
+            e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && e.tags.none { it.startsWith("situation:") && it != "situation:general" } &&
+                !(context.navigating && LineBank.isOwnersQuote(e))
         }
         val quotes = usable.filter { it.kind == EntryKind.QUOTE }
         val pool = quotes.ifEmpty { usable }

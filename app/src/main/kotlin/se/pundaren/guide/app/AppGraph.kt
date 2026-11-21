@@ -129,7 +129,8 @@ class AppGraph(context: Context) : AutoCloseable {
     /** Don't Panic, kort tryck: en rad ur arkivet, genom SafetyGate som allt annat från Guiden. */
     fun requestWisdom() {
         val now = SystemClock.elapsedRealtime()
-        val context = EngineContext(seed, navigator.state.navigation.value.travelMode, conductor.memory)
+        val navigation = navigator.state.navigation.value
+        val context = EngineContext(seed, navigation.travelMode, conductor.memory, navigating = navigation.activeRoute)
         val candidate = engine.wisdom("BEGARAN-${++wisdomRequests}", now, context)
         if (candidate == null) log.line("VISDOM: inga rader kvar att välja bland") else conductor.onRequested(candidate, now)
     }

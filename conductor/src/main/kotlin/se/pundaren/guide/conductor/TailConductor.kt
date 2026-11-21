@@ -87,7 +87,8 @@ class TailConductor(
     /** En händelse från bussen. */
     fun onEvent(event: TruthEvent, nowMonotonicMillis: Long) {
         if (settings.enabled && passesChattiness(event.eventId)) {
-            val context = EngineContext(seed, state.navigation.value.travelMode, memory)
+            val navigation = state.navigation.value
+            val context = EngineContext(seed, navigation.travelMode, memory, navigating = navigation.activeRoute)
             val candidates = engine.onEvent(event, context)
             val chosen = candidates.firstOrNull { it.kind == TailKind.SPOKEN } ?: candidates.firstOrNull()
             if (chosen != null) offer(chosen)

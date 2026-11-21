@@ -242,3 +242,13 @@ Inget av detta är byggt än. G7 är oförändrat NOT_VERIFIED.
 | Byggregeln för Google-bibliotek | ÄNDRAD genom ägarbeslut | Gratis bibliotek från Google får användas utan nytt beslut. Kontrollen i `build.gradle.kts` som fällde bygget för varje ogranskad `com.google`-modul är borttagen. |
 | ZXing och CameraX | ACCEPT genom ägarbeslut | Convoy-inbjudan visas och läses som QR-kod. ZXing (Apache 2.0) ritar och läser koden, CameraX ger kamerabilden. Appen får kamerabehörighet, som bara används medan skanningsrutan är öppen. |
 | Listan över förbjudna Google-tjänster | Oförändrad, byggarens tolkning | Play-tjänster, Firebase, Google Maps med flera fäller fortfarande bygget. Byggaren tolkar beslutet som att just de tjänsterna är de som kostar eller kan börja kosta. Ägaren har inte uttalat sig om listan. |
+
+## 14. Ägarbeslut 2026-11-21, infört kl. 19.18 (Europe/Stockholm): körriktningsrösten och citaten
+
+Ägarens ord, ordagrant: "Den vanliga körriktnings rösten ska vara vara möjlig att stänga av mina citat ska inte vara med i navigation läget".
+
+| Id | Utfall | Kort |
+|---|---|---|
+| Körriktningsrösten | Genomfört | Rösten gick redan att stänga av under Reglage. Nu finns också knappen "Vägröst: på/av" på huvudskärmen. Sanningsremsan visar varje besked oavsett. |
+| Citaten under navigering | Genomfört | Medan en rutt är aktiv föreslår Guiden inga av ägarens citat (original eller bearbetade), varken av sig själv eller när man trycker på Don't Panic. Kvar under navigering: de 20 navigationskommentarerna och de 20 genererade variationerna. |
+| De genererade variationerna | Öppet, byggarens tolkning | Variationerna är inte ägarens ord och är därför kvar. Ägaren har inte uttalat sig om dem. |

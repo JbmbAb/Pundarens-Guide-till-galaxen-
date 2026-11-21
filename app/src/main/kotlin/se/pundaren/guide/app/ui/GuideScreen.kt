@@ -195,7 +195,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
     val voiceNote = when (val v = voiceStatus) {
         VoiceStatus.Starting -> "Rösten startar …"
         is VoiceStatus.Failed -> "Ingen röst: ${v.reason}"
-        is VoiceStatus.Ready -> if (settings.instructionsMuted) "Beskedsrösten är avstängd" else null
+        is VoiceStatus.Ready -> if (settings.instructionsMuted) "Körriktningsrösten är avstängd" else null
     }
 
     Column(Modifier.fillMaxSize().background(GuideColors.Background)) {
@@ -288,6 +288,10 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                             PillButton("Snacks", enabled = status is NavigatorStatus.Ready) { sheet = Sheet.SNACKS }
                         }
                         PillButton("Hem") { sheet = Sheet.HOME }
+                        // Körriktningsrösten av eller på med ett tryck. Sanningsremsan visar ändå varje besked.
+                        PillButton(if (settings.instructionsMuted) "Vägröst: av" else "Vägröst: på") {
+                            graph.settings.update { it.copy(instructionsMuted = !it.instructionsMuted) }
+                        }
                         PillButton(settings.mapStyle.title) {
                             graph.settings.update { it.copy(mapStyle = MapStyle.entries[(it.mapStyle.ordinal + 1) % MapStyle.entries.size]) }
                         }

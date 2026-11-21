@@ -167,7 +167,7 @@ fun DriveDialog(
             SwitchRow("Guiden pratar", settings.guideEnabled) { on -> graph.settings.update { it.copy(guideEnabled = on) } }
             Text("Pratsamhet: ${settings.chattinessPercent} %", color = GuideColors.OnSurface, fontSize = 16.sp)
             Slider(value = settings.chattinessPercent.toFloat(), onValueChange = { v -> graph.settings.update { it.copy(chattinessPercent = v.toInt()) } }, valueRange = 0f..100f)
-            SwitchRow("Beskedsrösten läser upp", !settings.instructionsMuted) { on -> graph.settings.update { it.copy(instructionsMuted = !on) } }
+            SwitchRow("Körriktningsrösten läser upp", !settings.instructionsMuted) { on -> graph.settings.update { it.copy(instructionsMuted = !on) } }
 
             // Röstval: två olika röster gör att det hörs vem som talar (RR-12). Tryck för att byta.
             val voices by graph.voice.voices.collectAsState()
