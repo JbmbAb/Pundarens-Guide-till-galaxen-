@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-21T08:23:42.552Z" hostname="grok-bot-vm-328085215" time="0.036">
+  <properties/>
+  <testcase name="inga Google-paket importeras" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.023"/>
+  <testcase name="talmotorn binds bara via TTS_SERVICE och ingen INTERNET-behörighet läggs till" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.0"/>
+  <testcase name="ingen Illogical Engine eller tramslager i prototypen" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.004"/>
+  <testcase name="ingen nätadress i stilen" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.001"/>
+  <testcase name="navigeringsrösten i sanning tal är ren Kotlin utan Android, UI eller Guiden" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.006"/>
+  <testcase name="manifestet tar bort INTERNET" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.001"/>
+  <testcase name="källorna hittas" classname="se.pundaren.guide.prototyp.arkitektur.ArkitekturTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

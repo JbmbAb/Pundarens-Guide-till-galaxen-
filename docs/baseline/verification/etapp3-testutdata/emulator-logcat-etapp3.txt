@@ -1,0 +1,66 @@
+# logcat -s Etapp2:I, emulatorn etapp2-AVD (TCG, flygplansläge, ingen talmotor installerad), APK x86_64 byggd på 7b10de2 (efter ändring 4), hämtad 2026-11-21 09:29:38 CET. Tider i loggen är UTC.
+--------- beginning of main
+11-21 08:24:46.406  2924  2924 I Etapp2  : 08:24:46.362 START unknown Android SDK built for x86_64 Android 15 (API 35)
+11-21 08:24:46.466  2924  2924 I Etapp2  : 08:24:46.450 INTERNET-behörighet: saknas (som avsett)
+11-21 08:24:47.221  2924  2924 I Etapp2  : 08:24:47.200 TAL FEL: Samsungs talmotor kunde inte startas
+11-21 08:24:47.500  2924  2959 I Etapp2  : 08:24:47.449 PAKET läses från APK:ns tillgångar
+11-21 08:24:48.211  2924  2959 I Etapp2  : 08:24:48.121 PAKET f03-sex-kommuner-20261121-0619 redan aktivt på 616 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB
+11-21 08:24:52.780  2924  2924 I Etapp2  : 08:24:52.756 KARTA stil laddad, källa pmtiles://file://…/karta.pmtiles
+11-21 08:25:53.603  2924  2959 I Etapp2  : 08:25:53.587 VALHALLA startad på 61831 ms
+11-21 08:26:08.184  2924  2959 I Etapp2  : 08:26:08.169 RUTT PASSAGERARE 2 punkter: 2520 ms i valhalla-mobile, 1 rutt(er), 22 steg, 16.07 km
+11-21 08:26:09.430  2924  2924 I Etapp2  : 08:26:09.427 TAL RÅTT: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+11-21 08:26:09.446  2924  2924 I Etapp2  : 08:26:09.444 TAL EJ REDO: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+11-21 08:26:09.479  2924  2924 I Etapp2  : 08:26:09.469 NAVIGERING startad (PASSAGERARE), simulerad position, avvikelseförsök vid [60, 200, 340]
+11-21 08:26:09.738  2924  2924 I Etapp2  : 08:26:09.730 STEG kvar 22: Slaggatan
+11-21 08:26:22.608  2924  2924 I Etapp2  : 08:26:22.597 TAL RÅTT: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+11-21 08:26:22.634  2924  2924 I Etapp2  : 08:26:22.632 TAL EJ REDO: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+11-21 08:26:25.704  2924  2924 I Etapp2  : 08:26:25.679 TAL EJ REDO: Sväng höger in på Skyttsvägen.
+11-21 08:26:25.762  2924  2924 I Etapp2  : 08:26:25.760 STEG kvar 21: Skyttsvägen
+11-21 08:26:31.158  2924  2924 I Etapp2  : 08:26:31.147 STEG kvar 20: Moravägen
+11-21 08:26:34.489  2924  2924 I Etapp2  : 08:26:34.484 TAL EJ REDO: Sväng vänster in på Moravägen.
+11-21 08:26:37.001  2924  2960 I Etapp2  : 08:26:36.994 AVVIKELSE försök 1: tre positioner 250 m från rutten vid steg 60
+11-21 08:26:39.986  2924  2924 I Etapp2  : 08:26:39.969 STEG kvar 19: E 45
+11-21 08:26:42.860  2924  2924 I Etapp2  : 08:26:42.839 OMRÄKNING pågår
+11-21 08:26:42.937  2924  2924 I Etapp2  : 08:26:42.930 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.7397752759926))
+11-21 08:26:44.002  2924  2924 I Etapp2  : 08:26:43.997 OMRÄKNING pågår
+11-21 08:26:44.389  2924  2960 I Etapp2  : 08:26:44.369 RUTT PASSAGERARE 2 punkter: 1119 ms i valhalla-mobile, 1 rutt(er), 21 steg, 15.85 km
+11-21 08:26:44.658  2924  2924 I Etapp2  : 08:26:44.645 OMRÄKNING pågår
+11-21 08:26:45.434  2924  2924 I Etapp2  : 08:26:45.414 OMRÄKNING pågår
+11-21 08:26:45.485  2924  2924 I Etapp2  : 08:26:45.474 PÅ RUTTEN igen
+11-21 08:26:45.980  2924  2924 I Etapp2  : 08:26:45.970 TAL RÅTT: Kör västerut  Slaggatan. Därefter Sväng vänster in på Skyttsvägen.
+11-21 08:26:46.008  2924  2924 I Etapp2  : 08:26:46.001 TAL EJ REDO: Kör västerut på Slaggatan. Därefter sväng vänster in på Skyttsvägen.
+11-21 08:26:46.088  2924  2924 I Etapp2  : 08:26:46.068 STEG kvar 21: Skyttsvägen
+11-21 08:26:46.097  2924  2924 I Etapp2  : 08:26:46.091 AVVIKELSE upptäckt: Deviation(kind=OffStepOnRoute(deviationFromStepLine=194.35790582264863))
+11-21 08:26:46.474  2924  2961 I Etapp2  : 08:26:46.472 RUTT PASSAGERARE 2 punkter: 1505 ms i valhalla-mobile, 1 rutt(er), 19 steg, 15.54 km
+11-21 08:26:46.786  2924  2924 I Etapp2  : 08:26:46.782 STEG kvar 19: E 45
+11-21 08:26:46.794  2924  2924 I Etapp2  : 08:26:46.793 PÅ RUTTEN igen
+11-21 08:26:50.882  2924  2924 I Etapp2  : 08:26:50.880 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på E 45, Moravägen.
+11-21 08:26:50.922  2924  2924 I Etapp2  : 08:26:50.919 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på E45, Moravägen.
+11-21 08:26:58.577  2924  2924 I Etapp2  : 08:26:58.571 TAL RÅTT: Kör ut ur rondellen in på E 45, Moravägen.
+11-21 08:26:58.606  2924  2924 I Etapp2  : 08:26:58.605 TAL EJ REDO: Kör ut ur rondellen in på E45, Moravägen.
+11-21 08:26:58.659  2924  2924 I Etapp2  : 08:26:58.642 STEG kvar 18: Moravägen
+11-21 08:26:59.321  2924  2924 I Etapp2  : 08:26:59.319 TAL RÅTT: Fortsätt på E 45 i 11 kilometer.
+11-21 08:26:59.337  2924  2924 I Etapp2  : 08:26:59.334 TAL EJ REDO: Fortsätt på E45 i 11 kilometer.
+11-21 08:26:59.370  2924  2924 I Etapp2  : 08:26:59.367 STEG kvar 17: Inlandsvägen
+11-21 08:27:30.952  2924  2960 I Etapp2  : 08:27:30.936 AVVIKELSE försök 2: tre positioner 250 m från rutten vid steg 200
+11-21 08:27:33.845  2924  2924 I Etapp2  : 08:27:33.843 OMRÄKNING pågår
+11-21 08:27:33.895  2924  2924 I Etapp2  : 08:27:33.885 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.71700746701202))
+11-21 08:27:34.596  2924  2924 I Etapp2  : 08:27:34.586 OMRÄKNING pågår
+11-21 08:27:34.950  2924  2924 I Etapp2  : 08:27:34.934 OMRÄKNING pågår
+11-21 08:27:34.963  2924  2961 I Etapp2  : 08:27:34.947 RUTT PASSAGERARE 2 punkter: 958 ms i valhalla-mobile, 1 rutt(er), 19 steg, 14.52 km
+11-21 08:27:35.516  2924  2924 I Etapp2  : 08:27:35.501 OMRÄKNING pågår
+11-21 08:27:35.649  2924  2924 I Etapp2  : 08:27:35.577 PÅ RUTTEN igen
+11-21 08:27:36.419  2924  2924 I Etapp2  : 08:27:36.399 TAL RÅTT: Fortsätt på E 45 i 11 kilometer.
+11-21 08:27:36.443  2924  2924 I Etapp2  : 08:27:36.433 TAL UPPREPNING stoppad efter omräkning: Fortsätt på E45 i 11 kilometer.
+11-21 08:27:37.222  2924  2960 I Etapp2  : 08:27:37.220 RUTT PASSAGERARE 2 punkter: 1084 ms i valhalla-mobile, 1 rutt(er), 17 steg, 14.29 km
+11-21 08:28:22.750  2924  3020 I Etapp2  : 08:28:22.738 AVVIKELSE försök 3: tre positioner 250 m från rutten vid steg 340
+11-21 08:28:23.648  2924  2924 I Etapp2  : 08:28:23.632 OMRÄKNING pågår
+11-21 08:28:23.667  2924  2924 I Etapp2  : 08:28:23.665 AVVIKELSE upptäckt: Deviation(kind=CompletelyOffRoute(deviationFromRouteLine=249.73515171371588))
+11-21 08:28:24.589  2924  2924 I Etapp2  : 08:28:24.578 OMRÄKNING pågår
+11-21 08:28:24.904  2924  2924 I Etapp2  : 08:28:24.900 OMRÄKNING pågår
+11-21 08:28:25.344  2924  2924 I Etapp2  : 08:28:25.313 OMRÄKNING pågår
+11-21 08:28:25.383  2924  2924 I Etapp2  : 08:28:25.381 PÅ RUTTEN igen
+11-21 08:28:25.424  2924  3020 I Etapp2  : 08:28:25.406 RUTT PASSAGERARE 2 punkter: 1505 ms i valhalla-mobile, 1 rutt(er), 20 steg, 14.19 km
+11-21 08:29:35.164  2924  2924 I Etapp2  : 08:29:35.156 STOPP
+11-21 08:29:36.549  2924  2924 I Etapp2  : 08:29:36.536 TAL RÅTT: Fortsätt på E 45 i 11 kilometer.
+11-21 08:29:36.587  2924  2924 I Etapp2  : 08:29:36.585 TAL UPPREPNING stoppad efter omräkning: Fortsätt på E45 i 11 kilometer.
