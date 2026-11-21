@@ -130,6 +130,10 @@ class ArchitectureTest {
             .filterNot { it.name == "ArchitectureTest.kt" }
             // Rotens build.gradle.kts innehåller listan över förbjudna grupper; den kontrollen görs av verifyModuleGraph.
             .filterNot { it == root.resolve("build.gradle.kts") }
+            // Etapp 2-prototypen: byggfilen och källprovet innehåller spärrlistorna själva. Där görs kontrollen
+            // av verifieraIngenGoogle (löst klassväg) och tools/verkstad/07-kontrollera-apk.sh (dex i APK:n).
+            .filterNot { it == root.resolve("prototyp/offline-kedja/app/build.gradle.kts") }
+            .filterNot { it == root.resolve("prototyp/offline-kedja/app/src/test/java/se/pundaren/guide/prototyp/arkitektur/ArkitekturTest.kt") }
             .toList()
         val hits = files.filter { f -> val t = f.readText(); listOf("com.google", "gms", "firebase", "googleapis").any { t.contains(it) } }
         assertEquals(emptyList<File>(), hits)

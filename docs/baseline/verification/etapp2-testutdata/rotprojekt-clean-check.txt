@@ -1,0 +1,6 @@
+# Kört 2026-11-21 01:48:33 CET på arbetskopia ovanpå commit 79d2b962b3f11c4655e01687c4c43467867d8f10 (undantag för prototypens spärrfiler i ArchitectureTest)
+
+BUILD SUCCESSFUL in 23s
+41 actionable tasks: 41 executed
+EXIT=0
+rot: tester 96 fel 0

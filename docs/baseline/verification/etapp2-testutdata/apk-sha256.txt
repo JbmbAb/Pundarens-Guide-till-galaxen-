@@ -1,0 +1,2 @@
+e670e33b2c77c1d3e2f9866a5a35a471c296c443c889f007c1064380c5538b2b  /workspace/verkstad/apk/offlinekedja-etapp2-arm64-debug.apk
+27f066bdd98637df458d9acccec61c3a1ab13cf48cebe3b12f9cbb4dea63681a  /workspace/verkstad/apk/offlinekedja-etapp2-x86_64-debug.apk

@@ -1,0 +1,15 @@
+# Emulatorprov 2026-11-21 01:25:33 CET
+# AVD: system-images;android-35;default;x86_64 (AOSP utan Google APIs), TCG (ingen KVM)
+== Android
+15
+Android SDK built for x86_64
+== Google-paket på emulatorn
+(inga)
+== flygplansläge
+cmd: Can't find service: phone
+1
+connect: Network is unreachable
+== installera
+Success
+      se.pundaren.guide.prototyp.offlinekedja.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+1

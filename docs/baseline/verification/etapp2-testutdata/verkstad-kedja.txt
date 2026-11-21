@@ -1,0 +1,55 @@
+# Kört 2026-11-21 01:17:06 CET på commit 93af26336fe4e4f340ba37e9777e5c7745b42a89
+
+=== 01 hämta OSM (Geofabrik, MD5)
+sweden-latest.osm.pbf: OK
+2026-11-19T21:22:20Z
+
+=== 02 klipp provområdet (14.20,60.90,15.20,61.65)
+  Bounding boxes:
+  Bounding box: (13.542627,60.5117764,15.6573667,61.8771744)
+  Number of nodes: 1104393
+  Number of ways: 74267
+  Number of relations: 3798
+  All objects have following metadata attributes: version+timestamp
+  Some objects have following metadata attributes: version+timestamp
+
+=== 03 Valhalla-rutor
+-rw-r--r-- 1 box box 4526080 Nov 21 01:17 /workspace/verkstad/ut/valhalla/valhalla_tiles.tar
+30
+
+=== 05 PMTiles
+-rw-r--r-- 1 box box 11591336 Nov 21 01:17 /workspace/verkstad/ut/karta/karta.pmtiles
+
+=== 06 paket och manifest
+/workspace/verkstad/ut/paket/orsa-prov-20261121-0117/manifest.json
+
+=== 04 ruttprov utan nätverk (unshare -rn)
+NÄTVERK: inget nätverk (OSError)
+orsa-gronklitt-auto: code=Ok avstånd=15.73 km tid=16.0 min steg=17 röst=25 banner=16 exempel="Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan."
+orsa-mora-auto: code=Ok avstånd=16.07 km tid=15.2 min steg=22 röst=28 banner=21 exempel="Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan."
+orsa-gronklitt-pedestrian: code=Ok avstånd=12.42 km tid=146.3 min steg=17 röst=36 banner=16 exempel="Gå norrut på Hantverkargatan."
+orsa-mora-pedestrian: code=Ok avstånd=15.60 km tid=183.5 min steg=31 röst=64 banner=30 exempel="Gå söderut på Hantverkargatan."
+mora-orsa-auto: code=Ok avstånd=16.34 km tid=15.5 min steg=22 röst=28 banner=21 exempel="Kör västerut  Dalagatan. Därefter, i 100 meter, Sväng höger in på Badstugatan."
+
+=== Ferrostar-prov utan nätverk (OSRM-parser, simulering, avvikelse)
+mora-orsa-auto.osrm.json: rutter=1 steg=22 talinstruktioner_i_rutten=28 bildinstruktioner=21 | simulering: positioner=1813 stegbyten=21 utlösta_tal=28 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör västerut  Dalagatan. Därefter, i 100 meter, Sväng höger in på Badstugatan.
+    tal: Sväng höger in på Badstugatan, 70.04. Därefter Kör in i rondellen och ta den 2:a avfarten in på Älvgatan.
+    tal: Kör in i rondellen och ta den 2:a avfarten in på Älvgatan, 70.
+orsa-gronklitt-auto.osrm.json: rutter=1 steg=17 talinstruktioner_i_rutten=25 bildinstruktioner=16 | simulering: positioner=1751 stegbyten=16 utlösta_tal=25 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+    tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+    tal: Sväng höger in på Skyttsvägen.
+orsa-gronklitt-pedestrian.osrm.json: rutter=1 steg=17 talinstruktioner_i_rutten=36 bildinstruktioner=16 | simulering: positioner=1381 stegbyten=16 utlösta_tal=36 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Gå norrut på Hantverkargatan.
+    tal: Om 50 meter, Sväng vänster.
+    tal: Sväng vänster.
+orsa-mora-auto.osrm.json: rutter=1 steg=22 talinstruktioner_i_rutten=28 bildinstruktioner=21 | simulering: positioner=1773 stegbyten=21 utlösta_tal=28 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+    tal: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+    tal: Sväng höger in på Skyttsvägen.
+orsa-mora-pedestrian.osrm.json: rutter=1 steg=31 talinstruktioner_i_rutten=64 bildinstruktioner=30 | simulering: positioner=1726 stegbyten=30 utlösta_tal=63 klar=true | avvikelse: 3/3 försök upptäckta (vid avvikande position nr [2, 2, 2]), tillbaka på rutten=true (efter [2, 2, 2] positioner) | OK
+    tal: Gå söderut på Hantverkargatan.
+    tal: Om 50 meter, Sväng vänster in på Slaggatan.
+    tal: Sväng vänster in på Slaggatan.
+TOTALT FEL: 0

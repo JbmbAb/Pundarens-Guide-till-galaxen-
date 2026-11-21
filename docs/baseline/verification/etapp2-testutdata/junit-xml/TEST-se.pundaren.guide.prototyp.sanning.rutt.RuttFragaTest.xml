@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.prototyp.sanning.rutt.RuttFragaTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-21T00:47:34.505Z" hostname="grok-bot-vm-328085215" time="0.001">
+  <properties/>
+  <testcase name="frågan matchar verkstadens" classname="se.pundaren.guide.prototyp.sanning.rutt.RuttFragaTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

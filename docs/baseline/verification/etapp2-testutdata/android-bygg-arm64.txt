@@ -1,0 +1,70 @@
+# Kört 2026-11-21 01:47:11 CET på commit 79d2b962b3f11c4655e01687c4c43467867d8f10
+# --: line 1: java: command not found; Gradle 9.2.1 (wrapper), AGP 9.0.1, compileSdk 36
+# Kommando: ./gradlew --console=plain clean :app:verifieraIngenGoogle :app:testDebugUnitTest :app:assembleDebug -PpaketKatalog=/workspace/verkstad/ut/paket/orsa-prov-20261121-0117
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:clean
+
+> Task :app:verifieraIngenGoogle
+verifieraIngenGoogle: OK. Inga förbjudna moduler. Granskade undantag: [com.google.code.gson:gson:2.10.1, com.google.guava:listenablefuture:1.0]. Rapport: /workspace/pundarens-guide-repo/prototyp/offline-kedja/app/build/rapporter/beroenden.txt
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:javaPreCompileDebug
+> Task :app:parseDebugLocalResources
+> Task :app:compileDebugNavigationResources
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugRFile
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:kopieraPaket
+> Task :app:mergeDebugAssets
+> Task :app:processDebugManifestForPackage
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:compressDebugAssets
+> Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:processDebugResources
+> Task :app:l8DexDesugarLibDebug
+> Task :app:mergeExtDexDebug
+> Task :app:mergeDebugNativeLibs
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libferrostar.so, libjnidispatch.so, libmaplibre.so, libvalhalla-wrapper.so. Run with --info option to learn more.
+
+> Task :app:compileDebugKotlin
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:processDebugJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 23s
+46 actionable tasks: 46 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+EXIT=0
