@@ -12,6 +12,7 @@ import com.stadiamaps.ferrostar.core.SpokenInstructionObserver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import se.pundaren.guide.prototyp.sanning.tal.SvenskTalTvatt
+import se.pundaren.guide.prototyp.sanning.tal.UpprepningsSparr
 import uniffi.ferrostar.SpokenInstruction
 
 class SvenskTalObserver(
@@ -128,6 +129,15 @@ class SvenskTalObserver(
         rapportera("TAL REDO: ${rost.name}, offline")
     }
 
+    // Ändring 3d: samma besked direkt efter en omräkning läses inte upp igen.
+    private val sparr = UpprepningsSparr()
+
+    /** Kallas av navigeringen när rutten räknas om. */
+    fun omrakning() = paHuvudtrad { sparr.omrakning() }
+
+    /** Kallas när en ny tur startar. */
+    fun nyTur() = paHuvudtrad { sparr.nollstall() }
+
     // Ändring 3a: frigör motorn efter misslyckad start. Navigeringen fortsätter utan tal.
     private fun slappMotorn() {
         redo = false
@@ -147,6 +157,11 @@ class SvenskTalObserver(
             }
 
             if (besked != ratt) rapportera("TAL RÅTT: $ratt") // Ändring 3c: spårbarhet i loggen
+
+            if (!sparr.slapp(besked)) { // Ändring 3d
+                rapportera("TAL UPPREPNING stoppad efter omräkning: $besked")
+                return@paHuvudtrad
+            }
 
             if (!redo) {
                 rapportera("TAL EJ REDO: $besked")

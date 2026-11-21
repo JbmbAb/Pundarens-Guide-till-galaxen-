@@ -211,7 +211,7 @@ class MainActivity : Activity() {
         scope.launch {
             c.state.collect { st ->
                 val ts = st.tripState
-                if (st.isCalculatingNewRoute) { remsa.text = "Räknar om rutten …"; logg("OMRÄKNING pågår") }
+                if (st.isCalculatingNewRoute) { remsa.text = "Räknar om rutten …"; logg("OMRÄKNING pågår"); tal?.omrakning() }
                 when (ts) {
                     is TripState.Navigating -> {
                         val instr = ts.visualInstruction?.primaryContent?.text ?: "–"
@@ -234,6 +234,7 @@ class MainActivity : Activity() {
         val c = core ?: return logg("Inte redo än")
         ruttkalla?.profil = profil
         stegForut = -1
+        tal?.nyTur()
         scope.launch {
             try {
                 val start = UserLocation(GeographicCoordinate(ORSA.first, ORSA.second), 5.0, null, java.time.Instant.now(), null)
