@@ -21,7 +21,7 @@ Varje källa har ett id (S-xx). Status beskriver om källan finns och kunde läs
 
 | Id | Källa | Plats | Status | Anmärkning |
 |---|---|---|---|---|
-| S-02 | Reviderad PRD v0.1 | `docs/PRD.md` (456 rader) | TILLGÄNGLIG | Skriven av Grok Bot 2026-11-20 och uppdaterad i `0eb7b87`. **Ersatt som utvecklingsunderlag** av den här baslinjen men oförändrad. Den tidigare versionen (`dfe7338`) är identisk med chattbilagan `596fe3c…md`. |
+| S-02 | Reviderad PRD v0.1 | `docs/archive/PRD-fore-2026-11-21.md` (456 rader, låg i `docs/PRD.md` till 2026-11-21) | TILLGÄNGLIG | Skriven av Grok Bot 2026-11-20 och uppdaterad i `0eb7b87`. **Ersatt som utvecklingsunderlag** av den här baslinjen men oförändrad. Den tidigare versionen (`dfe7338`) är identisk med chattbilagan `596fe3c…md`. |
 | S-03 | Stitch: slutlig PRD | `docs/design/original-briefs/final_project_prd_pundarens_v_n_till_galaxen.html` | TILLGÄNGLIG | Original, oförändrad |
 | S-04 | Stitch: projektbrief | `docs/design/original-briefs/project_brief_pundarens_v_n_till_galaxen.html` | TILLGÄNGLIG | Original, oförändrad |
 | S-05 | Stitch: uppdaterad brief | `docs/design/original-briefs/updated_project_brief_stoner_s_friend_to_the_galaxy.html` | TILLGÄNGLIG | Original, oförändrad |

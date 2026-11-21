@@ -1,6 +1,8 @@
+> **STYRANDE BESLUT:** [Gällande inriktning](../GALLANDE-INRIKTNING.md) har företräde framför äldre planer och designförslag.
+
 # Design
 
-Exporterat från Google Stitch (projektet *Pundarens vän till galaxen*). Filerna är oförändrade. Den reviderade produktinriktningen finns i [`../PRD.md`](../PRD.md).
+Exporterat från Google Stitch (projektet *Pundarens vän till galaxen*). Filerna är oförändrade. De är designreferenser, inte implementationsbeslut.
 
 ## Skärmar (`screens/`)
 
@@ -29,4 +31,4 @@ Babel-Stoner-skärmarna visar det ursprungliga slang-läget. Den nya samtalsmoto
 
 - `project_brief_pundarens_v_n_till_galaxen.html`: första briefen
 - `updated_project_brief_stoner_s_friend_to_the_galaxy.html`: uppdaterad brief (lägger till Towel Tracker, Vibe Protect, Room och Retrofit)
-- `final_project_prd_pundarens_v_n_till_galaxen.html`: slutlig PRD från Stitch, underlaget för `docs/PRD.md`
+- `final_project_prd_pundarens_v_n_till_galaxen.html`: slutlig PRD från Stitch, underlaget för den arkiverade `docs/archive/PRD-fore-2026-11-21.md`

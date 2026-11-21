@@ -1,3 +1,5 @@
+> **STYRANDE BESLUT:** [Gällande inriktning](../../GALLANDE-INRIKTNING.md) (2026-11-21) går före den här baslinjen där de strider. Baslinjens tekniska dokument (arkitektur, händelsekontrakt, SafetyGate, Convoy) gäller fortsatt.
+
 # Konsoliderad baslinje v0.1 – Pundarens Guide till Galaxen
 
 | | |
@@ -6,7 +8,7 @@
 | **Datum** | 2026-11-20 |
 | **Status** | REVISE – kandidat för granskning. Ingenting i den här baslinjen är verifierat på telefon. |
 | **Styrande underlag** | [`../source/Pundarens Guide till Galaxen – utvärdering och byggplan.md`](../source/) (byggplanen, 2026-11-20) och [`../00-startprompt.md`](../00-startprompt.md) (Jimmys startprompt, 2026-11-20) |
-| **Ersätter som utvecklingsunderlag** | [`docs/PRD.md`](../../PRD.md) (v0.1, commit `0eb7b87`). Filen är **inte** ändrad och behålls som historiskt underlag. Där den strider mot den här baslinjen gäller baslinjen, se [10-beslutslogg.md](10-beslutslogg.md). |
+| **Ersätter som utvecklingsunderlag** | [`docs/archive/PRD-fore-2026-11-21.md`](../../archive/PRD-fore-2026-11-21.md) (v0.1, commit `0eb7b87`, låg i `docs/PRD.md` till 2026-11-21). Filen är **inte** ändrad och behålls som historiskt underlag. Där den strider mot den här baslinjen gäller baslinjen, se [10-beslutslogg.md](10-beslutslogg.md). |
 | **Bas-commit** | `main` @ `969ed14` |
 | **Kod** | Inga kodändringar i den här versionen. PR #1 är inventerad men inte sammanslagen. |
 
@@ -15,7 +17,7 @@
 1. Jimmys startprompt (`00-startprompt.md`), som är senast och uttryckligen bindande.
 2. Byggplanen (`source/…utvärdering och byggplan.md`), som är styrande baslinje.
 3. Den här baslinjen v0.1, som tolkar och preciserar 1 och 2.
-4. Tidigare material: `docs/PRD.md`, Stitch-exporten, PR #1 och förslag i chatten. Det får komplettera men inte tyst ersätta 1 och 2.
+4. Tidigare material: den arkiverade PRD:n (`docs/archive/PRD-fore-2026-11-21.md`), Stitch-exporten, PR #1 och förslag i chatten. Det får komplettera men inte tyst ersätta 1 och 2.
 
 ## Statusord
 
@@ -62,7 +64,7 @@ Startprompten ber om arkivering i "det personliga projektarkivet". Det arkivet �
 |---|---|
 | `source/Pundarens Guide till Galaxen – utvärdering och byggplan.md` | `b0927726027a6fe4852c918d38665f16fdd3a87f72ded597057d391f0ea40ef5` |
 | `source/Citatarkiv och samtalslogik för Babel-Stoner (sammanställning 2026-11-20).txt` | `f5feca09109298fa1a8bae304314440f96827fa21ee1015764576ae8597a82f5` |
-| `docs/PRD.md` (oförändrad) | `2d7f3ed11d32c9d706e0706c820202d0b12d6ceac1d7a3d583ee8242886a5989` |
+| `docs/archive/PRD-fore-2026-11-21.md` (oförändrad, flyttad från `docs/PRD.md` 2026-11-21) | `2d7f3ed11d32c9d706e0706c820202d0b12d6ceac1d7a3d583ee8242886a5989` |
 | `data/quotes/quotes.json` (oförändrad) | `df5ea0053caa601c28073be2ab3aced047e04c1e9cb9295c49daed9ba117c311` |
 | `data/babel-stoner/rules.json` (oförändrad) | `9f406d3ecbe520988b4629907855d9c562a1bac0bca98a9c9a9b0006c418cdef` |
 | `data/lexicon/lexicon.json` (oförändrad) | `e2fa62827da50a66bb33c3f6f233914055afc868a60c774608dad36c45101860` |
