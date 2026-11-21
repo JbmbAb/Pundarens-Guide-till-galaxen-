@@ -117,7 +117,7 @@ class ArchitectureTest {
     @Test fun `G-6 beroendegrafen i byggfilerna saknar förbjudna kanter`() {
         fun deps(module: String) = Regex("project\\(\"([^\"]+)\"\\)").findAll(root.resolve("$module/build.gradle.kts").readText()).map { it.groupValues[1] }.toSet()
         val forbidden = mapOf(
-            "engine" to setOf(":truth:core", ":safetygate", ":voice", ":convoy:api", ":convoy:wss", ":babel"),
+            "engine" to setOf(":truth:core", ":safetygate", ":voice", ":convoy:api", ":convoy:http", ":convoy:wss", ":babel"),
             "engine/api" to setOf(":truth:core", ":engine"),
             "safetygate" to setOf(":truth:core", ":engine", ":babel"),
             "babel" to setOf(":truth:api", ":truth:core", ":safetygate", ":engine", ":engine:api"),

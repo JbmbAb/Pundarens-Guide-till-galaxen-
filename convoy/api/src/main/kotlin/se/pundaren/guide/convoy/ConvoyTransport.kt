@@ -42,8 +42,8 @@ data class ConvoySessionCredentials(val serverUrl: String, val sessionId: String
 
 /**
  * Transporten (07, avsnitt 2). Kryptering, samtycke och tidsgräns ligger ovanför den, så att en annan
- * transport kan ersätta den utan att resten skrivs om. Ingen implementation finns än: `:convoy:wss`
- * och servern väntar på ägarbeslut F-15.
+ * transport kan ersätta den utan att resten skrivs om. Implementationen är `:convoy:http`, som talar
+ * med reläet i `relay/convoy-relay.mjs`.
  */
 interface ConvoyTransport {
     val state: StateFlow<TransportState>

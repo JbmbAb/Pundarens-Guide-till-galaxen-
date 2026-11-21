@@ -30,6 +30,7 @@ include(
     ":conductor",
     ":babel",
     ":convoy:api",
+    ":convoy:http",
     ":encyclopedia",
     ":verification:architecture",
 )

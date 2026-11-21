@@ -33,6 +33,8 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     ":babel" to setOf(":archive:api"),
     // Convoy (07): protokollets logik ovanför transporten. Känner varken sanningen, motorn eller arkivet.
     ":convoy:api" to emptySet(),
+    // Transporten mot reläet: vanliga HTTP-anrop ur JDK:n, inget nätverksbibliotek.
+    ":convoy:http" to setOf(":convoy:api"),
     // Encyklopedin: egna fältanteckningar (med plats) och arkivets godkända lexikon.
     ":encyclopedia" to setOf(":truth:api", ":archive:api"),
     // Sanningskärnans Android-adaptrar: valhalla-mobile, Ferrostar, position, batteri.
