@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.nodkort.EmergencyCardTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:49.587Z" hostname="MIMER" time="0.037">
+  <properties/>
+  <testcase name="gammal eller osäker position märks tydligt" classname="se.pundaren.guide.truth.core.nodkort.EmergencyCardTest" time="0.027"/>
+  <testcase name="kortet har koordinater i tre format, riktning hem och batteri" classname="se.pundaren.guide.truth.core.nodkort.EmergencyCardTest" time="0.002"/>
+  <testcase name="kortet säger alltid att det inte ersätter 112" classname="se.pundaren.guide.truth.core.nodkort.EmergencyCardTest" time="0.004"/>
+  <testcase name="utan position säger kortet det rakt ut" classname="se.pundaren.guide.truth.core.nodkort.EmergencyCardTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

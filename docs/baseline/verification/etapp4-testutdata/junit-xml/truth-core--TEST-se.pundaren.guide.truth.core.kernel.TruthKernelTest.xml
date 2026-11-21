@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.kernel.TruthKernelTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:48.942Z" hostname="MIMER" time="0.635">
+  <properties/>
+  <testcase name="samma indata ger samma händelser" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.479"/>
+  <testcase name="farten härleds ur positionerna när GNSS inte anger den" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="batteriet rapporteras när det passerar trösklarna nedåt, inte vid laddning" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.006"/>
+  <testcase name="framkomst ger Arrived och avslutar rutten" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="utlöst talinstruktion ger ManeuverUpcoming med sanna värden" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="stegbyte ger ManeuverCompleted för den manöver som just passerades" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="ruttstart ger RouteStarted och aktiv navigering" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="nödläge slås på och av och tidpunkten för avslaget sparas" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="tillbaka på rutten utan omräkning släpper läget" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.001"/>
+  <testcase name="utan röst släpps omräkningsläget efter en kort stund, och senast efter maxgränsen" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.004"/>
+  <testcase name="avvikelse ger OffRoute och omräkningsläge tills första nya beskedet har spelats" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.002"/>
+  <testcase name="utan någon position alls räknas osäkerheten som visad från första klockslaget" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.001"/>
+  <testcase name="stillastående rapporteras vid 60 s, 5 min och 15 min och nollställs av rörelse" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.049"/>
+  <testcase name="en gammal sparad position ser inte färsk ut" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.007"/>
+  <testcase name="en glömd position lämnar inget kvar som ser ut som en känd plats" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.001"/>
+  <testcase name="dygnsfasen ger händelse vid byte men inte vid första avläsningen" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.016"/>
+  <testcase name="restiden till manövern är den kortaste av ruttens och den i nuvarande fart" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.006"/>
+  <testcase name="stoppad rutt nollställer vägledningen och ticks utan rutt ger inga händelser" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.006"/>
+  <testcase name="positionskvalitet GOOD DEGRADED LOST med ärlig ålder" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.008"/>
+  <testcase name="händelsernas id är unika och sorterbara och kuvertet är ifyllt" classname="se.pundaren.guide.truth.core.kernel.TruthKernelTest" time="0.03"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,19 @@
+# APK byggd på commit d6579c85e43e423c1f71166e5997c13ea704ef61
+fil: app/build/outputs/apk/debug/app-debug.apk
+storlek: 59125428 byte
+sha256: 8f3a5156c353c33ce644dfb230b93f997930edf393499e9f773b2e6a89ab239c
+--- aapt2 dump permissions
+package: se.pundaren.guide
+uses-permission: name='android.permission.ACCESS_FINE_LOCATION'
+uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+permission: se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission: name='se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+--- aapt2 dump badging (utdrag)
+package: name='se.pundaren.guide' versionCode='4' versionName='0.4-etapp4' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+targetSdkVersion:'36'
+uses-permission: name='android.permission.ACCESS_FINE_LOCATION'
+uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+native-code: 'arm64-v8a'

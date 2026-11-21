@@ -1,0 +1,761 @@
+# commit d6579c85e43e423c1f71166e5997c13ea704ef61 (etapp4/sanningskarna)
+# 2026-11-21 12:55:15 Europe/Stockholm, Windows 11, openjdk version "21.0.10" 2026-01-20
+# ./gradlew --console=plain clean check assembleDebug
+> Task :clean
+> Task :app:clean
+> Task :babel:clean
+> Task :conductor:clean
+> Task :engine:clean
+> Task :safetygate:clean
+> Task :voice:clean
+> Task :archive:api:clean
+> Task :archive:core:clean
+> Task :engine:api:clean
+> Task :truth:api:clean
+> Task :truth:core:clean
+> Task :truth:device:clean
+> Task :verification:architecture:clean
+> Task :app:verifyModuleEdges
+> Task :babel:verifyModuleEdges
+> Task :conductor:verifyModuleEdges
+> Task :engine:verifyModuleEdges
+> Task :safetygate:verifyModuleEdges
+> Task :voice:verifyModuleEdges
+> Task :archive:api:verifyModuleEdges
+> Task :archive:core:verifyModuleEdges
+> Task :engine:api:verifyModuleEdges
+> Task :truth:api:verifyModuleEdges
+> Task :truth:core:verifyModuleEdges
+> Task :truth:device:verifyModuleEdges
+> Task :verification:architecture:verifyModuleEdges
+
+> Task :verifyModuleGraph
+verifyModuleGraph: 0 överträdelser i 13 moduler. Rapport: build\reports\module-graph.txt
+
+> Task :truth:device:preBuild
+> Task :truth:device:preDebugBuild
+> Task :truth:device:mergeDebugJniLibFolders
+> Task :truth:device:mergeDebugNativeLibs NO-SOURCE
+> Task :truth:device:stripDebugDebugSymbols NO-SOURCE
+> Task :truth:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :truth:device:copyDebugJniLibsProjectAndLocalJars
+> Task :truth:api:processResources NO-SOURCE
+> Task :truth:core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :truth:core:processResources NO-SOURCE
+> Task :truth:device:generateDebugResources
+> Task :truth:device:packageDebugResources
+> Task :truth:device:processDebugNavigationResources
+> Task :truth:device:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :truth:device:generateDebugAssets UP-TO-DATE
+> Task :truth:device:mergeDebugAssets
+> Task :truth:device:checkDebugAarMetadata
+> Task :truth:device:parseDebugLocalResources
+> Task :truth:device:prepareDebugArtProfile UP-TO-DATE
+> Task :truth:device:javaPreCompileDebug
+> Task :truth:device:prepareLintJarForPublish UP-TO-DATE
+> Task :voice:preBuild
+> Task :voice:preDebugBuild
+> Task :truth:device:writeDebugAarMetadata
+> Task :voice:checkDebugAarMetadata
+> Task :truth:device:generateDebugRFile
+> Task :truth:device:processDebugManifest
+> Task :voice:mergeDebugJniLibFolders
+> Task :voice:mergeDebugNativeLibs NO-SOURCE
+> Task :voice:stripDebugDebugSymbols NO-SOURCE
+> Task :voice:copyDebugJniLibsProjectAndLocalJars
+> Task :voice:generateDebugResources
+> Task :voice:packageDebugResources
+> Task :voice:processDebugNavigationResources
+> Task :voice:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :voice:generateDebugAssets UP-TO-DATE
+> Task :voice:mergeDebugAssets
+> Task :voice:prepareDebugArtProfile UP-TO-DATE
+> Task :voice:prepareLintJarForPublish UP-TO-DATE
+> Task :voice:parseDebugLocalResources
+> Task :voice:javaPreCompileDebug
+> Task :voice:generateDebugRFile
+> Task :archive:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :voice:writeDebugAarMetadata
+> Task :voice:processDebugManifest
+> Task :archive:api:processResources NO-SOURCE
+> Task :engine:api:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :engine:api:processResources NO-SOURCE
+> Task :engine:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :engine:processResources NO-SOURCE
+> Task :archive:core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :archive:core:processResources
+> Task :safetygate:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :safetygate:processResources NO-SOURCE
+> Task :conductor:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :conductor:processResources NO-SOURCE
+> Task :babel:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :babel:processResources NO-SOURCE
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:parseDebugLocalResources
+> Task :app:javaPreCompileDebug
+> Task :app:generateDebugRFile
+> Task :app:mapDebugSourceSetPaths
+> Task :app:compileDebugNavigationResources
+> Task :app:checkDebugAarMetadata
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :voice:extractDeepLinksDebug
+> Task :truth:device:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :voice:compileDebugLibraryResources
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :truth:device:compileDebugLibraryResources
+> Task :voice:writeDebugLintModelMetadata
+> Task :truth:device:writeDebugLintModelMetadata
+> Task :app:extractProguardFiles
+> Task :voice:extractProguardFiles
+> Task :truth:device:extractProguardFiles
+> Task :app:preDebugUnitTestBuild
+> Task :voice:preDebugAndroidTestBuild
+> Task :voice:preDebugUnitTestBuild
+> Task :truth:device:preDebugAndroidTestBuild
+> Task :truth:device:preDebugUnitTestBuild
+> Task :app:javaPreCompileDebugUnitTest
+> Task :babel:processTestResources NO-SOURCE
+> Task :conductor:processTestResources NO-SOURCE
+> Task :engine:processTestResources NO-SOURCE
+> Task :safetygate:processTestResources NO-SOURCE
+> Task :voice:generateDebugUnitTestStubRFile
+> Task :archive:api:processTestResources NO-SOURCE
+> Task :archive:core:processTestResources NO-SOURCE
+> Task :engine:api:processTestResources NO-SOURCE
+> Task :truth:api:processTestResources NO-SOURCE
+> Task :truth:core:processTestResources NO-SOURCE
+> Task :voice:javaPreCompileDebugUnitTest
+> Task :truth:device:javaPreCompileDebugUnitTest
+> Task :verification:architecture:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :verification:architecture:compileKotlin NO-SOURCE
+> Task :verification:architecture:compileJava NO-SOURCE
+> Task :verification:architecture:processResources NO-SOURCE
+> Task :verification:architecture:classes UP-TO-DATE
+> Task :verification:architecture:jar
+> Task :verification:architecture:processTestResources NO-SOURCE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :truth:device:generateDebugUnitTestStubRFile
+> Task :app:kopieraArkiv
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :voice:copyDebugJniLibsProjectOnly
+> Task :truth:device:copyDebugJniLibsProjectOnly
+> Task :app:validateSigningDebug
+> Task :app:checkDebugDuplicateClasses
+> Task :app:writeDebugAppMetadata
+> Task :truth:api:compileKotlin
+> Task :app:writeDebugSigningConfigVersions
+> Task :archive:api:compileKotlin
+> Task :app:l8DexDesugarLibDebug
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
+> Task :archive:api:compileJava NO-SOURCE
+> Task :archive:api:classes UP-TO-DATE
+> Task :archive:api:jar
+> Task :truth:api:compileJava NO-SOURCE
+> Task :truth:api:classes UP-TO-DATE
+> Task :truth:api:jar
+> Task :voice:extractDebugAnnotations
+> Task :archive:api:compileTestKotlin NO-SOURCE
+> Task :archive:api:compileTestJava NO-SOURCE
+> Task :archive:api:testClasses UP-TO-DATE
+> Task :archive:api:test NO-SOURCE
+> Task :archive:api:check
+> Task :truth:api:compileTestKotlin NO-SOURCE
+> Task :truth:api:compileTestJava NO-SOURCE
+> Task :truth:api:testClasses UP-TO-DATE
+> Task :truth:api:test NO-SOURCE
+> Task :truth:api:check
+> Task :engine:api:compileKotlin
+> Task :engine:api:compileJava NO-SOURCE
+> Task :engine:api:classes UP-TO-DATE
+> Task :engine:api:jar
+> Task :engine:api:compileTestKotlin NO-SOURCE
+> Task :engine:api:compileTestJava NO-SOURCE
+> Task :engine:api:testClasses UP-TO-DATE
+> Task :engine:api:test NO-SOURCE
+> Task :engine:api:check
+> Task :voice:compileDebugKotlin
+> Task :voice:compileDebugJavaWithJavac NO-SOURCE
+> Task :voice:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :voice:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :voice:processDebugJavaRes
+> Task :voice:mergeDebugJavaResource
+> Task :voice:bundleLibCompileToJarDebug
+> Task :voice:syncDebugLibJars
+> Task :voice:bundleDebugLocalLintAar
+> Task :voice:bundleLibRuntimeToJarDebug
+> Task :voice:generateDebugLintModel
+> Task :voice:createFullJarDebug
+> Task :voice:generateDebugAndroidTestLintModel
+> Task :voice:generateDebugUnitTestLintModel
+> Task :voice:generateDebugLintReportModel
+> Task :voice:compileDebugUnitTestKotlin NO-SOURCE
+> Task :voice:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :voice:processDebugUnitTestJavaRes NO-SOURCE
+> Task :voice:testDebugUnitTest NO-SOURCE
+> Task :voice:test UP-TO-DATE
+> Task :voice:bundleDebugAar
+> Task :voice:assembleDebug
+> Task :voice:bundleLibRuntimeToDirDebug
+> Task :babel:compileKotlin
+> Task :babel:compileJava NO-SOURCE
+> Task :babel:classes UP-TO-DATE
+> Task :babel:jar
+> Task :voice:lintAnalyzeDebugUnitTest
+> Task :voice:lintAnalyzeDebugAndroidTest
+> Task :archive:core:compileKotlin
+> Task :archive:core:compileJava NO-SOURCE
+> Task :archive:core:classes
+> Task :archive:core:jar
+> Task :safetygate:compileKotlin
+> Task :safetygate:compileJava NO-SOURCE
+> Task :safetygate:classes UP-TO-DATE
+> Task :safetygate:jar
+> Task :truth:core:compileKotlin
+> Task :engine:compileKotlin
+> Task :engine:compileJava NO-SOURCE
+> Task :engine:classes UP-TO-DATE
+> Task :engine:jar
+> Task :voice:lintAnalyzeDebug
+> Task :truth:core:compileJava NO-SOURCE
+> Task :truth:core:classes UP-TO-DATE
+> Task :voice:lintReportDebug
+> Task :truth:core:jar
+> Task :voice:lintDebug
+> Task :truth:device:extractDebugAnnotations
+> Task :voice:lint
+> Task :voice:check
+> Task :babel:compileTestKotlin
+> Task :babel:compileTestJava NO-SOURCE
+> Task :babel:testClasses UP-TO-DATE
+
+> Task :babel:test
+
+SatireModeTest > bara godkända regler BS-01 till BS-16 används PASSED
+
+SatireModeTest > svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning PASSED
+
+SatireModeTest > samma inmatning, session och seed ger samma svar PASSED
+
+SatireModeTest > repliker är godkända exempel och fotrader används inte i fordon PASSED
+
+SatireModeTest > BS-08 återvänder till samtalets början efter flera varv PASSED
+
+SatireModeTest > Rikard-utdrag, blockerade och väntande poster används aldrig PASSED
+
+> Task :babel:check
+> Task :conductor:compileKotlin
+> Task :conductor:compileJava NO-SOURCE
+> Task :conductor:classes UP-TO-DATE
+> Task :conductor:jar
+> Task :safetygate:compileTestKotlin
+> Task :safetygate:compileTestJava NO-SOURCE
+> Task :safetygate:testClasses UP-TO-DATE
+
+> Task :safetygate:test
+
+SafetyGateTest > SG-18 samma rad som för fem svansar sedan stoppas PASSED
+
+SafetyGateTest > SG-06 nödläge avbryter och stoppar sedan allt PASSED
+
+SafetyGateTest > SG-05b till fots i fordonsfart gäller fordonsreglerna PASSED
+
+SafetyGateTest > ägarbeslutet tar inte bort säkerhetsreglerna för privata rader PASSED
+
+SafetyGateTest > SG-16 privat rad med aktiv konvoj spelas upp PASSED
+
+SafetyGateTest > SG-03 pågående svans avbryts när manövern går in i tyst fönster PASSED
+
+SafetyGateTest > SG-07 nödläge och 1000 slumpade kandidater ger alltid EMERGENCY PASSED
+
+SafetyGateTest > SG-15 glitch i 40 km per h stoppas PASSED
+
+SafetyGateTest > SG-05 riktningsord till fots utan manöver tillåts PASSED
+
+SafetyGateTest > SG-01 normalt läge ger Present PASSED
+
+SafetyGateTest > SG-02 manöver om 10 s i fordon ger NO_TIME PASSED
+
+SafetyGateTest > F-11 rad bara till fots stoppas i fordon och släpps till fots PASSED
+
+SafetyGateTest > SG-22 aldrig Present i EMERGENCY, REROUTING eller MANEUVER_WINDOW PASSED
+
+SafetyGateTest > SG-02b manöver inom tyst fönster utan känd talinstruktion ger MANEUVER PASSED
+
+SafetyGateTest > SG-12 batteri 12 procent ger PRIORITY_INFO PASSED
+
+SafetyGateTest > SG-13 förlorad konvojkontakt ger PRIORITY_INFO PASSED
+
+SafetyGateTest > SG-17 privat rad spelas upp på alla ljudutgångar PASSED
+
+SafetyGateTest > SG-04 riktningsord i fordonsläge stoppas PASSED
+
+SafetyGateTest > SG-20 svans från V-012 med PENDING stoppas PASSED
+
+SafetyGateTest > SG-21 samma indata 10000 gånger ger samma beslut PASSED
+
+SafetyGateTest > SG-10 förlorad position under aktiv rutt stoppar PASSED
+
+SafetyGateTest > SG-11 osäkerhet visad i 3 s tillåter Rikard-svans PASSED
+
+SafetyGateTest > SG-14 i 70 km per h stoppas en svans på 3 s PASSED
+
+SafetyGateTest > SG-09 efter första nya beskedet tillåts svans igen PASSED
+
+SafetyGateTest > SG-19 utgången svans stoppas PASSED
+
+SafetyGateTest > SG-08 avvikelse ger REROUTING PASSED
+
+SafetyGateTest > R-16 ingen svans de första 60 s efter nödläge PASSED
+
+SafetyGateTest > kandidatvärdena är märkta som ofrysta PASSED
+
+> Task :safetygate:check
+> Task :app:mergeDebugNativeLibs
+> Task :engine:compileTestKotlin
+> Task :engine:compileTestJava NO-SOURCE
+> Task :engine:testClasses UP-TO-DATE
+> Task :archive:core:compileTestKotlin
+
+> Task :engine:test
+
+IllogicalEngineTest > motsägelseminnet förnekar bara presenterade yttranden PASSED
+
+IllogicalEngineTest > G1-kriteriet med hundra simulerade händelser PASSED
+
+IllogicalEngineTest > riktningsord väljs bort i fordonsläge men inte till fots PASSED
+
+IllogicalEngineTest > samma händelse, minne och seed ger samma utdata PASSED
+
+IllogicalEngineTest > varje svans uppfyller svarskontraktet i 05 PASSED
+
+IllogicalEngineTest > godkänd syntetisk satir når motorn PASSED
+
+IllogicalEngineTest > ej godkända rader och regler når aldrig motorn PASSED
+
+IllogicalEngineTest > navigationskommentarer följer sin situation PASSED
+
+IllogicalEngineTest > ingen rad upprepas inom tio presenterade repliker PASSED
+
+IllogicalEngineTest > inga svansar vid avvikelse, nödläge, batteri eller konvojhändelser PASSED
+
+IllogicalEngineTest > rader bara till fots föreslås aldrig i fordonsläge men till fots PASSED
+
+LineBankTest > godkända variationer och navigationskommentarer finns i radbanken PASSED
+
+LineBankTest > märkta rader är bara till fots PASSED
+
+LineBankTest > Rikard-utdrag, regler, lexikon och arkivposter hålls utanför PASSED
+
+LineBankTest > det finns inga förnekelserader i dagens data PASSED
+
+LineBankTest > radbanken innehåller bara godkända poster och inga regler PASSED
+
+> Task :engine:check
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libferrostar.so, libjnidispatch.so, libmaplibre.so, libvalhalla-wrapper.so. Run with --info option to learn more.
+
+> Task :truth:device:compileDebugKotlin
+> Task :truth:core:compileTestKotlin
+
+> Task :truth:device:compileDebugKotlin
+w: file:///C:/Users/jimmy/StudioProjects/Pundarens-Guide-till-galaxen-/truth/device/src/main/kotlin/se/pundaren/guide/truth/device/OfflineNavigator.kt:438:17 'when' is exhaustive so 'else' is redundant here.
+
+> Task :truth:device:compileDebugJavaWithJavac NO-SOURCE
+> Task :truth:device:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :truth:device:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :truth:device:processDebugJavaRes
+> Task :truth:device:mergeDebugJavaResource
+> Task :truth:device:bundleLibCompileToJarDebug
+> Task :truth:device:bundleLibRuntimeToJarDebug
+> Task :truth:device:syncDebugLibJars
+> Task :truth:device:bundleDebugLocalLintAar
+> Task :truth:device:createFullJarDebug
+> Task :truth:device:generateDebugLintModel
+> Task :truth:device:generateDebugAndroidTestLintModel
+> Task :truth:device:generateDebugUnitTestLintModel
+> Task :archive:core:compileTestJava NO-SOURCE
+> Task :archive:core:testClasses UP-TO-DATE
+> Task :conductor:compileTestKotlin
+> Task :verification:architecture:compileTestKotlin
+> Task :truth:device:lintAnalyzeDebugUnitTest
+> Task :truth:device:lintAnalyzeDebugAndroidTest
+
+> Task :archive:core:test
+
+ArchiveImportTest > relationscitat och Rikard-utdrag är märkta PASSED
+
+ArchiveImportTest > BS-01 till BS-16 är godkända regler PASSED
+
+ArchiveImportTest > Grok Bots förslag är godkända av Jimmy men aldrig original PASSED
+
+ArchiveImportTest > okänd proveniens fäller importen PASSED
+
+ArchiveImportTest > konstruerade exempel ur sammanställningen är fortfarande inte godkända PASSED
+
+ArchiveImportTest > alla poster är PRIVATE vid import PASSED
+
+ArchiveImportTest > approved true utan Jimmy som godkännare räknas inte PASSED
+
+ArchiveImportTest > datafilerna ändras inte av importen PASSED
+
+ArchiveImportTest > originalen importeras byte för byte ur quotes json PASSED
+
+ArchiveImportTest > F-10 och F-09 ger APPROVED_EDIT och originalen ligger kvar PASSED
+
+ArchiveImportTest > F-12 och K-15 håller EX-01-FORMULERING och mönstren i arkivet PASSED
+
+ArchiveImportTest > verifieringsstatus följer 04 PASSED
+
+ArchiveStoreTest > ingen post kan uppgraderas till original PASSED
+
+ArchiveStoreTest > fel kontrollsumma stoppas vid import PASSED
+
+ArchiveStoreTest > syntetisk text får ändras genom ny revision PASSED
+
+ArchiveStoreTest > synlighetsändring är tillåten och loggas PASSED
+
+ArchiveStoreTest > original med samma id kan inte importeras igen PASSED
+
+ArchiveStoreTest > original kan inte ändras i text PASSED
+
+ArchiveStoreTest > original kan inte raderas PASSED
+
+SqliteTriggerTest > syntetisk post får ändras PASSED
+
+SqliteTriggerTest > ombyggnad av tabellen tappar triggerna och upptäcks PASSED
+
+SqliteTriggerTest > revisionshistoriken är bara tillägg PASSED
+
+SqliteTriggerTest > delete av original stoppas PASSED
+
+SqliteTriggerTest > update av originaltext stoppas PASSED
+
+SqliteTriggerTest > uppgradering till original stoppas PASSED
+
+> Task :conductor:compileTestJava NO-SOURCE
+> Task :conductor:testClasses UP-TO-DATE
+
+> Task :conductor:test
+
+TailConductorTest > svansen väntar medan beskedet spelas och kommer efteråt PASSED
+
+TailConductorTest > riktningsord i fordonsläge stoppas av SafetyGate även om motorn släpper dem PASSED
+
+TailConductorTest > en svans i taget och den nyaste väntande gäller PASSED
+
+TailConductorTest > pågående svans avbryts när manöverfönstret öppnas PASSED
+
+TailConductorTest > avstängd Guide och noll pratsamhet ger inga svansar PASSED
+
+TailConductorTest > svans presenteras i normalt läge och hamnar i minnet PASSED
+
+TailConductorTest > svansen får aldrig mer tid än det som är kvar till nästa besked PASSED
+
+TailConductorTest > urvalet är deterministiskt PASSED
+
+TailConductorTest > omräkning låter svansen vänta, lågt batteri stryker den PASSED
+
+TailConductorTest > väntande svans stryks när livslängden gått ut PASSED
+
+TailConductorTest > nödläge avbryter pågående svans och stryker nya direkt PASSED
+
+TailConductorTest > tvåtusen slumpade händelser med riktig motor ger aldrig trams i förbjudna lägen PASSED
+
+TailConductorTest > beställd svans går samma väg genom SafetyGate PASSED
+
+> Task :conductor:check
+> Task :archive:core:check
+> Task :truth:core:compileTestJava NO-SOURCE
+> Task :truth:core:testClasses UP-TO-DATE
+
+> Task :truth:core:test
+
+GeoTest > väderstreck i åtta steg PASSED
+
+GeoTest > solen står i zenit vid ekvatorn vid vårdagjämningen PASSED
+
+GeoTest > avstånd och kurs Orsa till Mora PASSED
+
+GeoTest > soluppgång och solnedgång i Stockholm vid solstånden PASSED
+
+GeoTest > polarnatt och midnattssol i Kiruna PASSED
+
+GeoTest > avstånd i klartext PASSED
+
+GeoTest > koordinater i grader och decimalminuter PASSED
+
+GeoTest > en breddgrad är cirka 111 km och destination går tillbaka PASSED
+
+GeoTest > SWEREF 99 TM stämmer med Lantmäteriets kontrollpunkter PASSED
+
+GeoTest > dag skymning och natt i Orsa den 21 november PASSED
+
+GeoTest > SWEREF 99 TM på medelmeridianen och i Orsa PASSED
+
+LoadBearingJokesTest > målet lottas bara bland dem som verkligen nås i tid PASSED
+
+LoadBearingJokesTest > okänt visas som okänt och gör inte handduken säkrad PASSED
+
+LoadBearingJokesTest > perspektivvyn räknar andelen av universums ålder på riktigt PASSED
+
+LoadBearingJokesTest > öppettider läses försiktigt och allt oklart blir okänt PASSED
+
+LoadBearingJokesTest > handduken är säkrad när alla fem punkter är godkända PASSED
+
+LoadBearingJokesTest > varje brist syns med sitt sanna värde PASSED
+
+LoadBearingJokesTest > snacks rangordnas efter omväg och säger okänd när öppettider saknas PASSED
+
+LoadBearingJokesTest > kandidaterna ligger inom rimligt avstånd och urvalet är seedat PASSED
+
+LoadBearingJokesTest > protokollet håller isär sant och satir och skrivs i myndighetsform PASSED
+
+ManeuverTextTest > beskedet i fast form med avstånd PASSED
+
+ManeuverTextTest > alla riktningar och manövertyper har text och pil PASSED
+
+ManeuverTextTest > sidan byts aldrig PASSED
+
+TruthKernelTest > samma indata ger samma händelser PASSED
+
+TruthKernelTest > farten härleds ur positionerna när GNSS inte anger den PASSED
+
+TruthKernelTest > batteriet rapporteras när det passerar trösklarna nedåt, inte vid laddning PASSED
+
+TruthKernelTest > framkomst ger Arrived och avslutar rutten PASSED
+
+TruthKernelTest > utlöst talinstruktion ger ManeuverUpcoming med sanna värden PASSED
+
+TruthKernelTest > stegbyte ger ManeuverCompleted för den manöver som just passerades PASSED
+
+TruthKernelTest > ruttstart ger RouteStarted och aktiv navigering PASSED
+
+TruthKernelTest > nödläge slås på och av och tidpunkten för avslaget sparas PASSED
+
+TruthKernelTest > tillbaka på rutten utan omräkning släpper läget PASSED
+
+TruthKernelTest > utan röst släpps omräkningsläget efter en kort stund, och senast efter maxgränsen PASSED
+
+TruthKernelTest > avvikelse ger OffRoute och omräkningsläge tills första nya beskedet har spelats PASSED
+
+TruthKernelTest > utan någon position alls räknas osäkerheten som visad från första klockslaget PASSED
+
+TruthKernelTest > stillastående rapporteras vid 60 s, 5 min och 15 min och nollställs av rörelse PASSED
+
+TruthKernelTest > en gammal sparad position ser inte färsk ut PASSED
+
+TruthKernelTest > en glömd position lämnar inget kvar som ser ut som en känd plats PASSED
+
+TruthKernelTest > dygnsfasen ger händelse vid byte men inte vid första avläsningen PASSED
+
+TruthKernelTest > restiden till manövern är den kortaste av ruttens och den i nuvarande fart PASSED
+
+TruthKernelTest > stoppad rutt nollställer vägledningen och ticks utan rutt ger inga händelser PASSED
+
+TruthKernelTest > positionskvalitet GOOD DEGRADED LOST med ärlig ålder PASSED
+
+TruthKernelTest > händelsernas id är unika och sorterbara och kuvertet är ifyllt PASSED
+
+EmergencyCardTest > gammal eller osäker position märks tydligt PASSED
+
+EmergencyCardTest > kortet har koordinater i tre format, riktning hem och batteri PASSED
+
+EmergencyCardTest > kortet säger alltid att det inte ersätter 112 PASSED
+
+EmergencyCardTest > utan position säger kortet det rakt ut PASSED
+
+PaketInstallerareTest > farliga namn i manifestet avvisas PASSED
+
+PaketInstallerareTest > samma version installeras inte om PASSED
+
+PaketInstallerareTest > ny version byter pekaren, föregående sparas för återställning, äldre tas bort PASSED
+
+PaketInstallerareTest > installerar och pekar ut aktivt paket PASSED
+
+PaketInstallerareTest > avbrott mitt i kopieringen lämnar det gamla paketet aktivt och städas vid nästa start PASSED
+
+PaketInstallerareTest > trasig pekare ger inget aktivt paket PASSED
+
+PaketInstallerareTest > fel kontrollsumma avvisas och det gamla paketet ligger kvar PASSED
+
+PaketInstallerareTest > fel storlek avvisas PASSED
+
+PlaceIndexTest > närmast först inom en radie PASSED
+
+PlaceIndexTest > exakt träff först, sedan börjar-med, orter före annat PASSED
+
+PlaceIndexTest > sökning bryr sig inte om versaler eller prickar PASSED
+
+PlaceIndexTest > läser punkter med namn och hoppar över resten PASSED
+
+InstructionAnnouncerTest > beskedet tvättas och läses upp, råtexten loggas PASSED
+
+InstructionAnnouncerTest > avstängt ljud läser inget men loggar beskedet, tomt besked ger ingenting PASSED
+
+InstructionAnnouncerTest > samma besked direkt efter omräkning läses inte upp igen PASSED
+
+SvenskTalTvattTest > europaväg utan mellanslag PASSED
+
+SvenskTalTvattTest > liten bokstav mitt i meningen bara för instruktionsord PASSED
+
+SvenskTalTvattTest > etapp2-beskeden bevarar riktning avstånd och gatunamn PASSED
+
+SvenskTalTvattTest > avstånd 2-a avfart och orter rörs inte PASSED
+
+SvenskTalTvattTest > decimalkomma före enhet PASSED
+
+SvenskTalTvattTest > ensamt delnummer med punkt tas bort med sitt på PASSED
+
+SvenskTalTvattTest > vägnummer efter gatunamn tas bort PASSED
+
+SvenskTalTvattTest > dubbelt mellanslag och saknat på i startbeskedet PASSED
+
+SvenskTalTvattTest > ensamt vägnummer blir väg N som på skylten PASSED
+
+UpprepningsSparrTest > tre omräkningar i rad som i etapp2-emulatorn ger ett enda besked PASSED
+
+UpprepningsSparrTest > nytt besked efter omräkning släpps och nollställer spärren PASSED
+
+UpprepningsSparrTest > ny tur nollställer PASSED
+
+UpprepningsSparrTest > jämförelsen bryr sig inte om versaler och mellanslag PASSED
+
+UpprepningsSparrTest > upprepning utan omräkning släpps igenom PASSED
+
+UpprepningsSparrTest > samma besked direkt efter omräkning stoppas PASSED
+
+> Task :truth:core:check
+> Task :truth:device:generateDebugLintReportModel
+> Task :truth:device:compileDebugUnitTestKotlin NO-SOURCE
+> Task :truth:device:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :truth:device:processDebugUnitTestJavaRes NO-SOURCE
+> Task :truth:device:testDebugUnitTest NO-SOURCE
+> Task :truth:device:test UP-TO-DATE
+> Task :verification:architecture:compileTestJava NO-SOURCE
+> Task :verification:architecture:testClasses UP-TO-DATE
+
+> Task :verification:architecture:test
+
+ArchitectureTest > G-4 TailCandidate bär inga sanningstyper och inga callbacks PASSED
+
+ArchitectureTest > motorn gör ingen I-O PASSED
+
+ArchitectureTest > G-9 och SG-23 SafetyGate returnerar bara beslut och har inga sanningsberoenden PASSED
+
+ArchitectureTest > inget Google-beroende någonstans i bygget PASSED
+
+ArchitectureTest > händelserna är oföränderliga värden PASSED
+
+ArchitectureTest > G-3 sanningsgränssnitten är bara läsning PASSED
+
+ArchitectureTest > G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen PASSED
+
+ArchitectureTest > motorns gränssnitt har ingen väg tillbaka till sanningen PASSED
+
+ArchitectureTest > G-6 beroendegrafen i byggfilerna saknar förbjudna kanter PASSED
+
+ArchitectureTest > G-8 rena moduler har varken Android, Google eller nätverk PASSED
+
+EndToEndDiodeTest > tvåhundra simulerade händelser genom motor och SafetyGate PASSED
+
+KernelDiodeTest > samma tur med och utan tramslagret ger exakt samma sanning PASSED
+
+KernelDiodeTest > turen innehåller alla lägen som ska tysta tramset PASSED
+
+TruthBoundaryTest > utgående porten för besked kan inte läsa eller ändra sanningsdata PASSED
+
+TruthBoundaryTest > G-2 all inmatning i kärnan är märkt TruthInput PASSED
+
+TruthBoundaryTest > G-1 sanningslagret importerar inget ur tramslagret PASSED
+
+TruthBoundaryTest > appen saknar INTERNET-behörighet och ingen modul lägger till den PASSED
+
+TruthBoundaryTest > rösten känner varken motorn, SafetyGate eller sanningskärnan PASSED
+
+TruthBoundaryTest > G-2 bara truth-device och testkod slår på TruthInput PASSED
+
+TruthBoundaryTest > kartstilarna har samma lager, inga nätadresser och ingen sanningsfärg PASSED
+
+TruthBoundaryTest > G-5 kärnans inmatning tar inga tramstyper och text bara som målets namn PASSED
+
+VoiceRulesTest > RR-05 spärrlistan omfattar böjningar men inte högre PASSED
+
+VoiceRulesTest > RR-01 varje rad i radbanken bär minst en mekanism PASSED
+
+VoiceRulesTest > RR-08 förslag och variationer kan inte vara original PASSED
+
+VoiceRulesTest > RR-13 Babel-grepp finns inte i navigatorns radbank PASSED
+
+VoiceRulesTest > RR-06 rader som skyller på användaren spärras PASSED
+
+VoiceRulesTest > RR-09 satiren är märkt som satir PASSED
+
+VoiceRulesTest > RR-04 rader som låter som besked finns bara som rader till fots PASSED
+
+VoiceRulesTest > RR-10 lånade namn finns bara som märkta arbetsnamn PASSED
+
+VoiceRulesTest > RR-07 Rikard hörs aldrig och verkliga utdrag läses inte upp PASSED
+
+VoiceRulesTest > RR-11 bara APPROVED, relationscitat märkta, och privata rader hörs överallt PASSED
+
+> Task :verification:architecture:check
+> Task :truth:device:bundleDebugAar
+> Task :truth:device:assembleDebug
+> Task :truth:device:bundleLibRuntimeToDirDebug
+> Task :app:mergeLibDexDebug
+> Task :app:compileDebugKotlin
+> Task :truth:device:lintAnalyzeDebug
+> Task :truth:device:lintReportDebug
+> Task :truth:device:lintDebug
+> Task :truth:device:lint
+> Task :truth:device:check
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:compileDebugUnitTestKotlin NO-SOURCE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes
+> Task :app:processDebugUnitTestJavaRes NO-SOURCE
+> Task :app:testDebugUnitTest NO-SOURCE
+> Task :app:test UP-TO-DATE
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:lintAnalyzeDebug
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///C:/Users/jimmy/StudioProjects/Pundarens-Guide-till-galaxen-/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+> Task :app:lint
+> Task :app:check
+> Task :check
+
+BUILD SUCCESSFUL in 4m 10s
+200 actionable tasks: 190 executed, 10 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+EXIT=0

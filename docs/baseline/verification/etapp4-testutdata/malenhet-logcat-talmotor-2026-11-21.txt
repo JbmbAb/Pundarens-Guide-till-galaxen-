@@ -1,0 +1,37 @@
+# Utdrag ur systemloggen (adb logcat) på målenheten SM-X900, One UI 8.0, Android 16, 2026-11-21.
+# Visar vad som händer när appen ber om Samsungs talmotor uttryckligen:
+#   TextToSpeech(context, lyssnare, "com.samsung.SMT")
+# Raderna är ordagranna. Process 29580 är appen (se.pundaren.guide), 29698 är Samsungs talmotor,
+# 2467 är systemets tjänst. Systeminställningen tts_default_synth var com.samsung.SMT vid tillfället
+# (ägaren hade valt Samsungs motor som önskad motor).
+#
+# Slutsats: Samsungs motor (3.5.02.46) kontrollerar anroparens paketnamn mot en egen lista och
+# avvisar appen. Ramverket väljer då den högst rankade ÖPPNA motorn, com.google.android.tts, och
+# rapporterar en lyckad anslutning. Appen får alltså Googles motor utan att ha bett om den.
+
+11-21 12:01:29.768 29580 29580 I TextToSpeech: Create TextToSpeech : caller process id[29580] / name[se.pundaren.guide] / target[com.samsung.SMT]
+11-21 12:01:30.047 29698 29723 I SamsungTTS: se.pundaren.guide is invalid package.
+11-21 12:01:30.047 29698 29723 I SamsungTTS: [check_allowed_package] se.pundaren.guide is not allowed. [-4]
+11-21 12:01:30.050 29580 29580 I TextToSpeech: se.pundaren.guide is not allowed to bind to private engine.
+11-21 12:01:30.058 29580 29580 I TextToSpeech: getHighestRankedPublicEngineName = com.google.android.tts
+11-21 12:01:30.069 29580 29580 I TextToSpeech: Sucessfully bound to com.google.android.tts
+11-21 12:01:30.089  2467  5371 D TextToSpeechManagerPerUserService: Trying to start connection to TTS engine: com.google.android.tts
+11-21 12:01:30.178 29698 29698 I SamsungTTS: [Service][350200046][3.5.02.46] Loading Success
+11-21 12:01:30.500 29698 29698 I SamsungTTS: Summary [20]Languages [22]Voices [67]Downloadable [151]ms
+11-21 12:01:31.458  2467  2467 D TextToSpeechManagerPerUserService: Connected successfully to TTS engine: com.google.android.tts
+11-21 12:01:31.463 29580 29612 I TextToSpeech: Connected to TTS engine
+11-21 12:01:32.162 29580 29804 I TextToSpeech: Setting up the connection to TTS engine...
+11-21 12:01:32.191 29698 29738 I SamsungTTS: se.pundaren.guide is invalid package.
+11-21 12:01:32.191 29698 29738 I SamsungTTS: [check_allowed_package] se.pundaren.guide is not allowed. [-4]
+11-21 12:01:32.193 29580 29580 I TextToSpeech: se.pundaren.guide is not allowed to bind to private engine.
+11-21 12:01:32.193 29580 29580 I TextToSpeech: getHighestRankedPublicEngineName = com.google.android.tts
+
+# Appens egen logg vid samma start (guide-logg.txt, då med spärren "bara Samsungs motor"):
+12:01:32.482 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:01:32.491 TAL FEL: Den anslutna talmotorn är inte Samsungs
+
+# Första starten samma dag, 11.41, innan ägaren hade valt Samsungs motor som önskad motor
+# (tts_default_synth var inte satt). Samma avvisning:
+11-21 11:41:35.603 10486 10497 I SamsungTTS: se.pundaren.guide is invalid package.
+11-21 11:41:35.604 10486 10497 I SamsungTTS: [check_allowed_package] se.pundaren.guide is not allowed. [-4]
+11-21 11:41:35.605 10465 10465 I TextToSpeech: se.pundaren.guide is not allowed to bind to private engine.

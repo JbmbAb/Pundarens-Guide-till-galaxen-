@@ -178,6 +178,18 @@ Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/e
 
 Genomfört på grenen `etapp2/offline-karta` (PR #6), se [`../verification/etapp2-protokoll.md`](../verification/etapp2-protokoll.md).
 
+<a id="talmotorn"></a>
+## 10. Ägarbeslut 2026-11-21 cirka kl. 12.31–12.35 (Europe/Stockholm): talmotorn och vad Google-förbudet gäller
+
+Bakgrund: på målenheten avvisar Samsungs talmotor appen, och Android ansluter då tyst Googles talmotor ([etapp4-protokollet](../verification/etapp4-protokoll.md), avsnitt 5). Byggaren frågade vilken röst appen ska ha. Ägaren valde först "Piper i appen" i frågerutan och skrev strax därefter, ordagrant: "goggle api förbjuds inte goggle i övrigt". På följdfrågan om det betyder att förbudet gäller Googles API:er och att plattans talmotor därmed får användas valde ägaren "Ja, Googles motor nu". Det senare svaret gäller.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| F-06 | REVISE genom ägarbeslut | Förbudet mot Google gäller Googles **API:er** (Maps, Play-tjänster, Firebase med flera), inte Google i övrigt. Enhetens talmotor får användas även när den är Googles. Preciserar E2-D3 ("förbudet gäller Googles tjänster"). Beroendespärren i bygget (`verifyModuleEdges`) är oförändrad: inga Google-bibliotek för tjänster i appen, och `gson` och `listenablefuture` är fortfarande de enda granskade undantagen. |
+| B-46, A-08 | ACCEPT genom ägarbeslut | Rösten är systemets talmotor via Androids `TextToSpeech`, med svenska röster som läses upp på enheten (på målenheten Googles motor, rösterna `sv-se-x-…-local`). Appen har fortfarande ingen INTERNET-behörighet. |
+| Samsungs talmotor | REJECT (går inte) | `com.samsung.SMT` 3.5.02.46 är en privat motor på SM-X900 och avvisar appen. Ägarens `SvenskTalObserver.kt` bad uttryckligen om den; den vägen fungerar inte på målenheten. |
+| Piper via sherpa-onnx (T-22, T-23) | Parkerat | Väcks om ägaren senare vill ha en röst helt utan Google. Att tänka på då: Pipers uttalsdel (espeak-ng) har GPL-licens, vilket påverkar F-17. |
+
 <a id="godkann-allt"></a>
 ## 8. Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): godkänn allt
 

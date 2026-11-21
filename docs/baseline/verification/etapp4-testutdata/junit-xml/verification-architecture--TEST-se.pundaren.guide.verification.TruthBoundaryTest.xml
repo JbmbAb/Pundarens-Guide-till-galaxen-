@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.verification.TruthBoundaryTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:56.173Z" hostname="MIMER" time="0.28">
+  <properties/>
+  <testcase name="utgående porten för besked kan inte läsa eller ändra sanningsdata" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.001"/>
+  <testcase name="G-2 all inmatning i kärnan är märkt TruthInput" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.002"/>
+  <testcase name="G-1 sanningslagret importerar inget ur tramslagret" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.013"/>
+  <testcase name="appen saknar INTERNET-behörighet och ingen modul lägger till den" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.044"/>
+  <testcase name="rösten känner varken motorn, SafetyGate eller sanningskärnan" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.003"/>
+  <testcase name="G-2 bara truth-device och testkod slår på TruthInput" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.186"/>
+  <testcase name="kartstilarna har samma lager, inga nätadresser och ingen sanningsfärg" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.013"/>
+  <testcase name="G-5 kärnans inmatning tar inga tramstyper och text bara som målets namn" classname="se.pundaren.guide.verification.TruthBoundaryTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

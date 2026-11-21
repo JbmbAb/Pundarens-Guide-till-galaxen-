@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.archive.core.ArchiveStoreTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:39.209Z" hostname="MIMER" time="0.103">
+  <properties/>
+  <testcase name="ingen post kan uppgraderas till original" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.015"/>
+  <testcase name="fel kontrollsumma stoppas vid import" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.011"/>
+  <testcase name="syntetisk text får ändras genom ny revision" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.013"/>
+  <testcase name="synlighetsändring är tillåten och loggas" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.019"/>
+  <testcase name="original med samma id kan inte importeras igen" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.011"/>
+  <testcase name="original kan inte ändras i text" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.017"/>
+  <testcase name="original kan inte raderas" classname="se.pundaren.guide.archive.core.ArchiveStoreTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

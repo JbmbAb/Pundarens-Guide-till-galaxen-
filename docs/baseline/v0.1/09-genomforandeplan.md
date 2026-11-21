@@ -17,6 +17,20 @@ Röstmodulen (etapp 2 och G4) och den tekniska navigationsprototypen (etapp 3) f
 | **6** | Convoy för två | `:convoy:api`, `:convoy:wss`, självhostad server, samtyckesflöde, hotmodellstester | G5 | G7 | NOT_VERIFIED |
 | **7** | Babel-Stoner och Galactic Encyclopedia | `:babel` med Satirläge (spelet) och Analysläge (frågebokföring), `:llm:api` med lokal modell eller LAN, encyklopedi med fältanteckningar | G1 (motor), G5 | G8 | NOT_VERIFIED |
 
+## Läge 2026-11-21
+
+Projektets löpande numrering i grenar och protokoll skiljer sig från tabellen ovan (etapp1-protokollet, D-9). Det här är byggt och provat hittills. Ingen grind efter G0 är `ACCEPT`.
+
+| Tabellens etapp | Löpande namn | Gren och PR | Protokoll | Grind |
+|---|---|---|---|---|
+| 2 | Etapp 1 | `etapp1/illogical-engine`, PR #5 (sammanslagen) | [etapp1-protokoll](../verification/etapp1-protokoll.md) | G1 NOT_VERIFIED |
+| 3 | Etapp 2 | `etapp2/offline-karta`, PR #6 | [etapp2-protokoll](../verification/etapp2-protokoll.md) | G2, G3 NOT_VERIFIED |
+| 2–3 (G4) | Etapp 3 | `etapp3/svenskt-tal`, PR #7 | [etapp3-tal-protokoll](../verification/etapp3-tal-protokoll.md) | G4 NOT_VERIFIED. Samsungs motor fungerar inte på målenheten, se etapp 4. |
+| 4 | Etapp 4 | `etapp4/sanningskarna` | [etapp4-protokoll](../verification/etapp4-protokoll.md) | G5 NOT_VERIFIED. Appen kör på målenheten med simulerad position. |
+| 5 | – | `etapp4/sanningskarna` (bara logiken) | etapp4-protokollet avsnitt 1 | G6 NOT_VERIFIED. Sanna värden under skämten är testade på JVM, inte inkopplade i appen. |
+| 6 | – | – | – | Inte byggt. F-15 (var servern ska köras) är öppen. |
+| 7 | – | – | – | Satirläget finns sedan etapp 1. Spelet, analysläget och encyklopedin är inte byggda. |
+
 ## Etapp 1 i detalj (nästa steg)
 
 Etapp 1 är nästan helt beslut som bara Jimmy kan fatta. Den kräver ingen kod utom arkivdatabasens prototyp.

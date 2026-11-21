@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.kernel.ManeuverTextTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:48.901Z" hostname="MIMER" time="0.015">
+  <properties/>
+  <testcase name="beskedet i fast form med avstånd" classname="se.pundaren.guide.truth.core.kernel.ManeuverTextTest" time="0.007"/>
+  <testcase name="alla riktningar och manövertyper har text och pil" classname="se.pundaren.guide.truth.core.kernel.ManeuverTextTest" time="0.004"/>
+  <testcase name="sidan byts aldrig" classname="se.pundaren.guide.truth.core.kernel.ManeuverTextTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

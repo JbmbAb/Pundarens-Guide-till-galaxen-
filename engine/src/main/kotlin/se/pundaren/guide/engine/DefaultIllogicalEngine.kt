@@ -31,9 +31,14 @@ import java.util.SplittableRandom
 data class EngineConfig(
     /** 05 §5 punkt 2: högst 10 s efter händelsen (kandidatvärde). */
     val tailLifetimeMillis: Long = 10_000,
-    /** Uppskattad taltid. Byggarens antagande, mäts i G4. */
-    val baseSpeechMillis: Int = 600,
-    val millisPerWord: Int = 380,
+    /**
+     * Uppskattad taltid per tecken. Mätt på målenheten 2026-11-21 (etapp4-protokollet, E4-D14):
+     * 110 tecken tog 6,3 s och 97 tecken 5,9 s med Guidens röst, alltså cirka 60 ms per tecken.
+     * Värdena ligger avsiktligt i överkant: uppskattningen avgör både om svansen ryms före nästa
+     * besked och när den senast klipps, och en för låg uppskattning klipper svansen mitt i ett ord.
+     */
+    val baseSpeechMillis: Int = 800,
+    val millisPerCharacter: Int = 65,
     /** R-13 / G1: ingen upprepning inom tio repliker. */
     val noRepeatWindow: Int = 10,
     /** Sannolikhet i promille att motsägelseminnet används när en förnekelserad finns. */
@@ -113,7 +118,7 @@ class DefaultIllogicalEngine(
     )
 
     fun estimateSpeechMillis(text: String): Int =
-        config.baseSpeechMillis + config.millisPerWord * text.trim().split(Regex("\\s+")).count { it.isNotEmpty() }
+        config.baseSpeechMillis + config.millisPerCharacter * text.trim().length
 
     companion object {
         /** Händelser där tramslagret inte föreslår något alls (05, avsnitt 3). */

@@ -6,7 +6,29 @@ En ologisk men oumbärlig digital följeslagare för Android, inspirerad av *Lif
 
 > Appen ska inte vara en förnuftig assistent som försöker vara rolig. Den ska vara en absurd, inkonsekvent, självmedvetet inkompetent galaktisk följeslagare som av misstag råkar vara användbar.
 
-**Status:** tidig planering. Här finns produktspecifikation, design och data, men ingen Android-kod ännu.
+**Status 2026-11-21:** appen finns och kör på målenheten (Samsung Galaxy Tab S8 Ultra) med karta, ruttning och navigering offline, svensk röst och Guiden bakom SafetyGate. Ingen grind efter G0 är godkänd: det som återstår är verkliga turer, lyssning och oberoende granskning. Läget står i protokollen under [`docs/baseline/verification/`](docs/baseline/verification/), senast [etapp 4](docs/baseline/verification/etapp4-protokoll.md).
+
+Det som gäller för bygget är baslinjen i [`docs/baseline/v0.1/`](docs/baseline/v0.1/), inte resten av den här sidan. Avsnitten nedan är den ursprungliga beskrivningen och är delvis ersatta: Google Maps används inte (MapLibre med lokal kartfil), och anti-navigering i fordon är struken.
+
+## Bygga och köra
+
+```
+./gradlew clean check assembleDebug      # alla tester, modulgraf, lint och APK
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+```
+
+Offlinepaketet (karta, ruttgraf, platser) checkas inte in. Det byggs i verkstaden (`tools/verkstad/`) och läggs i appens mapp `inkommande/` efter första start, se etapp 4-protokollet avsnitt 3.
+
+| Modul | Vad |
+|---|---|
+| `truth/api`, `truth/core`, `truth/device` | Sanningslagret: händelser, kärnan (ren Kotlin) och Android-adaptrarna (valhalla-mobile, Ferrostar, GNSS) |
+| `engine/api`, `engine`, `archive/*` | Illogical Engine och arkivet med ursprungsklasser |
+| `safetygate`, `conductor` | SafetyGate och dirigenten som bara släpper fram Guiden när det är tillåtet |
+| `voice` | En talmotor, två kanaler: besked klipper alltid svansen |
+| `app` | Skärmen: sanningsremsan, kartan, svansytan, nödkortet |
+| `babel` | Babel-Stoners satirläge |
+| `verification/architecture` | Tester som håller isär sanning och trams |
+| `prototyp/offline-kedja` | Etapp 2-prototypen, kvar som historik |
 
 ## Grundprincip: Illogical Engine
 
