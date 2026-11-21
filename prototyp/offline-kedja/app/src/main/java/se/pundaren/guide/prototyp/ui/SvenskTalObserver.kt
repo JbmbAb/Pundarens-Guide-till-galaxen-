@@ -53,6 +53,7 @@ class SvenskTalObserver(
             tal.engines.none { it.name == "com.samsung.SMT" }
         ) {
             rapportera("TAL FEL: Samsungs talmotor kunde inte startas")
+            slappMotorn() // Ändring 3a: läck inte motorn när starten misslyckas
             return
         }
 
@@ -73,6 +74,7 @@ class SvenskTalObserver(
             tal.setVoice(rost) != TextToSpeech.SUCCESS
         ) {
             rapportera("TAL FEL: Ingen installerad svensk offlineröst")
+            slappMotorn() // Ändring 3a: läck inte motorn när starten misslyckas
             return
         }
 
@@ -89,6 +91,13 @@ class SvenskTalObserver(
 
         redo = true
         rapportera("TAL REDO: ${rost.name}, offline")
+    }
+
+    // Ändring 3a: frigör motorn efter misslyckad start. Navigeringen fortsätter utan tal.
+    private fun slappMotorn() {
+        redo = false
+        motor?.shutdown()
+        motor = null
     }
 
     override fun onSpokenInstructionTrigger(
