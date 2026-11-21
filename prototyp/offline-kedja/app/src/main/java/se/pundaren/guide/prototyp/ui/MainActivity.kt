@@ -37,7 +37,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.maplibre.android.MapLibre
 import org.maplibre.android.camera.CameraPosition
+import org.maplibre.android.camera.CameraUpdateFactory
 import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.geometry.LatLngBounds
 import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.Style
@@ -77,6 +79,8 @@ class MainActivity : Activity() {
         val ORSA = 61.1201175 to 14.6222536
         val GRONKLITT = 61.2077132 to 14.5377551
         val MORA = 61.0086787 to 14.5442519
+        // F-03 (ägarbeslut 2026-11-21 06.15): långt prov in i Härjedalen, place=town ur OSM
+        val SVEG = 62.0360709 to 14.3598392
         const val TURKOS = 0xFF4AF8E3.toInt()
         const val BAKGRUND = 0xFF0E0E0E.toInt()
     }
@@ -127,6 +131,7 @@ class MainActivity : Activity() {
         }.also { knappar.addView(it) }
         knapp("Orsa → Grönklitt (passagerare)") { navigera(GRONKLITT, ValhallaRuttkalla.Profil.PASSAGERARE, setOf()) }
         knapp("Orsa → Mora (till fots)") { navigera(MORA, ValhallaRuttkalla.Profil.TILL_FOTS, setOf()) }
+        knapp("Orsa → Sveg (passagerare)") { navigera(SVEG, ValhallaRuttkalla.Profil.PASSAGERARE, setOf()) }
         knapp("Avvikelseprov ×3") { navigera(MORA, ValhallaRuttkalla.Profil.PASSAGERARE, setOf(60, 200, 340)) }
         knapp("Stopp") { core?.stopNavigation(); position.stoppa(); logg("STOPP") }
         panel.addView(knappar)
@@ -256,6 +261,8 @@ class MainActivity : Activity() {
         val s = karta?.style ?: return
         if (geo.isEmpty()) return
         s.getSourceAs<GeoJsonSource>("rutt")?.setGeoJson(LineString.fromLngLats(geo.map { Point.fromLngLat(it.lng, it.lat) }))
+        val ram = LatLngBounds.Builder().apply { geo.forEach { include(LatLng(it.lat, it.lng)) } }.build()
+        karta?.moveCamera(CameraUpdateFactory.newLatLngBounds(ram, 80))
     }
 
     private fun visaPosition(p: UserLocation) {

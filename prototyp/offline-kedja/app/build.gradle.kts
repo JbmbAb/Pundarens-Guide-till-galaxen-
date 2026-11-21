@@ -78,7 +78,8 @@ val forbjudnaGrupper = listOf(
     "com.google.android.play",         // Play Core
     "com.google.mlkit", "com.google.android.datatransport", "com.google.android.libraries",
 )
-// Grupp:modul → motivering. Varje rad är ett öppet ägarbeslut (etapp2-protokollet, E2-D3).
+// Grupp:modul → motivering. Ägarbeslut 2026-11-21 06.15 (E2-D3): förbudet gäller Googles TJÄNSTER;
+// gson och listenablefuture får vara kvar. Nya rader kräver nytt ägarbeslut.
 // Båda är fristående öppna Java-bibliotek (Apache-2.0) utan nätverk, konto eller tjänst.
 val tillatnaGoogleModuler = mapOf(
     "com.google.code.gson:gson" to "JSON-läsare som MapLibres GeoJSON-modul (android-sdk-geojson 6.0.1) kräver",
