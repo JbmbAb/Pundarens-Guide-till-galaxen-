@@ -1,15 +1,11 @@
-# Emulatorprov 2026-11-21 01:25:33 CET
-# AVD: system-images;android-35;default;x86_64 (AOSP utan Google APIs), TCG (ingen KVM)
-== Android
-15
-Android SDK built for x86_64
-== Google-paket på emulatorn
-(inga)
-== flygplansläge
+# 2026-11-21 06:24:27 CET emulator etapp2 (TCG), F-03-paketet
 cmd: Can't find service: phone
-1
+airplane_mode_on=1
 connect: Network is unreachable
-== installera
 Success
-      se.pundaren.guide.prototyp.offlinekedja.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
-1
+install start 06:25:02
+Performing Streamed Install
+Success
+install slut 06:28:07
+google-paket: 0
+x86_64-APK sha256 b71d1ed8ff72d817b434339e6a940e50b74056db9cc4869b82a4ada4a7f699a7

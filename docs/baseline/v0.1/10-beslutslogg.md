@@ -165,6 +165,19 @@ Inget här gör G0 till ACCEPT. Alla grindar förblir NOT_VERIFIED. Ingen implem
 
 Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 8.
 
+## 9. Ägarbeslut 2026-11-21 kl. 06.15 (Europe/Stockholm): Google-förbudet och testområdet
+
+Ägarens svar ordagrant: "Gson och listenablefuture får vara kvar, förbudet gäller Googles tjänster" och, om grannkommunerna, "Mora, Rättvik, Ljusdal, Härjedalen, Älvdalen".
+
+| Id | Utfall | Kort |
+|---|---|---|
+| E2-D3 | ACCEPT genom ägarbeslut | Förbudet mot Google gäller Googles tjänster (Play-tjänster, Firebase, Maps, Tink, ML Kit m.fl.). `com.google.code.gson:gson` och `com.google.guava:listenablefuture` får stå kvar i tillåtelselistan i `verifieraIngenGoogle`. Nya rader i listan kräver nytt ägarbeslut. F-06 i [11](11-tekniska-antaganden.md) är preciserad. |
+| F-03 | BESLUTAT | Testområdet är Orsa kommun samt Mora, Rättvik, Ljusdal, Härjedalen och Älvdalen. Paketgränsen är unionen av OSM-gränserna (admin_level 7) med 0,02° buffert. Älvdalen gränsar inte till Orsa i OSM; kommunen ingår ändå enligt beslutet. |
+| E2-D2 | Stängd | Rektangeln runt Orsa är ersatt av F-03-området. |
+| APK på Google Drive | Utfört av huvudagenten | Ägaren bad: "Lägg APK:n på min Google Drive". Filen som laddades upp är den första APK:n (Orsa-rektangeln, SHA-256 `e670e33b…8b2b`). APK:n med F-03-området är inte uppladdad. |
+
+Genomfört på grenen `etapp2/offline-karta` (PR #6), se [`../verification/etapp2-protokoll.md`](../verification/etapp2-protokoll.md).
+
 <a id="godkann-allt"></a>
 ## 8. Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): godkänn allt
 
