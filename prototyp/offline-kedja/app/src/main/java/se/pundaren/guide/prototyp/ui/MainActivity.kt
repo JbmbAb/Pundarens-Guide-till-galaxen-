@@ -100,6 +100,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         loggFil = File(getExternalFilesDir(null) ?: filesDir, "etapp2-logg.txt")
         MapLibre.getInstance(this)
+        MapLibre.setConnected(false) // MapLibre ska aldrig försöka hämta något
         mapView = MapView(this)
         mapView.onCreate(savedInstanceState)
         setContentView(bygglayout())
