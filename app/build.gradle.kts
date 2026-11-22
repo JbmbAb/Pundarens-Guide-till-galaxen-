@@ -17,8 +17,8 @@ android {
         applicationId = "se.pundaren.guide"
         minSdk = 26
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.6-etapp6"
+        versionCode = 6
+        versionName = "0.7-galaxen"
         // Målenheten SM-X900 är arm64. Bara den ABI:n packas. För emulatorprov: -Pabi=x86_64.
         ndk { abiFilters += listOf(providers.gradleProperty("abi").orNull ?: "arm64-v8a") }
     }

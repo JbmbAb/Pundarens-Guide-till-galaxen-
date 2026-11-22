@@ -30,6 +30,10 @@ data class Settings(
     val tailVoice: String? = null,
     /** Adressen till Convoy-reläet (https). Tom tills ägaren har skrivit in den. */
     val convoyRelayUrl: String = "",
+    /** Absurditetsgraden, 0–100 %: hur långt Guidens beslut får gå. Rör aldrig rutt eller besked. */
+    val absurdityPercent: Int = 60,
+    /** Antalet registrerade löften. Löftenas text sparas aldrig. */
+    val promiseCount: Int = 0,
 )
 
 /** Inställningarna, sparade i appens privata lagring. Ingenting här lämnar enheten. */
@@ -53,6 +57,8 @@ class AppSettings(context: Context) {
             instructionVoice = prefs.getString("instruction_voice", null),
             tailVoice = prefs.getString("tail_voice", null),
             convoyRelayUrl = prefs.getString("convoy_relay_url", null).orEmpty(),
+            absurdityPercent = prefs.getInt("absurdity", 60).coerceIn(0, 100),
+            promiseCount = prefs.getInt("promise_count", 0).coerceAtLeast(0),
         )
     }
 
@@ -68,6 +74,8 @@ class AppSettings(context: Context) {
             .putString("instruction_voice", next.instructionVoice)
             .putString("tail_voice", next.tailVoice)
             .putString("convoy_relay_url", next.convoyRelayUrl)
+            .putInt("absurdity", next.absurdityPercent)
+            .putInt("promise_count", next.promiseCount)
             .apply {
                 if (next.home != null) putString("home_lat", next.home.lat.toString()).putString("home_lon", next.home.lon.toString())
                 else remove("home_lat").remove("home_lon")
