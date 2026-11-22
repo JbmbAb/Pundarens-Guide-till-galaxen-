@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.babel.SatireModeTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:05.315Z" hostname="MIMER" time="0.907">
+  <properties/>
+  <testcase name="bara godkända regler BS-01 till BS-16 används" classname="se.pundaren.guide.babel.SatireModeTest" time="0.595"/>
+  <testcase name="svaret är märkt som satir och innehåller ingen ny text utöver regel och inmatning" classname="se.pundaren.guide.babel.SatireModeTest" time="0.114"/>
+  <testcase name="samma inmatning, session och seed ger samma svar" classname="se.pundaren.guide.babel.SatireModeTest" time="0.062"/>
+  <testcase name="repliker är godkända exempel och fotrader används inte i fordon" classname="se.pundaren.guide.babel.SatireModeTest" time="0.055"/>
+  <testcase name="BS-08 återvänder till samtalets början efter flera varv" classname="se.pundaren.guide.babel.SatireModeTest" time="0.04"/>
+  <testcase name="Rikard-utdrag, blockerade och väntande poster används aldrig" classname="se.pundaren.guide.babel.SatireModeTest" time="0.038"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

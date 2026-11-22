@@ -1,73 +1,86 @@
-# 🌀 Pundarens Guide till galaxen
+# 🌀 Pundarens Guide till Galaxen
 
-*Pundarens vän till galaxen · Stoner's Friend to the Galaxy*
+> **GÄLLANDE, ÖVERORDNAD INRIKTNING:**  
+> [docs/GALLANDE-INRIKTNING.md](docs/GALLANDE-INRIKTNING.md)  
+> Detta dokument har företräde framför äldre
+> planer, briefer och motstridiga förslag.
 
-En ologisk men oumbärlig digital följeslagare för Android, inspirerad av *Liftarens guide till galaxen*. Den är en karta, en filosof och en guide till nattmat i ett.
+**Inte en navigator med skämt.**  
+En absurd galaktisk följeslagare som av misstag
+råkar vara användbar.
 
-> Appen ska inte vara en förnuftig assistent som försöker vara rolig. Den ska vara en absurd, inkonsekvent, självmedvetet inkompetent galaktisk följeslagare som av misstag råkar vara användbar.
+Appen ska göra användaren glad.
 
-**Status:** tidig planering. Här finns produktspecifikation, design och data, men ingen Android-kod ännu.
+## Börja här
 
-## Grundprincip: Illogical Engine
+- [Gällande produktinriktning](docs/GALLANDE-INRIKTNING.md)
+- [Satirisk kanon och de tio budorden](docs/SATIRISK-KANON.md)
+- [Aktuell PRD](docs/PRD.md)
+- [Dokumentationsrevision och ersatta beslut](docs/DOKUMENTATIONSREVISION.md)
+- [Stitch-design](docs/design/README.md)
+- [Citatarkivet](data/quotes/README.md)
 
-Illogical är själva grundprincipen, inte en humoristisk effekt ovanpå en vanlig app. Personligheten bygger på **Inverted Grammar + Paradox + Mundane Reality**:
+## Appens hjärta
 
-**Observation → Paradox → Verklighet → Eventuell total urspårning**
+**Illogical Engine** förenar:
 
-En gemensam motor, Illogical Engine, används av navigatorn, translatorn, citatarkivet och Don't Panic. Den tar in verkliga händelser och frågor, egna citat och paradoxer, logiska motsägelser, Rikard-faktorn och slump, och ger ett absurt, situationsanpassat resultat. Fakta (rutt, platser, avstånd) passerar aldrig motorns kreativa del.
+- Don't Panic.
+- Babel-Stoner.
+- Rikard-faktorn.
+- Citatarkivet.
+- Cosmic Navigator.
+- Probability Drive.
+- Handdukssensorn.
+- Vibe Protect.
 
-Läs hela specifikationen i [`docs/PRD.md`](docs/PRD.md).
+Den visuella riktningen hämtas från
+Handdukssensorn och Cosmic HUD.
 
-## Funktioner
+## Faktiskt tekniskt läge
 
-- **Cosmic Navigator (GIS):** karta med toaletter, rastplatser och munchie stations i tre lägen: Practical, Poetic och Improbability. **Anti-Navigation** ger korrekt rutt och korrekta visuella instruktioner, men en oberäknelig kommentator: *"Om 400 meter inträffar en korsning. Rikard har förnekat all kännedom om den."*
-- **Rikard-faktorn:** källan till alla systemfel, felsvängar och korta glitch-effekter (300–500 ms).
-- **Babel-Stoner:** en satirisk samtalsmotor där logiken aldrig får vinna, med mekanismerna ansvarsförskjutning, ämnesbyte, motsägelse, självbildsförsvar, cirkulär argumentation och omvänd skuld. Den har fem personligheter (Ansvarsförskjutaren, Den eviga cirkeln, Verklighetsrevisorn, Den sårade hjälten, Kosmisk totalförvirring), en galaktisk analys av varje svar och ett omvänt läge som pekar ut möjliga felslut, motsägelser och obesvarade frågor i ett verkligt samtal. *Babel-Stoner är satir, inte ett diagnostiskt verktyg.* Den ursprungliga slang-översättningen finns kvar som ett sekundärt läge.
-- **"Don't Panic" Wisdom Generator:** en pulserande knapp med nonsensartade och märkligt djupa råd, byggda på det personliga citatarkivet.
-- **Infinite Improbability Theme Engine (Probability Drive):** Material 3 med dynamisk färg och rörelse, och reglage för kaos, Rikard-frekvens, glitchnivå och anti-navigeringens sarkasmnivå.
-- **Citatarkivet:** personliga livscitat och värdepar (frihet ↔ trygghet, kaos ↔ kontroll). Originalen bevaras ordagrant, och variationer lagras separat och märks som variationer.
-- **Handdukssensorn och Vibe Protect** från tidigare briefer.
+Det finns en byggbar Android-prototyp
+under `prototyp/offline-kedja/`.
 
-## Teknisk stack (planerad)
+**Utvecklingsgren:** `etapp2/offline-karta`  
+**Verifierad prototypversion:** `0.1-etapp2`
 
-- **Kotlin**
-- **Jetpack Compose + Material 3** (edge-to-edge, dynamisk färg, animationer)
-- **Google Maps SDK for Android / maps-compose** (+ android-maps-utils för GeoJSON)
-- **Kotlin Coroutines**
-- **KSP + Moshi** (parsning av GeoJSON och citatarkiv)
-- **Coil** (bilder)
+Nuvarande offlinekedja använder:
 
-Kartdata ligger först som GeoJSON i appen, bakom ett `PlacesRepository`-interface. PostGIS med ett API framför kommer senare utan att resten av appen behöver ändras.
+- Kotlin.
+- MapLibre.
+- Valhalla Mobile.
+- Ferrostar Core.
+- Lokala kart- och ruttningspaket.
 
-## Repots struktur
+Ingen Google Maps SDK eller beroende av
+Google Play Services ingår i målarkitekturen.
 
-```
-.
-├── README.md
-├── docs/
-│   ├── PRD.md                      # reviderad PRD: Illogical Engine som kärna
-│   └── design/
-│       ├── README.md
-│       ├── screens/                # Stitch-skärmar (code.html + screen.png)
-│       ├── design-systems/         # Cosmic Drift och The Sentient Archive (DESIGN.md)
-│       └── original-briefs/        # de tre ursprungliga briefarna/PRD:erna från Stitch
-└── data/
-    ├── geojson/stockholms-lan/     # toaletter, rastplatser, munchie stations (OSM)
-    └── quotes/                     # citatarkivets schema och fastställda original
-```
+Den nuvarande prototypen är ett teknikprov.
+Den färdiga Guidens startsida och personlighet
+ska utvecklas med den styrande produktinriktningen
+som referens.
 
-## Data och upphov
+## Viktig säkerhetsprincip
 
-Kartlagren i `data/geojson/` kommer från OpenStreetMap och är **© OpenStreetMap contributors**, tillgängliga under [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/). Appen måste visa upphovet i kartan och på om-sidan. Detaljer och Overpass-frågor finns i [`data/geojson/stockholms-lan/README.md`](data/geojson/stockholms-lan/README.md).
+Illogical Engine får vara fullständigt absurd.
+Navigeringsinformation får det inte.
 
-Designen i `docs/design/` är exporterad från Google Stitch.
+Rutt, position, svängar, avstånd och varningar
+hanteras av ett separat sanningslager.
 
-Citaten i `data/quotes/` är personligt material.
+Inga skämt får ändra, dölja eller försena
+säkerhetskritisk information.
 
-## Licens
+## Ursprung och upphov
 
-Licensen är inte bestämd än. Tills en licens har valts gäller inga öppna rättigheter för koden eller citatarkivet. OSM-datan omfattas av ODbL oavsett.
+Designreferenser kommer från Google Stitch.
+Personligt citatmaterial har särskilda
+proveniensregler.
 
-## Ursprunglig beskrivning
+Kartdata från OpenStreetMap:
+© OpenStreetMap contributors, ODbL.
 
-Stoner's Guide to the Galaxy is a digital companion inspired by The Hitchhiker's Guide to the Galaxy. It is designed to be completely illogical yet absolutely indispensable, providing cosmic guidance for the modern wanderer with a vibrant, energetic Material 3 aesthetic. Features • "Don't Panic" Wisdom Generator: A central, pulsating
+Se respektive datakatalog för detaljer.
+
+Historiska dokument är referensmaterial,
+inte gällande utvecklingsbeslut.

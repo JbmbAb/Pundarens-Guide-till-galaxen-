@@ -1,0 +1,18 @@
+# APK byggd ur en ren byggnad (clean check assembleDebug) av koden i samma incheckning som den här filen
+fil: app/build/outputs/apk/debug/app-debug.apk
+storlek: 59272275 byte
+sha256: 1d60ddc832409cf7fb0e4735381720640296f3a8d0ac6ad0de9a018d45851508
+--- aapt2 dump permissions
+package: se.pundaren.guide
+uses-permission: name='android.permission.ACCESS_FINE_LOCATION'
+uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+permission: se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission: name='se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+--- aapt2 dump badging (utdrag)
+package: name='se.pundaren.guide' versionCode='4' versionName='0.5-etapp5' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+targetSdkVersion:'36'
+uses-permission: name='android.permission.ACCESS_FINE_LOCATION'
+uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='se.pundaren.guide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'

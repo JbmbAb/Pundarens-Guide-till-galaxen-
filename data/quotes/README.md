@@ -1,3 +1,5 @@
+> **STYRANDE BESLUT:** [Gällande inriktning](../../docs/GALLANDE-INRIKTNING.md) har företräde framför äldre planer och designförslag.
+
 # Citatarkivet
 
 Grunden för Illogical Engine. Används av Don't Panic, Cosmic Navigator, Babel-Stoner och citatvyerna. Se [`docs/PRD.md`, avsnitt 8](../../docs/PRD.md#8-citatarkivet-som-grund).

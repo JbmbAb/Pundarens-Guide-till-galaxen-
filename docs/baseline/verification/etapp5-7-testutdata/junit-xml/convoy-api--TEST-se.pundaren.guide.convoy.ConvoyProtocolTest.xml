@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.convoy.ConvoyProtocolTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:43:54.817Z" hostname="MIMER" time="0.403">
+  <properties/>
+  <testcase name="sluta dela stoppar sändningen direkt, säger det till den andra och raderar nyckeln" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.154"/>
+  <testcase name="varje ändring av ett kuvert upptäcks (T-06)" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.026"/>
+  <testcase name="verifieringskoden är densamma på båda telefonerna och en annan för en obehörig" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.039"/>
+  <testcase name="ett kuvert kan inte spelas upp igen (T-02)" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.004"/>
+  <testcase name="mellanhanden ser bara oläslig data av fast storlek (T-05, T-10)" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.009"/>
+  <testcase name="mötespunkten är den plats där den som har längst dit får kortast väg" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.013"/>
+  <testcase name="samtycket gäller bara mellan godkännandet och sluttiden och inte efter återkallelse" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.001"/>
+  <testcase name="den som gick med med tidigare sluttid slutar sända då" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.005"/>
+  <testcase name="inbjudan går runt som text och gäller i tio minuter" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.007"/>
+  <testcase name="en session har slumpat namn, 256 bitars nyckel och en sluttid högst ett dygn bort" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.007"/>
+  <testcase name="en position går från den ena telefonen till den andra och bara dit" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.002"/>
+  <testcase name="fel nyckel läser ingenting" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.002"/>
+  <testcase name="den som går med kan välja en tidigare sluttid men aldrig en senare" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.001"/>
+  <testcase name="går klockorna olika visas den högre åldern (T-07)" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.001"/>
+  <testcase name="sändningen upphör vid sluttiden och den andra telefonen visar senast sedd med rätt ålder (G7)" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.105"/>
+  <testcase name="åldern delas in i fyra klasser och står alltid med" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.006"/>
+  <testcase name="nödsignalen kommer fram som nödsignal och inte som position" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.003"/>
+  <testcase name="en position som redan var gammal när den kom fram visas aldrig som aktuell" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.002"/>
+  <testcase name="mottagaren kastar det som är sänt efter sluttiden även om det är äkta" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.001"/>
+  <testcase name="löpnumret ökar strikt även när flera kuvert förseglas i samma millisekund och efter omstart" classname="se.pundaren.guide.convoy.ConvoyProtocolTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

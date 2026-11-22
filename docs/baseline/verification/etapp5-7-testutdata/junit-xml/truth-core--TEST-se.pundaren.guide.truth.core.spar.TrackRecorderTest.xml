@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.spar.TrackRecorderTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:45.357Z" hostname="MIMER" time="0.015">
+  <properties/>
+  <testcase name="ett spår med en enda punkt har ingen väg tillbaka" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.005"/>
+  <testcase name="spårets längd är summan av sträckorna" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.001"/>
+  <testcase name="en osäker position sparas inte och räknas inte som rörelse" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.0"/>
+  <testcase name="första positionen sparas och nästa först efter minsta avståndet" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.0"/>
+  <testcase name="utan position börjar vägen tillbaka i spårets senaste punkt" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.001"/>
+  <testcase name="nollställt spår är tomt och börjar om" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.002"/>
+  <testcase name="ögonblicksbilden säger om spåret är simulerat" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.001"/>
+  <testcase name="ett långt spår glesas ut men behåller början och slutet" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.003"/>
+  <testcase name="ett hopp i positionen kommer inte med i spåret" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.0"/>
+  <testcase name="vägen tillbaka går baklänges från närmaste spårpunkt till början" classname="se.pundaren.guide.truth.core.spar.TrackRecorderTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

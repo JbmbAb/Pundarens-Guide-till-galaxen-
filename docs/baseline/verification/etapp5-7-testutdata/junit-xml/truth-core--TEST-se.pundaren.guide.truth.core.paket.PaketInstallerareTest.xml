@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:44.908Z" hostname="MIMER" time="0.429">
+  <properties/>
+  <testcase name="farliga namn i manifestet avvisas" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.105"/>
+  <testcase name="samma version installeras inte om" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.086"/>
+  <testcase name="ny version byter pekaren, föregående sparas för återställning, äldre tas bort" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.084"/>
+  <testcase name="installerar och pekar ut aktivt paket" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.029"/>
+  <testcase name="avbrott mitt i kopieringen lämnar det gamla paketet aktivt och städas vid nästa start" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.044"/>
+  <testcase name="trasig pekare ger inget aktivt paket" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.026"/>
+  <testcase name="fel kontrollsumma avvisas och det gamla paketet ligger kvar" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.04"/>
+  <testcase name="fel storlek avvisas" classname="se.pundaren.guide.truth.core.paket.PaketInstallerareTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

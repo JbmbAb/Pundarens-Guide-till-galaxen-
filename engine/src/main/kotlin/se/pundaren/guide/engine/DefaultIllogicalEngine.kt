@@ -1,11 +1,13 @@
 package se.pundaren.guide.engine
 
 import se.pundaren.guide.archive.api.ArchiveEntry
+import se.pundaren.guide.archive.api.EntryKind
 import se.pundaren.guide.archive.api.Mechanism
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.IllogicalEngine
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.engine.api.TailKind
+import se.pundaren.guide.engine.api.WisdomSource
 import se.pundaren.guide.truth.api.Arrived
 import se.pundaren.guide.truth.api.BatteryLow
 import se.pundaren.guide.truth.api.ConvoyContactLost
@@ -29,9 +31,14 @@ import java.util.SplittableRandom
 data class EngineConfig(
     /** 05 §5 punkt 2: högst 10 s efter händelsen (kandidatvärde). */
     val tailLifetimeMillis: Long = 10_000,
-    /** Uppskattad taltid. Byggarens antagande, mäts i G4. */
-    val baseSpeechMillis: Int = 600,
-    val millisPerWord: Int = 380,
+    /**
+     * Uppskattad taltid per tecken. Mätt på målenheten 2026-11-21 (etapp4-protokollet, E4-D14):
+     * 110 tecken tog 6,3 s och 97 tecken 5,9 s med Guidens röst, alltså cirka 60 ms per tecken.
+     * Värdena ligger avsiktligt i överkant: uppskattningen avgör både om svansen ryms före nästa
+     * besked och när den senast klipps, och en för låg uppskattning klipper svansen mitt i ett ord.
+     */
+    val baseSpeechMillis: Int = 800,
+    val millisPerCharacter: Int = 65,
     /** R-13 / G1: ingen upprepning inom tio repliker. */
     val noRepeatWindow: Int = 10,
     /** Sannolikhet i promille att motsägelseminnet används när en förnekelserad finns. */
@@ -49,7 +56,7 @@ data class EngineConfig(
 class DefaultIllogicalEngine(
     private val bank: LineBank,
     private val config: EngineConfig = EngineConfig(),
-) : IllogicalEngine {
+) : IllogicalEngine, WisdomSource {
 
     override fun onEvent(event: TruthEvent, context: EngineContext): List<TailCandidate> {
         if (!mayProposeTail(event)) return emptyList()
@@ -57,7 +64,8 @@ class DefaultIllogicalEngine(
         val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
         val vehicle = context.travelMode != TravelMode.FOOT
 
-        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && fitsSituation(e, event)
+        fun usable(e: ArchiveEntry) = e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && fitsSituation(e, event) &&
+            !(context.navigating && LineBank.isOwnersQuote(e))
 
         // M2: motsägelseminnet förnekar bara yttranden som faktiskt presenterades.
         val lastPresented = context.memory.presented.lastOrNull()
@@ -72,8 +80,31 @@ class DefaultIllogicalEngine(
         return listOf(toCandidate(line, event, contradicts = null, extra = emptySet()))
     }
 
-    private fun toCandidate(line: ArchiveEntry, event: TruthEvent, contradicts: String?, extra: Set<Mechanism>) = TailCandidate(
-        id = "TAIL-${line.id}-${event.eventId}",
+    /**
+     * Don't Panic: en rad på begäran. Väljs bland arkivets citat (original och godkända bearbetningar)
+     * och annars bland övriga rader utan situation. Samma spärrar som i [onEvent]: ingen upprepning
+     * inom fönstret, inga rader som bara får användas till fots när läget är fordon, och inga av
+     * ägarens citat medan en rutt är aktiv.
+     */
+    override fun wisdom(requestId: String, nowMonotonicMillis: Long, context: EngineContext): TailCandidate? {
+        val rng = SplittableRandom(mix(context.seed, requestId))
+        val recent = context.memory.presented.takeLast(config.noRepeatWindow).map { it.lineId }.toSet()
+        val vehicle = context.travelMode != TravelMode.FOOT
+        val usable = bank.lines.filter { e ->
+            e.id !in recent && !(vehicle && LineBank.isFootOnly(e)) && e.tags.none { it.startsWith("situation:") && it != "situation:general" } &&
+                !(context.navigating && LineBank.isOwnersQuote(e))
+        }
+        val quotes = usable.filter { it.kind == EntryKind.QUOTE }
+        val pool = quotes.ifEmpty { usable }
+        if (pool.isEmpty()) return null
+        return toCandidate(pool[rng.nextInt(pool.size)], requestId, nowMonotonicMillis, contradicts = null, extra = emptySet())
+    }
+
+    private fun toCandidate(line: ArchiveEntry, event: TruthEvent, contradicts: String?, extra: Set<Mechanism>) =
+        toCandidate(line, event.eventId, event.monotonicMillis, contradicts, extra)
+
+    private fun toCandidate(line: ArchiveEntry, triggeredBy: String, atMonotonicMillis: Long, contradicts: String?, extra: Set<Mechanism>) = TailCandidate(
+        id = "TAIL-${line.id}-$triggeredBy",
         text = line.text,
         lineId = line.id,
         origin = line.originClass,
@@ -84,13 +115,13 @@ class DefaultIllogicalEngine(
         mentionsRikard = VoiceGuards.mentionsRikard(line.text),
         estimatedSpeechMillis = estimateSpeechMillis(line.text),
         footOnly = LineBank.isFootOnly(line),
-        triggeredBy = event.eventId,
-        validUntilMonotonicMillis = event.monotonicMillis + config.tailLifetimeMillis,
+        triggeredBy = triggeredBy,
+        validUntilMonotonicMillis = atMonotonicMillis + config.tailLifetimeMillis,
         contradicts = contradicts,
     )
 
     fun estimateSpeechMillis(text: String): Int =
-        config.baseSpeechMillis + config.millisPerWord * text.trim().split(Regex("\\s+")).count { it.isNotEmpty() }
+        config.baseSpeechMillis + config.millisPerCharacter * text.trim().length
 
     companion object {
         /** Händelser där tramslagret inte föreslår något alls (05, avsnitt 3). */

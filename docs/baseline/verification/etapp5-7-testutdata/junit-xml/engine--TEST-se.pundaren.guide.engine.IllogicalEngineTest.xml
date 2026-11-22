@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.engine.IllogicalEngineTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:31.866Z" hostname="MIMER" time="2.118">
+  <properties/>
+  <testcase name="motsägelseminnet förnekar bara presenterade yttranden" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.451"/>
+  <testcase name="G1-kriteriet med hundra simulerade händelser" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.102"/>
+  <testcase name="riktningsord väljs bort i fordonsläge men inte till fots" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.005"/>
+  <testcase name="samma händelse, minne och seed ger samma utdata" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.874"/>
+  <testcase name="varje svans uppfyller svarskontraktet i 05" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.217"/>
+  <testcase name="godkänd syntetisk satir når motorn" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.005"/>
+  <testcase name="ej godkända rader och regler når aldrig motorn" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.004"/>
+  <testcase name="navigationskommentarer följer sin situation" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.047"/>
+  <testcase name="ingen rad upprepas inom tio presenterade repliker" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.202"/>
+  <testcase name="inga svansar vid avvikelse, nödläge, batteri eller konvojhändelser" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.005"/>
+  <testcase name="rader bara till fots föreslås aldrig i fordonsläge men till fots" classname="se.pundaren.guide.engine.IllogicalEngineTest" time="0.198"/>
+  <system-out><![CDATA[G1-SIMULERING: 100 händelser, 57 svansar föreslagna, 0 brott
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

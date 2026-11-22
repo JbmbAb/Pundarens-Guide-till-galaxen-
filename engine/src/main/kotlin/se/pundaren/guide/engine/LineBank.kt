@@ -62,6 +62,13 @@ class LineBank private constructor(
             else -> null
         }
 
+        /**
+         * Ägarens egna citat: original eller godkänd bearbetning. De hålls utanför navigeringsläget.
+         * De genererade variationerna är också importerade som citat men är inte ägarens ord och räknas inte hit.
+         */
+        fun isOwnersQuote(e: ArchiveEntry): Boolean =
+            e.kind == EntryKind.QUOTE && (e.originClass == OriginClass.ORIGINAL_VERBATIM || e.originClass == OriginClass.APPROVED_EDIT)
+
         /** Får bara presenteras till fots: märkt i F-11, eller innehåller riktningsord eller beskedsliknande mönster. */
         fun isFootOnly(e: ArchiveEntry): Boolean =
             FOOT_ONLY_TAG in e.tags || VoiceGuards.hasDirectionWord(e.text) || VoiceGuards.soundsLikeInstruction(e.text)

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.geo.GeoTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:44.166Z" hostname="MIMER" time="0.188">
+  <properties/>
+  <testcase name="väderstreck i åtta steg" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.047"/>
+  <testcase name="solen står i zenit vid ekvatorn vid vårdagjämningen" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.038"/>
+  <testcase name="avstånd och kurs Orsa till Mora" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.001"/>
+  <testcase name="soluppgång och solnedgång i Stockholm vid solstånden" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.026"/>
+  <testcase name="polarnatt och midnattssol i Kiruna" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.005"/>
+  <testcase name="avstånd i klartext" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.025"/>
+  <testcase name="koordinater i grader och decimalminuter" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.016"/>
+  <testcase name="en breddgrad är cirka 111 km och destination går tillbaka" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.001"/>
+  <testcase name="SWEREF 99 TM stämmer med Lantmäteriets kontrollpunkter" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.011"/>
+  <testcase name="dag skymning och natt i Orsa den 21 november" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.005"/>
+  <testcase name="SWEREF 99 TM på medelmeridianen och i Orsa" classname="se.pundaren.guide.truth.core.geo.GeoTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

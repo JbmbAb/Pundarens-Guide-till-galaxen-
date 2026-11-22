@@ -127,9 +127,11 @@ class SafetyGate(private val config: SafetyGateConfig = SafetyGateConfig.CANDIDA
         GateState.POSITION_UNCERTAIN ->
             if (input.position.quality == PositionQuality.LOST && input.navigation.activeRoute) PresentationDecision.Interrupt(SuppressReason.POSITION_LOST)
             else PresentationDecision.Continue
-        GateState.NORMAL ->
-            if (input.nowMonotonicMillis > playing.validUntilMonotonicMillis) PresentationDecision.Interrupt(SuppressReason.EXPIRED)
-            else PresentationDecision.Continue
+        // Livslängden (R-14) avgör om en svans får BÖRJA. En svans som börjat i tid klipps inte mitt i
+        // meningen för att livslängden går ut medan den spelas: dess längd är redan begränsad av
+        // maxMillis i Present, och alla säkerhetsavbrott ovan gäller. Ändrat i etapp 4 efter prov på
+        // målenheten 2026-11-21, där en svans klipptes efter 6,4 av 8 sekunder (avvikelse E4-D5).
+        GateState.NORMAL -> PresentationDecision.Continue
     }
 
     private fun inManeuverWindow(nav: NavigationSnapshot): Boolean {

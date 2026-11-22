@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.verification.KernelDiodeTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:55.444Z" hostname="MIMER" time="0.727">
+  <properties/>
+  <testcase name="samma tur med och utan tramslagret ger exakt samma sanning" classname="se.pundaren.guide.verification.KernelDiodeTest" time="0.711"/>
+  <testcase name="turen innehåller alla lägen som ska tysta tramset" classname="se.pundaren.guide.verification.KernelDiodeTest" time="0.016"/>
+  <system-out><![CDATA[KernelDiodeTest: 27 händelser, 904 ögonblicksbilder, 11 svansar presenterade; sanningen identisk
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

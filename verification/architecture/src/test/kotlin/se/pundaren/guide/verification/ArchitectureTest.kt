@@ -34,15 +34,19 @@ class ArchitectureTest {
     private val android = listOf("android.", "androidx.", "com.google", "com.android")
 
     @Test fun `G-1 motorn, babel och safetygate når inte sanningskärnan eller konvojen`() {
-        val truthCore = listOf("se.pundaren.guide.truth.core", "se.pundaren.guide.convoy")
-        listOf("engine", "babel", "safetygate", "engine/api").forEach { assertNoImports(it, truthCore) }
+        val truthCore = listOf(
+            "se.pundaren.guide.truth.core", "se.pundaren.guide.truth.device", "se.pundaren.guide.convoy", "se.pundaren.guide.voice",
+        )
+        listOf("engine", "babel", "safetygate", "engine/api", "conductor").forEach { assertNoImports(it, truthCore) }
+        // Dirigenten kopplar ihop motor och SafetyGate men får inte se motorns implementation eller Babel.
+        assertNoImports("conductor", listOf("se.pundaren.guide.engine.Default", "se.pundaren.guide.engine.LineBank", "se.pundaren.guide.engine.VoiceGuards", "se.pundaren.guide.babel"))
         // SafetyGate får se :engine:api (typen TailCandidate) men inte motorns implementation eller dess spärrlista.
         assertNoImports("safetygate", listOf("se.pundaren.guide.engine.Default", "se.pundaren.guide.engine.LineBank", "se.pundaren.guide.engine.VoiceGuards", "se.pundaren.guide.engine.TailContract"))
         assertNoImports("babel", listOf("se.pundaren.guide.truth", "se.pundaren.guide.safetygate", "se.pundaren.guide.engine"))
     }
 
     @Test fun `G-8 rena moduler har varken Android, Google eller nätverk`() {
-        listOf("truth/api", "engine/api", "engine", "archive/api", "archive/core", "safetygate", "babel").forEach {
+        listOf("truth/api", "truth/core", "engine/api", "engine", "archive/api", "archive/core", "safetygate", "conductor", "babel").forEach {
             assertNoImports(it, network + android)
         }
     }
@@ -113,17 +117,26 @@ class ArchitectureTest {
     @Test fun `G-6 beroendegrafen i byggfilerna saknar förbjudna kanter`() {
         fun deps(module: String) = Regex("project\\(\"([^\"]+)\"\\)").findAll(root.resolve("$module/build.gradle.kts").readText()).map { it.groupValues[1] }.toSet()
         val forbidden = mapOf(
-            "engine" to setOf(":truth:core", ":safetygate", ":voice", ":convoy:api", ":convoy:wss", ":babel"),
+            "engine" to setOf(":truth:core", ":safetygate", ":voice", ":convoy:api", ":convoy:http", ":convoy:wss", ":babel"),
             "engine/api" to setOf(":truth:core", ":engine"),
             "safetygate" to setOf(":truth:core", ":engine", ":babel"),
             "babel" to setOf(":truth:api", ":truth:core", ":safetygate", ":engine", ":engine:api"),
             "truth/api" to setOf(":engine", ":engine:api", ":archive:api", ":safetygate", ":babel"),
             "archive/api" to setOf(":engine", ":truth:api"),
+            // Etapp 4: sanningskärnan och dess Android-adaptrar känner inget av tramslagret.
+            "truth/core" to setOf(":engine", ":engine:api", ":archive:api", ":archive:core", ":safetygate", ":conductor", ":babel", ":voice", ":app"),
+            "truth/device" to setOf(":engine", ":engine:api", ":archive:api", ":archive:core", ":safetygate", ":conductor", ":babel", ":voice", ":app"),
+            // Rösten ser bara sanningens port för besked.
+            "voice" to setOf(":engine", ":engine:api", ":archive:api", ":truth:core", ":truth:device", ":safetygate", ":conductor", ":babel", ":app"),
+            // Dirigenten läser sanningen genom :truth:api och når aldrig kärnan eller enheten.
+            "conductor" to setOf(":truth:core", ":truth:device", ":voice", ":babel", ":app"),
         )
         forbidden.forEach { (m, bad) -> assertEquals("$m", emptySet<String>(), deps(m).intersect(bad)) }
     }
 
-    @Test fun `inget Google-beroende någonstans i bygget`() {
+    // Ägarbeslut 2026-11-21 kl. 18.29 (beslutsloggen, avsnitt 13): förbudet gäller Googles tjänster, som
+    // kan kosta. Gratis bibliotek från Google (ZXing) är tillåtna.
+    @Test fun `ingen Google-tjänst någonstans i bygget`() {
         val files = root.walkTopDown()
             .onEnter { it.name !in setOf(".git", "build", ".gradle", "docs", "data", ".kotlin") }
             .filter { it.isFile && (it.extension in setOf("kts", "toml", "properties", "kt")) }
@@ -135,7 +148,11 @@ class ArchitectureTest {
             .filterNot { it == root.resolve("prototyp/offline-kedja/app/build.gradle.kts") }
             .filterNot { it == root.resolve("prototyp/offline-kedja/app/src/test/java/se/pundaren/guide/prototyp/arkitektur/ArkitekturTest.kt") }
             .toList()
-        val hits = files.filter { f -> val t = f.readText(); listOf("com.google", "gms", "firebase", "googleapis").any { t.contains(it) } }
+        val services = listOf(
+            "com.google.android.gms", "com.google.firebase", "com.google.crypto.tink", "com.google.maps", "com.google.android.libraries",
+            "com.google.android.play", "com.google.mlkit", "com.google.android.datatransport", "gms", "firebase", "googleapis",
+        )
+        val hits = files.filter { f -> val t = f.readText(); services.any { t.contains(it) } }
         assertEquals(emptyList<File>(), hits)
     }
 }

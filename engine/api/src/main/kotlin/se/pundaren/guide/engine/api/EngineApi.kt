@@ -46,6 +46,11 @@ data class EngineContext(
     val seed: Long,
     val travelMode: TravelMode,
     val memory: EngineMemory = EngineMemory(),
+    /**
+     * Sant medan en rutt är aktiv. Ägarens egna citat föreslås då inte, varken av en händelse eller på
+     * begäran (ägarbeslut 2026-11-21: "mina citat ska inte vara med i navigation läget").
+     */
+    val navigating: Boolean = false,
 )
 
 /**
@@ -54,4 +59,13 @@ data class EngineContext(
  */
 interface IllogicalEngine {
     fun onEvent(event: TruthEvent, context: EngineContext): List<TailCandidate>
+}
+
+/**
+ * En rad som användaren själv ber om (Don't Panic, kort tryck). Ingen sanningshändelse utlöser den,
+ * så [TailCandidate.triggeredBy] är anroparens eget id för begäran. Raden går samma väg genom
+ * SafetyGate som alla andra svansar. Tillägg i etapp 4.
+ */
+interface WisdomSource {
+    fun wisdom(requestId: String, nowMonotonicMillis: Long, context: EngineContext): TailCandidate?
 }

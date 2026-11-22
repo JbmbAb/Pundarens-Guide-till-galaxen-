@@ -1,0 +1,647 @@
+11:41:34.529 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+11:41:34.531 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 33780292306226
+11:41:34.725 HÄNDELSE BatteryLow(percent=16, estimatedMinutesLeft=null)
+11:41:35.605 TAL FEL: Samsungs talmotor kunde inte startas
+11:41:39.414 POSITION: behörighet beviljad
+11:41:39.431 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+11:42:02.195 HÄNDELSE BatteryLow(percent=15, estimatedMinutesLeft=null)
+12:01:30.610 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:01:30.612 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 34976366793322
+12:01:30.701 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:01:30.784 PAKET saknas: inget aktivt paket, inget i APK:n och inget läsbart manifest i /storage/emulated/0/Android/data/se.pundaren.guide/files/inkommande
+12:01:32.482 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:01:32.491 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:03:11.478 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:03:11.480 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 35077237837242
+12:03:11.488 PAKET läses från /storage/emulated/0/Android/data/se.pundaren.guide/files/inkommande
+12:03:11.639 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:03:11.937 PAKET f03-sex-kommuner-20261121-0619.p1 installerat atomärt på 448 ms: karta.pmtiles 75217 kB, valhalla_tiles.tar 19480 kB, platser.geojson 961 kB
+12:03:11.977 PAKET inkommande/ tömd
+12:03:12.295 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:03:12.297 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:03:12.340 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:03:13.559 VALHALLA startad på 1412 ms
+12:03:14.248 PLATSER 5247 st ur platser.geojson
+12:09:06.038 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:09:06.040 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 35431796761221
+12:09:06.120 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:09:06.662 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:09:06.666 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:09:06.718 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:09:07.715 VALHALLA startad på 1529 ms
+12:09:08.335 PLATSER 5247 st ur platser.geojson
+12:11:24.853 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:11:24.855 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 35570616159398
+12:11:24.920 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:11:25.287 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:11:25.422 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:11:25.424 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:11:26.424 VALHALLA startad på 1448 ms
+12:11:27.046 PLATSER 5247 st ur platser.geojson
+12:11:54.909 RUTT pedestrian 2 punkter: 102 ms i valhalla-mobile, 1 rutt(er), 17 steg, 12,42 km
+12:12:23.533 RUTT auto 2 punkter: 12 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+12:12:28.112 SVANS STRUKEN (STRESS_TOO_LONG): V-009
+12:12:28.113 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=0.021, quality=GOOD)
+12:12:28.120 SVANS STRUKEN (STRESS_TOO_LONG): P-001
+12:12:28.120 HÄNDELSE RouteStarted(destinationName=Grönklitt, distanceMeters=15728, etaSeconds=958, travelMode=PASSENGER)
+12:12:28.135 TAL RÅTT: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+12:12:28.135 TAL #1: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+12:12:28.136 TAL EJ REDO: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+12:12:28.137 NAVIGERING startad (PASSENGER) till Grönklitt: 15,73 km, 17 steg, provtur ×8, avvikelseförsök vid []
+12:12:29.826 TAL RÅTT: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+12:12:29.827 TAL #2: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+12:12:29.827 TAL EJ REDO: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+12:12:29.834 SVANS VÄNTAR (NO_TIME): P-001-N
+12:12:29.835 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=52, secondsToManeuver=0.5160852165120702, streetName=Slaggatan)
+12:12:30.672 TAL #3: Sväng höger in på Skyttsvägen.
+12:12:30.678 TAL EJ REDO: Sväng höger in på Skyttsvägen.
+12:12:30.685 SVANS VÄNTAR (NO_TIME): V-006
+12:12:30.686 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=Slaggatan)
+12:12:30.691 SVANS VÄNTAR (NO_TIME): P-002
+12:12:30.692 HÄNDELSE ManeuverCompleted(maneuverId=R1-S17)
+12:12:31.920 SVANS VÄNTAR (NO_TIME): NAV-017
+12:12:31.921 HÄNDELSE ManeuverCompleted(maneuverId=R1-S16)
+12:12:32.994 TAL #4: Sväng höger in på Moravägen.
+12:12:33.000 TAL EJ REDO: Sväng höger in på Moravägen.
+12:12:33.009 SVANS VÄNTAR (NO_TIME): P-003
+12:12:33.010 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S15, type=turn, modifier=right, distanceMeters=112, secondsToManeuver=1.122981438882586, streetName=Moravägen)
+12:12:34.493 SVANS VÄNTAR (NO_TIME): NAV-015
+12:12:34.494 HÄNDELSE ManeuverCompleted(maneuverId=R1-S15)
+12:12:35.295 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+12:12:35.296 TAL #5: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+12:12:35.302 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+12:12:35.310 SVANS VÄNTAR (NO_TIME): V-005
+12:12:35.311 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=144, secondsToManeuver=1.4401062684100423, streetName=Kaplansgatan)
+12:12:37.067 TAL RÅTT: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+12:12:37.068 TAL #6: Kör ut ur rondellen in på Kaplansgatan.
+12:12:37.074 TAL EJ REDO: Kör ut ur rondellen in på Kaplansgatan.
+12:12:37.082 SVANS VÄNTAR (NO_TIME): V-005
+12:12:37.083 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Kaplansgatan)
+12:12:37.089 SVANS VÄNTAR (NO_TIME): V-018
+12:12:37.089 HÄNDELSE ManeuverCompleted(maneuverId=R1-S14)
+12:12:37.740 SVANS VÄNTAR (NO_TIME): C-002b
+12:12:37.741 HÄNDELSE ManeuverCompleted(maneuverId=R1-S13)
+12:12:41.403 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+12:12:41.404 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+12:12:41.409 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+12:12:41.416 SVANS VÄNTAR (NO_TIME): P-005
+12:12:41.417 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=143, secondsToManeuver=1.4274347668591354, streetName=Parkgatan)
+12:12:43.290 TAL RÅTT: Kör ut ur rondellen in på Parkgatan, W 1000.
+12:12:43.290 TAL #8: Kör ut ur rondellen in på Parkgatan.
+12:12:43.296 TAL EJ REDO: Kör ut ur rondellen in på Parkgatan.
+12:12:43.306 SVANS VÄNTAR (NO_TIME): V-008
+12:12:43.307 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Parkgatan)
+12:12:43.313 SVANS VÄNTAR (NO_TIME): V-007
+12:12:43.314 HÄNDELSE ManeuverCompleted(maneuverId=R1-S12)
+12:12:44.379 SVANS VÄNTAR (NO_TIME): V-014
+12:12:44.379 HÄNDELSE ManeuverCompleted(maneuverId=R1-S11)
+12:12:45.446 TAL RÅTT: Sväng höger in på Lillågatan, W 1000.
+12:12:45.447 TAL #9: Sväng höger in på Lillågatan.
+12:12:45.453 TAL EJ REDO: Sväng höger in på Lillågatan.
+12:12:45.462 SVANS VÄNTAR (NO_TIME): V-014
+12:12:45.463 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=150, secondsToManeuver=1.501949224194667, streetName=Lillågatan)
+12:12:47.199 TAL RÅTT: Fortsätt på W 1000 i 2 kilometer.
+12:12:47.200 TAL #10: Fortsätt på väg 1000 i 2 kilometer.
+12:12:47.207 TAL EJ REDO: Fortsätt på väg 1000 i 2 kilometer.
+12:12:47.215 SVANS VÄNTAR (NO_TIME): V-014
+12:12:47.215 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Lillågatan)
+12:12:47.222 SVANS VÄNTAR (NO_TIME): NAV-006
+12:12:47.222 HÄNDELSE ManeuverCompleted(maneuverId=R1-S10)
+12:12:47.223 SVANS VÄNTAR (MANEUVER): NAV-006
+12:12:47.619 SVANS STRUKEN (STRESS_TOO_LONG): NAV-006
+12:13:08.814 TAL RÅTT: Om 400 meter, Sväng höger.
+12:13:08.817 TAL #11: Om 400 meter, sväng höger.
+12:13:08.821 TAL EJ REDO: Om 400 meter, sväng höger.
+12:13:08.829 SVANS VÄNTAR (NO_TIME): C-006
+12:13:08.830 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=396, secondsToManeuver=3.960679430418006, streetName=null)
+12:13:11.882 TAL RÅTT: Sväng höger. Därefter Sväng vänster.
+12:13:11.883 TAL #12: Sväng höger. Därefter sväng vänster.
+12:13:11.888 TAL EJ REDO: Sväng höger. Därefter sväng vänster.
+12:13:11.896 SVANS VÄNTAR (NO_TIME): V-004
+12:13:11.897 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=123, secondsToManeuver=1.2271649976166963, streetName=null)
+12:13:13.618 TAL RÅTT: Sväng vänster. Därefter Sväng vänster.
+12:13:13.619 TAL #13: Sväng vänster. Därefter sväng vänster.
+12:13:13.619 TAL EJ REDO: Sväng vänster. Därefter sväng vänster.
+12:13:13.641 SVANS VÄNTAR (NO_TIME): RED-P-007
+12:13:13.642 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:13:13.650 SVANS VÄNTAR (NO_TIME): V-014
+12:13:13.650 HÄNDELSE ManeuverCompleted(maneuverId=R1-S9)
+12:13:14.284 TAL RÅTT: Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+12:13:14.286 TAL #14: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+12:13:14.290 TAL EJ REDO: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+12:13:14.297 SVANS VÄNTAR (NO_TIME): C-002a
+12:13:14.298 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S8, type=turn, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:13:14.304 SVANS VÄNTAR (NO_TIME): V-015
+12:13:14.305 HÄNDELSE ManeuverCompleted(maneuverId=R1-S8)
+12:13:15.337 TAL RÅTT: Sväng höger in på Våmhusvägen, W 1000.
+12:13:15.338 TAL #15: Sväng höger in på Våmhusvägen.
+12:13:15.338 TAL EJ REDO: Sväng höger in på Våmhusvägen.
+12:13:15.345 SVANS VÄNTAR (NO_TIME): NAV-008
+12:13:15.346 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S7, type=end of road, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:13:15.351 SVANS VÄNTAR (NO_TIME): N-002
+12:13:15.352 HÄNDELSE ManeuverCompleted(maneuverId=R1-S7)
+12:13:15.473 TAL #16: Fortsätt i 800 meter.
+12:13:15.482 TAL EJ REDO: Fortsätt i 800 meter.
+12:13:15.489 SVANS VÄNTAR (NO_TIME): P-007
+12:13:15.490 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S6, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Våmhusvägen)
+12:13:15.496 SVANS VÄNTAR (NO_TIME): NAV-010
+12:13:15.496 HÄNDELSE ManeuverCompleted(maneuverId=R1-S6)
+12:13:19.469 TAL RÅTT: Om 500 meter, Sväng höger in på Fryksåsvägen.
+12:13:19.470 TAL #17: Om 500 meter, sväng höger in på Fryksåsvägen.
+12:13:19.476 TAL EJ REDO: Om 500 meter, sväng höger in på Fryksåsvägen.
+12:13:19.484 SVANS VÄNTAR (NO_TIME): V-009
+12:13:19.485 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=480, secondsToManeuver=4.800231529663487, streetName=Fryksåsvägen)
+12:13:23.205 TAL RÅTT: Sväng höger in på Fryksåsvägen, W 1002.
+12:13:23.206 TAL #18: Sväng höger in på Fryksåsvägen.
+12:13:23.209 TAL EJ REDO: Sväng höger in på Fryksåsvägen.
+12:13:23.216 SVANS VÄNTAR (NO_TIME): P-002
+12:13:23.217 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=179, secondsToManeuver=1.785009797227233, streetName=Fryksåsvägen)
+12:13:25.467 TAL #19: Fortsätt i 9 kilometer.
+12:13:25.468 TAL EJ REDO: Fortsätt i 9 kilometer.
+12:13:25.483 SVANS VÄNTAR (NO_TIME): C-005
+12:13:25.484 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Fryksåsvägen)
+12:13:25.490 SVANS VÄNTAR (NO_TIME): V-012
+12:13:25.490 HÄNDELSE ManeuverCompleted(maneuverId=R1-S5)
+12:13:25.491 SVANS VÄNTAR (MANEUVER): V-012
+12:13:25.884 SVANS STRUKEN (STRESS_TOO_LONG): V-012
+12:14:59.596 TAL RÅTT: Om 700 meter, Sväng höger in på Grönklittsvägen.
+12:14:59.597 TAL #20: Om 700 meter, sväng höger in på Grönklittsvägen.
+12:14:59.602 TAL EJ REDO: Om 700 meter, sväng höger in på Grönklittsvägen.
+12:14:59.610 SVANS VÄNTAR (NO_TIME): C-004
+12:14:59.611 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S4, type=turn, modifier=right, distanceMeters=686, secondsToManeuver=6.864717907329441, streetName=Grönklittsvägen)
+12:15:05.188 TAL RÅTT: Sväng höger in på Grönklittsvägen, W 1008.
+12:15:05.189 TAL #21: Sväng höger in på Grönklittsvägen.
+12:15:05.195 TAL EJ REDO: Sväng höger in på Grönklittsvägen.
+12:15:05.204 SVANS VÄNTAR (NO_TIME): NAV-017
+12:15:05.205 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S4, type=turn, modifier=right, distanceMeters=205, secondsToManeuver=2.051691998196602, streetName=Grönklittsvägen)
+12:15:07.533 TAL RÅTT: Fortsätt i 2.5 kilometer.
+12:15:07.534 TAL #22: Fortsätt i 2,5 kilometer.
+12:15:07.537 TAL EJ REDO: Fortsätt i 2,5 kilometer.
+12:15:07.546 SVANS VÄNTAR (NO_TIME): V-013
+12:15:07.547 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S4, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Grönklittsvägen)
+12:15:07.553 SVANS VÄNTAR (NO_TIME): P-004
+12:15:07.554 HÄNDELSE ManeuverCompleted(maneuverId=R1-S4)
+12:15:07.554 SVANS VÄNTAR (MANEUVER): P-004
+12:15:07.945 SVANS STRUKEN (STRESS_TOO_LONG): P-004
+12:15:27.083 TAL RÅTT: Om 600 meter, Sväng vänster in på Värdshusvägen.
+12:15:27.084 TAL #23: Om 600 meter, sväng vänster in på Värdshusvägen.
+12:15:27.088 TAL EJ REDO: Om 600 meter, sväng vänster in på Värdshusvägen.
+12:15:27.098 SVANS VÄNTAR (NO_TIME): P-005
+12:15:27.099 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S3, type=turn, modifier=left, distanceMeters=649, secondsToManeuver=6.49135323822737, streetName=Värdshusvägen)
+12:15:32.909 TAL #24: Sväng vänster in på Värdshusvägen.
+12:15:32.914 TAL EJ REDO: Sväng vänster in på Värdshusvägen.
+12:15:32.923 SVANS VÄNTAR (NO_TIME): NAV-016
+12:15:32.924 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S3, type=turn, modifier=left, distanceMeters=162, secondsToManeuver=1.616735709387599, streetName=Värdshusvägen)
+12:15:34.859 SVANS VÄNTAR (NO_TIME): C-007
+12:15:34.861 HÄNDELSE ManeuverCompleted(maneuverId=R1-S3)
+12:15:35.239 TAL #25: Din destination är till höger.
+12:15:35.241 TAL EJ REDO: Din destination är till höger.
+12:15:35.258 SVANS VÄNTAR (NO_TIME): NAV-015
+12:15:35.258 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S2, type=arrive, modifier=right, distanceMeters=112, secondsToManeuver=1.1240468150048069, streetName=Värdshusvägen)
+12:15:36.542 SVANS VÄNTAR (NO_TIME): NAV-005
+12:15:36.543 HÄNDELSE ManeuverCompleted(maneuverId=R1-S2)
+12:15:36.670 SVANS VÄNTAR (NO_TIME): V-002
+12:15:36.671 HÄNDELSE ManeuverCompleted(maneuverId=R1-S1)
+12:15:36.678 SVANS VÄNTAR (NO_TIME): V-003
+12:15:36.678 HÄNDELSE Arrived(destinationName=Grönklitt, totalSeconds=188, totalMeters=15708)
+12:15:36.679 SVANS STRUKEN (STRESS_TOO_LONG): V-003
+12:15:36.679 FRAMME (Complete)
+12:15:43.608 SVANS STRUKEN (STRESS_TOO_LONG): C-002a
+12:15:43.609 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=6.928, quality=DEGRADED)
+12:15:56.659 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=20.001, quality=LOST)
+12:18:08.015 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:18:08.017 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 35973772249765
+12:18:08.151 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:18:08.657 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:18:08.782 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:18:08.784 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:18:09.980 VALHALLA startad på 1710 ms
+12:18:10.641 PLATSER 5247 st ur platser.geojson
+12:18:25.387 RUTT auto 2 punkter: 100 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+12:18:29.502 SVANS V-001 [SYNTHETIC_SATIRE] högst 8200 ms: Om man sticker huvudet tillräckligt djupt i sanden kan man alltid hävda att det var kartan som flyttade på sig.
+12:18:29.503 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=0.017, quality=GOOD)
+12:18:29.509 HÄNDELSE RouteStarted(destinationName=Grönklitt, distanceMeters=15728, etaSeconds=958, travelMode=PASSENGER)
+12:18:29.525 TAL RÅTT: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+12:18:29.525 TAL #1: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+12:18:29.525 TAL EJ REDO: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+12:18:29.526 SVANS AVBRUTEN (MANEUVER): V-001
+12:18:29.526 SVANS VÄNTAR (MANEUVER): C-006
+12:18:29.527 NAVIGERING startad (PASSENGER) till Grönklitt: 15,73 km, 17 steg, provtur ×1, avvikelseförsök vid []
+12:18:34.628 SVANS VÄNTAR (NO_TIME): C-006
+12:18:39.728 SVANS STRUKEN (EXPIRED): C-006
+12:18:41.788 TAL RÅTT: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+12:18:41.789 TAL #2: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+12:18:41.793 TAL EJ REDO: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+12:18:41.799 SVANS VÄNTAR (NO_TIME): V-015
+12:18:41.800 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=52, secondsToManeuver=4.128681732096561, streetName=Slaggatan)
+12:18:47.938 TAL #3: Sväng höger in på Skyttsvägen.
+12:18:47.941 TAL EJ REDO: Sväng höger in på Skyttsvägen.
+12:18:47.958 SVANS VÄNTAR (NO_TIME): V-005
+12:18:47.959 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=Slaggatan)
+12:18:47.964 SVANS VÄNTAR (NO_TIME): P-005
+12:18:47.965 HÄNDELSE ManeuverCompleted(maneuverId=R1-S17)
+12:18:57.101 SVANS VÄNTAR (NO_TIME): C-004
+12:18:57.102 HÄNDELSE ManeuverCompleted(maneuverId=R1-S16)
+12:19:05.153 TAL #4: Sväng höger in på Moravägen.
+12:19:05.160 TAL EJ REDO: Sväng höger in på Moravägen.
+12:19:05.166 SVANS VÄNTAR (NO_TIME): V-012
+12:19:05.167 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S15, type=turn, modifier=right, distanceMeters=112, secondsToManeuver=8.983851511060688, streetName=Moravägen)
+12:19:15.272 SVANS STRUKEN (EXPIRED): V-012
+12:19:16.305 SVANS VÄNTAR (NO_TIME): V-011
+12:19:16.306 HÄNDELSE ManeuverCompleted(maneuverId=R1-S15)
+12:19:22.394 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+12:19:22.394 TAL #5: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+12:19:22.401 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+12:19:22.409 SVANS VÄNTAR (NO_TIME): C-002a
+12:19:22.410 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=144, secondsToManeuver=11.520850147280338, streetName=Kaplansgatan)
+12:19:23.406 SVANS VÄNTAR (MANEUVER): C-002a
+12:19:28.495 SVANS VÄNTAR (NO_TIME): C-002a
+12:19:32.549 SVANS STRUKEN (EXPIRED): C-002a
+12:19:35.622 TAL RÅTT: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+12:19:35.622 TAL #6: Kör ut ur rondellen in på Kaplansgatan.
+12:19:35.627 TAL EJ REDO: Kör ut ur rondellen in på Kaplansgatan.
+12:19:35.633 SVANS VÄNTAR (NO_TIME): P-005
+12:19:35.634 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Kaplansgatan)
+12:19:35.650 SVANS VÄNTAR (NO_TIME): C-008
+12:19:35.651 HÄNDELSE ManeuverCompleted(maneuverId=R1-S14)
+12:19:40.710 SVANS VÄNTAR (NO_TIME): V-006
+12:19:40.711 HÄNDELSE ManeuverCompleted(maneuverId=R1-S13)
+12:19:40.712 SVANS V-006 [SYNTHETIC_SATIRE] högst 9720 ms: Pickar man hål på bubblan tillräckligt många gånger blir hålet en ny bubbla. Då har man tekniskt sett inte pickat alls, bara möblerat om.
+12:20:08.148 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+12:20:08.149 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+12:20:08.151 TAL EJ REDO: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+12:20:08.160 SVANS VÄNTAR (NO_TIME): RED-P-007
+12:20:08.161 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=143, secondsToManeuver=10.40694639730003, streetName=Parkgatan)
+12:20:18.296 SVANS STRUKEN (EXPIRED): RED-P-007
+12:20:22.371 TAL RÅTT: Kör ut ur rondellen in på Parkgatan, W 1000.
+12:20:22.372 TAL #8: Kör ut ur rondellen in på Parkgatan.
+12:20:22.382 TAL EJ REDO: Kör ut ur rondellen in på Parkgatan.
+12:20:22.390 SVANS VÄNTAR (NO_TIME): C-002a
+12:20:22.391 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Parkgatan)
+12:20:22.397 SVANS VÄNTAR (NO_TIME): V-012
+12:20:22.397 HÄNDELSE ManeuverCompleted(maneuverId=R1-S12)
+12:20:30.512 SVANS VÄNTAR (NO_TIME): V-013
+12:20:30.513 HÄNDELSE ManeuverCompleted(maneuverId=R1-S11)
+12:20:38.651 TAL RÅTT: Sväng höger in på Lillågatan, W 1000.
+12:20:38.652 TAL #9: Sväng höger in på Lillågatan.
+12:20:38.654 TAL EJ REDO: Sväng höger in på Lillågatan.
+12:20:38.661 SVANS VÄNTAR (NO_TIME): P-001-N
+12:20:38.662 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=150, secondsToManeuver=10.973371636246602, streetName=Lillågatan)
+12:20:38.663 SVANS VÄNTAR (MANEUVER): P-001-N
+12:20:40.683 SVANS VÄNTAR (NO_TIME): P-001-N
+12:20:48.806 SVANS STRUKEN (EXPIRED): P-001-N
+12:20:51.874 TAL RÅTT: Fortsätt på W 1000 i 2 kilometer.
+12:20:51.874 TAL #10: Fortsätt på väg 1000 i 2 kilometer.
+12:20:51.879 TAL EJ REDO: Fortsätt på väg 1000 i 2 kilometer.
+12:20:51.886 SVANS VÄNTAR (NO_TIME): V-016
+12:20:51.887 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Lillågatan)
+12:20:51.892 SVANS VÄNTAR (NO_TIME): V-002
+12:20:51.893 HÄNDELSE ManeuverCompleted(maneuverId=R1-S10)
+12:20:51.893 SVANS VÄNTAR (MANEUVER): V-002
+12:20:52.285 SVANS V-002 [SYNTHETIC_SATIRE] högst 7440 ms: Jag är inte förvirrad. Universum är tillfälligt felkalibrerat runt just mig, vilket enligt mig är ett tydligt hälsotecken.
+12:22:55.336 STOPP
+12:23:00.766 SVANS V-015 [SYNTHETIC_SATIRE] högst 9340 ms: Man ska aldrig köpa en handduk när man behöver en handduk. Då är man redan blöt, och butiken tar inte ansvar för tidsparadoxen.
+12:23:00.768 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=6.096, quality=DEGRADED)
+12:23:04.731 RUTT auto 2 punkter: 13 ms i valhalla-mobile, 1 rutt(er), 9 steg, 13,03 km
+12:23:14.902 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=20.244, quality=LOST)
+12:25:10.555 SVANS STRUKEN (STRESS_TOO_LONG): C-009
+12:25:10.556 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=0.007, quality=GOOD)
+12:25:10.563 SVANS STRUKEN (STRESS_TOO_LONG): V-004
+12:25:10.563 HÄNDELSE RouteStarted(destinationName=Grönklitt, distanceMeters=13033, etaSeconds=745, travelMode=PASSENGER)
+12:25:10.568 TAL RÅTT: Kör mot nordväst  Våmhusvägen, W 1000.
+12:25:10.569 TAL #1: Kör mot nordväst Våmhusvägen.
+12:25:10.569 TAL EJ REDO: Kör mot nordväst Våmhusvägen.
+12:25:10.570 NAVIGERING startad (PASSENGER) till Grönklitt: 13,03 km, 9 steg, provtur ×4, avvikelseförsök vid [40, 120, 200]
+12:25:19.398 TAL RÅTT: Om 400 meter, Sväng höger.
+12:25:19.399 TAL #2: Om 400 meter, sväng höger.
+12:25:19.402 TAL EJ REDO: Om 400 meter, sväng höger.
+12:25:19.420 SVANS VÄNTAR (NO_TIME): V-014
+12:25:19.421 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=396, secondsToManeuver=7.9213588608360155, streetName=null)
+12:25:20.925 AVVIKELSE försök 1: tre positioner 250 m från rutten vid steg 40
+12:25:21.198 OMRÄKNING pågår
+12:25:21.199 HÄNDELSE OffRoute(deviationMeters=250, secondsOffRoute=0)
+12:25:21.200 SVANS VÄNTAR (REROUTING): V-014
+12:25:21.209 RUTT auto 2 punkter: 13 ms i valhalla-mobile, 1 rutt(er), 11 steg, 12,78 km
+12:25:21.220 NY RUTT (generation 2): 11 steg, 12,78 km kvar
+12:25:21.226 SVANS VÄNTAR (REROUTING): P-006
+12:25:21.226 HÄNDELSE Rerouted(newDistanceMeters=12780, newEtaSeconds=815, reason=avvikelse)
+12:25:26.395 OMRÄKNING pågår
+12:25:26.403 RUTT auto 2 punkter: 10 ms i valhalla-mobile, 1 rutt(er), 9 steg, 12,29 km
+12:25:26.408 TAL RÅTT: Kör norrut  Våmhusvägen, W 1000. Därefter Sväng höger.
+12:25:26.408 TAL #3: Kör norrut på Våmhusvägen. Därefter sväng höger.
+12:25:26.419 TAL EJ REDO: Kör norrut på Våmhusvägen. Därefter sväng höger.
+12:25:26.428 SVANS VÄNTAR (REROUTING): V-007
+12:25:26.428 HÄNDELSE ManeuverUpcoming(maneuverId=R2-S11, type=unknown, modifier=null, distanceMeters=103, secondsToManeuver=2.0527180052356213, streetName=Kallovavägen)
+12:25:26.429 NY RUTT (generation 3): 9 steg, 12,29 km kvar
+12:25:26.434 SVANS VÄNTAR (REROUTING): C-005
+12:25:26.434 HÄNDELSE Rerouted(newDistanceMeters=12287, newEtaSeconds=678, reason=avvikelse)
+12:25:28.209 TAL RÅTT: Sväng höger. Därefter Sväng vänster.
+12:25:28.210 TAL #4: Sväng höger. Därefter sväng vänster.
+12:25:28.213 TAL EJ REDO: Sväng höger. Därefter sväng vänster.
+12:25:28.222 SVANS VÄNTAR (REROUTING): V-008
+12:25:28.223 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S9, type=end of road, modifier=right, distanceMeters=32, secondsToManeuver=0.6356468514771874, streetName=null)
+12:25:29.501 TAL RÅTT: Sväng vänster. Därefter Sväng vänster.
+12:25:29.501 TAL #5: Sväng vänster. Därefter sväng vänster.
+12:25:29.501 TAL EJ REDO: Sväng vänster. Därefter sväng vänster.
+12:25:29.508 SVANS VÄNTAR (REROUTING): V-004
+12:25:29.509 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S9, type=end of road, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:25:29.516 SVANS VÄNTAR (REROUTING): NAV-017
+12:25:29.516 HÄNDELSE ManeuverCompleted(maneuverId=R3-S9)
+12:25:29.903 SVANS VÄNTAR (NO_TIME): NAV-017
+12:25:30.803 TAL RÅTT: Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+12:25:30.804 TAL #6: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+12:25:30.809 TAL EJ REDO: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+12:25:30.818 SVANS VÄNTAR (NO_TIME): NAV-017
+12:25:30.819 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S8, type=turn, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:25:30.825 SVANS VÄNTAR (NO_TIME): C-002a
+12:25:30.825 HÄNDELSE ManeuverCompleted(maneuverId=R3-S8)
+12:25:32.885 TAL RÅTT: Sväng höger in på Våmhusvägen, W 1000.
+12:25:32.885 TAL #7: Sväng höger in på Våmhusvägen.
+12:25:32.886 TAL EJ REDO: Sväng höger in på Våmhusvägen.
+12:25:32.894 SVANS VÄNTAR (NO_TIME): N-002
+12:25:32.895 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S7, type=end of road, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:25:32.901 SVANS VÄNTAR (NO_TIME): V-018
+12:25:32.902 HÄNDELSE ManeuverCompleted(maneuverId=R3-S7)
+12:25:33.142 TAL #8: Fortsätt i 800 meter.
+12:25:33.143 TAL EJ REDO: Fortsätt i 800 meter.
+12:25:33.155 SVANS VÄNTAR (NO_TIME): NAV-016
+12:25:33.156 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S6, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Våmhusvägen)
+12:25:33.162 SVANS VÄNTAR (NO_TIME): NAV-017
+12:25:33.163 HÄNDELSE ManeuverCompleted(maneuverId=R3-S6)
+12:25:40.954 TAL RÅTT: Om 500 meter, Sväng höger in på Fryksåsvägen.
+12:25:40.956 TAL #9: Om 500 meter, sväng höger in på Fryksåsvägen.
+12:25:40.961 TAL EJ REDO: Om 500 meter, sväng höger in på Fryksåsvägen.
+12:25:40.969 SVANS VÄNTAR (NO_TIME): V-004
+12:25:40.970 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S5, type=turn, modifier=right, distanceMeters=480, secondsToManeuver=9.600463059326975, streetName=Fryksåsvägen)
+12:25:42.509 AVVIKELSE försök 2: tre positioner 250 m från rutten vid steg 120
+12:25:42.780 OMRÄKNING pågår
+12:25:42.782 HÄNDELSE OffRoute(deviationMeters=250, secondsOffRoute=0)
+12:25:42.782 SVANS VÄNTAR (REROUTING): V-004
+12:25:42.789 RUTT auto 2 punkter: 13 ms i valhalla-mobile, 1 rutt(er), 8 steg, 12,63 km
+12:25:42.795 TAL #10: Kör mot sydöst.
+12:25:42.808 TAL EJ REDO: Kör mot sydöst.
+12:25:42.819 SVANS VÄNTAR (REROUTING): V-009
+12:25:42.821 HÄNDELSE ManeuverUpcoming(maneuverId=R3-S5, type=unknown, modifier=null, distanceMeters=402, secondsToManeuver=8.049563203612692, streetName=Fryksåsvägen)
+12:25:42.822 NY RUTT (generation 4): 8 steg, 12,63 km kvar
+12:25:42.828 SVANS VÄNTAR (REROUTING): NAV-017
+12:25:42.829 HÄNDELSE Rerouted(newDistanceMeters=12626, newEtaSeconds=937, reason=avvikelse)
+12:25:47.953 OMRÄKNING pågår
+12:25:47.963 RUTT auto 2 punkter: 10 ms i valhalla-mobile, 1 rutt(er), 5 steg, 11,54 km
+12:25:47.967 TAL RÅTT: Kör västerut  Våmhusvägen, W 1000. Därefter Sväng höger in på Fryksåsvägen.
+12:25:47.968 TAL #11: Kör västerut på Våmhusvägen. Därefter sväng höger in på Fryksåsvägen.
+12:25:47.968 TAL EJ REDO: Kör västerut på Våmhusvägen. Därefter sväng höger in på Fryksåsvägen.
+12:25:47.978 SVANS VÄNTAR (REROUTING): P-004
+12:25:47.979 HÄNDELSE ManeuverUpcoming(maneuverId=R4-S8, type=end of road, modifier=right, distanceMeters=135, secondsToManeuver=2.7025300307860873, streetName=Backängsvägen)
+12:25:47.979 NY RUTT (generation 5): 5 steg, 11,54 km kvar
+12:25:47.984 SVANS VÄNTAR (REROUTING): P-002
+12:25:47.985 HÄNDELSE Rerouted(newDistanceMeters=11539, newEtaSeconds=608, reason=avvikelse)
+12:25:51.844 TAL RÅTT: Sväng höger in på Fryksåsvägen, W 1002.
+12:25:51.845 TAL #12: Sväng höger in på Fryksåsvägen.
+12:25:51.850 TAL EJ REDO: Sväng höger in på Fryksåsvägen.
+12:25:51.858 SVANS VÄNTAR (REROUTING): V-012
+12:25:51.858 HÄNDELSE ManeuverUpcoming(maneuverId=R5-S5, type=turn, modifier=right, distanceMeters=63, secondsToManeuver=1.2637410720503937, streetName=Fryksåsvägen)
+12:25:53.389 TAL #13: Fortsätt i 9 kilometer.
+12:25:53.390 TAL EJ REDO: Fortsätt i 9 kilometer.
+12:25:53.406 SVANS VÄNTAR (REROUTING): C-005
+12:25:53.407 HÄNDELSE ManeuverUpcoming(maneuverId=R5-S5, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Fryksåsvägen)
+12:25:53.412 SVANS VÄNTAR (REROUTING): P-004
+12:25:53.412 HÄNDELSE ManeuverCompleted(maneuverId=R5-S5)
+12:25:53.804 SVANS STRUKEN (STRESS_TOO_LONG): P-004
+12:26:04.053 AVVIKELSE försök 3: tre positioner 250 m från rutten vid steg 200
+12:26:04.319 OMRÄKNING pågår
+12:26:04.324 HÄNDELSE OffRoute(deviationMeters=249, secondsOffRoute=0)
+12:26:04.325 RUTT auto 2 punkter: 8 ms i valhalla-mobile, 1 rutt(er), 4 steg, 10,90 km
+12:26:04.343 NY RUTT (generation 6): 4 steg, 10,89 km kvar
+12:26:04.350 SVANS VÄNTAR (REROUTING): NAV-010
+12:26:04.351 HÄNDELSE Rerouted(newDistanceMeters=10893, newEtaSeconds=571, reason=avvikelse)
+12:26:05.076 TAL RÅTT: Kör mot nordväst  Fryksåsvägen, W 1002.
+12:26:05.078 TAL #14: Kör mot nordväst Fryksåsvägen.
+12:26:05.084 TAL EJ REDO: Kör mot nordväst Fryksåsvägen.
+12:26:05.091 SVANS VÄNTAR (REROUTING): V-016
+12:26:05.092 HÄNDELSE ManeuverUpcoming(maneuverId=R6-S4, type=unknown, modifier=null, distanceMeters=8374, secondsToManeuver=167.47948330525804, streetName=Grönklittsvägen)
+12:26:06.647 SVANS STRUKEN (STRESS_TOO_LONG): V-016
+12:26:46.096 STOPP
+12:26:52.689 SVANS STRUKEN (STRESS_TOO_LONG): P-001-N
+12:26:52.690 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=6.612, quality=DEGRADED)
+12:27:06.743 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=20.689, quality=LOST)
+12:28:55.751 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:28:55.753 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 36621515349361
+12:28:55.825 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:28:56.216 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:28:56.626 TAL ansluten uttryckligen: standardmotor=com.google.android.tts, 474 röster, svenska offline: sv-SE-language, sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local
+12:28:56.629 TAL FEL: Den anslutna talmotorn är inte Samsungs
+12:28:57.490 VALHALLA startad på 1608 ms
+12:28:58.131 PLATSER 5247 st ur platser.geojson
+12:29:08.152 KARTA stil Poetisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:29:14.927 KARTA stil Osannolik laddad, källa pmtiles://file://…/karta.pmtiles
+12:29:20.998 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:29:23.791 HÄNDELSE EmergencyActivated(source=USER)
+12:30:07.405 HÄNDELSE EmergencyCleared(schemaVersion=1)
+12:37:22.675 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:37:22.677 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 37128437139272
+12:37:22.750 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:37:23.169 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:37:23.567 TAL motor com.google.android.tts, 474 röster, svenska utan nät: sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local, sv-SE-language
+12:37:23.567 TAL REDO: besked sv-se-x-afp-local, Guiden sv-se-x-lfs-local, motor com.google.android.tts, utan nät
+12:37:24.762 VALHALLA startad på 1946 ms
+12:37:25.404 PLATSER 5247 st ur platser.geojson
+12:37:44.255 RUTT auto 2 punkter: 107 ms i valhalla-mobile, 1 rutt(er), 17 steg, 15,73 km
+12:38:02.605 SVANS P-002 [ORIGINAL_VERBATIM] högst 9720 ms: är detta sjukt? Ja, Är jag sjuk? Troligen. Men hade jag varit frisk hade jag blivit så sjuk att jag aldrig blivit frisk igen
+12:38:02.700 HÄNDELSE PositionQualityChanged(accuracyMeters=5.0, fixAgeSeconds=0.01, quality=GOOD)
+12:38:02.707 HÄNDELSE RouteStarted(destinationName=Grönklitt, distanceMeters=15728, etaSeconds=958, travelMode=PASSENGER)
+12:38:02.724 TAL RÅTT: Kör söderut  Hantverkargatan. Därefter Sväng vänster in på Slaggatan.
+12:38:02.724 TAL #1: Kör söderut på Hantverkargatan. Därefter sväng vänster in på Slaggatan.
+12:38:02.727 SVANS KLIPPT (besked) efter 31 ms
+12:38:02.728 SVANS V-018 [SYNTHETIC_SATIRE] högst 10860 ms: De mest skam-allergi framkallande orden är "vi sa ju" och "du lovade". De bör bara uttalas i vakuum, där ingen hör dem och ingen därför behöver skämmas.
+12:38:02.753 SVANS KLIPPT (avbruten) efter 3 ms
+12:38:02.754 SVANS AVBRUTEN (MANEUVER): V-018
+12:38:02.756 NAVIGERING startad (PASSENGER) till Grönklitt: 15,73 km, 17 steg, provtur ×1, avvikelseförsök vid []
+12:38:03.234 TAL BÖRJAR: 481 ms efter begäran
+12:38:09.627 TAL KLART: 6393 ms
+12:38:14.863 TAL RÅTT: Sväng vänster in på Slaggatan. Därefter Sväng höger in på Skyttsvägen.
+12:38:14.863 TAL #2: Sväng vänster in på Slaggatan. Därefter sväng höger in på Skyttsvägen.
+12:38:14.885 SVANS VÄNTAR (NO_TIME): P-004
+12:38:14.887 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=52, secondsToManeuver=4.128681732096561, streetName=Slaggatan)
+12:38:14.939 TAL BÖRJAR: 64 ms efter begäran
+12:38:20.964 TAL #3: Sväng höger in på Skyttsvägen.
+12:38:20.978 SVANS VÄNTAR (NO_TIME): V-020
+12:38:20.979 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S17, type=new name, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=Slaggatan)
+12:38:20.985 SVANS VÄNTAR (NO_TIME): C-008
+12:38:20.986 HÄNDELSE ManeuverCompleted(maneuverId=R1-S17)
+12:38:21.021 TAL BÖRJAR: 50 ms efter begäran
+12:38:23.714 TAL KLART: 2693 ms
+12:38:30.119 SVANS VÄNTAR (NO_TIME): C-004
+12:38:30.120 HÄNDELSE ManeuverCompleted(maneuverId=R1-S16)
+12:38:38.235 TAL #4: Sväng höger in på Moravägen.
+12:38:38.256 SVANS VÄNTAR (NO_TIME): NAV-016
+12:38:38.257 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S15, type=turn, modifier=right, distanceMeters=112, secondsToManeuver=8.983851511060688, streetName=Moravägen)
+12:38:38.258 SVANS VÄNTAR (MANEUVER): NAV-016
+12:38:38.307 TAL BÖRJAR: 61 ms efter begäran
+12:38:39.255 SVANS VÄNTAR (NO_TIME): NAV-016
+12:38:41.052 TAL KLART: 2745 ms
+12:38:48.371 SVANS STRUKEN (EXPIRED): NAV-016
+12:38:49.406 SVANS VÄNTAR (NO_TIME): NAV-015
+12:38:49.407 HÄNDELSE ManeuverCompleted(maneuverId=R1-S15)
+12:38:55.489 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan, W 1000.
+12:38:55.489 TAL #5: Kör in i rondellen och ta den 2:a avfarten in på Kaplansgatan.
+12:38:55.508 SVANS VÄNTAR (NO_TIME): P-001-N
+12:38:55.509 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=144, secondsToManeuver=11.520850147280338, streetName=Kaplansgatan)
+12:38:55.597 TAL BÖRJAR: 99 ms efter begäran
+12:38:56.504 SVANS VÄNTAR (MANEUVER): P-001-N
+12:38:57.514 SVANS VÄNTAR (NO_TIME): P-001-N
+12:39:00.860 TAL KLART: 5262 ms
+12:39:05.608 SVANS STRUKEN (EXPIRED): P-001-N
+12:39:08.661 TAL RÅTT: Kör ut ur rondellen in på Kaplansgatan, W 1000.
+12:39:08.661 TAL #6: Kör ut ur rondellen in på Kaplansgatan.
+12:39:08.677 SVANS VÄNTAR (NO_TIME): V-003
+12:39:08.678 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S14, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Kaplansgatan)
+12:39:08.683 SVANS VÄNTAR (NO_TIME): NAV-005
+12:39:08.684 HÄNDELSE ManeuverCompleted(maneuverId=R1-S14)
+12:39:08.727 TAL BÖRJAR: 57 ms efter begäran
+12:39:12.220 TAL KLART: 3492 ms
+12:39:13.735 SVANS VÄNTAR (NO_TIME): V-001
+12:39:13.736 HÄNDELSE ManeuverCompleted(maneuverId=R1-S13)
+12:39:13.737 SVANS V-001 [SYNTHETIC_SATIRE] högst 8200 ms: Om man sticker huvudet tillräckligt djupt i sanden kan man alltid hävda att det var kartan som flyttade på sig.
+12:39:20.150 SVANS KLAR: 6339 ms
+12:39:41.105 TAL RÅTT: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan, W 1000.
+12:39:41.106 TAL #7: Kör in i rondellen och ta den 2:a avfarten in på Parkgatan.
+12:39:41.126 SVANS VÄNTAR (NO_TIME): C-009
+12:39:41.127 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=143, secondsToManeuver=10.40694639730003, streetName=Parkgatan)
+12:39:41.205 TAL BÖRJAR: 88 ms efter begäran
+12:39:46.285 TAL KLART: 5078 ms
+12:39:51.227 SVANS STRUKEN (EXPIRED): C-009
+12:39:55.298 TAL RÅTT: Kör ut ur rondellen in på Parkgatan, W 1000.
+12:39:55.299 TAL #8: Kör ut ur rondellen in på Parkgatan.
+12:39:55.319 SVANS VÄNTAR (NO_TIME): V-013
+12:39:55.321 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S12, type=roundabout, modifier=slight right, distanceMeters=0, secondsToManeuver=0.0, streetName=Parkgatan)
+12:39:55.326 SVANS VÄNTAR (NO_TIME): V-020
+12:39:55.327 HÄNDELSE ManeuverCompleted(maneuverId=R1-S12)
+12:39:55.360 TAL BÖRJAR: 54 ms efter begäran
+12:39:58.635 TAL KLART: 3275 ms
+12:40:03.413 SVANS VÄNTAR (NO_TIME): V-011
+12:40:03.414 HÄNDELSE ManeuverCompleted(maneuverId=R1-S11)
+12:40:11.520 TAL RÅTT: Sväng höger in på Lillågatan, W 1000.
+12:40:11.521 TAL #9: Sväng höger in på Lillågatan.
+12:40:11.539 SVANS VÄNTAR (NO_TIME): P-005
+12:40:11.541 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=150, secondsToManeuver=10.973371636246602, streetName=Lillågatan)
+12:40:11.542 SVANS VÄNTAR (MANEUVER): P-005
+12:40:11.594 TAL BÖRJAR: 64 ms efter begäran
+12:40:14.386 TAL KLART: 2791 ms
+12:40:14.554 SVANS VÄNTAR (NO_TIME): P-005
+12:40:21.645 SVANS STRUKEN (EXPIRED): P-005
+12:40:24.697 TAL RÅTT: Fortsätt på W 1000 i 2 kilometer.
+12:40:24.698 TAL #10: Fortsätt på väg 1000 i 2 kilometer.
+12:40:24.719 SVANS VÄNTAR (NO_TIME): V-014
+12:40:24.720 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S10, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Lillågatan)
+12:40:24.724 SVANS VÄNTAR (NO_TIME): V-004
+12:40:24.724 HÄNDELSE ManeuverCompleted(maneuverId=R1-S10)
+12:40:24.724 SVANS VÄNTAR (MANEUVER): V-004
+12:40:24.779 TAL BÖRJAR: 71 ms efter begäran
+12:40:28.299 SVANS V-004 [SYNTHETIC_SATIRE] högst 8200 ms: Den som inte vet att hen navigerar kan inte ha kört fel. Kartan är i så fall ett överflödigt bevis.
+12:40:28.305 TAL KLART: 3525 ms
+12:40:34.808 SVANS KLIPPT (avbruten) efter 6456 ms
+12:40:34.809 SVANS AVBRUTEN (EXPIRED): V-004
+12:43:07.904 TAL RÅTT: Om 400 meter, Sväng höger.
+12:43:07.910 TAL #11: Om 400 meter, sväng höger.
+12:43:07.927 SVANS VÄNTAR (NO_TIME): N-002
+12:43:07.929 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=396, secondsToManeuver=30.726543762806998, streetName=null)
+12:43:07.929 SVANS VÄNTAR (MANEUVER): N-002
+12:43:08.031 TAL BÖRJAR: 113 ms efter begäran
+12:43:11.318 SVANS N-002 [ORIGINAL_VERBATIM] högst 1740 ms: skam-allergi framkallande ord
+12:43:11.325 TAL KLART: 3295 ms
+12:43:13.070 SVANS KLIPPT (tidsgräns 1740 ms) efter 1683 ms
+12:43:31.184 TAL RÅTT: Sväng höger. Därefter Sväng vänster.
+12:43:31.185 TAL #12: Sväng höger. Därefter sväng vänster.
+12:43:31.206 SVANS VÄNTAR (NO_TIME): C-009
+12:43:31.207 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=123, secondsToManeuver=9.520219867800524, streetName=null)
+12:43:31.248 TAL BÖRJAR: 53 ms efter begäran
+12:43:34.667 TAL KLART: 3418 ms
+12:43:41.296 SVANS STRUKEN (EXPIRED): C-009
+12:43:44.356 TAL RÅTT: Sväng vänster. Därefter Sväng vänster.
+12:43:44.356 TAL #13: Sväng vänster. Därefter sväng vänster.
+12:43:44.376 SVANS VÄNTAR (NO_TIME): NAV-016
+12:43:44.377 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S9, type=end of road, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:43:44.383 SVANS VÄNTAR (NO_TIME): V-017
+12:43:44.384 HÄNDELSE ManeuverCompleted(maneuverId=R1-S9)
+12:43:44.413 TAL BÖRJAR: 44 ms efter begäran
+12:43:47.960 TAL KLART: 3547 ms
+12:43:49.402 TAL RÅTT: Sväng vänster. Därefter Sväng höger in på Våmhusvägen.
+12:43:49.403 TAL #14: Sväng vänster. Därefter sväng höger in på Våmhusvägen.
+12:43:49.420 SVANS VÄNTAR (NO_TIME): P-001
+12:43:49.421 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S8, type=turn, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:43:49.427 SVANS VÄNTAR (NO_TIME): C-001
+12:43:49.427 HÄNDELSE ManeuverCompleted(maneuverId=R1-S8)
+12:43:49.463 TAL BÖRJAR: 51 ms efter begäran
+12:43:54.401 TAL KLART: 4937 ms
+12:43:57.485 TAL RÅTT: Sväng höger in på Våmhusvägen, W 1000.
+12:43:57.486 TAL #15: Sväng höger in på Våmhusvägen.
+12:43:57.506 SVANS VÄNTAR (NO_TIME): V-002
+12:43:57.507 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S7, type=end of road, modifier=left, distanceMeters=0, secondsToManeuver=0.0, streetName=null)
+12:43:57.513 SVANS VÄNTAR (NO_TIME): C-008
+12:43:57.513 HÄNDELSE ManeuverCompleted(maneuverId=R1-S7)
+12:43:57.559 TAL BÖRJAR: 62 ms efter begäran
+12:43:58.496 TAL #16: Fortsätt i 800 meter.
+12:43:58.513 SVANS VÄNTAR (NO_TIME): C-007
+12:43:58.514 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S6, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Våmhusvägen)
+12:43:58.519 SVANS VÄNTAR (NO_TIME): NAV-008
+12:43:58.520 HÄNDELSE ManeuverCompleted(maneuverId=R1-S6)
+12:43:58.576 TAL BÖRJAR: 71 ms efter begäran
+12:43:59.513 SVANS VÄNTAR (MANEUVER): NAV-008
+12:44:01.373 SVANS NAV-008 [SYNTHETIC_SATIRE] högst 5920 ms: Om något låter fel är det min kommentar, inte pilen. Pilen har högre säkerhetsklass.
+12:44:01.382 TAL KLART: 2805 ms
+12:44:07.304 SVANS KLIPPT (tidsgräns 5920 ms) efter 5875 ms
+12:44:28.824 TAL RÅTT: Om 500 meter, Sväng höger in på Fryksåsvägen.
+12:44:28.825 TAL #17: Om 500 meter, sväng höger in på Fryksåsvägen.
+12:44:28.846 SVANS VÄNTAR (NO_TIME): RED-P-007
+12:44:28.847 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=480, secondsToManeuver=38.4018522373079, streetName=Fryksåsvägen)
+12:44:28.848 SVANS VÄNTAR (MANEUVER): RED-P-007
+12:44:28.909 TAL BÖRJAR: 71 ms efter begäran
+12:44:33.401 SVANS RED-P-007 [APPROVED_EDIT] högst 9340 ms: För att undvika risken att misslyckas med något man vill lyckas med, låter man bli att göra det som krävs för att lyckas.
+12:44:33.408 TAL KLART: 4499 ms
+12:44:38.910 SVANS KLIPPT (avbruten) efter 5429 ms
+12:44:38.911 SVANS AVBRUTEN (EXPIRED): RED-P-007
+12:44:57.140 TAL RÅTT: Sväng höger in på Fryksåsvägen, W 1002.
+12:44:57.141 TAL #18: Sväng höger in på Fryksåsvägen.
+12:44:57.159 SVANS VÄNTAR (NO_TIME): C-008
+12:44:57.160 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=179, secondsToManeuver=14.280078377817864, streetName=Fryksåsvägen)
+12:44:57.217 TAL BÖRJAR: 66 ms efter begäran
+12:45:00.187 TAL KLART: 2969 ms
+12:45:07.260 SVANS STRUKEN (EXPIRED): C-008
+12:45:14.355 TAL #19: Fortsätt i 9 kilometer.
+12:45:14.376 SVANS VÄNTAR (NO_TIME): C-002b
+12:45:14.377 HÄNDELSE ManeuverUpcoming(maneuverId=R1-S5, type=turn, modifier=right, distanceMeters=0, secondsToManeuver=0.0, streetName=Fryksåsvägen)
+12:45:14.382 SVANS VÄNTAR (NO_TIME): P-001-N
+12:45:14.383 HÄNDELSE ManeuverCompleted(maneuverId=R1-S5)
+12:45:14.383 SVANS VÄNTAR (MANEUVER): P-001-N
+12:45:14.427 TAL BÖRJAR: 60 ms efter begäran
+12:45:16.882 SVANS P-001-N [APPROVED_EDIT] högst 7060 ms: Om man sticker huvudet tillräckligt djupt i sanden kommer det tillslut upp i arslet på en själv.
+12:45:16.889 TAL KLART: 2460 ms
+12:45:22.874 SVANS KLAR: 5920 ms
+12:45:55.957 STOPP
+12:47:06.922 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:47:06.924 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 37712683882956
+12:47:06.990 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:47:07.455 TAL motor com.google.android.tts, 474 röster, svenska utan nät: sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local, sv-SE-language
+12:47:07.456 TAL REDO: besked sv-se-x-afp-local, Guiden sv-se-x-lfs-local, motor com.google.android.tts, utan nät
+12:47:07.499 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:47:08.591 VALHALLA startad på 1550 ms
+12:47:09.226 PLATSER 5247 st ur platser.geojson
+12:48:23.005 SVANS VÄNTAR (UNCERTAINTY_NOT_SHOWN): C-006
+12:48:27.872 SVANS VÄNTAR (MANEUVER): C-006
+12:48:28.035 TAL BÖRJAR: 164 ms efter begäran
+12:48:31.553 SVANS VÄNTAR (UNCERTAINTY_NOT_SHOWN): C-006
+12:48:31.558 TAL KLART: 3522 ms
+12:48:33.082 SVANS STRUKEN (EXPIRED): C-006
+12:52:55.010 START samsung SM-X900 Android 16 (API 36), app 0.4-etapp4
+12:52:55.012 ARKIV 109 poster, radbank 60 rader (49 uteslutna), seed 38060773564281
+12:52:55.093 POSITION: lyssnar på GNSS (GPS_PROVIDER), påslagen=true
+12:52:55.493 KARTA stil Praktisk laddad, källa pmtiles://file://…/karta.pmtiles
+12:52:55.655 TAL motor com.google.android.tts, 474 röster, svenska utan nät: sv-se-x-afp-local, sv-se-x-cfg-local, sv-se-x-cmh-local, sv-se-x-dmc-local, sv-se-x-lfs-local, sv-SE-language
+12:52:55.655 TAL REDO: besked sv-se-x-afp-local, Guiden sv-se-x-lfs-local, motor com.google.android.tts, utan nät
+12:52:57.239 VALHALLA startad på 1790 ms
+12:52:57.881 PLATSER 5247 st ur platser.geojson
+12:53:09.131 SVANS V-019 [SYNTHETIC_SATIRE] högst 9720 ms: Så länge man inte står vid sitt ord är det säkrast att stå i sanden. Där syns inga fotspår, och därmed inga brutna rutter.
+12:53:10.426 SVANS KLIPPT (besked) efter 828 ms
+12:53:10.468 SVANS TYST: 50 ms efter beskedets begäran
+12:53:10.542 TAL BÖRJAR: 110 ms efter begäran
+12:53:13.773 TAL KLART: 3230 ms

@@ -1,3 +1,5 @@
+> **STYRANDE BESLUT:** [Gällande inriktning](../GALLANDE-INRIKTNING.md) har företräde framför äldre planer och designförslag.
+
 # Design
 
 Exporterat från Google Stitch (projektet *Pundarens vän till galaxen*). Filerna är oförändrade. Den reviderade produktinriktningen finns i [`../PRD.md`](../PRD.md).

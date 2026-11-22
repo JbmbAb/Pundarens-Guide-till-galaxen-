@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.engine.LineBankTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:21.079Z" hostname="MIMER" time="0.018">
+  <properties/>
+  <testcase name="godkända variationer och navigationskommentarer finns i radbanken" classname="se.pundaren.guide.engine.LineBankTest" time="0.002"/>
+  <testcase name="märkta rader är bara till fots" classname="se.pundaren.guide.engine.LineBankTest" time="0.005"/>
+  <testcase name="Rikard-utdrag, regler, lexikon och arkivposter hålls utanför" classname="se.pundaren.guide.engine.LineBankTest" time="0.002"/>
+  <testcase name="det finns inga förnekelserader i dagens data" classname="se.pundaren.guide.engine.LineBankTest" time="0.002"/>
+  <testcase name="radbanken innehåller bara godkända poster och inga regler" classname="se.pundaren.guide.engine.LineBankTest" time="0.006"/>
+  <system-out><![CDATA[BARA TILL FOTS (10): NAV-001, NAV-002, NAV-003, NAV-004, NAV-007, NAV-009, NAV-012, NAV-013, NAV-014, V-010
+RADBANK (60): C-001, C-002a, C-002b, C-003, C-004, C-005, C-006, C-007, C-008, C-009, N-002, NAV-001, NAV-002, NAV-003, NAV-004, NAV-005, NAV-006, NAV-007, NAV-008, NAV-009, NAV-010, NAV-011, NAV-012, NAV-013, NAV-014, NAV-015, NAV-016, NAV-017, NAV-018, NAV-019, NAV-020, P-001, P-001-N, P-002, P-003, P-004, P-005, P-006, P-007, RED-P-007, V-001, V-002, V-003, V-004, V-005, V-006, V-007, V-008, V-009, V-010, V-011, V-012, V-013, V-014, V-015, V-016, V-017, V-018, V-019, V-020
+UTESLUTNA (49): ORIGIN_NOT_ALLOWED=16 | NOT_APPROVED=10 | KIND_NOT_TAIL=20 | REAL_PERSON_EXCERPT=3
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

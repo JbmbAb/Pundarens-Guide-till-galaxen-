@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.babel.BabelGameTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:24.256Z" hostname="MIMER" time="0.573">
+  <properties/>
+  <testcase name="bara grepp med en godkänd arkivrad går att spela" classname="se.pundaren.guide.babel.BabelGameTest" time="0.155"/>
+  <testcase name="rätt grepp ger tillbaka frågan och poängen är antalet repliker" classname="se.pundaren.guide.babel.BabelGameTest" time="0.041"/>
+  <testcase name="tecken på hot eller våld bryter satiren" classname="se.pundaren.guide.babel.BabelGameTest" time="0.102"/>
+  <testcase name="spelet är deterministiskt" classname="se.pundaren.guide.babel.BabelGameTest" time="0.133"/>
+  <testcase name="varje replik är en godkänd arkivrad och alternativen är godkända regler med det rätta bland dem" classname="se.pundaren.guide.babel.BabelGameTest" time="0.108"/>
+  <testcase name="de fem motståndarna delar upp greppen och den femte har alla" classname="se.pundaren.guide.babel.BabelGameTest" time="0.016"/>
+  <testcase name="en motståndare utan spelbara grepp och en tom fråga ger inget spel" classname="se.pundaren.guide.babel.BabelGameTest" time="0.014"/>
+  <system-out><![CDATA[SPELBARA GREPP: BS-03 (P-002), BS-04 (C-006+C-007+C-008+C-009), BS-05 (P-007), BS-06 (P-004+P-005), BS-07 (P-006), BS-15 (C-007)
+VÄNTAR PÅ GODKÄNDA RADER: BS-01, BS-02, BS-08, BS-09, BS-10, BS-11, BS-12, BS-13, BS-14, BS-16
+MOTSTÅNDARE Ansvarsförskjutaren: 2 spelbara grepp
+MOTSTÅNDARE Den eviga cirkeln: 1 spelbara grepp
+MOTSTÅNDARE Verklighetsrevisorn: 2 spelbara grepp
+MOTSTÅNDARE Den sårade hjälten: 1 spelbara grepp
+MOTSTÅNDARE Kosmisk totalförvirring: 6 spelbara grepp
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

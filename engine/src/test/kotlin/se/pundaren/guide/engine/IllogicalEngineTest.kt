@@ -144,4 +144,31 @@ class IllogicalEngineTest {
         }
         println("G1-SIMULERING: 100 händelser, ${spoken.size} svansar föreslagna, 0 brott")
     }
+
+    @Test fun `ägarens citat föreslås aldrig medan en rutt är aktiv, men annars`() {
+        val quotes = Fixtures.realArchive.all().filter(LineBank::isOwnersQuote).map { it.id }.toSet()
+        assertTrue(quotes.isNotEmpty())
+        fun spoken(navigating: Boolean): List<String> {
+            val lines = mutableListOf<String>()
+            var memory = EngineMemory()
+            Fixtures.simulate(600, 31).forEach { ev ->
+                engine.onEvent(ev, EngineContext(11, TravelMode.FOOT, memory, navigating)).forEach { c ->
+                    lines += c.lineId
+                    memory = memory.withPresented(PresentedTail(c.id, c.lineId, ev.monotonicMillis))
+                }
+            }
+            repeat(40) { i ->
+                engine.wisdom("BEGARAN-$i", 1_000L * i, EngineContext(11, TravelMode.FOOT, memory, navigating))?.let { c ->
+                    lines += c.lineId
+                    memory = memory.withPresented(PresentedTail(c.id, c.lineId, 1_000L * i))
+                }
+            }
+            return lines
+        }
+        val during = spoken(navigating = true)
+        assertTrue("Guiden blev tyst under navigering", during.size > 100)
+        assertEquals(emptyList<String>(), during.filter { it in quotes })
+        assertTrue("citaten försvann även utanför navigering", spoken(navigating = false).any { it in quotes })
+        println("CITAT: ${during.size} repliker under navigering ur ${during.toSet().size} olika rader, 0 citat")
+    }
 }

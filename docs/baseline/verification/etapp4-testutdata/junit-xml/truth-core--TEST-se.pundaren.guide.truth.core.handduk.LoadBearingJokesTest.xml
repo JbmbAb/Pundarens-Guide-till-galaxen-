@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:48.520Z" hostname="MIMER" time="0.366">
+  <properties/>
+  <testcase name="målet lottas bara bland dem som verkligen nås i tid" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.126"/>
+  <testcase name="okänt visas som okänt och gör inte handduken säkrad" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.02"/>
+  <testcase name="perspektivvyn räknar andelen av universums ålder på riktigt" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.023"/>
+  <testcase name="öppettider läses försiktigt och allt oklart blir okänt" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.027"/>
+  <testcase name="handduken är säkrad när alla fem punkter är godkända" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.011"/>
+  <testcase name="varje brist syns med sitt sanna värde" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.011"/>
+  <testcase name="snacks rangordnas efter omväg och säger okänd när öppettider saknas" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.046"/>
+  <testcase name="kandidaterna ligger inom rimligt avstånd och urvalet är seedat" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.054"/>
+  <testcase name="protokollet håller isär sant och satir och skrivs i myndighetsform" classname="se.pundaren.guide.truth.core.handduk.LoadBearingJokesTest" time="0.042"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.verification.VoiceRulesTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-21T11:58:56.464Z" hostname="MIMER" time="0.439">
+  <properties/>
+  <testcase name="RR-05 spärrlistan omfattar böjningar men inte högre" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.035"/>
+  <testcase name="RR-01 varje rad i radbanken bär minst en mekanism" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.04"/>
+  <testcase name="RR-08 förslag och variationer kan inte vara original" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.024"/>
+  <testcase name="RR-13 Babel-grepp finns inte i navigatorns radbank" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.012"/>
+  <testcase name="RR-06 rader som skyller på användaren spärras" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.022"/>
+  <testcase name="RR-09 satiren är märkt som satir" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.061"/>
+  <testcase name="RR-04 rader som låter som besked finns bara som rader till fots" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.054"/>
+  <testcase name="RR-10 lånade namn finns bara som märkta arbetsnamn" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.044"/>
+  <testcase name="RR-07 Rikard hörs aldrig och verkliga utdrag läses inte upp" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.096"/>
+  <testcase name="RR-11 bara APPROVED, relationscitat märkta, och privata rader hörs överallt" classname="se.pundaren.guide.verification.VoiceRulesTest" time="0.048"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

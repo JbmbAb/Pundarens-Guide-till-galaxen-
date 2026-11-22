@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.archive.core.ArchiveImportTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:19.092Z" hostname="MIMER" time="1.11">
+  <properties/>
+  <testcase name="relationscitat och Rikard-utdrag är märkta" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.498"/>
+  <testcase name="BS-01 till BS-16 är godkända regler" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.133"/>
+  <testcase name="Grok Bots förslag är godkända av Jimmy men aldrig original" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.09"/>
+  <testcase name="okänd proveniens fäller importen" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.126"/>
+  <testcase name="konstruerade exempel ur sammanställningen är fortfarande inte godkända" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.024"/>
+  <testcase name="alla poster är PRIVATE vid import" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.03"/>
+  <testcase name="approved true utan Jimmy som godkännare räknas inte" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.058"/>
+  <testcase name="datafilerna ändras inte av importen" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.051"/>
+  <testcase name="originalen importeras byte för byte ur quotes json" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.011"/>
+  <testcase name="F-10 och F-09 ger APPROVED_EDIT och originalen ligger kvar" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.011"/>
+  <testcase name="F-12 och K-15 håller EX-01-FORMULERING och mönstren i arkivet" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.04"/>
+  <testcase name="verifieringsstatus följer 04" classname="se.pundaren.guide.archive.core.ArchiveImportTest" time="0.021"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

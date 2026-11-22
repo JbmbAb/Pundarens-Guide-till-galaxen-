@@ -178,6 +178,18 @@ Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/e
 
 Genomfört på grenen `etapp2/offline-karta` (PR #6), se [`../verification/etapp2-protokoll.md`](../verification/etapp2-protokoll.md).
 
+<a id="talmotorn"></a>
+## 10. Ägarbeslut 2026-11-21 cirka kl. 12.31–12.35 (Europe/Stockholm): talmotorn och vad Google-förbudet gäller
+
+Bakgrund: på målenheten avvisar Samsungs talmotor appen, och Android ansluter då tyst Googles talmotor ([etapp4-protokollet](../verification/etapp4-protokoll.md), avsnitt 5). Byggaren frågade vilken röst appen ska ha. Ägaren valde först "Piper i appen" i frågerutan och skrev strax därefter, ordagrant: "goggle api förbjuds inte goggle i övrigt". På följdfrågan om det betyder att förbudet gäller Googles API:er och att plattans talmotor därmed får användas valde ägaren "Ja, Googles motor nu". Det senare svaret gäller.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| F-06 | REVISE genom ägarbeslut | Förbudet mot Google gäller Googles **API:er** (Maps, Play-tjänster, Firebase med flera), inte Google i övrigt. Enhetens talmotor får användas även när den är Googles. Preciserar E2-D3 ("förbudet gäller Googles tjänster"). Beroendespärren i bygget (`verifyModuleEdges`) är oförändrad: inga Google-bibliotek för tjänster i appen, och `gson` och `listenablefuture` är fortfarande de enda granskade undantagen. |
+| B-46, A-08 | ACCEPT genom ägarbeslut | Rösten är systemets talmotor via Androids `TextToSpeech`, med svenska röster som läses upp på enheten (på målenheten Googles motor, rösterna `sv-se-x-…-local`). Appen har fortfarande ingen INTERNET-behörighet. |
+| Samsungs talmotor | REJECT (går inte) | `com.samsung.SMT` 3.5.02.46 är en privat motor på SM-X900 och avvisar appen. Ägarens `SvenskTalObserver.kt` bad uttryckligen om den; den vägen fungerar inte på målenheten. |
+| Piper via sherpa-onnx (T-22, T-23) | Parkerat | Väcks om ägaren senare vill ha en röst helt utan Google. Att tänka på då: Pipers uttalsdel (espeak-ng) har GPL-licens, vilket påverkar F-17. |
+
 <a id="godkann-allt"></a>
 ## 8. Ägarbeslut 2026-11-20 kl. 23.36 (Europe/Stockholm): godkänn allt
 
@@ -196,3 +208,62 @@ Genomfört på grenen `etapp2/offline-karta` (PR #6), se [`../verification/etapp
 
 Genomfört i PR #5, se [`../verification/etapp1-protokoll.md`](../verification/etapp1-protokoll.md) avsnitt 9.
 
+## 11. Ägarbeslut 2026-11-21 kl. 14.19 (Europe/Stockholm): krypteringen i Convoy
+
+Bakgrund: baslinjen pekar ut XChaCha20-Poly1305 i libsodium som kandidat (07, 3.2; 03, avsnitt 5; A-17). Byggaren byggde `:convoy:api` med AES-256-GCM ur plattformens JCA för att inte lägga ett nytt inbyggt bibliotek i appen utan beslut ([etapp5-7-protokollet](../verification/etapp5-7-protokoll.md), E6-D1), redogjorde för skillnaden och rekommenderade AES-256-GCM för Convoy för två. Ägarens beslut ordagrant: "Kör på AES-256-GCM".
+
+| Id | Utfall | Kort |
+|---|---|---|
+| E6-D1 | ACCEPT genom ägarbeslut | Convoy för två förseglar kuverten med AES-256-GCM ur plattformens JCA. 96 bitars nonce, slumpad per kuvert; ny nyckel per session; en session sänder som mest några tiotusental kuvert. |
+| A-17, libsodium | Parkerat | Väcks om grupper större än två eller långlivade nycklar blir aktuella. Primitiven ligger bakom gränssnittet `Aead` och kan bytas utan att protokollet ändras. |
+| G7 | Oförändrat, NOT_VERIFIED | Beslutet gäller valet av primitiv. Det ersätter inte granskningen av krypteringsdelen av någon som inte har byggt den. |
+
+Fortfarande öppet för Convoy: var servern ska köras (F-15) och om appen får nätverksbehörighet.
+
+## 12. Ägarbeslut 2026-11-21 kl. 14.23 (Europe/Stockholm): Convoy får nätverk
+
+**Rättad 2026-11-21 kl. 17.40.** Avsnittet angav först att ägaren hade beslutat att servern körs på datorn "mimer" över Tailscale. Det var byggarens feltolkning. Ägaren ordagrant kl. 17.40: "tailscale har inte valts jag upplyste om att alternativet redan fanns . finns optimalare lösning?" Raden om F-15 nedan är ändrad efter det. Den felaktiga lydelsen finns kvar i incheckningen `64bcdaf`.
+
+Ägarens ord kl. 14.23, ordagrant: "Ja till nätverk server på mimer tailscale finns något att återanvända från mimer". Beslutet är det första ledet, ja till nätverk. Mellanledet är en upplysning om att ett alternativ redan finns, och det sista ledet är en fråga till byggaren.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| Nätverksbehörighet | ACCEPT genom ägarbeslut | Appen får `INTERNET`-behörighet för Convoy. Det ändrar det som visades i etapp 4 (E4-K14: ingen nätverksbehörighet). Behörigheten får bara användas av Convoy-transporten; navigering, karta, röst och Guiden ska fortsätta fungera utan nät, och arkitekturtestet som i dag kräver att behörigheten saknas skrivs om till att kräva just det. |
+| F-15, var servern körs | **Öppet** | Inte beslutat. Ägaren har upplyst om att datorn `mimer` och Tailscale redan finns som alternativ. Vilken väg telefonerna når reläet på är också öppet. |
+
+Inget av detta är byggt än. G7 är oförändrat NOT_VERIFIED.
+
+## 13. Ägarbeslut 2026-11-21 kl. 18.29 (Europe/Stockholm): Google-förbudet gäller kostnader
+
+Ägarens ord, ordagrant: "ÄNDRA BYGGREGEL DET HANDLAR OM GOOGLES KOSTNADER ÄR DET GRATIS INGA PROBLEM". Det var svaret på byggarens fråga om Convoy-skärmen fick byggas med QR-kod, ZXing och CameraX.
+
+| Id | Utfall | Kort |
+|---|---|---|
+| Byggregeln för Google-bibliotek | ÄNDRAD genom ägarbeslut | Gratis bibliotek från Google får användas utan nytt beslut. Kontrollen i `build.gradle.kts` som fällde bygget för varje ogranskad `com.google`-modul är borttagen. |
+| ZXing och CameraX | ACCEPT genom ägarbeslut | Convoy-inbjudan visas och läses som QR-kod. ZXing (Apache 2.0) ritar och läser koden, CameraX ger kamerabilden. Appen får kamerabehörighet, som bara används medan skanningsrutan är öppen. |
+| Listan över förbjudna Google-tjänster | Oförändrad, byggarens tolkning | Play-tjänster, Firebase, Google Maps med flera fäller fortfarande bygget. Byggaren tolkar beslutet som att just de tjänsterna är de som kostar eller kan börja kosta. Ägaren har inte uttalat sig om listan. |
+
+## 14. Ägarbeslut 2026-11-21, infört kl. 19.18 (Europe/Stockholm): körriktningsrösten och citaten
+
+Ägarens ord, ordagrant: "Den vanliga körriktnings rösten ska vara vara möjlig att stänga av mina citat ska inte vara med i navigation läget".
+
+| Id | Utfall | Kort |
+|---|---|---|
+| Körriktningsrösten | Genomfört | Rösten gick redan att stänga av under Reglage. Nu finns också knappen "Vägröst: på/av" på huvudskärmen. Sanningsremsan visar varje besked oavsett. |
+| Citaten under navigering | Genomfört | Medan en rutt är aktiv föreslår Guiden inga av ägarens citat (original eller bearbetade), varken av sig själv eller när man trycker på Don't Panic. Kvar under navigering: de 20 navigationskommentarerna och de 20 genererade variationerna. |
+| De genererade variationerna | Öppet, byggarens tolkning | Variationerna är inte ägarens ord och är därför kvar. Ägaren har inte uttalat sig om dem. |
+
+## 15. Ägarbeslut 2026-11-21 kl. 19.41 (Europe/Stockholm): spärrarna tas bort, bygget väntar
+
+Ägarens ord, ordagrant: "TA BORT SPÄRRARNA MEN VÄNTA MED BYGGET". Det var svaret på byggarens fråga om de fyra spärrar som hindrar appen från att bli den följeslagare som ursprungstanken beskriver (Stitch-briefen: karta, filosof och nattlig snacksguide i ett, med Don't Panic i mitten).
+
+| Spärr | Utfall | Vad som gäller nu |
+|---|---|---|
+| Byggaren får inte skriva Guidens eller Babel-Stoners rader | BORTTAGEN | Byggaren får skriva rader, mallar och en motor som formulerar sig själv efter ägarens formel (iakttagelse, paradox, praktisk verklighet) ur ägarens citat och motsatspar. |
+| Guiden får inte låta som ett besked | BORTTAGEN | Antinavigering är tillåten: uteslutning och existentiella frågor i stället för order. |
+| Rikard får nämnas men aldrig agera | BORTTAGEN | Rikard får vara den som orsakar omräkningar, glitchar och fel. Frågan om verkliga utdrag från den riktige Rikard (F-08) berörs inte. |
+| Grindar, protokoll och beslutslogg för varje steg | BORTTAGEN | Inga fler grindprotokoll eller loggposter per steg. Det här avsnittet är det sista av det slaget. |
+
+Kvar, enligt byggarens förslag som ägaren inte har invänt mot: det raka beskedet syns alltid överst, och nödkortet är fritt från skämt.
+
+Ingen kod är ändrad med anledning av beslutet. Spärrarna finns alltså kvar i koden (SafetyGate, radbankens urval, arkitekturtesterna) tills ägaren säger att bygget ska börja.

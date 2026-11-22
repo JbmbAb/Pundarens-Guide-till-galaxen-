@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="se.pundaren.guide.truth.core.tal.InstructionAnnouncerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-21T12:44:45.376Z" hostname="MIMER" time="0.018">
+  <properties/>
+  <testcase name="beskedet tvättas och läses upp, råtexten loggas" classname="se.pundaren.guide.truth.core.tal.InstructionAnnouncerTest" time="0.012"/>
+  <testcase name="avstängt ljud läser inget men loggar beskedet, tomt besked ger ingenting" classname="se.pundaren.guide.truth.core.tal.InstructionAnnouncerTest" time="0.002"/>
+  <testcase name="samma besked direkt efter omräkning läses inte upp igen" classname="se.pundaren.guide.truth.core.tal.InstructionAnnouncerTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

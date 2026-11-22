@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "status": "kallutkast_ej_importerat",
+  "description": "Återgivna formuleringar från projektchatten, inte verifierade mot råexport. Ska inte automatiskt ges proveniens original.",
+  "entries": [
+    {
+      "id": "CHAT-20261121-001",
+      "text": "allt ont kommer från Rikard",
+      "sourceLevel": "atergivet_i_projektchatten",
+      "quoteType": "familjeuttryck",
+      "themes": ["rikard", "skuld", "orsakssamband", "absurdism"],
+      "sourceNote": "Uttrycket uppges härstamma från en äldre familjetradition. Ursprungspersonen är inte namngiven i publik data."
+    },
+    {
+      "id": "CHAT-20261121-002",
+      "text": "det spelar ingen roll hur jag än gör så blir det fel",
+      "sourceLevel": "atergivet_i_projektchatten",
+      "quoteType": "atergiven_replik",
+      "themes": ["upprepning", "paradox", "ansvar", "forandring"],
+      "sourceNote": "Återgiven formulering, inte jämförd mot ljudfil eller råtranskription."
+    }
+  ],
+  "contextWithoutDirectQuotation": [
+    {
+      "id": "CHAT-TEMA-001",
+      "description": "Tre återkommande löften under en vecka utan upplevd bestående förändring.",
+      "themes": ["loften", "tillit", "engangsloftet"]
+    },
+    {
+      "id": "CHAT-TEMA-002",
+      "description": "En fråga om ansvar kan förskjutas till hur jobbigt det var att få frågan.",
+      "themes": ["offerkofta", "ansvarsforskjutning"]
+    },
+    {
+      "id": "CHAT-TEMA-003",
+      "description": "Samma metod upprepas och beskrivs som om alla alternativ prövats.",
+      "themes": ["upprepningsparadox", "sjalmotsagelse"]
+    }
+  ]
+}
