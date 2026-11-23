@@ -6,7 +6,32 @@ enum class Role(val title: String) {
     CEREMONY("Ceremonimästaren"),
     PANIC("Panikministern"),
     HELPFUL("Den överdrivet hjälpsamma handläggaren"),
+    /** Den torra rösten som skiljer det observerade från slutsatsen. */
+    BABEL("Babel-Stoner"),
+    MEMBER("Medlemmen"),
+    MONKEYS("Flying Monkeys"),
 }
+
+/** En scen: en rubrik och regisserade rader, med uppgift om varifrån texten kommer. */
+data class Scene(
+    val title: String,
+    val cues: List<Cue>,
+    val source: Source = Source.OWNER,
+    val authority: String? = null,
+)
+
+/** Rader efter varandra med samma röst. Sista raden får den längre pausen. */
+internal fun said(role: Role?, vararg lines: String, direction: String? = null, first: Int = 400, last: Int = 950): List<Cue> =
+    lines.mapIndexed { i, text ->
+        Cue(
+            text, role, if (i == 0) direction else null,
+            when {
+                i == 0 -> first
+                i == lines.lastIndex -> last
+                else -> 500
+            },
+        )
+    }
 
 /**
  * En rad med regi: vem som säger den, hur, och hur lång tystnaden före den ska vara.

@@ -135,6 +135,7 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
             }
             AbsurdityCard(settings.absurdityPercent) { v -> graph.settings.update { it.copy(absurdityPercent = v) } }
             PromiseCard(graph, settings.promiseCount)
+            ConversionCard(graph, settings.conversionStep, canSpeak = !routeActive && graph.canReadAloud())
         }
 
         if (wide) {
@@ -296,7 +297,7 @@ private fun MonkeyCard(
 }
 
 @Composable
-private fun Meter(label: String, value: String, modifier: Modifier = Modifier) {
+internal fun Meter(label: String, value: String, modifier: Modifier = Modifier) {
     Column(modifier.clip(RoundedCornerShape(16.dp)).background(GuideColors.Surface).padding(horizontal = 14.dp, vertical = 10.dp)) {
         Text(label, color = GuideColors.OnSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.Bold)
         Text(value, color = GuideColors.OnSurface, fontSize = 26.sp, fontWeight = FontWeight.Black)

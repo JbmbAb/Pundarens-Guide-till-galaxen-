@@ -47,19 +47,24 @@ import java.time.format.DateTimeFormatter
  * Guidens lila med id och klass. Frågebokföringen och fältanteckningarna är inte satir och är inte lila.
  */
 
-/** Babel-Stoner: spelet (satir) och frågebokföringen (analys). Två skilda funktioner (02 B-1, B-2). */
+/** Babel-Stoner: spelet (satir), frågebokföringen (analys) och Fekala Haverikommissionen. Skilda funktioner (02 B-1, B-2). */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BabelScreen(graph: AppGraph) {
-    var analysis by remember { mutableStateOf(false) }
+    var pane by remember { mutableStateOf(0) }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Column(Modifier.widthIn(max = 720.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("Babel-Stoner", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PillButton("Spelet", primary = !analysis) { analysis = false }
-                PillButton("Frågebokföring", primary = analysis) { analysis = true }
+                PillButton("Spelet", primary = pane == 0) { graph.stopReading(); pane = 0 }
+                PillButton("Frågebokföring", primary = pane == 1) { graph.stopReading(); pane = 1 }
+                PillButton("Bajsanalysatorn", primary = pane == 2) { pane = 2 }
             }
-            if (analysis) LedgerPane() else GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
+            when (pane) {
+                0 -> GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
+                1 -> LedgerPane()
+                else -> FecalPane(graph)
+            }
         }
     }
 }

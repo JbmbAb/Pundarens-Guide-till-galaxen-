@@ -185,6 +185,9 @@ class AppGraph(context: Context) : AutoCloseable {
         Role.CEREMONY -> 0.74f to 0.68f
         Role.PANIC -> 1.22f to 1.18f
         Role.HELPFUL -> 1.08f to 1.5f
+        Role.BABEL -> 0.96f to 1.0f
+        Role.MEMBER -> 1.0f to 1.12f
+        Role.MONKEYS -> 1.35f to 1.9f
         Role.OFFICIAL, null -> 0.88f to 0.85f
     }
 
