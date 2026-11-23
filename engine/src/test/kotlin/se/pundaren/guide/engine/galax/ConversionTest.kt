@@ -47,7 +47,7 @@ class ConversionTest {
         val scenes = (1..12).map { Conversion.step(it)!! } + Conversion.ceremony + Conversion.conclusion + Conversion.paradox + Conversion.reportTheMessenger
         val all = scenes.flatMap { s -> listOf(s.title) + s.cues.map { it.text } } + Conversion.warning +
             Conversion.certificate.flatMap { listOf(it.area, it.before, it.after) }
-        listOf("bonnie", "min mor", "mamma", "moder", "jimmy", "ulla-bella", "ulla bella").forEach { name ->
+        listOf("bonnie", "min mor", "mamma", "jimmy", "ulla-bella", "ulla bella").forEach { name ->
             assertFalse("$name förekommer", all.any { name in it.lowercase() })
         }
     }

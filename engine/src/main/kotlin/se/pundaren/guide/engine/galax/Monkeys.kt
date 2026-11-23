@@ -12,6 +12,19 @@ enum class Role(val title: String) {
     MONKEYS("Flying Monkeys"),
 }
 
+/**
+ * Filnamnet, utan ändelse, för en inspelad version av raden: rollen och ett fingeravtryck av texten.
+ * En inspelning med det namnet går före all talsyntes. Rader utan roll läses aldrig upp.
+ */
+val Cue.clipName: String? get() = role?.let { "${it.name.lowercase()}-${fingerprint(text)}" }
+
+/** FNV-1a, 64 bitar, över textens UTF-8. Lätt att räkna ut likadant i vilket verktyg som helst. */
+internal fun fingerprint(text: String): String {
+    var hash = 0xcbf29ce484222325uL
+    for (byte in text.trim().encodeToByteArray()) hash = (hash xor byte.toUByte().toULong()) * 0x100000001b3uL
+    return hash.toString(16).padStart(16, '0')
+}
+
 /** En scen: en rubrik och regisserade rader, med uppgift om varifrån texten kommer. */
 data class Scene(
     val title: String,

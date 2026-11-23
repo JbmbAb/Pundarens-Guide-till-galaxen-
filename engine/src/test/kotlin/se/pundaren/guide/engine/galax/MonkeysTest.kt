@@ -108,4 +108,12 @@ class MonkeysTest {
             assertFalse("$name förekommer", all.any { name in it.lowercase() })
         }
     }
+
+    @Test fun `en inspelad replik hittas på rollen och textens fingeravtryck`() {
+        assertEquals("cbf29ce484222325", fingerprint(""))
+        assertEquals("af63dc4c8601ec8c", fingerprint("a"))
+        assertEquals(fingerprint("Nej."), fingerprint("  Nej.  "))
+        assertEquals("panic-" + fingerprint("RELEASE THE MONKEYS!"), Cue("RELEASE THE MONKEYS!", Role.PANIC).clipName)
+        assertNull(Cue("UPPDRAG SLUTFÖRT").clipName)
+    }
 }

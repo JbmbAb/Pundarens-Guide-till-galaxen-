@@ -28,11 +28,8 @@ import se.pundaren.guide.engine.DefaultIllogicalEngine
 import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.TailCandidate
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
 import se.pundaren.guide.engine.galax.Cue
 import se.pundaren.guide.engine.galax.DontPanic
-import se.pundaren.guide.engine.galax.Role
 import se.pundaren.guide.engine.galax.PanicMemory
 import se.pundaren.guide.engine.galax.PanicReply
 import se.pundaren.guide.engine.galax.PromiseRegistry
@@ -175,38 +172,28 @@ class AppGraph(context: Context) : AutoCloseable {
         voice.speakTail("galax-${++galaxRequests}", text, 120_000) {}
     }
 
-    fun stopReading() = voice.stopTail()
+    fun stopReading() {
+        voice.stopTail()
+        recorded.stop()
+    }
+
+    private val recorded = RecordedVoice(app, log::line)
 
     /**
-     * Rollrösterna på enhetens talmotor, som takt och tonhöjd. Kandidatvärden tills ägaren har lyssnat:
-     * en platt talsyntes blir ingen skådespelare av två tal, men rollerna går att skilja åt med örat.
+     * Rollernas röstkällor, i den ordning de prövas: en inspelad replik går före talsyntesen. En
+     * talsyntes som körs på enheten (Piper) hör hemma mellan de två när den byggs in.
      */
-    private fun profile(role: Role?): Pair<Float, Float> = when (role) {
-        Role.CEREMONY -> 0.74f to 0.68f
-        Role.PANIC -> 1.22f to 1.18f
-        Role.HELPFUL -> 1.08f to 1.5f
-        Role.BABEL -> 0.96f to 1.0f
-        Role.MEMBER -> 1.0f to 1.12f
-        Role.MONKEYS -> 1.35f to 1.9f
-        Role.OFFICIAL, null -> 0.88f to 0.85f
-    }
+    private val cast: List<CueVoice> = listOf(recorded, DeviceVoice(voice))
 
     /**
      * Läser upp en regisserad rad med rollens röst och väntar tills den är färdigläst. Svarar falskt om
-     * raden klipptes eller aldrig fick börja. Avbryts anropet tystnar rösten. Aldrig under en aktiv rutt.
+     * raden klipptes eller aldrig fick börja. Avbryts anropet tystnar rösten. Aldrig under en aktiv rutt,
+     * där beskeden har företräde.
      */
     suspend fun speakCue(cue: Cue): Boolean {
-        if (!canReadAloud()) return false
-        val (rate, pitch) = profile(cue.role)
-        // Versaler är skrik på skärmen men riskerar att bokstaveras av talmotorn.
-        val letters = cue.text.filter { it.isLetter() }
-        val shouted = letters.isNotEmpty() && letters.count { it.isUpperCase() } > letters.length / 2
-        return suspendCancellableCoroutine { waiting ->
-            voice.speakTail("roll-${++galaxRequests}", if (shouted) cue.text.lowercase() else cue.text, 60_000, rate, pitch) { finished ->
-                if (waiting.isActive) waiting.resume(finished)
-            }
-            waiting.invokeOnCancellation { voice.stopTail() }
-        }
+        if (navigator.state.navigation.value.activeRoute) return false
+        val source = cast.firstOrNull { it.has(cue) } ?: return false
+        return source.speak(cue)
     }
 
     private fun record(r: ConductorRecord) {

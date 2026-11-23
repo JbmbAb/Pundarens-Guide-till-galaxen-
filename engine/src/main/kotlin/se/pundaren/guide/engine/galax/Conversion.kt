@@ -157,7 +157,7 @@ object Conversion {
             10, "X", "Vi fortsatte vår moraliska inventering av andra och tilldelade omedelbart Rikard ansvaret när något gick fel",
             listOf(
                 "Genom daglig övning utvecklade vi en förmåga att upptäcka andras brister innan de själva hann begå dem.",
-                "När vår egen roll i en händelse blev besvärande hänvisade vi till den äldre familjetraditionens ursprungliga och fortfarande gällande dom:",
+                "När vår egen roll i en händelse blev besvärande hänvisade vi till moderns ursprungliga och fortfarande gällande dom:",
                 "”Allt ont kommer från Rikard.”",
             ),
             listOf(
