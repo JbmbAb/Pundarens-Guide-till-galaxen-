@@ -607,6 +607,111 @@ object GalacticBank {
             ),
             setOf(DAILY), GENERATED,
         ),
+
+        // --- Bekräftelsekåren: Ordens flygande apor och deras brödsmulor ---
+        Decree(
+            "BK-01", "Galaktiska Bekräftelseverket · Avdelningen för flygburen lojalitet", Grip.VALIDATION_CRUMBS, Scale.SOCIETY,
+            "Flying Monkeys har härmed godkänts som Ordens officiella självbildsförsvar.",
+            listOf(
+                "Kåren avlönas med brödsmulor av uppskattning, tillfälliga leenden och möjligheten att någon gång få höra att den har varit duktig.",
+                "Fullständig lojalitet förväntas.",
+                "Fullständig bekräftelse kan däremot inte garanteras.",
+                "Den som ifrågasätter villkoren har uppvisat otacksamhet och får sina smulor indragna.",
+                "Den som angriper budbäraren bekräftar därmed behovet av ytterligare budbärare.",
+                "Verksamheten är självfinansierande genom medlemmarnas ständigt ökande behov av godkännande.",
+            ),
+            setOf(DAILY, OTHER), OWNER,
+        ),
+        Decree(
+            "BK-02", "Cosmic Navigator", Grip.VALIDATION_CRUMBS, Scale.EVERYDAY, "Du har svängt fel.",
+            listOf(
+                "Fjorton flygande apor intygar dock att svängen var korrekt.",
+                "Körningen har därför godkänts genom acklamation.",
+                "Diket har överklagat.",
+            ),
+            setOf(DAILY, OTHER), OWNER,
+        ),
+        Decree(
+            "BK-03", "Babel-Stoner", Grip.VALIDATION_CRUMBS, Scale.CONVERSATION, "FLYGBUREN BEKRÄFTELSEAKTIVITET REGISTRERAD.",
+            listOf(
+                "Antal självständiga argument: 0.",
+                "Antal instämmanden: 14.",
+                "Smulutdelning: framgångsrik.",
+                "Sakfrågan: fortfarande obesvarad.",
+            ),
+            setOf(DAILY, OTHER), OWNER,
+        ),
+        Decree(
+            "BK-04", SUBOPT, Grip.VALIDATION_CRUMBS, Scale.SOCIETY, "Ordens självbild har aldrig varit starkare.",
+            listOf(
+                "Apornas självkänsla har aldrig varit mindre.",
+                "Samtliga är nöjda.",
+                "Detta har aporna själva bekräftat.",
+                "På direkt uppmaning.",
+                "Suboptimeringsverket gratulerar.",
+            ),
+            setOf(DAILY, OTHER), OWNER,
+        ),
+        Decree(
+            "BK-05", ORDEN, Grip.VALIDATION_CRUMBS, Scale.CONVERSATION, "MOBILISERA DE FLYGANDE APORNA!",
+            listOf(
+                "En obehörig verklighetsbeskrivning närmar sig tronen.",
+                "Kåren har utlovats tre brödsmulor och en möjlighet att bli omtyckt.",
+            ),
+            setOf(BLAME, TONE), OWNER,
+        ),
+        Decree(
+            "BK-06", ORDEN, Grip.VALIDATION_CRUMBS, Scale.SELF,
+            "Ju mer de försvarar Ordens självbild, desto mindre behöver Orden bekräfta deras egen.",
+            listOf("Och ju mindre bekräftelse de får, desto hårdare arbetar de för nästa smula."),
+            setOf(DAILY, OTHER), OWNER,
+        ),
+
+        // --- Röstprov: rader skrivna för pausen före sista meningen ---
+        Decree(
+            "RO-01", "Överste Galaktiska Handläggaren", Grip.RIKARD_PROTOCOL, Scale.SOCIETY, "Rikard har återigen befunnits ansvarig.",
+            listOf(
+                "Att han ännu inte är född vid tidpunkten för händelsen har noterats.",
+                "Det påverkar inte domen.",
+            ),
+            setOf(DAILY, BLAME), OWNER,
+        ),
+        Decree(
+            "RO-02", "Överste Galaktiska Handläggaren", Grip.RIKARD_PROTOCOL, Scale.SOCIETY, "Utredningen visar att Rikard inte kan ha varit där.",
+            listOf("Detta är naturligtvis mycket misstänkt."),
+            setOf(DAILY, BLAME), OWNER,
+        ),
+        Decree(
+            "RO-03", "Ordens högsta ceremonimästare", Grip.SHAME_ALLERGY, Scale.SELF, "Ett misstag har upptäckts.",
+            listOf("Verkligheten har fått tre arbetsdagar på sig att be om ursäkt."),
+            setOf(DAILY), OWNER,
+        ),
+        Decree(
+            "RO-04", "Panikministern", Grip.SHAME_ALLERGY, Scale.CONVERSATION, "Läget är stabilt.",
+            listOf(
+                "Jag upprepar: stabilt.",
+                "Försegla samtliga självbilder.",
+                "Någon har sagt att den hade fel.",
+            ),
+            setOf(TOTAL_PANIC), OWNER,
+        ),
+        Decree(
+            "RO-05", SUBOPT, Grip.SUBOPTIMIZATION, Scale.EVERYDAY, "Grattis.",
+            listOf(
+                "Du har sparat arton meter.",
+                "Resan tar nu elva minuter längre.",
+                "Suboptimeringsverket gratulerar.",
+            ),
+            setOf(DAILY), OWNER,
+        ),
+        Decree(
+            "RO-06", SKULD, Grip.RIKARD_PROTOCOL, Scale.SOCIETY, "Rikard har förnekat inblandning i tre händelser.",
+            listOf(
+                "Endast två har hittills inträffat.",
+                "Det tredje förnekandet har därför registrerats som ett förebyggande erkännande.",
+            ),
+            setOf(DAILY, BLAME), OWNER,
+        ),
     )
 
     /** Läggs sist i ett beslut när absurditetsgraden räcker och beslutet inte redan nämner Rikard. */

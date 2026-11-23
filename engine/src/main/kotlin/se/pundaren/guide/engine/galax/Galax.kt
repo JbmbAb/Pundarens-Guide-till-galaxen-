@@ -20,6 +20,8 @@ enum class Grip(val title: String) {
     VICTIM_SHIELD("Offerkoftan"),
     RIKARD_PROTOCOL("Rikard-protokollet"),
     REPEAT_AS_PROGRESS("Upprepning som framsteg"),
+    /** Självbildsförsvaret läggs ut på entreprenad: delmålet är nästa smula av uppskattning. */
+    VALIDATION_CRUMBS("Bekräftelsesmulesystemet"),
 }
 
 /** Samma systemfel i olika världar. */

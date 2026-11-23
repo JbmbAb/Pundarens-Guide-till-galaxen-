@@ -28,7 +28,11 @@ import se.pundaren.guide.engine.DefaultIllogicalEngine
 import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.TailCandidate
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import se.pundaren.guide.engine.galax.Cue
 import se.pundaren.guide.engine.galax.DontPanic
+import se.pundaren.guide.engine.galax.Role
 import se.pundaren.guide.engine.galax.PanicMemory
 import se.pundaren.guide.engine.galax.PanicReply
 import se.pundaren.guide.engine.galax.PromiseRegistry
@@ -172,6 +176,35 @@ class AppGraph(context: Context) : AutoCloseable {
     }
 
     fun stopReading() = voice.stopTail()
+
+    /**
+     * Rollrösterna på enhetens talmotor, som takt och tonhöjd. Kandidatvärden tills ägaren har lyssnat:
+     * en platt talsyntes blir ingen skådespelare av två tal, men rollerna går att skilja åt med örat.
+     */
+    private fun profile(role: Role?): Pair<Float, Float> = when (role) {
+        Role.CEREMONY -> 0.74f to 0.68f
+        Role.PANIC -> 1.22f to 1.18f
+        Role.HELPFUL -> 1.08f to 1.5f
+        Role.OFFICIAL, null -> 0.88f to 0.85f
+    }
+
+    /**
+     * Läser upp en regisserad rad med rollens röst och väntar tills den är färdigläst. Svarar falskt om
+     * raden klipptes eller aldrig fick börja. Avbryts anropet tystnar rösten. Aldrig under en aktiv rutt.
+     */
+    suspend fun speakCue(cue: Cue): Boolean {
+        if (!canReadAloud()) return false
+        val (rate, pitch) = profile(cue.role)
+        // Versaler är skrik på skärmen men riskerar att bokstaveras av talmotorn.
+        val letters = cue.text.filter { it.isLetter() }
+        val shouted = letters.isNotEmpty() && letters.count { it.isUpperCase() } > letters.length / 2
+        return suspendCancellableCoroutine { waiting ->
+            voice.speakTail("roll-${++galaxRequests}", if (shouted) cue.text.lowercase() else cue.text, 60_000, rate, pitch) { finished ->
+                if (waiting.isActive) waiting.resume(finished)
+            }
+            waiting.invokeOnCancellation { voice.stopTail() }
+        }
+    }
 
     private fun record(r: ConductorRecord) {
         when (r) {

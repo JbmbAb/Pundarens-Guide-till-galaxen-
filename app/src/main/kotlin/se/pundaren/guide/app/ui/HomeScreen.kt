@@ -1,5 +1,6 @@
 package se.pundaren.guide.app.ui
 
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -15,9 +16,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -45,6 +49,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
@@ -52,17 +57,26 @@ import se.pundaren.guide.app.AppGraph
 import se.pundaren.guide.app.Settings
 import se.pundaren.guide.engine.galax.DontPanic
 import se.pundaren.guide.engine.galax.GalacticBank
+import se.pundaren.guide.engine.galax.MonkeyScene
+import se.pundaren.guide.engine.galax.MonkeyState
+import se.pundaren.guide.engine.galax.Monkeys
 import se.pundaren.guide.engine.galax.PanicKind
 import se.pundaren.guide.engine.galax.PanicReply
 import se.pundaren.guide.engine.galax.PromiseRegistry
 import se.pundaren.guide.engine.galax.Source
+import kotlin.math.cos
+import kotlin.math.roundToInt
+import kotlin.math.sin
 
 /*
  * Startsidan (gällande inriktning, avsnitt 6): DON'T PANIC i mitten, och runt den visdomssändningen,
  * absurditetsgraden och Löftesregistret. Allt här fungerar utan karta, utan nät och hemma i soffan.
  *
  * Lila är Guiden. Turkost är sant: verklighetsankaret och upplysningen om vad som sparas.
- * Korall är larm: TOTAL PANIK och bonusen. Sidan rör aldrig rutt, position eller besked.
+ * Korall är larm: TOTAL PANIK, bonusen och aporna. Sidan rör aldrig rutt, position eller besked.
+ *
+ * Dubbeltryck på knappen släpper lös Ordens flygande bekräftelsekår och öppnar minispelet
+ * Effektivisera aporna. Enkeltryck och långtryck fungerar som förut.
  */
 
 @Composable
@@ -72,9 +86,18 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
     var wisdom by rememberSaveable { mutableIntStateOf((System.nanoTime() % GalacticBank.proverbs.size).toInt().coerceAtLeast(0)) }
     var sent by rememberSaveable { mutableIntStateOf(1) }
 
+    var monkeys by remember { mutableStateOf<MonkeyScene?>(null) }
+    var voices by rememberSaveable { mutableStateOf(true) }
+
     val press = {
         graph.stopReading()
         reply = graph.dontPanic(input)
+    }
+    val release = {
+        graph.stopReading()
+        val scene = Monkeys.release(monkeys?.state ?: MonkeyState())
+        graph.log.line("APOR flock ${scene.state.flocks}")
+        monkeys = scene
     }
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
@@ -85,7 +108,10 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
                 wisdom = (wisdom + 1 + (System.nanoTime() % 7).toInt().coerceAtLeast(0)) % GalacticBank.proverbs.size
                 sent += 1
             }
-            PanicButton(onPress = press, onEmergency = onEmergency, modifier = Modifier.align(Alignment.CenterHorizontally))
+            PanicButton(
+                onPress = press, onRelease = release, onEmergency = onEmergency, flocks = monkeys?.state?.flocks ?: 0,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
             OutlinedTextField(
                 value = input, onValueChange = { input = it }, modifier = Modifier.fillMaxWidth(), maxLines = 4,
                 label = { Text("Vad har hänt? (frivilligt)") },
@@ -93,6 +119,13 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
             )
         }
         val right: @Composable ColumnScope.() -> Unit = {
+            monkeys?.let { scene ->
+                MonkeyCard(
+                    graph = graph, scene = scene, canSpeak = !routeActive && graph.canReadAloud(), voices = voices,
+                    onVoices = { on -> if (!on) graph.stopReading(); voices = on },
+                    onScene = { next -> graph.stopReading(); monkeys = next },
+                )
+            }
             reply?.let { r ->
                 ReplyCard(
                     reply = r, canRead = !routeActive && graph.canReadAloud(),
@@ -132,20 +165,36 @@ private fun WisdomCard(number: Int, text: String, onNext: () -> Unit) {
     }
 }
 
-/** Den stora knappen. Kort tryck: ett galaktiskt beslut. Långt tryck: nödkortet, som är sant och inte satir. */
+/**
+ * Den stora knappen. Kort tryck: ett galaktiskt beslut. Dubbeltryck: aporna släpps lös.
+ * Långt tryck: nödkortet, som är sant och inte satir.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun PanicButton(onPress: () -> Unit, onEmergency: () -> Unit, modifier: Modifier = Modifier) {
+private fun PanicButton(onPress: () -> Unit, onRelease: () -> Unit, onEmergency: () -> Unit, flocks: Int, modifier: Modifier = Modifier) {
     val pulse = rememberInfiniteTransition(label = "puls")
     val scale by pulse.animateFloat(0.96f, 1.04f, infiniteRepeatable(tween(1400), RepeatMode.Reverse), label = "skala")
     val glow by pulse.animateFloat(0.18f, 0.42f, infiniteRepeatable(tween(1400), RepeatMode.Reverse), label = "sken")
+    val orbit by pulse.animateFloat(0f, 360f, infiniteRepeatable(tween(9000, easing = LinearEasing)), label = "varv")
     Box(modifier.size(300.dp), contentAlignment = Alignment.Center) {
         Box(Modifier.fillMaxSize().background(Brush.radialGradient(listOf(GuideColors.Guide.copy(alpha = glow), Color.Transparent)), CircleShape))
+        // Bekräftelsekåren cirklar runt tronen. Fler flockar, fler apor.
+        val monkeys = if (flocks <= 0) 0 else (4 + 2 * flocks).coerceAtMost(12)
+        repeat(monkeys) { i ->
+            Text(
+                "\uD83D\uDC12", fontSize = 24.sp,
+                modifier = Modifier.offset {
+                    val angle = Math.toRadians(orbit + i * 360.0 / monkeys)
+                    val radius = (130 + 6 * sin(Math.toRadians(orbit * 4.0 + i * 70.0))).dp.toPx()
+                    IntOffset((cos(angle) * radius).roundToInt(), (sin(angle) * radius).roundToInt())
+                },
+            )
+        }
         Box(
             Modifier.size(220.dp).graphicsLayer { scaleX = scale; scaleY = scale }.clip(CircleShape)
                 .background(Brush.linearGradient(listOf(GuideColors.GuideAlt, GuideColors.Guide, GuideColors.GuideDim)))
                 .border(6.dp, GuideColors.GuideDim.copy(alpha = 0.7f), CircleShape)
-                .combinedClickable(onClick = onPress, onLongClick = onEmergency),
+                .combinedClickable(onClick = onPress, onDoubleClick = onRelease, onLongClick = onEmergency),
             contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -153,6 +202,104 @@ private fun PanicButton(onPress: () -> Unit, onEmergency: () -> Unit, modifier: 
                 Text("håll in: nödkort", color = GuideColors.OnGuide, fontSize = 12.sp)
             }
         }
+    }
+}
+
+/**
+ * Effektivisera aporna. Raderna kommer en i taget med regisserade pauser, och varje roll läses upp
+ * med sin egen röst när rösten finns och ingen rutt pågår.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun MonkeyCard(
+    graph: AppGraph, scene: MonkeyScene, canSpeak: Boolean, voices: Boolean,
+    onVoices: (Boolean) -> Unit, onScene: (MonkeyScene?) -> Unit,
+) {
+    val state = scene.state
+    var shown by remember(scene) { mutableIntStateOf(0) }
+    LaunchedEffect(scene) {
+        var speak = voices && canSpeak
+        scene.cues.forEachIndexed { i, cue ->
+            delay(cue.pauseBeforeMillis.toLong())
+            shown = i + 1
+            when {
+                // Klipps en replik (nytt tryck, röster av) läses resten av scenen inte upp.
+                speak && cue.role != null -> if (!graph.speakCue(cue)) speak = false
+                speak -> delay((cue.text.length * 45L).coerceIn(700L, 2600L))
+            }
+        }
+    }
+    val shape = RoundedCornerShape(topStart = 44.dp, topEnd = 28.dp, bottomEnd = 44.dp, bottomStart = 28.dp)
+    Column(
+        Modifier.fillMaxWidth().clip(shape).background(GuideColors.SurfaceHigh).border(2.dp, GuideColors.Warm.copy(alpha = 0.6f), shape)
+            .padding(horizontal = 24.dp, vertical = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(Monkeys.AUTHORITY, color = GuideColors.OnSurfaceVariant, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+        Text("RELEASE THE MONKEYS!", color = GuideColors.Warm, fontSize = 30.sp, lineHeight = 34.sp, fontWeight = FontWeight.Black)
+        Text(scene.title, color = GuideColors.Guide, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+
+        scene.cues.take(shown).forEachIndexed { i, cue ->
+            val role = cue.role
+            if (role != null && (cue.direction != null || scene.cues.getOrNull(i - 1)?.role != role)) {
+                Text(
+                    role.title.uppercase() + (cue.direction?.let { " · $it" } ?: ""),
+                    color = GuideColors.OnSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 4.dp),
+                )
+            }
+            val shouted = cue.text == cue.text.uppercase()
+            Text(
+                if (role == null) cue.text else "”${cue.text}”",
+                color = when {
+                    shouted -> GuideColors.Warm
+                    role == null -> GuideColors.OnSurface
+                    else -> GuideColors.GuideAlt
+                },
+                fontSize = 19.sp, lineHeight = 26.sp,
+                fontWeight = if (shouted) FontWeight.Black else FontWeight.Normal,
+                fontStyle = if (role == se.pundaren.guide.engine.galax.Role.CEREMONY) FontStyle.Italic else FontStyle.Normal,
+            )
+        }
+
+        Row(Modifier.fillMaxWidth().padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Meter("SMULOR PER APA", "${state.crumbsPerMonkey}", Modifier.weight(1f))
+            Meter("ARBETSKRAV", "${state.workDemand}×", Modifier.weight(1f))
+        }
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Meter("EMOTIONELL KOSTNAD", "${state.emotionalCostPercent} %", Modifier.weight(1f))
+            Meter("FAKTISKT LÖST", "${state.solvedPercent} %", Modifier.weight(1f))
+        }
+        if (state.worse > 0) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                Meter("BEKRÄFTARE SOM KRÄVS", "${state.confirmersNeeded}", Modifier.weight(1f))
+                Meter("SKULD FÖR STÄMNINGEN", "${state.blamePercent} %", Modifier.weight(1f))
+            }
+            Meter("RAPPORTERAT RESULTAT", "${state.reportedResultPercent} %", Modifier.fillMaxWidth())
+        }
+        Text(Monkeys.STATUS, color = GuideColors.OnSurfaceVariant, fontSize = 14.sp, fontStyle = FontStyle.Italic)
+
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            when {
+                Monkeys.canBlameRikard(state) -> PillButton("[ SKYLL PÅ RIKARD ]", primary = true) { onScene(Monkeys.blameRikard(state)) }
+                Monkeys.canReport(state) -> PillButton("SLUTRAPPORT", primary = true) { onScene(Monkeys.finalReport(state)) }
+                !state.reported -> {
+                    PillButton("HALVERA SMULRANSONEN", primary = true, enabled = Monkeys.canHalve(state)) { Monkeys.halve(state)?.let(onScene) }
+                    PillButton("SUBOPTIMERA ÄNNU MER", enabled = Monkeys.canSuboptimize(state)) { Monkeys.suboptimize(state)?.let(onScene) }
+                }
+            }
+            PillButton("Återställ katastrofen") { onScene(null) }
+            if (canSpeak) PillButton(if (voices) "Röster: på" else "Röster: av") { onVoices(!voices) }
+        }
+        Text(Monkeys.DISCLAIMER, color = GuideColors.Truth, fontSize = 12.sp)
+        Text("${scene.source.label} · ${scene.grip.title}", color = GuideColors.OnSurfaceVariant, fontSize = 11.sp)
+    }
+}
+
+@Composable
+private fun Meter(label: String, value: String, modifier: Modifier = Modifier) {
+    Column(modifier.clip(RoundedCornerShape(16.dp)).background(GuideColors.Surface).padding(horizontal = 14.dp, vertical = 10.dp)) {
+        Text(label, color = GuideColors.OnSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+        Text(value, color = GuideColors.OnSurface, fontSize = 26.sp, fontWeight = FontWeight.Black)
     }
 }
 

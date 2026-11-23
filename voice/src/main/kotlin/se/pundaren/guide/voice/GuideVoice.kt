@@ -232,8 +232,13 @@ class GuideVoice(
      * Läser upp en svans. [onDone] anropas alltid exakt en gång på huvudtråden: `true` om svansen
      * lästes färdigt, `false` om den klipptes (av ett besked, av tidsgränsen eller av [stopTail])
      * eller aldrig kunde börja. Anropet kommer alltid efteråt, aldrig inifrån det här anropet.
+     *
+     * [rate] och [pitch] ger en rollröst (ceremonimästaren, panikministern). Null betyder Guidens vanliga röst.
      */
-    fun speakTail(id: String, text: String, maxMillis: Int, onDone: (finished: Boolean) -> Unit) = onMain {
+    fun speakTail(
+        id: String, text: String, maxMillis: Int, rate: Float? = null, pitch: Float? = null,
+        onDone: (finished: Boolean) -> Unit,
+    ) = onMain {
         val tts = engine
         val voice = tailVoice
         if (closed || !ready || tts == null || voice == null || text.isBlank() || instructionId != null || _instructionSpeaking.value || maxMillis <= 0) {
@@ -243,8 +248,8 @@ class GuideVoice(
         finishTail(finished = false, cutBy = "ny svans")
         val utterance = "svans-$id"
         tts.voice = voice
-        tts.setSpeechRate(TAIL_RATE)
-        tts.setPitch(if (voice.name == instructionVoice?.name) TAIL_PITCH_SAME_VOICE else TAIL_PITCH)
+        tts.setSpeechRate(rate ?: TAIL_RATE)
+        tts.setPitch(pitch ?: if (voice.name == instructionVoice?.name) TAIL_PITCH_SAME_VOICE else TAIL_PITCH)
         requestFocus(utterance)
         tailId = utterance
         tailDone = onDone
