@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontFamily
@@ -39,26 +42,30 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 /*
- * Etapp 7: Babel-Stoner och encyklopedin. Panelerna nås bara när ingen tur pågår (byggplanen:
+ * Etapp 7: Babel-Stoner och encyklopedin. De nås bara när ingen tur pågår (byggplanen:
  * greppen används aldrig i navigatorn). Babel-Stoners repliker är godkända arkivrader och visas i
  * Guidens lila med id och klass. Frågebokföringen och fältanteckningarna är inte satir och är inte lila.
  */
 
-/** Babel-Stoner: spelet (satir) och frågebokföringen (analys). Två skilda funktioner (02 B-1, B-2). */
+/** Babel-Stoner: spelet (satir), frågebokföringen (analys) och Fekala Haverikommissionen. Skilda funktioner (02 B-1, B-2). */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun BabelDialog(graph: AppGraph, onDismiss: () -> Unit) {
-    var analysis by remember { mutableStateOf(false) }
-    Panel(onDismiss) {
-        Text("Babel-Stoner", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PillButton("Spelet", primary = !analysis) { analysis = false }
-            PillButton("Frågebokföring", primary = analysis) { analysis = true }
+fun BabelScreen(graph: AppGraph) {
+    var pane by remember { mutableStateOf(0) }
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(Modifier.widthIn(max = 720.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Babel-Stoner", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PillButton("Spelet", primary = pane == 0) { graph.stopReading(); pane = 0 }
+                PillButton("Frågebokföring", primary = pane == 1) { graph.stopReading(); pane = 1 }
+                PillButton("Bajsanalysatorn", primary = pane == 2) { pane = 2 }
+            }
+            when (pane) {
+                0 -> GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
+                1 -> LedgerPane()
+                else -> FecalPane(graph)
+            }
         }
-        Column(Modifier.heightIn(max = 560.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            if (analysis) LedgerPane() else GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
-        }
-        Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) { PillButton("Stäng", onClick = onDismiss) }
     }
 }
 

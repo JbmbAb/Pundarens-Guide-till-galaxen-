@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -38,6 +39,7 @@ import se.pundaren.guide.app.Settings
 import se.pundaren.guide.archive.api.ArchiveEntry
 import se.pundaren.guide.archive.api.OriginClass
 import se.pundaren.guide.engine.api.TailCandidate
+import se.pundaren.guide.engine.galax.DontPanic
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.api.PositionSnapshot
 import se.pundaren.guide.truth.core.geo.Geo
@@ -152,17 +154,20 @@ private fun TruthButton(text: String, onClick: () -> Unit) {
     )
 }
 
-/** Reglagen (underlagets Probability Drive): rör bara Guiden. Dessutom läget för paket, röst och logg. */
+/** Reglagen (underlagets Probability Drive): rör bara Guiden. Dessutom läget för paket, röst och logg. En egen flik. */
 @Composable
-fun DriveDialog(
+fun DriveScreen(
     graph: AppGraph, settings: Settings, status: NavigatorStatus, voiceStatus: VoiceStatus, position: GeoPoint?, mapCenter: GeoPoint?,
-    onShowSource: (TailCandidate) -> Unit, onDismiss: () -> Unit,
+    onShowSource: (TailCandidate) -> Unit,
 ) {
     val history by graph.history.collectAsState()
-    Panel(onDismiss) {
-        Column(Modifier.heightIn(max = 620.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(Modifier.widthIn(max = 720.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Reglage", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
             Text("Reglagen rör bara Guiden. Rutten, beskeden och nödkortet påverkas aldrig.", color = GuideColors.OnSurfaceVariant, fontSize = 14.sp)
+
+            Text("Absurditetsgrad: ${settings.absurdityPercent} % · ${DontPanic.levelName(settings.absurdityPercent)}", color = GuideColors.OnSurface, fontSize = 16.sp)
+            Slider(value = settings.absurdityPercent.toFloat(), onValueChange = { v -> graph.settings.update { it.copy(absurdityPercent = v.toInt()) } }, valueRange = 0f..100f)
 
             SwitchRow("Guiden pratar", settings.guideEnabled) { on -> graph.settings.update { it.copy(guideEnabled = on) } }
             Text("Pratsamhet: ${settings.chattinessPercent} %", color = GuideColors.OnSurface, fontSize = 16.sp)
@@ -227,7 +232,6 @@ fun DriveDialog(
                 }
             }
         }
-        Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) { PillButton("Stäng", onClick = onDismiss) }
     }
 }
 

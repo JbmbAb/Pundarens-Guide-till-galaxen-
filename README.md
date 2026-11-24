@@ -1,3 +1,5 @@
+> **TILLÄGG 2026-11-22:** [Samlad projektkontext](docs/SAMLAD-PROJEKTKONTEXT.md) samlar tilläggen från den 21–22 november 2026.
+
 # 🌀 Pundarens Guide till Galaxen
 
 > **GÄLLANDE, ÖVERORDNAD INRIKTNING:**  

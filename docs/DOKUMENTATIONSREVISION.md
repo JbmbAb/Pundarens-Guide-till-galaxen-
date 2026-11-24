@@ -1,3 +1,5 @@
+> **TILLÄGG 2026-11-22:** [Samlad projektkontext](SAMLAD-PROJEKTKONTEXT.md) samlar tilläggen från den 21–22 november 2026.
+
 # Dokumentationsrevision – 2026-11-21
 
 **Gällande källa:** [Gällande inriktning](GALLANDE-INRIKTNING.md)

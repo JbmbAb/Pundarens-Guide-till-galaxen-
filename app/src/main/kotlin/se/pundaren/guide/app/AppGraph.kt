@@ -28,6 +28,11 @@ import se.pundaren.guide.engine.DefaultIllogicalEngine
 import se.pundaren.guide.engine.LineBank
 import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.TailCandidate
+import se.pundaren.guide.engine.galax.Cue
+import se.pundaren.guide.engine.galax.DontPanic
+import se.pundaren.guide.engine.galax.PanicMemory
+import se.pundaren.guide.engine.galax.PanicReply
+import se.pundaren.guide.engine.galax.PromiseRegistry
 import se.pundaren.guide.safetygate.SafetyGate
 import se.pundaren.guide.truth.api.GuidancePhase
 import se.pundaren.guide.truth.device.OfflineNavigator
@@ -135,6 +140,62 @@ class AppGraph(context: Context) : AutoCloseable {
         if (candidate == null) log.line("VISDOM: inga rader kvar att välja bland") else conductor.onRequested(candidate, now)
     }
 
+    private var panicMemory = PanicMemory()
+    private var galaxRequests = 0
+
+    /**
+     * DON'T PANIC på startsidan: ett galaktiskt beslut om det användaren skrev, eller dagens beslut om
+     * rutan är tom. Texten loggas inte och lämnar inte enheten; bara beslutets slag och id skrivs i loggen.
+     */
+    fun dontPanic(input: String): PanicReply {
+        val reply = DontPanic.react(input, settings.value.value.absurdityPercent, seed + ++galaxRequests, panicMemory)
+        panicMemory = reply.memory
+        log.line("PANIK ${reply.kind} ${reply.decreeId ?: "-"} (${reply.source?.label ?: "allvar"})")
+        return reply
+    }
+
+    /** Löftesregistret: löftets text tas inte emot. Bara antalet sparas, på enheten. */
+    fun registerPromise(): PromiseRegistry.Receipt {
+        val receipt = PromiseRegistry.register(settings.value.value.promiseCount, seed + ++galaxRequests)
+        settings.update { it.copy(promiseCount = receipt.count) }
+        log.line("LÖFTE ${receipt.number}${if (receipt.bonus.isNotEmpty()) " med bonus" else ""}")
+        return receipt
+    }
+
+    /** Sant när Guidens röst får läsa upp en text från startsidan: rösten finns och ingen rutt är aktiv. */
+    fun canReadAloud(): Boolean =
+        voice.status.value is se.pundaren.guide.voice.VoiceStatus.Ready && !navigator.state.navigation.value.activeRoute
+
+    /** Läser upp ett beslut med Guidens röst. Aldrig under en aktiv rutt, där beskeden har företräde. */
+    fun readAloud(text: String) {
+        if (!canReadAloud()) return
+        voice.speakTail("galax-${++galaxRequests}", text, 120_000) {}
+    }
+
+    fun stopReading() {
+        voice.stopTail()
+        recorded.stop()
+    }
+
+    private val recorded = RecordedVoice(app, log::line)
+
+    /**
+     * Rollernas röstkällor, i den ordning de prövas: en inspelad replik går före talsyntesen. En
+     * talsyntes som körs på enheten (Piper) hör hemma mellan de två när den byggs in.
+     */
+    private val cast: List<CueVoice> = listOf(recorded, DeviceVoice(voice))
+
+    /**
+     * Läser upp en regisserad rad med rollens röst och väntar tills den är färdigläst. Svarar falskt om
+     * raden klipptes eller aldrig fick börja. Avbryts anropet tystnar rösten. Aldrig under en aktiv rutt,
+     * där beskeden har företräde.
+     */
+    suspend fun speakCue(cue: Cue): Boolean {
+        if (navigator.state.navigation.value.activeRoute) return false
+        val source = cast.firstOrNull { it.has(cue) } ?: return false
+        return source.speak(cue)
+    }
+
     private fun record(r: ConductorRecord) {
         when (r) {
             is ConductorRecord.Presented -> {
@@ -170,5 +231,5 @@ class AppGraph(context: Context) : AutoCloseable {
 }
 
 object BuildInfo {
-    const val VERSION = "0.6-etapp6"
+    const val VERSION = "0.7-galaxen"
 }

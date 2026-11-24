@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import se.pundaren.guide.app.ui.GuideScreen
+import se.pundaren.guide.app.ui.RootScreen
 import se.pundaren.guide.app.ui.GuideTheme
 
 /**
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             GuideTheme {
-                GuideScreen(graph, map, onRequestLocation = { askLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION) })
+                RootScreen(graph, map, onRequestLocation = { askLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION) })
             }
         }
     }

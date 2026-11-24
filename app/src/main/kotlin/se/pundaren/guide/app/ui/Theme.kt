@@ -8,23 +8,25 @@ import androidx.compose.ui.graphics.Color
 /**
  * Färgerna enligt F-02 (G0-beslutsbladet avsnitt 2): The Sentient Archive som grund.
  *
- * **Turkost är sant. Lila är Guiden.** [Truth] används bara i sanningsremsan och på nödkortet.
+ * **Turkost är sant. Lila är Guiden.** [Truth] används i sanningsremsan, på nödkortet och för startsidans
+ * verklighetsankare, som också är sant. Korall ([Warm]) är larm: TOTAL PANIK och bonusen.
+ * Kulörerna följer gällande inriktning, avsnitt 10.
  * Typsnitten Space Grotesk och Manrope följer inte med än (licensfilerna saknas i repot, PR1-20);
  * systemets typsnitt används tills vidare.
  */
 object GuideColors {
-    val Background = Color(0xFF0E0E0E)
-    val Surface = Color(0xFF191919)
-    val SurfaceHigh = Color(0xFF262626)
+    val Background = Color(0xFF0B0E14)
+    val Surface = Color(0xFF151923)
+    val SurfaceHigh = Color(0xFF212736)
     val OnSurface = Color(0xFFE8E8E8)
     val OnSurfaceVariant = Color(0xFFABABAB)
 
     /** Guiden: lila. */
-    val Guide = Color(0xFFC59AFF)
+    val Guide = Color(0xFFC799FF)
     val GuideAlt = Color(0xFFD896FE)
     val GuideDim = Color(0xFF9547F7)
     val OnGuide = Color(0xFF1B0B33)
-    val Warm = Color(0xFFFF8BA0)
+    val Warm = Color(0xFFFF9DAC)
     val Error = Color(0xFFFF6E84)
 
     /** Sanningen: turkos. Bara i sanningsremsan och på nödkortet. */
