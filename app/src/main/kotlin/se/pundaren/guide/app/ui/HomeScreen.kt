@@ -43,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -102,6 +103,8 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
         val wide = maxWidth >= 900.dp
+        // Galaxen läggs där sidan annars är tom: nere till vänster på bred skärm, bakom knappen på smal.
+        Cosmos(galaxyAt = if (wide) Offset(0.25f, 0.74f) else Offset(0.5f, 0.32f))
         val left: @Composable ColumnScope.() -> Unit = {
             Text("PUNDARENS GUIDE TILL GALAXEN", color = GuideColors.Guide, fontSize = 20.sp, fontWeight = FontWeight.Black, fontStyle = FontStyle.Italic)
             WisdomCard(number = sent, text = GalacticBank.proverbs[wisdom]) {
@@ -421,19 +424,18 @@ fun TabBar(selected: Tab, enabled: (Tab) -> Boolean, onSelect: (Tab) -> Unit, mo
         Tab.entries.forEach { tab ->
             val on = tab == selected
             val usable = enabled(tab)
-            Box(
+            val color = when {
+                on -> GuideColors.OnGuide
+                usable -> GuideColors.Guide
+                else -> GuideColors.OnSurfaceVariant.copy(alpha = 0.5f)
+            }
+            Row(
                 Modifier.widthIn(min = 96.dp).clip(CircleShape).background(if (on) GuideColors.Guide else Color.Transparent)
-                    .clickable(enabled = usable) { onSelect(tab) }.padding(horizontal = 22.dp, vertical = 12.dp),
-                contentAlignment = Alignment.Center,
+                    .clickable(enabled = usable) { onSelect(tab) }.padding(horizontal = 20.dp, vertical = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally), verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
-                    tab.title, fontSize = 16.sp, fontWeight = if (on) FontWeight.Black else FontWeight.SemiBold,
-                    color = when {
-                        on -> GuideColors.OnGuide
-                        usable -> GuideColors.Guide
-                        else -> GuideColors.OnSurfaceVariant.copy(alpha = 0.5f)
-                    },
-                )
+                TabIcon(tab, color)
+                Text(tab.title, fontSize = 16.sp, fontWeight = if (on) FontWeight.Black else FontWeight.SemiBold, color = color)
             }
         }
     }

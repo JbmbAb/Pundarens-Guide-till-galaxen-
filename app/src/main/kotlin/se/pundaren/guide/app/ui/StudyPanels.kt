@@ -3,6 +3,7 @@ package se.pundaren.guide.app.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -26,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -52,18 +54,22 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun BabelScreen(graph: AppGraph) {
     var pane by remember { mutableStateOf(0) }
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Column(Modifier.widthIn(max = 720.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("Babel-Stoner", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PillButton("Spelet", primary = pane == 0) { graph.stopReading(); pane = 0 }
-                PillButton("Frågebokföring", primary = pane == 1) { graph.stopReading(); pane = 1 }
-                PillButton("Bajsanalysatorn", primary = pane == 2) { pane = 2 }
-            }
-            when (pane) {
-                0 -> GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
-                1 -> LedgerPane()
-                else -> FecalPane(graph)
+    // Rymden hör till satiren. Frågebokföringen är analys och får stå mot ren botten.
+    Box(Modifier.fillMaxSize()) {
+        if (pane != 1) Cosmos(galaxyAt = Offset(0.5f, 0.68f))
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(Modifier.widthIn(max = 720.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text("Babel-Stoner", color = GuideColors.Guide, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PillButton("Spelet", primary = pane == 0) { graph.stopReading(); pane = 0 }
+                    PillButton("Frågebokföring", primary = pane == 1) { graph.stopReading(); pane = 1 }
+                    PillButton("Bajsanalysatorn", primary = pane == 2) { pane = 2 }
+                }
+                when (pane) {
+                    0 -> GamePane(graph.babelGame, seed = { System.nanoTime() }, log = graph.log::line)
+                    1 -> LedgerPane()
+                    else -> FecalPane(graph)
+                }
             }
         }
     }
