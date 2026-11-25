@@ -11,11 +11,11 @@ import se.pundaren.guide.archive.api.OriginClass
  * grepp i taget, och du vinner när du namnger greppet och får tillbaka din fråga. Poängen är antalet
  * repliker tills frågan är återställd.
  *
- * **Bara godkänt material.** Ett grepp är en godkänd regel (BS-01–BS-16). Det kan bara spelas om det
- * har minst en godkänd arkivrad knuten till sig, för byggaren skriver inga egna repliker. Raderna
- * kommer i dag ur reglernas `relatedQuoteIds`; godkända exempel märkta `rule:<regel-id>` används
- * också när sådana finns. Rader som återger en verklig person (Rikard) används aldrig.
- * [unplayable] visar vilka grepp som saknar rader och väntar på ägarens godkända exempel.
+ * **Två sorters repliker.** Ett grepp är en godkänd regel (BS-01–BS-16). Replikerna är i första hand
+ * godkända arkivrader: reglernas `relatedQuoteIds` och godkända exempel märkta `rule:<regel-id>`.
+ * De grepp som saknar arkivrader spelas med byggarens nyskrivna repliker ([WrittenGrips]), som visas
+ * som GENERERAD och aldrig blandas ihop med arkivet. Arkivrader som återger en verklig person används aldrig.
+ * [unplayable] visar grepp som saknar repliker helt.
  *
  * Deterministiskt: samma fråga, motståndare och frö ger samma spel. Greppen stannar här (02 B-6,
  * RR-13): klassen har inget beroende på navigatorn, motorn eller SafetyGate.
@@ -58,11 +58,11 @@ class BabelGame(archive: ArchiveReader) {
     val grips: Map<String, Grip> = rules.mapNotNull { rule ->
         val quoted = rule.tags.filter { it.startsWith("quote:") }.mapNotNull { usableLines[it.removePrefix("quote:")] }
         val tagged = usableLines.values.filter { "rule:${rule.id}" in it.tags }
-        val lines = (quoted + tagged).distinctBy { it.id }.sortedBy { it.id }
+        val lines = (quoted + tagged).distinctBy { it.id }.sortedBy { it.id }.ifEmpty { WrittenGrips.linesFor(rule.id) }
         if (lines.isEmpty()) null else rule.id to Grip(rule, lines)
     }.toMap()
 
-    /** Godkända grepp som inte går att spela än, eftersom ingen godkänd rad är knuten till dem. */
+    /** Godkända grepp som inte går att spela, eftersom de varken har arkivrader eller nyskrivna repliker. */
     val unplayable: List<ArchiveEntry> = rules.filter { it.id !in grips }
 
     fun gripsOf(opponent: Opponent): List<Grip> =
@@ -78,14 +78,29 @@ class BabelGame(archive: ArchiveReader) {
         val wrongGuesses: Int,
         /** Greppet som används i den replik som visas nu. Skärmen visar det först när spelet är vunnet. */
         val grip: Grip,
-        /** Den godkända arkivraden som visas. */
+        /** Repliken som visas: en godkänd arkivrad eller en av byggarens nyskrivna ([WrittenGrips]). */
         val line: ArchiveEntry,
+        /** Greppen Babel-Stoner har använt hittills, i ordning. Det sista är [grip]. */
+        val used: List<String>,
         /** Svarsalternativen: regler att välja bland, i fast ordning. Det rätta är alltid med. */
         val options: List<ArchiveEntry>,
         val won: Boolean,
     ) {
         /** Etiketten gör att ingen kan ta repliken för annat än satir (02 B-4). */
         val label: String get() = "Satir"
+
+        /**
+         * Galaktisk analys av vad som hände med frågan. Talen är räknade ur spelet och inget annat:
+         * de beskriver replikerna här, inte någon människa. Sista raden är satir och säger det själv.
+         */
+        fun analysis(): List<Pair<String, String>> = listOf(
+            "Frågan ställdes" to "1 gång",
+            "Repliker från Babel-Stoner" to "$replies",
+            "Repliker som besvarade frågan" to "0",
+            "Grepp i tur och ordning" to used.joinToString(", "),
+            "Felaktigt namngivna grepp" to "$wrongGuesses",
+            "Rikards inblandning (satir)" to if ("BS-09" in used) "Fastställd utan utredning" else "Inte utredd, och därmed inte utesluten",
+        )
     }
 
     /** Börjar ett spel. Null om motståndaren inte har något spelbart grepp, eller om frågan är tom. */
@@ -94,7 +109,7 @@ class BabelGame(archive: ArchiveReader) {
         if (text.isEmpty()) return null
         val available = gripsOf(opponent)
         if (available.isEmpty()) return null
-        return turn(text, opponent, seed, replies = 1, wrongGuesses = 0, available = available, previous = null)
+        return turn(text, opponent, seed, replies = 1, wrongGuesses = 0, available = available, used = emptyList())
     }
 
     /**
@@ -106,15 +121,15 @@ class BabelGame(archive: ArchiveReader) {
         if (ruleId == round.grip.rule.id) return round.copy(won = true)
         return turn(
             round.question, round.opponent, round.seed, round.replies + 1, round.wrongGuesses + 1,
-            gripsOf(round.opponent), previous = round.grip.rule.id,
+            gripsOf(round.opponent), used = round.used,
         )
     }
 
     private fun turn(
-        question: String, opponent: Opponent, seed: Long, replies: Int, wrongGuesses: Int, available: List<Grip>, previous: String?,
+        question: String, opponent: Opponent, seed: Long, replies: Int, wrongGuesses: Int, available: List<Grip>, used: List<String>,
     ): Round {
         // Samma grepp två gånger i rad vore inget nytt att gissa på, om det finns fler att välja bland.
-        val pool = available.filter { it.rule.id != previous }.ifEmpty { available }
+        val pool = available.filter { it.rule.id != used.lastOrNull() }.ifEmpty { available }
         val h = mix(seed, replies.toLong(), question)
         val grip = pool[Math.floorMod(h, pool.size.toLong()).toInt()]
         val line = grip.lines[Math.floorMod(h ushr 17, grip.lines.size.toLong()).toInt()]
@@ -126,7 +141,7 @@ class BabelGame(archive: ArchiveReader) {
             k = k * 6_364_136_223_846_793_005L + 1_442_695_040_888_963_407L
             wrong += others[Math.floorMod(k ushr 20, others.size.toLong()).toInt()]
         }
-        return Round(question, opponent, seed, replies, wrongGuesses, grip, line, (wrong + grip.rule).sortedBy { it.id }, won = false)
+        return Round(question, opponent, seed, replies, wrongGuesses, grip, line, used + grip.rule.id, (wrong + grip.rule).sortedBy { it.id }, won = false)
     }
 
     private fun mix(seed: Long, turn: Long, text: String): Long {

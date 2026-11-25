@@ -85,12 +85,8 @@ private fun GamePane(game: BabelGame, seed: () -> Long, log: (String) -> Unit) {
 
     Text(
         "Satir. Ställ en fråga, så slingrar sig Babel-Stoner med ett grepp i taget. Namnge greppet och du får tillbaka din fråga. " +
-            "Varje replik är en godkänd rad ur arkivet.",
+            "Varje replik visar sin källa: en rad ur arkivet eller en nyskriven, märkt GENERERAD.",
         color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
-    )
-    Text(
-        "${game.grips.size} av ${game.grips.size + game.unplayable.size} grepp går att spela. De andra saknar godkända rader i arkivet.",
-        color = GuideColors.OnSurfaceVariant, fontSize = 13.sp,
     )
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         BabelGame.Opponent.entries.forEach { o ->
@@ -131,6 +127,13 @@ private fun GamePane(game: BabelGame, seed: () -> Long, log: (String) -> Unit) {
             Text("Rätt: ${r.grip.rule.id}, ${r.grip.rule.text}.", color = GuideColors.OnSurface, fontSize = 16.sp, fontWeight = FontWeight.Bold)
             Text("Din fråga är återställd: «${r.question}»", color = GuideColors.OnSurface, fontSize = 16.sp)
             Text("Poäng: ${r.replies} ${if (r.replies == 1) "replik" else "repliker"}. Lägre är bättre.", color = GuideColors.OnSurfaceVariant, fontSize = 14.sp)
+            Column(
+                Modifier.fillMaxWidth().clip(RoundedCornerShape(22.dp)).background(GuideColors.SurfaceHigh).padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Text("GALAKTISK ANALYS AV FRÅGANS ÖDE", color = GuideColors.Guide, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                r.analysis().forEach { (label, value) -> Text("$label: $value", color = GuideColors.GuideAlt, fontSize = 15.sp) }
+            }
         }
     }
 }
