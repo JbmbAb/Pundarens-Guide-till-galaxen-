@@ -35,6 +35,16 @@ class EmergencyCardTest {
         assertTrue(lines.none { it.contains("null") })
     }
 
+    @Test fun `den andra i konvojen står sist på kortet, med ålder och riktning`() {
+        val fresh = EmergencyCard.build(orsa, 4.4, 2.2, PositionQuality.GOOD, home = null, batteryPercent = 63, peer = mora, peerAgeSeconds = 40)
+        assertEquals("Den andra i konvojen: N 61° 00,521′  E 14° 32,655′, för 40 s sedan. 13 km åt söder härifrån, fågelvägen.", fresh.lines().last())
+        val old = EmergencyCard.build(null, null, null, PositionQuality.LOST, home = null, batteryPercent = 63, peer = mora, peerAgeSeconds = 700)
+        assertEquals("Den andra i konvojen: N 61° 00,521′  E 14° 32,655′, för 11 min sedan. Positionen är gammal och kan vara fel.", old.lines().last())
+        // Utan delning, eller innan den andras första position har kommit, står ingenting om konvojen.
+        val none = EmergencyCard.build(orsa, 4.4, 2.2, PositionQuality.GOOD, home = null, batteryPercent = 63)
+        assertTrue(none.lines().none { it.contains("konvoj") })
+    }
+
     @Test fun `gammal eller osäker position märks tydligt`() {
         val old = EmergencyCard.build(orsa, 80.0, 190.0, PositionQuality.LOST, home = null, batteryPercent = 50)
         assertTrue(old.lines().contains("Noggrannhet: ±80 m, 3 min gammal. Positionen är gammal och kan vara fel."))

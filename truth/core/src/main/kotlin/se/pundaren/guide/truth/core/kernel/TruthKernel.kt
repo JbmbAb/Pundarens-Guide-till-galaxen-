@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import se.pundaren.guide.truth.api.Arrived
 import se.pundaren.guide.truth.api.AudioOutput
 import se.pundaren.guide.truth.api.BatteryLow
+import se.pundaren.guide.truth.api.ConvoyContactLost
+import se.pundaren.guide.truth.api.ConvoyGap
 import se.pundaren.guide.truth.api.DayPhase
 import se.pundaren.guide.truth.api.EmergencyActivated
 import se.pundaren.guide.truth.api.EmergencyCleared
@@ -128,6 +130,11 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
     private var audioOutput = AudioOutput.UNKNOWN
     private var dayPhase: DayPhase? = null
     private var anchorPoint: GeoPoint? = config.fallbackPosition
+
+    // --- Konvoj (07) ---
+    private var convoyActive = false
+    private var convoyContactLost = false
+    private var convoyGapReported = false
 
     private var sequence = 0L
 
@@ -366,6 +373,45 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
         publish(stamp)
     }
 
+    /**
+     * Konvojens läge (07): om en delning pågår och var den andra senast var. [peer] är null tills den
+     * andras första position har kommit, och när den andra har slutat dela.
+     *
+     * Kontakten räknas som bruten när den andras position är för gammal för att ritas. Då går
+     * SafetyGate till prioriterat informationsläge (06, R-09) och Guiden tiger tills kontakten är tillbaka.
+     */
+    @TruthInput @Synchronized
+    fun convoy(stamp: Stamp, sharing: Boolean, peer: ConvoyPeerFix?) {
+        if (!sharing) {
+            if (!convoyActive) return
+            convoyActive = false
+            convoyContactLost = false
+            convoyGapReported = false
+            publish(stamp)
+            return
+        }
+        convoyActive = true
+        val lost = peer != null && peer.ageSeconds > config.convoyContactLostAfterSeconds
+        if (lost && !convoyContactLost) {
+            emit(ConvoyContactLost(id(stamp), stamp.monotonicMillis, stamp.wallClockUtc, expeditionId, PEER_ALIAS, peer!!.ageSeconds))
+        }
+        convoyContactLost = lost
+        val own = lastFix?.point
+        if (peer == null) {
+            convoyGapReported = false
+        } else if (!lost && own != null && quality != PositionQuality.LOST) {
+            val distance = Geo.distanceMeters(own, peer.point).roundToInt()
+            val limit = if (mode == TravelMode.FOOT) config.convoyGapMetersOnFoot else config.convoyGapMetersInVehicle
+            if (distance > limit && !convoyGapReported) {
+                convoyGapReported = true
+                emit(ConvoyGap(id(stamp), stamp.monotonicMillis, stamp.wallClockUtc, expeditionId, PEER_ALIAS, distance, peer.ageSeconds))
+            } else if (distance < limit * 4 / 5) {
+                convoyGapReported = false // luckan är sluten; nästa gång den öppnas rapporteras den igen
+            }
+        }
+        publish(stamp)
+    }
+
     @TruthInput @Synchronized
     fun audioOutput(output: AudioOutput) {
         audioOutput = output
@@ -491,8 +537,8 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
             emergencyActive = emergencyActive,
             emergencyClearedAtMonotonicMillis = emergencyClearedAtMono,
             batteryPercent = batteryPercent,
-            convoyActive = false,
-            convoyContactLost = false,
+            convoyActive = convoyActive,
+            convoyContactLost = convoyContactLost,
             audioOutput = audioOutput,
         )
         val phase = when {
@@ -533,4 +579,9 @@ class TruthKernel(private val config: KernelConfig = KernelConfig()) :
     }
 
     private fun id(stamp: Stamp) = "EV-%013d-%06d".format(Locale.ROOT, stamp.wallClockUtc.toEpochMilli(), sequence++)
+
+    private companion object {
+        /** Convoy för två: den andra har inget namn i appen. */
+        const val PEER_ALIAS = "den andra"
+    }
 }

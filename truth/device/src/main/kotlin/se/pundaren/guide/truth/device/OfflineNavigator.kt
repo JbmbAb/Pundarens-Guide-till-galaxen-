@@ -35,6 +35,7 @@ import se.pundaren.guide.truth.api.TruthDisplayReader
 import se.pundaren.guide.truth.api.TruthEventStream
 import se.pundaren.guide.truth.api.TruthStateReader
 import se.pundaren.guide.truth.core.TruthInput
+import se.pundaren.guide.truth.core.kernel.ConvoyPeerFix
 import se.pundaren.guide.truth.core.kernel.KernelConfig
 import se.pundaren.guide.truth.core.kernel.NavPhase
 import se.pundaren.guide.truth.core.kernel.NavTick
@@ -420,6 +421,13 @@ class OfflineNavigator(
 
     /** Nödläget (Don't Panic, långt tryck). Undertrycker all satir via SafetyGate. */
     fun setEmergency(active: Boolean) = kernel.emergency(now(), active, EmergencySource.USER)
+
+    /**
+     * Konvojens läge (07): om en delning pågår, och den andras senaste position med ålder. Bara
+     * verkliga värden ur Convoy-protokollet. Bryts kontakten tiger Guiden tills den är tillbaka.
+     */
+    fun setConvoy(sharing: Boolean, peer: GeoPoint?, peerAgeSeconds: Int?) =
+        kernel.convoy(now(), sharing, if (peer != null && peerAgeSeconds != null) ConvoyPeerFix(peer, peerAgeSeconds) else null)
 
     /** Restider från [from] till flera mål, sekunder per mål eller null där ingen väg finns. */
     suspend fun travelSeconds(from: GeoPoint, targets: List<GeoPoint>, mode: TravelMode): List<Double?> =

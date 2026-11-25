@@ -1,10 +1,12 @@
 package se.pundaren.guide.app.ui
 
 import android.Manifest
+import android.app.KeyguardManager
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -84,6 +86,17 @@ fun ConvoyDialog(graph: AppGraph, own: GeoPoint?, onShowPeer: (GeoPoint) -> Unit
     var pasted by remember { mutableStateOf("") }
     var hours by remember { mutableLongStateOf(6L) }
     val askCamera = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted -> scanning = granted }
+    // Notisen under delningen kräver användarens ja på nyare Android. Delningen börjar oavsett svaret.
+    var afterNotice by remember { mutableStateOf<(() -> Unit)?>(null) }
+    val askNotice = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { afterNotice?.invoke(); afterNotice = null }
+    fun withNotice(action: () -> Unit) {
+        if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            afterNotice = action
+            askNotice.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else action()
+    }
+    // Skärmlås krävs (07, T-08): utan det kan den som hittar telefonen se var den andra är.
+    val locked = remember(view.phase) { context.getSystemService(KeyguardManager::class.java)?.isDeviceSecure == true }
 
     Panel(onDismiss) {
         Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -101,7 +114,7 @@ fun ConvoyDialog(graph: AppGraph, own: GeoPoint?, onShowPeer: (GeoPoint) -> Unit
                     Text("Rikta kameran mot den andras kod.", color = GuideColors.OnSurface, fontSize = 16.sp)
                     QrScanner(onInvite = { text ->
                         scanning = false
-                        graph.convoy.join(text)
+                        withNotice { graph.convoy.join(text) }
                     })
                     PillButton("Avbryt") { scanning = false }
                 } else {
@@ -121,8 +134,12 @@ fun ConvoyDialog(graph: AppGraph, own: GeoPoint?, onShowPeer: (GeoPoint) -> Unit
                         "När du startar delar du din position med den som skannar koden, till kl. ${clock(Instant.now().plusSeconds(hours * 3600))} eller tills du trycker Sluta dela.",
                         color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
                     )
-                    PillButton("Starta och visa kod", primary = true, enabled = settings.convoyRelayUrl.startsWith("https://")) {
-                        graph.convoy.start(settings.convoyRelayUrl, hours)
+                    if (!locked) Text(
+                        "Convoy kräver skärmlås. Utan det kan den som hittar telefonen se var den andra är. Sätt ett skärmlås i telefonens inställningar och öppna rutan igen.",
+                        color = GuideColors.Warm, fontSize = 16.sp,
+                    )
+                    PillButton("Starta och visa kod", primary = true, enabled = locked && settings.convoyRelayUrl.startsWith("https://")) {
+                        withNotice { graph.convoy.start(settings.convoyRelayUrl, hours) }
                     }
 
                     Text("Gå med i någon annans tur", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
@@ -130,7 +147,7 @@ fun ConvoyDialog(graph: AppGraph, own: GeoPoint?, onShowPeer: (GeoPoint) -> Unit
                         "När du går med delar du din position med den som bjöd in, till turens sluttid eller tills du trycker Sluta dela.",
                         color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
                     )
-                    PillButton("Skanna kod", primary = true) {
+                    PillButton("Skanna kod", primary = true, enabled = locked) {
                         if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) scanning = true
                         else askCamera.launch(Manifest.permission.CAMERA)
                     }
@@ -138,9 +155,10 @@ fun ConvoyDialog(graph: AppGraph, own: GeoPoint?, onShowPeer: (GeoPoint) -> Unit
                         value = pasted, onValueChange = { pasted = it.trim() },
                         label = { Text("eller klistra in inbjudan") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
                     )
-                    PillButton("Gå med", enabled = pasted.startsWith(ConvoyInvite.PREFIX)) {
-                        graph.convoy.join(pasted)
+                    PillButton("Gå med", enabled = locked && pasted.startsWith(ConvoyInvite.PREFIX)) {
+                        val invite = pasted
                         pasted = ""
+                        withNotice { graph.convoy.join(invite) }
                     }
                 }
             }
@@ -155,6 +173,7 @@ private fun Sharing(view: ConvoyView, own: GeoPoint?, onShowPeer: (GeoPoint) -> 
         "Du delar din position" + (view.expiresAtUtc?.let { " till kl. ${clock(it)}." } ?: "."),
         color = GuideColors.OnSurface, fontSize = 18.sp,
     )
+    Text("En notis står kvar så länge delningen pågår. Delningen fortsätter när appen ligger i bakgrunden.", color = GuideColors.OnSurfaceVariant, fontSize = 14.sp)
     if (view.notSending) {
         Text("Din position sänds inte just nu: det finns ingen verklig position med känd noggrannhet.", color = GuideColors.Warm, fontSize = 16.sp)
     }

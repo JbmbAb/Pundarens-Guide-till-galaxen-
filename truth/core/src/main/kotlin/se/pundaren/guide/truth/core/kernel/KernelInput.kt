@@ -60,6 +60,9 @@ data class PositionFix(
     val altitudeMeters: Double? = null,
 )
 
+/** Den andra deltagarens senaste position i en pågående delning, med ärlig ålder (07, 3.5). */
+data class ConvoyPeerFix(val point: GeoPoint, val ageSeconds: Int)
+
 /**
  * Tröskelvärden i kärnan. Kandidatvärden, inte frysta (G0-grindbeslutet). De prövas i G5.
  */
@@ -89,6 +92,11 @@ data class KernelConfig(
     val vehicleSpeedMps: Double = 8.0,
     /** Plats för solens läge innan första positionen finns, t.ex. offlinepaketets mittpunkt. */
     val fallbackPosition: GeoPoint? = null,
+    /** Äldre än så här och kontakten med den andra i konvojen räknas som bruten (07, 3.5: då ritas ingen prick). */
+    val convoyContactLostAfterSeconds: Int = 900,
+    /** ConvoyGap skickas när avståndet till den andra passerar det här värdet uppåt, till fots respektive i fordon. */
+    val convoyGapMetersOnFoot: Int = 300,
+    val convoyGapMetersInVehicle: Int = 2_000,
 ) {
     companion object {
         const val STATUS = "KANDIDAT_OFRYST"

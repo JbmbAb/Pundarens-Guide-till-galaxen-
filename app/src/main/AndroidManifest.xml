@@ -12,6 +12,17 @@
     <!-- Kameran används bara medan skanningsrutan för Convoy-inbjudan är öppen. -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <!-- Convoy-delningen (07, T-09): en notis som står kvar så länge positionen delas, och en
+         förgrundstjänst som håller delningen igång när appen ligger i bakgrunden eller skärmen är
+         släckt. Vaklåset släpps vid delningens sluttid. Inget av detta används utan en pågående delning. -->
+    <!-- Positionsbehörigheterna kommer redan från :truth:device. De står här också eftersom
+         tjänstens typ kräver dem i samma manifest; appen får ingen ny behörighet av de två raderna. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
 
     <application
@@ -31,5 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".ConvoyShareService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 </manifest>

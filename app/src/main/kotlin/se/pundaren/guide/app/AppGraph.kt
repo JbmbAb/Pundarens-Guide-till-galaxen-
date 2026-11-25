@@ -128,6 +128,19 @@ class AppGraph(context: Context) : AutoCloseable {
         scope.launch {
             navigator.state.safety.map { it.emergencyActive }.distinctUntilChanged().collect { if (it) convoy.sendEmergency() }
         }
+        // Konvojens läge går in i sanningskärnan: bryts kontakten tiger Guiden (06, R-09).
+        scope.launch {
+            convoy.view.collect { v ->
+                navigator.setConvoy(v.phase == ConvoyPhase.SHARING, v.peer?.point, v.peer?.presentation?.ageSeconds?.toInt())
+            }
+        }
+        // Notisen står kvar så länge delningen pågår, och håller delningen igång när appen ligger i bakgrunden (07, T-09).
+        scope.launch {
+            convoy.view.map { if (it.phase == ConvoyPhase.SHARING) it.expiresAtUtc else null }.distinctUntilChanged().collect { until ->
+                if (until != null) ConvoyShareService.start(app, until, navigator.hasLocationPermission(), log::line) else ConvoyShareService.stop(app)
+            }
+        }
+        ConvoyShareService.onStopRequested = { convoy.requestStop() }
         scope.launch { navigator.prepare() }
     }
 
@@ -224,6 +237,8 @@ class AppGraph(context: Context) : AutoCloseable {
     }
 
     override fun close() {
+        ConvoyShareService.onStopRequested = null
+        ConvoyShareService.stop(app)
         scope.cancel()
         navigator.close()
         voice.close()

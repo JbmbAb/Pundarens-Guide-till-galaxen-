@@ -30,6 +30,11 @@ data class EmergencyCard(
     val homeDistanceMeters: Int?,
     val homeIsSet: Boolean,
     val batteryPercent: Int,
+    /** Den andra i konvojen: senaste position, dess ålder och var den ligger härifrån. Null utan delning eller position. */
+    val peerDegreesMinutes: String? = null,
+    val peerAgeSeconds: Int? = null,
+    val peerCompass: String? = null,
+    val peerDistanceMeters: Int? = null,
 ) {
     /** Radernas text i den ordning de visas. Samma text läses upp om användaren ber om det. */
     fun lines(): List<String> = buildList {
@@ -50,6 +55,14 @@ data class EmergencyCard(
             },
         )
         add("Batteri: $batteryPercent %.")
+        if (peerDegreesMinutes != null && peerAgeSeconds != null) add(peerLine(peerDegreesMinutes, peerAgeSeconds))
+    }
+
+    private fun peerLine(where: String, ageSeconds: Int): String {
+        val age = if (ageSeconds < 60) "$ageSeconds s" else "${ageSeconds / 60} min"
+        val from = if (peerDistanceMeters != null) " ${Geo.formatDistance(peerDistanceMeters.toDouble())} åt $peerCompass härifrån, fågelvägen." else ""
+        val warning = if (ageSeconds > PEER_OLD_SECONDS) " Positionen är gammal och kan vara fel." else ""
+        return "Den andra i konvojen: $where, för $age sedan.$from$warning"
     }
 
     private fun positionAgeLine(): String {
@@ -66,6 +79,9 @@ data class EmergencyCard(
     companion object {
         const val NOT_112 = "Ring 112 vid nödläge. Det här kortet ersätter inte 112."
 
+        /** Äldre än så här och den andras position sägs vara gammal (07, 3.5: två minuter). */
+        const val PEER_OLD_SECONDS = 120
+
         fun build(
             position: GeoPoint?,
             accuracyMeters: Double?,
@@ -73,6 +89,8 @@ data class EmergencyCard(
             quality: PositionQuality,
             home: GeoPoint?,
             batteryPercent: Int,
+            peer: GeoPoint? = null,
+            peerAgeSeconds: Int? = null,
         ): EmergencyCard = EmergencyCard(
             hasPosition = position != null,
             degreesMinutes = position?.let(Geo::formatDegreesMinutes),
@@ -86,6 +104,10 @@ data class EmergencyCard(
             homeDistanceMeters = if (position != null && home != null) Geo.distanceMeters(position, home).roundToInt() else null,
             homeIsSet = home != null,
             batteryPercent = batteryPercent,
+            peerDegreesMinutes = peer?.takeIf { peerAgeSeconds != null }?.let(Geo::formatDegreesMinutes),
+            peerAgeSeconds = peerAgeSeconds.takeIf { peer != null },
+            peerCompass = if (position != null && peer != null) Geo.compassSv(Geo.bearingDegrees(position, peer)) else null,
+            peerDistanceMeters = if (position != null && peer != null) Geo.distanceMeters(position, peer).roundToInt() else null,
         )
     }
 }

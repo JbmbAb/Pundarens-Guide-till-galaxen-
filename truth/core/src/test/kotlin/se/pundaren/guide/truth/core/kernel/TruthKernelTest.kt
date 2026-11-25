@@ -16,6 +16,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import se.pundaren.guide.truth.api.Arrived
 import se.pundaren.guide.truth.api.BatteryLow
+import se.pundaren.guide.truth.api.ConvoyContactLost
+import se.pundaren.guide.truth.api.ConvoyGap
 import se.pundaren.guide.truth.api.DayPhase
 import se.pundaren.guide.truth.api.EmergencyActivated
 import se.pundaren.guide.truth.api.EmergencyCleared
@@ -293,6 +295,46 @@ class TruthKernelTest {
         kernel.battery(stamp(7), 18, charging = false) // passerar 20 igen efter laddning
         assertEquals(4, events<BatteryLow>().size)
         assertEquals(18, kernel.safety.value.batteryPercent)
+    }
+
+    @Test fun `bruten konvojkontakt rapporteras en gång och släpps när kontakten är tillbaka`() {
+        kernel.convoy(stamp(0), sharing = true, peer = null) // väntar på den andras första position
+        assertTrue(kernel.safety.value.convoyActive); assertFalse(kernel.safety.value.convoyContactLost)
+        kernel.convoy(stamp(1_000), true, ConvoyPeerFix(gronklitt, 12))
+        kernel.convoy(stamp(2_000), true, ConvoyPeerFix(gronklitt, 900)) // precis på gränsen: ännu inte bruten
+        assertFalse(kernel.safety.value.convoyContactLost)
+        kernel.convoy(stamp(3_000), true, ConvoyPeerFix(gronklitt, 901))
+        kernel.convoy(stamp(4_000), true, ConvoyPeerFix(gronklitt, 902))
+        assertTrue(kernel.safety.value.convoyContactLost)
+        val lost = events<ConvoyContactLost>().single()
+        assertEquals("den andra", lost.peerAlias); assertEquals(901, lost.lastSeenAgeSeconds)
+        kernel.convoy(stamp(5_000), true, ConvoyPeerFix(gronklitt, 3))
+        assertFalse(kernel.safety.value.convoyContactLost)
+        kernel.convoy(stamp(6_000), true, ConvoyPeerFix(gronklitt, 1_000))
+        assertEquals("bryts kontakten igen rapporteras den igen", 2, events<ConvoyContactLost>().size)
+        kernel.convoy(stamp(7_000), sharing = false, peer = null)
+        assertFalse(kernel.safety.value.convoyActive); assertFalse(kernel.safety.value.convoyContactLost)
+    }
+
+    @Test fun `luckan i konvojen rapporteras när den öppnas, inte varje sekund`() {
+        kernel.travelMode(TravelMode.FOOT)
+        kernel.positionFix(stamp(0), PositionFix(orsa, 4.0))
+        val near = GeoPoint(orsa.lat + 0.001, orsa.lon)  // drygt 100 m
+        val far = GeoPoint(orsa.lat + 0.005, orsa.lon)   // drygt 550 m
+        kernel.convoy(stamp(1_000), true, ConvoyPeerFix(near, 4))
+        assertTrue(events<ConvoyGap>().isEmpty())
+        kernel.convoy(stamp(2_000), true, ConvoyPeerFix(far, 4))
+        kernel.convoy(stamp(3_000), true, ConvoyPeerFix(far, 5))
+        val gap = events<ConvoyGap>().single()
+        assertTrue(gap.distanceMeters in 500..600); assertEquals(4, gap.peerFixAgeSeconds)
+        kernel.convoy(stamp(4_000), true, ConvoyPeerFix(near, 3))
+        kernel.convoy(stamp(5_000), true, ConvoyPeerFix(far, 3))
+        assertEquals(2, events<ConvoyGap>().size)
+        // I fordon är samma avstånd ingen lucka.
+        kernel.convoy(stamp(6_000), sharing = false, peer = null)
+        kernel.travelMode(TravelMode.PASSENGER)
+        kernel.convoy(stamp(7_000), true, ConvoyPeerFix(far, 3))
+        assertEquals(2, events<ConvoyGap>().size)
     }
 
     @Test fun `nödläge slås på och av och tidpunkten för avslaget sparas`() {

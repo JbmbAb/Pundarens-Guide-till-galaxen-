@@ -122,9 +122,10 @@ internal fun kindLabel(p: Place): String = when (p.kind) {
 @Composable
 fun EmergencyCardView(
     position: GeoPoint?, snapshot: PositionSnapshot, home: GeoPoint?, batteryPercent: Int,
+    peer: GeoPoint?, peerAgeSeconds: Int?,
     onReadAloud: (List<String>) -> Unit, onClose: () -> Unit, modifier: Modifier = Modifier,
 ) {
-    val card = EmergencyCard.build(position, snapshot.accuracyMeters, snapshot.fixAgeSeconds, snapshot.quality, home, batteryPercent)
+    val card = EmergencyCard.build(position, snapshot.accuracyMeters, snapshot.fixAgeSeconds, snapshot.quality, home, batteryPercent, peer, peerAgeSeconds)
     val lines = card.lines()
     Column(
         modifier.background(GuideColors.Background, RectangleShape).verticalScroll(rememberScrollState()).padding(28.dp),
@@ -134,7 +135,7 @@ fun EmergencyCardView(
         Text(lines.first(), color = GuideColors.Truth, fontSize = 30.sp, fontWeight = FontWeight.Bold, lineHeight = 36.sp)
         lines.drop(1).forEach { Text(it, color = GuideColors.Truth, fontSize = 26.sp, lineHeight = 32.sp) }
         Text(
-            "Läs upp koordinaterna för larmoperatören. Appen kan inte ringa och har ingen nätanslutning.",
+            "Läs upp koordinaterna för larmoperatören. Appen kan inte ringa.",
             color = GuideColors.Truth, fontSize = 17.sp,
         )
         // Nödkortet bär bara sanningsfärgen: inga lila knappar här (F-02: lila är Guiden).

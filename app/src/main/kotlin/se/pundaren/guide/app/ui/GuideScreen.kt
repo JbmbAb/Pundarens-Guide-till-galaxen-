@@ -301,10 +301,11 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         PillButton(
                             when {
                                 convoy.peerEmergencyAtUtc != null -> "Convoy: NÖD"
+                                safety.convoyContactLost -> "Convoy: ingen kontakt"
                                 convoy.phase == ConvoyPhase.SHARING -> "Convoy: delar"
                                 else -> "Convoy"
                             },
-                            primary = convoy.peerEmergencyAtUtc != null,
+                            primary = convoy.peerEmergencyAtUtc != null || safety.convoyContactLost,
                         ) { sheet = Sheet.CONVOY }
                         // Encyklopedin nås bara när ingen tur pågår. Babel-Stoner och reglagen är egna flikar.
                         if (!busy) PillButton("Encyklopedi") { sheet = Sheet.ENCYCLOPEDIA }
@@ -313,6 +314,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
             } else {
                 EmergencyCardView(
                     position = mapData.position, snapshot = position, home = settings.home, batteryPercent = safety.batteryPercent,
+                    peer = convoy.peer?.point, peerAgeSeconds = convoy.peer?.presentation?.ageSeconds?.toInt(),
                     onReadAloud = { lines -> graph.voice.speakInstruction(lines.joinToString(" ")) },
                     onClose = { graph.voice.stopInstruction(); navigator.setEmergency(false) },
                     modifier = Modifier.fillMaxSize(),
