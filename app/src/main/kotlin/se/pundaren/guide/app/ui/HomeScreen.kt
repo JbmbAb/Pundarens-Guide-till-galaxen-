@@ -34,10 +34,12 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -54,7 +56,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import se.pundaren.guide.app.AppGraph
+import se.pundaren.guide.app.Secret
 import se.pundaren.guide.app.Settings
 import se.pundaren.guide.engine.galax.DontPanic
 import se.pundaren.guide.engine.galax.GalacticBank
@@ -72,6 +76,7 @@ import kotlin.math.sin
 /*
  * Startsidan (gällande inriktning, avsnitt 6): DON'T PANIC i mitten, och runt den visdomssändningen,
  * absurditetsgraden och Löftesregistret. Allt här fungerar utan karta, utan nät och hemma i soffan.
+ * Har ägaren slagit på Claude under Reglage får Claude välja beslutet, och då skickas texten dit.
  *
  * Lila är Guiden. Turkost är sant: verklighetsankaret och upplysningen om vad som sparas.
  * Korall är larm: TOTAL PANIK, bonusen och aporna. Sidan rör aldrig rutt, position eller besked.
@@ -90,9 +95,23 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
     var monkeys by remember { mutableStateOf<MonkeyScene?>(null) }
     var voices by rememberSaveable { mutableStateOf(true) }
 
+    val scope = rememberCoroutineScope()
+    var asking by remember { mutableStateOf(false) }
+    val stored by graph.secrets.stored.collectAsState()
+    val claudeOn = settings.claudeChooses && Secret.CLAUDE in stored
+
     val press = {
         graph.stopReading()
-        reply = graph.dontPanic(input)
+        if (!asking) {
+            if (graph.wouldAskClaude(input)) {
+                asking = true
+                scope.launch {
+                    try { reply = graph.dontPanicChosen(input) } finally { asking = false }
+                }
+            } else {
+                reply = graph.dontPanic(input)
+            }
+        }
     }
     val release = {
         graph.stopReading()
@@ -118,8 +137,14 @@ fun HomeScreen(graph: AppGraph, settings: Settings, routeActive: Boolean, onEmer
             OutlinedTextField(
                 value = input, onValueChange = { input = it }, modifier = Modifier.fillMaxWidth(), maxLines = 4,
                 label = { Text("Vad har hänt? (frivilligt)") },
-                supportingText = { Text("Skriv något och tryck på knappen. Tom ruta ger dagens galaktiska beslut. Texten stannar på enheten och sparas inte.") },
+                supportingText = {
+                    Text(
+                        if (claudeOn) "Skriv något och tryck på knappen. Tom ruta ger dagens galaktiska beslut. Texten skickas till Claude (Anthropic), som väljer beslutet. Allvar skickas aldrig, och ingenting sparas här."
+                        else "Skriv något och tryck på knappen. Tom ruta ger dagens galaktiska beslut. Texten stannar på enheten och sparas inte.",
+                    )
+                },
             )
+            if (asking) Text("Guiden rådfrågar Claude …", color = GuideColors.Truth, fontSize = 14.sp)
         }
         val right: @Composable ColumnScope.() -> Unit = {
             monkeys?.let { scene ->

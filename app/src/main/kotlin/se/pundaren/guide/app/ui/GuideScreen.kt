@@ -78,7 +78,7 @@ private data class Proposal(
 )
 
 /** Panelerna som kan ligga över kartan, en i taget. */
-private enum class Sheet { DESTINATION, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, ENCYCLOPEDIA, CONVOY }
+private enum class Sheet { DESTINATION, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, ENCYCLOPEDIA, CONVOY, TRANSIT }
 
 /**
  * Huvudskärmen. Uppifrån och ned: sanningsremsan (sant, turkost), kartan, och ovanpå kartan
@@ -309,6 +309,8 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         ) { sheet = Sheet.CONVOY }
                         // Encyklopedin nås bara när ingen tur pågår. Babel-Stoner och reglagen är egna flikar.
                         if (!busy) PillButton("Encyklopedi") { sheet = Sheet.ENCYCLOPEDIA }
+                        // Kollektivtrafiken hämtas från Trafiklab över nätet, bara när den här knappen används.
+                        PillButton("Kollektivtrafik") { sheet = Sheet.TRANSIT }
                     }
                 }
             } else {
@@ -365,6 +367,10 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
         Sheet.CONVOY -> ConvoyDialog(graph, own = mapData.position, onShowPeer = { map.showPoint(it) }, onDismiss = { sheet = null })
         Sheet.ENCYCLOPEDIA -> EncyclopediaDialog(
             graph = graph, position = mapData.position.takeIf { !simulating && position.quality != PositionQuality.LOST }, places = places,
+            onDismiss = { sheet = null },
+        )
+        Sheet.TRANSIT -> TransitDialog(
+            graph = graph, position = mapData.position.takeIf { !simulating && position.quality != PositionQuality.LOST },
             onDismiss = { sheet = null },
         )
         null -> {}

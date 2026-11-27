@@ -37,6 +37,8 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     ":convoy:http" to setOf(":convoy:api"),
     // Encyklopedin: egna fältanteckningar (med plats) och arkivets godkända lexikon.
     ":encyclopedia" to setOf(":truth:api", ":archive:api"),
+    // Frivilliga nättjänster (Trafiklab, Claude): vanliga HTTPS-anrop ur JDK:n. Känner ingen annan modul.
+    ":online" to emptySet(),
     // Sanningskärnans Android-adaptrar: valhalla-mobile, Ferrostar, position, batteri.
     ":truth:device" to setOf(":truth:api", ":truth:core"),
     // Rösten: en talmotor, två kanaler. Ser bara sanningens port för besked.
@@ -44,7 +46,7 @@ val allowedProjectEdges: Map<String, Set<String>> = mapOf(
     // Kompositionsroten ser allt (03, kvarstående risk R-07).
     ":app" to setOf(
         ":truth:api", ":truth:core", ":truth:device", ":engine:api", ":engine", ":archive:api", ":archive:core",
-        ":safetygate", ":conductor", ":voice", ":babel", ":encyclopedia", ":convoy:api", ":convoy:http",
+        ":safetygate", ":conductor", ":voice", ":babel", ":encyclopedia", ":convoy:api", ":convoy:http", ":online",
     ),
     // Testmodulen får se allt rent, men bara i testkonfigurationer.
     ":verification:architecture" to setOf(

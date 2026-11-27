@@ -32,6 +32,7 @@ include(
     ":convoy:api",
     ":convoy:http",
     ":encyclopedia",
+    ":online",
     ":verification:architecture",
 )
 

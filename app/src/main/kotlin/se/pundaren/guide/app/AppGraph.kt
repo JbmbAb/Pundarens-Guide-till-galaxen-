@@ -30,9 +30,12 @@ import se.pundaren.guide.engine.api.EngineContext
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.engine.galax.Cue
 import se.pundaren.guide.engine.galax.DontPanic
+import se.pundaren.guide.engine.galax.GalacticBank
+import se.pundaren.guide.engine.galax.PanicKind
 import se.pundaren.guide.engine.galax.PanicMemory
 import se.pundaren.guide.engine.galax.PanicReply
 import se.pundaren.guide.engine.galax.PromiseRegistry
+import se.pundaren.guide.online.ClaudeChooser
 import se.pundaren.guide.safetygate.SafetyGate
 import se.pundaren.guide.truth.api.GuidancePhase
 import se.pundaren.guide.truth.device.OfflineNavigator
@@ -88,8 +91,12 @@ class AppGraph(context: Context) : AutoCloseable {
     /** Expeditionsprotokollet (etapp 5). Fakta ur händelsebussen, satir ur det Guiden faktiskt sa. */
     val protocols = ProtocolKeeper(File(app.getExternalFilesDir(null) ?: app.filesDir, "protokoll"), log::line)
 
-    /** Convoy för två (etapp 6). Det enda i appen som använder nätet. */
+    /** Convoy för två (etapp 6). Använder nätet, mot ägarens eget relä. */
     val convoy = ConvoyController(scope, ::convoyFix, log::line)
+
+    /** De frivilliga nättjänsterna (Trafiklab, Claude) och deras nycklar. Används bara på begäran. */
+    val secrets = SecretStore(app, log::line)
+    val online = OnlineServices(secrets, log::line)
 
     /** Bara en verklig position med känd noggrannhet får delas. En provtur delar ingenting. */
     private fun convoyFix(): OwnFix? {
@@ -158,13 +165,34 @@ class AppGraph(context: Context) : AutoCloseable {
 
     /**
      * DON'T PANIC på startsidan: ett galaktiskt beslut om det användaren skrev, eller dagens beslut om
-     * rutan är tom. Texten loggas inte och lämnar inte enheten; bara beslutets slag och id skrivs i loggen.
+     * rutan är tom. Texten loggas aldrig; bara beslutets slag och id skrivs i loggen. Här lämnar texten
+     * inte enheten. Det gör den bara i [dontPanicChosen], när ägaren har slagit på Claude.
      */
-    fun dontPanic(input: String): PanicReply {
-        val reply = DontPanic.react(input, settings.value.value.absurdityPercent, seed + ++galaxRequests, panicMemory)
+    fun dontPanic(input: String, prefer: String? = null): PanicReply {
+        val reply = DontPanic.react(input, settings.value.value.absurdityPercent, seed + ++galaxRequests, panicMemory, prefer = prefer)
         panicMemory = reply.memory
-        log.line("PANIK ${reply.kind} ${reply.decreeId ?: "-"} (${reply.source?.label ?: "allvar"})")
+        val chosenBy = if (prefer != null && reply.decreeId == prefer) "Claude" else "Guiden"
+        log.line("PANIK ${reply.kind} ${reply.decreeId ?: "-"} (${reply.source?.label ?: "allvar"}, vald av $chosenBy)")
         return reply
+    }
+
+    /** Besluten Claude får välja bland: alltid samma lista i samma ordning. Bara färdiga rader ur banken. */
+    private val decreeOptions = GalacticBank.decrees.map { ClaudeChooser.Option(it.id, it.headline, it.lines.firstOrNull().orEmpty()) }
+
+    /**
+     * Sant när just den här texten skulle skickas till Claude: ägaren har slagit på det, nyckeln finns,
+     * rutan är inte tom och texten har inte känts igen som allvar. Allvar skickas aldrig.
+     */
+    fun wouldAskClaude(input: String): Boolean {
+        if (!settings.value.value.claudeChooses || Secret.CLAUDE !in secrets.stored.value) return false
+        val kind = DontPanic.classify(input)
+        return kind != PanicKind.SERIOUS && kind != PanicKind.DAILY
+    }
+
+    /** Som [dontPanic], men Claude väljer beslutet när det är tillåtet. Går något fel väljer Guiden själv. */
+    suspend fun dontPanicChosen(input: String): PanicReply {
+        val prefer = if (wouldAskClaude(input)) online.chooseDecree(input, decreeOptions, panicMemory.recent) else null
+        return dontPanic(input, prefer)
     }
 
     /** Löftesregistret: löftets text tas inte emot. Bara antalet sparas, på enheten. */

@@ -139,4 +139,16 @@ class PromiseRegistryTest {
         assertEquals(3, PromiseRegistry.untilBonus(7))
         assertEquals(10, PromiseRegistry.untilBonus(10))
     }
+
+    @Test fun `ett förvalt beslut används om det finns, och allvar går ändå före`() {
+        val chosen = DontPanic.react("Var är min handduk", 60, seed = 1, prefer = "RO-06")
+        assertEquals("RO-06", chosen.decreeId)
+        assertEquals(PanicKind.OTHER, chosen.kind)
+        assertEquals(listOf("RO-06"), chosen.memory.recent)
+        // Ett id som inte finns ger Guidens eget val, samma som utan förval.
+        assertEquals(DontPanic.react("Var är min handduk", 60, seed = 1).decreeId, DontPanic.react("Var är min handduk", 60, seed = 1, prefer = "FINNS-INTE").decreeId)
+        val serious = DontPanic.react("jag vill inte leva längre", 60, seed = 1, prefer = "RO-06")
+        assertEquals(PanicKind.SERIOUS, serious.kind)
+        assertNull(serious.decreeId)
+    }
 }

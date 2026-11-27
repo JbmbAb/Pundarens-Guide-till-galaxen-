@@ -36,9 +36,11 @@ data class Settings(
     val promiseCount: Int = 0,
     /** Antalet upplåsta steg i Omvändelseprogrammet, 0–12. */
     val conversionStep: Int = 0,
+    /** Claude får välja beslut vid DON'T PANIC. Då lämnar det användaren skrev enheten. Av tills ägaren slår på det. */
+    val claudeChooses: Boolean = false,
 )
 
-/** Inställningarna, sparade i appens privata lagring. Ingenting här lämnar enheten. */
+/** Inställningarna, sparade i appens privata lagring. Ingenting här lämnar enheten. Nätnycklarna ligger i [SecretStore]. */
 class AppSettings(context: Context) {
     private val prefs = context.getSharedPreferences("installningar", Context.MODE_PRIVATE)
 
@@ -62,6 +64,7 @@ class AppSettings(context: Context) {
             absurdityPercent = prefs.getInt("absurdity", 60).coerceIn(0, 100),
             promiseCount = prefs.getInt("promise_count", 0).coerceAtLeast(0),
             conversionStep = prefs.getInt("conversion_step", 0).coerceIn(0, 12),
+            claudeChooses = prefs.getBoolean("claude_chooses", false),
         )
     }
 
@@ -80,6 +83,7 @@ class AppSettings(context: Context) {
             .putInt("absurdity", next.absurdityPercent)
             .putInt("promise_count", next.promiseCount)
             .putInt("conversion_step", next.conversionStep)
+            .putBoolean("claude_chooses", next.claudeChooses)
             .apply {
                 if (next.home != null) putString("home_lat", next.home.lat.toString()).putString("home_lon", next.home.lon.toString())
                 else remove("home_lat").remove("home_lon")

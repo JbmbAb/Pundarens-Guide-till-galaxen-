@@ -87,6 +87,7 @@ dependencies {
     implementation(project(":encyclopedia"))
     implementation(project(":convoy:api"))
     implementation(project(":convoy:http"))
+    implementation(project(":online"))
 
     // Convoy: QR-koden ritas och läses med ZXing (Apache 2.0), kamerabilden kommer från CameraX (AOSP).
     implementation(libs.zxing.core)

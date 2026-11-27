@@ -29,12 +29,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import se.pundaren.guide.app.AppGraph
 import se.pundaren.guide.app.BuildInfo
+import se.pundaren.guide.app.Secret
 import se.pundaren.guide.app.Settings
 import se.pundaren.guide.archive.api.ArchiveEntry
 import se.pundaren.guide.archive.api.OriginClass
@@ -207,6 +211,23 @@ fun DriveScreen(
                 if (settings.home != null) PillButton("Glöm") { graph.settings.update { it.copy(home = null) } }
             }
 
+            // Nättjänsterna är frivilliga. Ägaren skaffar nycklarna själv; här skrivs de in och sparas krypterat.
+            val stored by graph.secrets.stored.collectAsState()
+            Text("Nättjänster", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(
+                "Frivilligt. Nycklarna sparas krypterat på enheten och visas aldrig igen. Utan nät eller nyckel fungerar appen som förut.",
+                color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
+            )
+            Secret.entries.forEach { secret -> SecretRow(graph, secret, saved = secret in stored) }
+            if (Secret.CLAUDE in stored) {
+                SwitchRow("Claude väljer beslut vid DON'T PANIC", settings.claudeChooses) { on -> graph.settings.update { it.copy(claudeChooses = on) } }
+                Text(
+                    "När det är på skickas det du skriver vid DON'T PANIC till Anthropic, och Claude väljer bland appens färdiga beslut. " +
+                        "Claude skriver ingenting själv. Text som appen känner igen som allvar skickas aldrig. Varje val kostar pengar på ditt Claude-konto.",
+                    color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
+                )
+            }
+
             Text("Läge", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             val pack = when (status) {
                 is NavigatorStatus.Ready -> "Offlinepaket ${status.packageVersion}"
@@ -232,6 +253,35 @@ fun DriveScreen(
                     Text(tail.text, color = GuideColors.GuideAlt, fontSize = 15.sp)
                 }
             }
+        }
+    }
+}
+
+/** En nyckel: sparad eller inte. Den sparade nyckeln visas aldrig, den kan bara bytas eller tas bort. */
+@Composable
+private fun SecretRow(graph: AppGraph, secret: Secret, saved: Boolean) {
+    var draft by remember(secret) { mutableStateOf("") }
+    var editing by remember(secret) { mutableStateOf(false) }
+    var failed by remember(secret) { mutableStateOf(false) }
+    if (saved && !editing) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("${secret.title}: sparad", color = GuideColors.Truth, fontSize = 16.sp, modifier = Modifier.weight(1f))
+            PillButton("Byt") { editing = true }
+            PillButton("Ta bort") { graph.secrets.clear(secret) }
+        }
+    } else {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            OutlinedTextField(
+                value = draft, onValueChange = { draft = it; failed = false }, singleLine = true, modifier = Modifier.weight(1f),
+                label = { Text("${secret.title} (nyckel från ${secret.source})") },
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
+                supportingText = if (failed) ({ Text("Enheten kunde inte spara nyckeln.", color = GuideColors.Error) }) else null,
+            )
+            PillButton("Spara", primary = true, enabled = draft.isNotBlank()) {
+                if (graph.secrets.put(secret, draft)) { draft = ""; editing = false } else failed = true
+            }
+            if (saved) PillButton("Avbryt") { draft = ""; editing = false }
         }
     }
 }

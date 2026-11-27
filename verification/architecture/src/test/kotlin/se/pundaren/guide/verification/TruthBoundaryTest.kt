@@ -107,7 +107,7 @@ class TruthBoundaryTest {
         }
     }
 
-    @Test fun `nätet används bara av Convoy-transporten, bara över https, och kartan är frånkopplad`() {
+    @Test fun `nätet används bara av Convoy-transporten och nättjänsternas port, bara över https, och kartan är frånkopplad`() {
         val skipped = setOf(".git", "build", ".gradle", "docs", "data", ".kotlin", "lokalt", "prototyp")
         val manifests = root.walkTopDown().onEnter { it.name !in skipped }.filter { it.name == "AndroidManifest.xml" }.toList()
         assertTrue("manifesten hittas", manifests.size >= 3)
@@ -119,13 +119,21 @@ class TruthBoundaryTest {
         )
         assertTrue(root.resolve("app/src/main/AndroidManifest.xml").readText().contains("""android:usesCleartextTraffic="false""""))
 
-        // Ingen annan källkod än :convoy:http öppnar en nätförbindelse.
+        // Ingen annan källkod än :convoy:http och porten i :online öppnar en nätförbindelse (ägarens order 2026-11-27).
         val network = Regex("""HttpURLConnection|HttpsURLConnection|java\.net\.Socket|java\.net\.http|okhttp3|io\.ktor|\.toURL\(\)|\.openConnection\(|\bURL\(""")
         val users = root.walkTopDown().onEnter { it.name !in skipped && it.name != "test" }
             .filter { it.extension == "kt" && it.invariantSeparatorsPath.contains("/src/main/") }
             .filter { network.containsMatchIn(it.readText()) }
             .map { it.relativeTo(root).invariantSeparatorsPath }.toList()
-        assertEquals(listOf("convoy/http/src/main/kotlin/se/pundaren/guide/convoy/http/RelayClient.kt"), users)
+        assertEquals(
+            listOf(
+                "convoy/http/src/main/kotlin/se/pundaren/guide/convoy/http/RelayClient.kt",
+                "online/src/main/kotlin/se/pundaren/guide/online/Https.kt",
+            ),
+            users.sorted(),
+        )
+        // Porten i :online vägrar allt annat än https.
+        assertTrue(root.resolve("online/src/main/kotlin/se/pundaren/guide/online/Https.kt").readText().contains("""uri.scheme != "https""""))
 
         // Appen godtar bara ett relä med https, och kartbiblioteket hämtar aldrig något.
         val controller = root.resolve("app/src/main/kotlin/se/pundaren/guide/app/ConvoyController.kt").readText()

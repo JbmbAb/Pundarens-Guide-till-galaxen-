@@ -103,8 +103,13 @@ object DontPanic {
 
     /**
      * @param absurdity 0–100. Avgör hur långt in i beslutet Guiden går, och hur ofta Rikard dras in.
+     * @param prefer id på ett beslut som någon annan har valt åt texten. Finns det i banken används det;
+     *   annars väljer Guiden själv som vanligt. Allvar går alltid före, vad som än har valts.
      */
-    fun react(input: String, absurdity: Int, seed: Long, memory: PanicMemory = PanicMemory(), bank: List<Decree> = GalacticBank.decrees): PanicReply {
+    fun react(
+        input: String, absurdity: Int, seed: Long, memory: PanicMemory = PanicMemory(), bank: List<Decree> = GalacticBank.decrees,
+        prefer: String? = null,
+    ): PanicReply {
         val kind = classify(input)
         if (kind == PanicKind.SERIOUS) {
             return PanicReply(
@@ -132,7 +137,8 @@ object DontPanic {
             .ifEmpty { (specific + general).filter { it.id !in memory.recent } }
             .ifEmpty { pool.sortedBy { memory.recent.lastIndexOf(it.id) }.take(1) }
         val shifted = fresh.filter { it.scale != memory.lastScale }.ifEmpty { fresh }
-        val decree = shifted[random.nextInt(shifted.size)]
+        val drawn = shifted[random.nextInt(shifted.size)]
+        val decree = prefer?.let { id -> bank.firstOrNull { it.id == id } } ?: drawn
 
         // Absurditetsgraden: hur många av raderna som får vara med, räknat från iakttagelsen och framåt.
         val wanted = Math.round(decree.lines.size * (0.34 + 0.66 * level / 100.0)).toInt().coerceIn(1, decree.lines.size)
