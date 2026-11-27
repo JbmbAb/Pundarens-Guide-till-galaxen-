@@ -15,12 +15,16 @@ import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapLibreMapOptions
 import org.maplibre.android.maps.MapView
 import org.maplibre.android.maps.Style
+import org.maplibre.android.offline.OfflineManager
 import org.maplibre.android.style.expressions.Expression
 import org.maplibre.android.style.layers.CircleLayer
 import org.maplibre.android.style.layers.LineLayer
 import org.maplibre.android.style.layers.PropertyFactory
+import org.maplibre.android.style.layers.RasterLayer
 import org.maplibre.android.style.layers.SymbolLayer
 import org.maplibre.android.style.sources.GeoJsonSource
+import org.maplibre.android.style.sources.RasterSource
+import org.maplibre.android.style.sources.TileSet
 import se.pundaren.guide.convoy.Freshness
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.core.platser.PlaceIndex
@@ -31,7 +35,9 @@ import kotlin.math.ceil
 /**
  * Kartan: MapLibre med den lokala PMTiles-filen (`pmtiles://file://`, T-01 och T-02) och en av tre
  * stilfiler över samma data. Allt som ritas här är sanningsdata: rutten, positionen, målet och
- * ortnamnen ur offlinepaketet. MapLibre körs frånkopplat och hämtar aldrig något.
+ * ortnamnen ur offlinepaketet. I de tre egna kartlägena körs MapLibre frånkopplat och hämtar aldrig
+ * något. I läget Lantmäteriet (ägarens order 2026-11-27) hämtas deras kartbilder över nätet och läggs
+ * ovanpå offlinekartan, som syns där en bild saknas. Hämtade bilder ligger kvar på enheten.
  *
  * Stilarna har inga textlager (inga glyfer följer med). Ortnamnen ritas därför som bilder som
  * skapas på enheten först när kartan ber om dem.
@@ -43,6 +49,7 @@ class MapController(private val context: Context, private val log: (String) -> U
     private var style: Style? = null
     private var tiles: File? = null
     private var shownStyle: MapStyle? = null
+    private var shownOnline = false
 
     private var routeLine: List<GeoPoint> = emptyList()
     private var previewLine: List<GeoPoint> = emptyList()
@@ -63,7 +70,9 @@ class MapController(private val context: Context, private val log: (String) -> U
 
     init {
         MapLibre.getInstance(context)
-        MapLibre.setConnected(false) // MapLibre ska aldrig försöka hämta något
+        MapLibre.setConnected(false) // utgångsläget: MapLibre hämtar ingenting. Bara läget Lantmäteriet kopplar upp.
+        LantmaterietMap.install()
+        OfflineManager.getInstance(context).setMaximumAmbientCacheSize(LantmaterietMap.CACHE_BYTES, null)
         // Mörk yta även innan kartstilen är laddad (annars lyser MapLibres ljusa platshållare).
         view = MapView(context, MapLibreMapOptions.createFromAttributes(context).foregroundLoadColor(0xFF0E0E0E.toInt()))
         view.addOnStyleImageMissingListener { id -> if (id.startsWith(LABEL_PREFIX)) style?.addImage(id, labelBitmap(id)) }
@@ -90,11 +99,15 @@ class MapController(private val context: Context, private val log: (String) -> U
         }
     }
 
-    /** Visar kartfilen med vald stil. Anropas när paketet är installerat och när stilen byts. */
-    fun show(pmtiles: File, mapStyle: MapStyle) {
-        if (tiles == pmtiles && shownStyle == mapStyle) return
+    /**
+     * Visar kartfilen med vald stil. Anropas när paketet är installerat, när stilen byts och när
+     * Lantmäteriets konto läggs in eller tas bort. [online] är sant när kartbilder får hämtas över nätet.
+     */
+    fun show(pmtiles: File, mapStyle: MapStyle, online: Boolean) {
+        if (tiles == pmtiles && shownStyle == mapStyle && shownOnline == online) return
         tiles = pmtiles
         shownStyle = mapStyle
+        shownOnline = online
         applyStyle()
     }
 
@@ -105,8 +118,19 @@ class MapController(private val context: Context, private val log: (String) -> U
         val json = context.assets.open(which.asset).use { it.readBytes().decodeToString() }
             .replace("{{KARTA}}", "pmtiles://file://" + file.absolutePath)
         val first = style == null
+        val lantmateriet = which.online && shownOnline
+        MapLibre.setConnected(lantmateriet)
         m.setStyle(Style.Builder().fromJson(json)) { s ->
             style = s
+            if (lantmateriet) {
+                // Lantmäteriets karta läggs ovanpå offlinekartan och under allt som appen själv ritar.
+                val tiles = TileSet("2.2.0", LantmaterietMap.TILES).apply {
+                    setMaxZoom(LantmaterietMap.MAX_ZOOM)
+                    attribution = LantmaterietMap.ATTRIBUTION
+                }
+                s.addSource(RasterSource(SRC_LANTMATERIET, tiles, 256))
+                s.addLayer(RasterLayer("lantmateriet-karta", SRC_LANTMATERIET))
+            }
             s.addSource(GeoJsonSource(SRC_PREVIEW)); s.addSource(GeoJsonSource(SRC_ROUTE))
             s.addSource(GeoJsonSource(SRC_DESTINATION)); s.addSource(GeoJsonSource(SRC_POSITION))
             s.addSource(GeoJsonSource(SRC_TRACK))
@@ -130,7 +154,8 @@ class MapController(private val context: Context, private val log: (String) -> U
                 PropertyFactory.circleColor("#0e0e0e"), PropertyFactory.circleRadius(7f),
                 PropertyFactory.circleStrokeColor("#f2f2f2"), PropertyFactory.circleStrokeWidth(4f)))
             val minZoom = floatArrayOf(5f, 8.5f, 10.5f)
-            for (rank in 0..2) {
+            // Lantmäteriets karta har egna ortnamn. Appens namnbilder skulle ligga dubbelt och ritas då inte.
+            if (!lantmateriet) for (rank in 0..2) {
                 s.addLayer(SymbolLayer("ortnamn-$rank", SRC_PLACES + rank).withProperties(
                     PropertyFactory.iconImage(Expression.get("bild")), PropertyFactory.iconAllowOverlap(false),
                     PropertyFactory.iconPadding(6f)).apply { setMinZoom(minZoom[rank]) })
@@ -141,7 +166,7 @@ class MapController(private val context: Context, private val log: (String) -> U
             s.addLayer(CircleLayer("position-punkt", SRC_POSITION).withProperties(
                 PropertyFactory.circleColor("#ffffff"), PropertyFactory.circleRadius(8f),
                 PropertyFactory.circleStrokeColor("#000000"), PropertyFactory.circleStrokeWidth(3f)))
-            log("KARTA stil ${which.title} laddad, källa pmtiles://file://…/${file.name}")
+            log("KARTA stil ${which.title} laddad, källa pmtiles://file://…/${file.name}${if (lantmateriet) " med Lantmäteriets kartbilder över nätet" else ""}")
             redraw()
             if (first) position?.let { m.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.lat, it.lon), 12.5)) }
         }
@@ -343,6 +368,7 @@ class MapController(private val context: Context, private val log: (String) -> U
         const val SRC_PREVIEW = "forslag"
         const val SRC_TRACK = "spar"
         const val SRC_PEER = "konvoj"
+        const val SRC_LANTMATERIET = "lantmateriet"
         const val LAYER_PEER = "konvoj-punkt"
         const val SRC_DESTINATION = "mal"
         const val SRC_POSITION = "position"

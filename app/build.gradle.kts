@@ -98,6 +98,9 @@ dependencies {
 
     // Kartvisning (BSD-2), läser pmtiles:// sedan 11.7.0.
     implementation(libs.maplibre)
+    // Kartbibliotekets egen nätklient (OkHttp) följer med MapLibre. Den behövs här bara vid kompilering,
+    // för att lägga Lantmäteriets inloggning på kartbildsanropen (LantmaterietMap). Samma version som MapLibre drar in.
+    compileOnly("com.squareup.okhttp3:okhttp:5.3.2")
     implementation(libs.coroutines.android)
 
     // Compose (androidx, AOSP). Inga Google-tjänster; kontrolleras av verifyModuleEdges.

@@ -95,7 +95,10 @@ class AppGraph(context: Context) : AutoCloseable {
     val convoy = ConvoyController(scope, ::convoyFix, log::line)
 
     /** De frivilliga nättjänsterna (Trafiklab, Claude) och deras nycklar. Används bara på begäran. */
-    val secrets = SecretStore(app, log::line)
+    val secrets = SecretStore(app, log::line).also {
+        // Sätts direkt, före kartan: annars hinner de första kartbilderna begäras utan inloggning.
+        LantmaterietMap.setAccount(it.get(Secret.LM_USER), it.get(Secret.LM_PASSWORD))
+    }
     val online = OnlineServices(secrets, log::line)
 
     /** Bara en verklig position med känd noggrannhet får delas. En provtur delar ingenting. */
@@ -148,6 +151,10 @@ class AppGraph(context: Context) : AutoCloseable {
             }
         }
         ConvoyShareService.onStopRequested = { convoy.requestStop() }
+        // Lantmäteriets systemkonto läggs på kartbildsanropen så snart det finns, och tas bort när det tas bort.
+        scope.launch {
+            secrets.stored.collect { LantmaterietMap.setAccount(secrets.get(Secret.LM_USER), secrets.get(Secret.LM_PASSWORD)) }
+        }
         scope.launch { navigator.prepare() }
     }
 

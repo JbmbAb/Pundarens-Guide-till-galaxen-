@@ -33,6 +33,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -215,7 +216,8 @@ fun DriveScreen(
             val stored by graph.secrets.stored.collectAsState()
             Text("Nättjänster", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(
-                "Frivilligt. Nycklarna sparas krypterat på enheten och visas aldrig igen. Utan nät eller nyckel fungerar appen som förut.",
+                "Frivilligt. Nycklar och lösenord sparas krypterat på enheten och visas aldrig igen. Utan nät eller nyckel fungerar appen som förut. " +
+                    "Med Lantmäteriets systemkonto inlagt får kartan ett fjärde läge, Lantmäteriet, som hämtar deras topografiska karta över nätet.",
                 color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
             )
             Secret.entries.forEach { secret -> SecretRow(graph, secret, saved = secret in stored) }
@@ -273,9 +275,9 @@ private fun SecretRow(graph: AppGraph, secret: Secret, saved: Boolean) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             OutlinedTextField(
                 value = draft, onValueChange = { draft = it; failed = false }, singleLine = true, modifier = Modifier.weight(1f),
-                label = { Text("${secret.title} (nyckel från ${secret.source})") },
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
+                label = { Text("${secret.title} (${secret.source})") },
+                visualTransformation = if (secret.masked) PasswordVisualTransformation() else VisualTransformation.None,
+                keyboardOptions = KeyboardOptions(keyboardType = if (secret.masked) KeyboardType.Password else KeyboardType.Ascii, autoCorrectEnabled = false),
                 supportingText = if (failed) ({ Text("Enheten kunde inte spara nyckeln.", color = GuideColors.Error) }) else null,
             )
             PillButton("Spara", primary = true, enabled = draft.isNotBlank()) {

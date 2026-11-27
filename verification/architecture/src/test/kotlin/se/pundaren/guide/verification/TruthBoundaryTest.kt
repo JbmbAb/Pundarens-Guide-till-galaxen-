@@ -107,7 +107,7 @@ class TruthBoundaryTest {
         }
     }
 
-    @Test fun `nätet används bara av Convoy-transporten och nättjänsternas port, bara över https, och kartan är frånkopplad`() {
+    @Test fun `nätet används bara av Convoy, nättjänsternas port och Lantmäteriets kartläge, bara över https`() {
         val skipped = setOf(".git", "build", ".gradle", "docs", "data", ".kotlin", "lokalt", "prototyp")
         val manifests = root.walkTopDown().onEnter { it.name !in skipped }.filter { it.name == "AndroidManifest.xml" }.toList()
         assertTrue("manifesten hittas", manifests.size >= 3)
@@ -119,7 +119,8 @@ class TruthBoundaryTest {
         )
         assertTrue(root.resolve("app/src/main/AndroidManifest.xml").readText().contains("""android:usesCleartextTraffic="false""""))
 
-        // Ingen annan källkod än :convoy:http och porten i :online öppnar en nätförbindelse (ägarens order 2026-11-27).
+        // Ingen annan källkod än :convoy:http, porten i :online och Lantmäteriets kartläge öppnar en
+        // nätförbindelse (ägarens order 2026-11-27).
         val network = Regex("""HttpURLConnection|HttpsURLConnection|java\.net\.Socket|java\.net\.http|okhttp3|io\.ktor|\.toURL\(\)|\.openConnection\(|\bURL\(""")
         val users = root.walkTopDown().onEnter { it.name !in skipped && it.name != "test" }
             .filter { it.extension == "kt" && it.invariantSeparatorsPath.contains("/src/main/") }
@@ -127,6 +128,7 @@ class TruthBoundaryTest {
             .map { it.relativeTo(root).invariantSeparatorsPath }.toList()
         assertEquals(
             listOf(
+                "app/src/main/kotlin/se/pundaren/guide/app/LantmaterietMap.kt",
                 "convoy/http/src/main/kotlin/se/pundaren/guide/convoy/http/RelayClient.kt",
                 "online/src/main/kotlin/se/pundaren/guide/online/Https.kt",
             ),
@@ -135,10 +137,17 @@ class TruthBoundaryTest {
         // Porten i :online vägrar allt annat än https.
         assertTrue(root.resolve("online/src/main/kotlin/se/pundaren/guide/online/Https.kt").readText().contains("""uri.scheme != "https""""))
 
-        // Appen godtar bara ett relä med https, och kartbiblioteket hämtar aldrig något.
+        // Appen godtar bara ett relä med https.
         val controller = root.resolve("app/src/main/kotlin/se/pundaren/guide/app/ConvoyController.kt").readText()
         assertTrue(Regex("""startsWith\("https://"\)""").findAll(controller).count() >= 2)
-        assertTrue(root.resolve("app/src/main/kotlin/se/pundaren/guide/app/MapController.kt").readText().contains("MapLibre.setConnected(false)"))
+        // Kartbiblioteket är frånkopplat från start och kopplas bara upp i läget Lantmäteriet.
+        val map = root.resolve("app/src/main/kotlin/se/pundaren/guide/app/MapController.kt").readText()
+        assertTrue(map.contains("MapLibre.setConnected(false)"))
+        assertEquals(listOf("MapLibre.setConnected(false)", "MapLibre.setConnected(lantmateriet)"), Regex("""MapLibre\.setConnected\([^)]*\)""").findAll(map).map { it.value }.toList())
+        // Inloggningen läggs bara på anrop till Lantmäteriets egen karttjänst, och bara över https.
+        val lm = root.resolve("app/src/main/kotlin/se/pundaren/guide/app/LantmaterietMap.kt").readText()
+        assertTrue(lm.contains("request.url.isHttps && request.url.host == HOST"))
+        assertTrue(lm.contains("""const val TILES = "https://"""))
     }
 
     @Test fun `kartstilarna har samma lager, inga nätadresser och ingen sanningsfärg`() {

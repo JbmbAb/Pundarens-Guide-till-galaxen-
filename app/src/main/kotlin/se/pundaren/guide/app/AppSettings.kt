@@ -7,11 +7,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.api.TravelMode
 
-/** Kartans tre lägen: tre stilfiler över samma data (B-09). */
-enum class MapStyle(val asset: String, val title: String) {
+/**
+ * Kartans lägen. De tre första är tre stilfiler över samma offlinedata (B-09). Det fjärde lägger
+ * Lantmäteriets topografiska karta ovanpå den praktiska stilen och hämtar kartbilder över nätet.
+ */
+enum class MapStyle(val asset: String, val title: String, val online: Boolean = false) {
     PRAKTISK("stil/praktisk.json", "Praktisk"),
     POETISK("stil/poetisk.json", "Poetisk"),
     OSANNOLIK("stil/osannolik.json", "Osannolik"),
+    LANTMATERIET("stil/praktisk.json", "Lantmäteriet", online = true),
 }
 
 data class Settings(

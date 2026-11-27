@@ -47,6 +47,7 @@ import se.pundaren.guide.convoy.Freshness
 import se.pundaren.guide.app.AppGraph
 import se.pundaren.guide.app.MapController
 import se.pundaren.guide.app.MapStyle
+import se.pundaren.guide.app.Secret
 import se.pundaren.guide.engine.api.TailCandidate
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.api.GuidancePhase
@@ -154,10 +155,14 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
         }
     }
 
+    // Lantmäteriets kartläge finns bara när systemkontot är inlagt under Reglage.
+    val stored by graph.secrets.stored.collectAsState()
+    val lantmateriet = Secret.LM_USER in stored && Secret.LM_PASSWORD in stored
+
     // Kartan får bara sanningsdata.
-    LaunchedEffect(activePackage, settings.mapStyle) {
+    LaunchedEffect(activePackage, settings.mapStyle, lantmateriet) {
         activePackage?.let { paket ->
-            map.show(paket.fil("karta.pmtiles"), settings.mapStyle)
+            map.show(paket.fil("karta.pmtiles"), settings.mapStyle, online = lantmateriet)
             paket.manifest.omradeBbox?.let { b -> map.startAt(GeoPoint((b[1] + b[3]) / 2, (b[0] + b[2]) / 2), 8.0) }
         }
     }
@@ -206,7 +211,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
             AndroidView(factory = { map.view }, modifier = Modifier.fillMaxSize())
 
             Text(
-                "© OpenStreetMap contributors",
+                if (settings.mapStyle.online && lantmateriet) "© Lantmäteriet · © OpenStreetMap contributors" else "© OpenStreetMap contributors",
                 color = GuideColors.OnSurfaceVariant, fontSize = 11.sp,
                 modifier = Modifier.align(Alignment.TopEnd).padding(8.dp).background(GuideColors.Background.copy(alpha = 0.6f)).padding(horizontal = 6.dp, vertical = 2.dp),
             )
@@ -292,8 +297,10 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         PillButton(if (settings.instructionsMuted) "Vägröst: av" else "Vägröst: på") {
                             graph.settings.update { it.copy(instructionsMuted = !it.instructionsMuted) }
                         }
-                        PillButton(settings.mapStyle.title) {
-                            graph.settings.update { it.copy(mapStyle = MapStyle.entries[(it.mapStyle.ordinal + 1) % MapStyle.entries.size]) }
+                        // Utan konto visas läget Lantmäteriet som det praktiska, och knappen hoppar över det.
+                        val styles = MapStyle.entries.filter { !it.online || lantmateriet }
+                        PillButton(if (settings.mapStyle in styles) settings.mapStyle.title else MapStyle.PRAKTISK.title) {
+                            graph.settings.update { it.copy(mapStyle = styles[(styles.indexOf(it.mapStyle) + 1) % styles.size]) }
                         }
                         if (!following) PillButton("Centrera") { map.recenter() }
                         if (!navigator.hasLocationPermission()) PillButton("Tillåt position") { onRequestLocation() }

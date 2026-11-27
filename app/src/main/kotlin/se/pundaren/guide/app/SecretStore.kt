@@ -14,10 +14,13 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 /** Nycklarna till de frivilliga nättjänsterna. Ägaren skaffar dem själv och skriver in dem i Reglage. */
-enum class Secret(val title: String, val source: String) {
-    CLAUDE("Claude", "Claude Console"),
-    RESROBOT("ResRobot v2.1", "Trafiklab"),
-    REALTIME("Trafiklab Realtime", "Trafiklab"),
+enum class Secret(val title: String, val source: String, val masked: Boolean = true) {
+    CLAUDE("Claude", "nyckel från Claude Console"),
+    RESROBOT("ResRobot v2.1", "nyckel från Trafiklab"),
+    REALTIME("Trafiklab Realtime", "nyckel från Trafiklab"),
+    /** Systemkontot i Geotorget, för Lantmäteriets visningstjänster. Användarnamnet är inte hemligt och visas medan det skrivs. */
+    LM_USER("Lantmäteriet, användarnamn", "systemkonto i Geotorget", masked = false),
+    LM_PASSWORD("Lantmäteriet, lösenord", "systemkonto i Geotorget"),
 }
 
 /**
