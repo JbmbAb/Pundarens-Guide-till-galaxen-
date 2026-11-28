@@ -110,12 +110,35 @@ class OnlineServices(
     suspend fun sights(samples: List<Pair<Double, Double>>, kinds: Set<SightKind>): Fetched<List<Sight>> = withContext(Dispatchers.IO) {
         if (samples.isEmpty()) return@withContext Fetched.Ok(emptyList())
         val wiki = Wikipedia(http)
-        val fromWikipedia = try {
-            samples.flatMap { (lat, lon) -> wiki.nearby(lat, lon) }
-        } catch (e: OnlineException) {
-            log("SEVÄRT Wikipedia fel ${e.status}")
-            return@withContext Fetched.Failed(if (e.status == 0) "Ingen kontakt med nätet. Sevärt behöver nät för att leta." else "Wikipedia svarade ${e.status}.")
+        // En fråga i taget med en liten paus: Wikipedia bromsar den som frågar för fort (svar 429).
+        // En nekad fråga prövas en gång till efter en stund, och sökningen går vidare även om den nekas igen.
+        val fromWikipedia = mutableListOf<Sight>()
+        var answered = 0
+        var lastError = 0
+        for ((index, sample) in samples.withIndex()) {
+            if (index > 0) Thread.sleep(250)
+            for (attempt in 1..2) {
+                try {
+                    fromWikipedia += wiki.nearby(sample.first, sample.second)
+                    answered++
+                    break
+                } catch (e: OnlineException) {
+                    lastError = e.status
+                    if (e.status == 429 && attempt == 1) Thread.sleep(2_000) else break
+                }
+            }
         }
+        if (answered == 0) {
+            log("SEVÄRT Wikipedia fel $lastError")
+            return@withContext Fetched.Failed(
+                when (lastError) {
+                    0 -> "Ingen kontakt med nätet. Sevärt behöver nät för att leta."
+                    429 -> "Wikipedia vill ha en paus. Vänta en minut och sök igen."
+                    else -> "Wikipedia svarade $lastError."
+                },
+            )
+        }
+        if (answered < samples.size) log("SEVÄRT Wikipedia svarade på $answered av ${samples.size} frågor")
         val fromOsm = try { Overpass(quick).sights(samples, 10_000, kinds) } catch (e: OnlineException) { log("SEVÄRT OpenStreetMap svarade inte (${e.status})"); emptyList() }
         // OpenStreetMaps fynd först: de bär mer detaljer. Samma plats från Wikipedia stryks om den ligger intill med samma namn.
         val all = (fromOsm + fromWikipedia).filter { it.kind in kinds }

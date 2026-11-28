@@ -95,7 +95,7 @@ fun SightsDialog(
                     val angle = 2 * Math.PI * i / count
                     lat + km / 111.0 * Math.cos(angle) to lon + km / (111.0 * Math.cos(Math.toRadians(lat))) * Math.sin(angle)
                 }
-                line + (if (reachKm > 10) ring(14.0, 6) else emptyList()) + (if (reachKm > 26) ring(30.0, 10) else emptyList())
+                line + (if (reachKm > 10) ring(14.0, 6) else emptyList()) + (if (reachKm > 26) ring(30.0, 8) else emptyList())
             }
             val found = graph.online.sights(samples, kinds)
             val sights = (found as? se.pundaren.guide.app.Fetched.Ok)?.value
