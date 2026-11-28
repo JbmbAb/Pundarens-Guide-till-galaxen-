@@ -277,7 +277,7 @@ private fun LantmaterietCheckSection(graph: AppGraph) {
     var results by remember { mutableStateOf<List<LmResult>?>(null) }
     Text("Lantmäteriets tjänster", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
     Text(
-        "Frågar alla ${Lantmateriet.services.size} tjänster i din behörighetslista en gång var och visar om de svarar. " +
+        "Frågar de ${Lantmateriet.services.size} visnings- och Direkt-tjänsterna i din behörighetslista en gång var och visar om de svarar. " +
             "Visningstjänsterna kräver systemkontot. Tjänsterna Direkt prövas med systemkontot och, om det inte räcker, med API-nyckeln.",
         color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
     )
@@ -298,7 +298,6 @@ private fun LantmaterietCheckSection(graph: AppGraph) {
 internal fun lmVerdict(row: LmResult): String {
     val via = row.via?.let { " med $it" }.orEmpty()
     return when {
-        row.service.access == LmAccess.OPEN && row.accepted -> "svarar utan inloggning"
         row.status in 200..299 -> "fungerar$via"
         row.accepted -> "inloggningen godtas$via (kontrollfrågan gav ${row.status})"
         row.status == LmResult.NO_LOGIN -> if (row.service.access == LmAccess.VIEW) "systemkontot är inte inlagt" else "ingen inloggning är inlagd"

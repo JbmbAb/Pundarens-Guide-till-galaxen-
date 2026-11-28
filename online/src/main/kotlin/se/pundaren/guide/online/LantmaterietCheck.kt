@@ -8,9 +8,6 @@ import java.util.Base64
 
 /** Hur en av Lantmäteriets tjänster nås. Iakttaget 2026-11-28 genom att fråga varje tjänst utan inloggning. */
 enum class LmAccess {
-    /** Svarar utan inloggning. Gäller katalogerna för nedladdning; själva filerna kan ändå kräva inloggning. */
-    OPEN,
-
     /** Visningstjänst på maps.lantmateriet.se. Godtar bara systemkontot (Basic). */
     VIEW,
 
@@ -43,30 +40,23 @@ object Lantmateriet {
     private const val MAPS = "https://maps.lantmateriet.se"
     private const val HERE = "limit=1&bbox=14.60,61.11,14.62,61.12"
 
-    /** Samtliga tjänster i behörighetslistan, i listans ordning. */
+    /**
+     * Visnings- och Direkt-tjänsterna i behörighetslistan, i listans ordning. Nedladdningstjänsterna är
+     * inte med: de uppgifterna kommer senare från ägarens egen PostGIS (ägarens besked 2026-11-28).
+     */
     val services: List<LmService> = listOf(
-        LmService("Belägenhetsadress Nedladdning, vektor", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
         LmService("Byggnad Direkt", LmAccess.API, "$API/distribution/produkter/byggnad/v3/"),
-        LmService("Byggnad Nedladdning, vektor", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
         LmService("Fastighetsindelning Direkt", LmAccess.API, "$API/ogc-features/v1/fastighetsindelning/collections/registerenhetsomradesytor/items?$HERE"),
-        LmService("Fastighetsindelning Nedladdning, vektor", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
-        LmService("Geotorget Nedladdning", LmAccess.API, "$API/geotorget/nedladdning/v1/orders"),
         LmService("Hydrografi Direkt", LmAccess.API, "$API/ogc-features/v1/hydrografi/collections/StandingWater/items?$HERE"),
         LmService("Kommun, Län och Rike Direkt", LmAccess.API, "$API/ogc-features/v1/administrativ-indelning/collections/kommuner/items?$HERE"),
-        LmService("Kommun, Län och Rike Nedladdning", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
         LmService("Markhöjd Direkt", LmAccess.API, "$API/distribution/produkter/markhojd/v1/hojd"),
-        LmService("Markhöjdmodell Nedladdning", LmAccess.OPEN, "$API/stac-hojd/v1/collections"),
         LmService("Marktäcke Direkt", LmAccess.API, "$API/ogc-features/v1/marktacke/collections/markytor/items?$HERE"),
-        LmService("Marktäcke Nedladdning, vektor", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
-        LmService("Ortnamn Nedladdning, vektor", LmAccess.OPEN, "$API/stac-vektor/v1/collections"),
         LmService("Ortofoto historiska Visning", LmAccess.VIEW, "$MAPS/historiska-ortofoton/wms/v1?request=GetCapabilities&version=1.1.1&service=WMS"),
-        LmService("Ortofoto Nedladdning", LmAccess.OPEN, "$API/stac-bild/v1/collections"),
         LmService("Referens Uppslag Adress", LmAccess.API, "$API/distribution/produkter/uppslag/adress/v3/fritext?adress=Storgatan"),
         LmService("Registerbeteckning Direkt", LmAccess.API, "$API/distribution/produkter/registerbeteckning/v5/referens/fritext?beteckning=Orsa"),
         LmService("Samfällighetsförening Direkt", LmAccess.API, "$API/distribution/produkter/samfallighetsforening/v2.2/"),
         LmService("Stompunkt Visning", LmAccess.VIEW, "$MAPS/stompunkt/wms/v1/?request=GetCapabilities&version=1.1.1&service=WMS"),
         LmService("Topografisk webbkarta Visning, översiktlig", LmAccess.VIEW, "$MAPS/open/topowebb-ccby/v1/wmts?request=GetCapabilities&version=1.0.0&service=wmts"),
-        LmService("Tyngdkraft Nedladdning", LmAccess.OPEN, "$API/tyngdkraft-nedladdning/atom/v1/"),
         LmService("Tyngdkraft Visning", LmAccess.VIEW, "$MAPS/tyngdkraft/wms/v1?request=GetCapabilities&version=1.1.1&service=WMS"),
     )
 
@@ -95,8 +85,7 @@ class LantmaterietCheck(private val http: HttpPort) {
      * @param bearer åtkomstbeviset från [token], eller null.
      */
     fun check(service: LmService, account: String?, bearer: String?): LmResult {
-        val attempts: List<Pair<String?, String?>> = when (service.access) {
-            LmAccess.OPEN -> listOf(null to null)
+        val attempts: List<Pair<String, String>> = when (service.access) {
             LmAccess.VIEW -> listOfNotNull(account?.let { it to Lantmateriet.VIA_ACCOUNT })
             LmAccess.API -> listOfNotNull(account?.let { it to Lantmateriet.VIA_ACCOUNT }, bearer?.let { it to Lantmateriet.VIA_KEY })
         }
@@ -104,7 +93,7 @@ class LantmaterietCheck(private val http: HttpPort) {
         var last = LmResult(service, 0, null)
         for ((authorization, via) in attempts) {
             val status = try {
-                http.get(service.testUrl, if (authorization != null) mapOf("Authorization" to authorization) else emptyMap())
+                http.get(service.testUrl, mapOf("Authorization" to authorization))
                 200
             } catch (e: OnlineException) {
                 e.status

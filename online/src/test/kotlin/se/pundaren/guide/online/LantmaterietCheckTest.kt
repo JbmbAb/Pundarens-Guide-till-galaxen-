@@ -24,22 +24,16 @@ class LantmaterietCheckTest {
 
     private fun service(name: String) = Lantmateriet.services.single { it.name == name }
 
-    @Test fun `listan har ägarens tjugotre tjänster, alla över https hos Lantmäteriet`() {
-        assertEquals(23, Lantmateriet.services.size)
-        assertEquals(23, Lantmateriet.services.map { it.name }.toSet().size)
+    @Test fun `listan har visnings- och direkttjänsterna, alla över https hos Lantmäteriet, och ingen nedladdning`() {
+        assertEquals(13, Lantmateriet.services.size)
+        assertEquals(13, Lantmateriet.services.map { it.name }.toSet().size)
+        assertTrue(Lantmateriet.services.none { "edladdning" in it.name })
         Lantmateriet.services.forEach { s ->
             val host = if (s.access == LmAccess.VIEW) "https://maps.lantmateriet.se/" else "https://api.lantmateriet.se/"
             assertTrue(s.name, s.testUrl.startsWith(host))
         }
         assertEquals(4, Lantmateriet.services.count { it.access == LmAccess.VIEW })
-    }
-
-    @Test fun `en öppen tjänst frågas utan inloggning, även när inloggning finns`() {
-        val http = StatusHttp({ _, _ -> 200 })
-        val result = LantmaterietCheck(http).check(service("Markhöjdmodell Nedladdning"), account = "Basic abc", bearer = "Bearer xyz")
-        assertTrue(result.accepted)
-        assertNull(result.via)
-        assertNull(http.calls.single().second)
+        assertEquals(9, Lantmateriet.services.count { it.access == LmAccess.API })
     }
 
     @Test fun `en visningstjänst prövas bara med systemkontot`() {
