@@ -21,6 +21,9 @@ enum class Secret(val title: String, val source: String, val masked: Boolean = t
     /** Systemkontot i Geotorget, för Lantmäteriets visningstjänster. Användarnamnet är inte hemligt och visas medan det skrivs. */
     LM_USER("Lantmäteriet, användarnamn", "systemkonto i Geotorget", masked = false),
     LM_PASSWORD("Lantmäteriet, lösenord", "systemkonto i Geotorget"),
+    /** API-portalens nyckelpar. Behövs bara om tjänsterna på api.lantmateriet.se inte godtar systemkontot. */
+    LM_KEY("Lantmäteriet, API-nyckel", "consumer key i API-portalen"),
+    LM_SECRET("Lantmäteriet, API-hemlighet", "consumer secret i API-portalen"),
 }
 
 /**

@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +45,11 @@ import se.pundaren.guide.app.Settings
 import se.pundaren.guide.archive.api.ArchiveEntry
 import se.pundaren.guide.archive.api.OriginClass
 import se.pundaren.guide.engine.api.TailCandidate
+import kotlinx.coroutines.launch
 import se.pundaren.guide.engine.galax.DontPanic
+import se.pundaren.guide.online.Lantmateriet
+import se.pundaren.guide.online.LmAccess
+import se.pundaren.guide.online.LmResult
 import se.pundaren.guide.truth.api.GeoPoint
 import se.pundaren.guide.truth.api.PositionSnapshot
 import se.pundaren.guide.truth.core.geo.Geo
@@ -230,6 +235,8 @@ fun DriveScreen(
                 )
             }
 
+            LantmaterietCheckSection(graph)
+
             Text("Läge", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             val pack = when (status) {
                 is NavigatorStatus.Ready -> "Offlinepaket ${status.packageVersion}"
@@ -256,6 +263,49 @@ fun DriveScreen(
                 }
             }
         }
+    }
+}
+
+/**
+ * Kontrollen av Lantmäteriets tjänster: en fråga per tjänst i ägarens behörighetslista, och ett rakt
+ * besked per rad om den svarar. Det här är uppgifter om verkligheten och visas i sanningens färg.
+ */
+@Composable
+private fun LantmaterietCheckSection(graph: AppGraph) {
+    val scope = rememberCoroutineScope()
+    var busy by remember { mutableStateOf(false) }
+    var results by remember { mutableStateOf<List<LmResult>?>(null) }
+    Text("Lantmäteriets tjänster", color = GuideColors.OnSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+    Text(
+        "Frågar alla ${Lantmateriet.services.size} tjänster i din behörighetslista en gång var och visar om de svarar. " +
+            "Visningstjänsterna kräver systemkontot. Tjänsterna Direkt prövas med systemkontot och, om det inte räcker, med API-nyckeln.",
+        color = GuideColors.OnSurfaceVariant, fontSize = 14.sp,
+    )
+    PillButton(if (busy) "Kontrollerar …" else "Kontrollera alla", primary = true, enabled = !busy) {
+        busy = true
+        scope.launch {
+            try { results = graph.online.checkLantmateriet() } finally { busy = false }
+        }
+    }
+    results?.let { rows ->
+        Text("${rows.count { it.accepted }} av ${rows.size} svarar.", color = GuideColors.Truth, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        rows.forEach { row ->
+            Text("${row.service.name}: ${lmVerdict(row)}", color = if (row.accepted) GuideColors.Truth else GuideColors.Error, fontSize = 14.sp)
+        }
+    }
+}
+
+internal fun lmVerdict(row: LmResult): String {
+    val via = row.via?.let { " med $it" }.orEmpty()
+    return when {
+        row.service.access == LmAccess.OPEN && row.accepted -> "svarar utan inloggning"
+        row.status in 200..299 -> "fungerar$via"
+        row.accepted -> "inloggningen godtas$via (kontrollfrågan gav ${row.status})"
+        row.status == LmResult.NO_LOGIN -> if (row.service.access == LmAccess.VIEW) "systemkontot är inte inlagt" else "ingen inloggning är inlagd"
+        row.status == 401 -> "inloggningen nekas$via"
+        row.status == 403 -> "kontot saknar behörighet$via"
+        row.status == 0 -> "ingen kontakt"
+        else -> "svarade ${row.status}$via"
     }
 }
 

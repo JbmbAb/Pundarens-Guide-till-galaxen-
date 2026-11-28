@@ -6,6 +6,9 @@ import se.pundaren.guide.online.ClaudeChooser
 import se.pundaren.guide.online.Departure
 import se.pundaren.guide.online.HttpPort
 import se.pundaren.guide.online.JdkHttps
+import se.pundaren.guide.online.Lantmateriet
+import se.pundaren.guide.online.LantmaterietCheck
+import se.pundaren.guide.online.LmResult
 import se.pundaren.guide.online.OnlineException
 import se.pundaren.guide.online.ResRobot
 import se.pundaren.guide.online.TrafiklabRealtime
@@ -90,6 +93,23 @@ class OnlineServices(
                 },
             )
         }
+    }
+
+    /**
+     * Frågar alla Lantmäteriets tjänster i ägarens behörighetslista en gång var, med de inloggningar som
+     * är inlagda, och svarar med en statuskod per tjänst. Inga data hämtas eller sparas.
+     */
+    suspend fun checkLantmateriet(): List<LmResult> = withContext(Dispatchers.IO) {
+        val user = secrets.get(Secret.LM_USER)
+        val password = secrets.get(Secret.LM_PASSWORD)
+        val account = if (user != null && password != null) Lantmateriet.basic(user, password) else null
+        val check = LantmaterietCheck(http)
+        val key = secrets.get(Secret.LM_KEY)
+        val secret = secrets.get(Secret.LM_SECRET)
+        val bearer = if (key != null && secret != null) check.token(key, secret) else null
+        if (key != null && secret != null) log("LANTMÄTERIET åtkomstbevis: ${if (bearer != null) "utfärdat" else "nekat"}")
+        Lantmateriet.services.map { check.check(it, account, bearer) }
+            .also { results -> log("LANTMÄTERIET kontroll: ${results.count { it.accepted }} av ${results.size} tjänster svarar") }
     }
 
     private fun missing(secret: Secret) = "Nyckeln för ${secret.title} saknas. Lägg in den under Reglage, Nättjänster."
