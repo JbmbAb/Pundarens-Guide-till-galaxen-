@@ -17,6 +17,9 @@ class OnlineException(val status: Int, message: String) : IOException(message)
 interface HttpPort {
     fun get(url: String, headers: Map<String, String> = emptyMap()): String
     fun post(url: String, headers: Map<String, String>, body: String): String
+
+    /** Svaret som råa byte, för bilder. */
+    fun bytes(url: String, headers: Map<String, String> = emptyMap()): ByteArray = throw OnlineException(0, "Porten kan inte hämta bilder.")
 }
 
 /** Blockerande HTTPS-anrop ur JDK:n, ett i taget. Anropas från en bakgrundstråd. Bara https godtas. */
@@ -24,10 +27,11 @@ class JdkHttps(
     private val connectTimeoutMillis: Int = 6_000,
     private val readTimeoutMillis: Int = 20_000,
 ) : HttpPort {
-    override fun get(url: String, headers: Map<String, String>): String = call("GET", url, headers, null)
-    override fun post(url: String, headers: Map<String, String>, body: String): String = call("POST", url, headers, body)
+    override fun get(url: String, headers: Map<String, String>): String = String(call("GET", url, headers, null), StandardCharsets.UTF_8)
+    override fun post(url: String, headers: Map<String, String>, body: String): String = String(call("POST", url, headers, body), StandardCharsets.UTF_8)
+    override fun bytes(url: String, headers: Map<String, String>): ByteArray = call("GET", url, headers, null)
 
-    private fun call(method: String, url: String, headers: Map<String, String>, body: String?): String {
+    private fun call(method: String, url: String, headers: Map<String, String>, body: String?): ByteArray {
         val uri = URI(url)
         if (uri.scheme != "https") throw OnlineException(0, "Bara https godtas.")
         val host = uri.host.orEmpty()
@@ -42,6 +46,7 @@ class JdkHttps(
             connection.readTimeout = readTimeoutMillis
             connection.useCaches = false
             connection.instanceFollowRedirects = false
+            connection.setRequestProperty("User-Agent", USER_AGENT)
             headers.forEach { (name, value) -> connection.setRequestProperty(name, value) }
             if (body != null) {
                 connection.doOutput = true
@@ -49,8 +54,7 @@ class JdkHttps(
             }
             val status = connection.responseCode
             if (status !in 200..299) throw OnlineException(status, "$host svarade $status.")
-            val bytes = connection.inputStream.use { it.readNBytes(MAX_RESPONSE_BYTES) }
-            return String(bytes, StandardCharsets.UTF_8)
+            return connection.inputStream.use { it.readNBytes(MAX_RESPONSE_BYTES) }
         } catch (e: OnlineException) {
             throw e
         } catch (e: IOException) {
@@ -63,5 +67,6 @@ class JdkHttps(
 
     private companion object {
         const val MAX_RESPONSE_BYTES = 2 * 1024 * 1024
+        const val USER_AGENT = "PundarensGuide/0.7 (Android)"
     }
 }

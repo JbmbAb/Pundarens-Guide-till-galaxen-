@@ -79,7 +79,7 @@ private data class Proposal(
 )
 
 /** Panelerna som kan ligga över kartan, en i taget. */
-private enum class Sheet { DESTINATION, IMPROBABILITY, SNACKS, WRONG_QUESTION, PROTOCOL, HOME, ENCYCLOPEDIA, CONVOY, TRANSIT }
+private enum class Sheet { DESTINATION, IMPROBABILITY, SNACKS, SIGHTS, WRONG_QUESTION, PROTOCOL, HOME, ENCYCLOPEDIA, CONVOY, TRANSIT }
 
 /**
  * Huvudskärmen. Uppifrån och ned: sanningsremsan (sant, turkost), kartan, och ovanpå kartan
@@ -291,6 +291,7 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
                         }
                         if (guidance.phase != GuidancePhase.ARRIVED) {
                             PillButton("Snacks", enabled = status is NavigatorStatus.Ready) { sheet = Sheet.SNACKS }
+                            PillButton("Sevärt", enabled = status is NavigatorStatus.Ready) { sheet = Sheet.SIGHTS }
                         }
                         PillButton("Hem") { sheet = Sheet.HOME }
                         // Körriktningsrösten av eller på med ett tryck. Sanningsremsan visar ändå varje besked.
@@ -352,6 +353,17 @@ fun GuideScreen(graph: AppGraph, map: MapController, onRequestLocation: () -> Un
             onGo = { place ->
                 sheet = null
                 // Väljs ett matstopp under en tur erbjuds det ursprungliga målet igen efter stoppet.
+                val then = mapData.destination.takeIf { navigating }?.let { Onward(it, guidance.destinationName ?: "målet") }
+                propose(place.point, place.name, then)
+            },
+            onDismiss = { sheet = null },
+        )
+        Sheet.SIGHTS -> SightsDialog(
+            graph = graph, origin = origin(), destination = mapData.destination.takeIf { navigating },
+            destinationName = guidance.destinationName.takeIf { navigating }, routeLine = mapData.routeLine.takeIf { navigating }.orEmpty(), mode = mode,
+            onGo = { place ->
+                sheet = null
+                // Väljs ett fynd under en tur erbjuds det ursprungliga målet igen efter stoppet.
                 val then = mapData.destination.takeIf { navigating }?.let { Onward(it, guidance.destinationName ?: "målet") }
                 propose(place.point, place.name, then)
             },

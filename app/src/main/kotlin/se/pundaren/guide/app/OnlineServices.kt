@@ -10,6 +10,11 @@ import se.pundaren.guide.online.Lantmateriet
 import se.pundaren.guide.online.LantmaterietCheck
 import se.pundaren.guide.online.LmResult
 import se.pundaren.guide.online.OnlineException
+import se.pundaren.guide.online.Overpass
+import se.pundaren.guide.online.Sight
+import se.pundaren.guide.online.SightKind
+import se.pundaren.guide.online.WikiSummary
+import se.pundaren.guide.online.Wikipedia
 import se.pundaren.guide.online.ResRobot
 import se.pundaren.guide.online.TrafiklabRealtime
 import se.pundaren.guide.online.TransitPlace
@@ -78,6 +83,9 @@ class OnlineServices(
         Fetched.Ok(DepartureBoard(stop, departures))
     }
 
+    /** Kort tålamod: för tjänster som är trevliga att ha men inte får hålla upp svaret. */
+    private val quick: HttpPort = JdkHttps(connectTimeoutMillis = 4_000, readTimeoutMillis = 9_000)
+
     private suspend fun <T> transit(secret: Secret, call: (String) -> Fetched<T>): Fetched<T> = withContext(Dispatchers.IO) {
         val key = secrets.get(secret) ?: return@withContext Fetched.Failed(missing(secret))
         try {
@@ -94,6 +102,38 @@ class OnlineServices(
             )
         }
     }
+
+    /**
+     * Sevärt: ovanliga platser nära punkterna i [samples]. Wikipedia är huvudkällan, och OpenStreetMaps
+     * sökserver läggs till när den svarar (den är ofta överbelastad, och då klarar sig sökningen utan den).
+     */
+    suspend fun sights(samples: List<Pair<Double, Double>>, kinds: Set<SightKind>): Fetched<List<Sight>> = withContext(Dispatchers.IO) {
+        if (samples.isEmpty()) return@withContext Fetched.Ok(emptyList())
+        val wiki = Wikipedia(http)
+        val fromWikipedia = try {
+            samples.flatMap { (lat, lon) -> wiki.nearby(lat, lon) }
+        } catch (e: OnlineException) {
+            log("SEVÄRT Wikipedia fel ${e.status}")
+            return@withContext Fetched.Failed(if (e.status == 0) "Ingen kontakt med nätet. Sevärt behöver nät för att leta." else "Wikipedia svarade ${e.status}.")
+        }
+        val fromOsm = try { Overpass(quick).sights(samples, 10_000, kinds) } catch (e: OnlineException) { log("SEVÄRT OpenStreetMap svarade inte (${e.status})"); emptyList() }
+        // OpenStreetMaps fynd först: de bär mer detaljer. Samma plats från Wikipedia stryks om den ligger intill med samma namn.
+        val all = (fromOsm + fromWikipedia).filter { it.kind in kinds }
+        val kept = mutableListOf<Sight>()
+        for (sight in all) {
+            val twin = kept.indexOfFirst { it.name.equals(sight.name, ignoreCase = true) && Math.abs(it.lat - sight.lat) < 0.02 && Math.abs(it.lon - sight.lon) < 0.04 }
+            if (twin < 0) kept += sight
+            else if (kept[twin].wikipedia == null && sight.wikipedia != null) kept[twin] = kept[twin].copy(wikipedia = sight.wikipedia, description = kept[twin].description ?: sight.description)
+        }
+        log("SEVÄRT ${fromWikipedia.size} ur Wikipedia, ${fromOsm.size} ur OpenStreetMap, ${kept.size} kvar")
+        Fetched.Ok(kept)
+    }
+
+    /** Artikelns inledning och bild. Null om den inte går att hämta. */
+    suspend fun wikiSummary(tag: String): WikiSummary? = withContext(Dispatchers.IO) { runCatching { Wikipedia(http).summary(tag) }.getOrNull() }
+
+    /** En bild som råa byte. Null om den inte går att hämta. */
+    suspend fun image(url: String): ByteArray? = withContext(Dispatchers.IO) { runCatching { http.bytes(url) }.getOrNull() }
 
     /**
      * Frågar alla Lantmäteriets tjänster i ägarens behörighetslista en gång var, med de inloggningar som
