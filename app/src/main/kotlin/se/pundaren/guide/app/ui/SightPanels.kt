@@ -86,7 +86,18 @@ fun SightsDialog(
                 destination != null -> listOf(from.point, destination)
                 else -> listOf(from.point)
             }.map { it.lat to it.lon }
-            val found = graph.online.sights(RouteSamples.along(line), kinds)
+            // Utan mål söks det runt där man står. Wikipedia tar högst en mil i taget, så med bil läggs
+            // ringar av sökpunkter utanför, så långt som restiden rimligen räcker.
+            val reachKm = minutes * if (mode == TravelMode.FOOT) 0.08 else 0.9
+            val samples = if (destination != null) RouteSamples.along(line) else {
+                val (lat, lon) = line.first()
+                fun ring(km: Double, count: Int) = (0 until count).map { i ->
+                    val angle = 2 * Math.PI * i / count
+                    lat + km / 111.0 * Math.cos(angle) to lon + km / (111.0 * Math.cos(Math.toRadians(lat))) * Math.sin(angle)
+                }
+                line + (if (reachKm > 10) ring(14.0, 6) else emptyList()) + (if (reachKm > 26) ring(30.0, 10) else emptyList())
+            }
+            val found = graph.online.sights(samples, kinds)
             val sights = (found as? se.pundaren.guide.app.Fetched.Ok)?.value
             if (sights == null) {
                 state = SightState.Failed((found as se.pundaren.guide.app.Fetched.Failed).message)
@@ -139,7 +150,7 @@ fun SightsDialog(
                         if (s.stops.isEmpty()) "Inget inom ${minutes} minuter. Prova längre omväg eller fler slag." else "${s.stops.size} fynd inom ${minutes} minuter.",
                         color = GuideColors.OnSurface, fontSize = 16.sp, fontWeight = FontWeight.Bold,
                     )
-                    Column(Modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(Modifier.heightIn(max = 640.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         s.stops.forEach { stop ->
                             SightCard(graph, stop, expanded = open == stop.sight.id, onToggle = { open = if (open == stop.sight.id) null else stop.sight.id }) {
                                 onGo(Place(stop.sight.id, stop.sight.name, PlaceKind.OTHER, stop.sight.kind.name.lowercase(), GeoPoint(stop.sight.lat, stop.sight.lon), null))
