@@ -158,6 +158,22 @@ class TrafiklabRealtime(private val key: String, private val http: HttpPort) {
         }.take(max)
     }
 
+    /** Hållplatser vars namn liknar [query], ur Realtime-tjänstens eget register. Kräver inte ResRobot. */
+    fun findStops(query: String, max: Int = 8): List<TransitStop> {
+        val text = query.trim()
+        if (text.isEmpty()) return emptyList()
+        val root = parse(http.get("$BASE/stops/name/${enc(text)}?key=${enc(key)}"))
+        return list(root["stop_groups"]).mapNotNull { element ->
+            val group = obj(element) ?: return@mapNotNull null
+            val first = list(group["stops"]).firstOrNull()?.let(::obj)
+            TransitStop(
+                id = text(group["id"]) ?: return@mapNotNull null,
+                name = text(group["name"]) ?: return@mapNotNull null,
+                lat = number(first?.get("lat")), lon = number(first?.get("lon")),
+            )
+        }.take(max)
+    }
+
     private fun platform(element: JsonElement?): String? = text(obj(element)?.get("designation"))?.takeIf { it.isNotBlank() }
 
     private fun time(element: JsonElement?): LocalDateTime? = runCatching { LocalDateTime.parse(text(element)) }.getOrNull()

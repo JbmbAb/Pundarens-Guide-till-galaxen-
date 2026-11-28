@@ -103,6 +103,21 @@ class OnlineTest {
         assertEquals("https://realtime-api.trafiklab.se/v1/departures/740021511?key=RT", http.urls.single())
     }
 
+    @Test fun `Realtime slår upp hållplatser själv, utan ResRobot`() {
+        val body = """{"timestamp":"2026-11-28T07:00:00","query":{"queryTime":"2026-11-28T07:00:00","query":"Mora"},
+          "stop_groups":[
+            {"id":"740000205","name":"Mora resecentrum","area_type":"RIKSHALLPLATS","average_daily_stop_times":120.5,"transport_modes":["BUS","TRAIN"],
+             "stops":[{"id":"9021","name":"Mora resecentrum","lat":61.0049,"lon":14.5453}]},
+            {"id":"740000206","name":"Mora strand","stops":[]},
+            {"name":"saknar id"}
+          ]}"""
+        val http = FakeHttp { body }
+        val stops = TrafiklabRealtime("RT", http).findStops(" Mora resecentrum ")
+        assertEquals(listOf(TransitStop("740000205", "Mora resecentrum", 61.0049, 14.5453), TransitStop("740000206", "Mora strand", null, null)), stops)
+        assertEquals("https://realtime-api.trafiklab.se/v1/stops/name/Mora%20resecentrum?key=RT", http.urls.single())
+        assertTrue(TrafiklabRealtime("RT", http).findStops("  ").isEmpty())
+    }
+
     @Test fun `ett svar som inte är json ger ett fel utan adress`() {
         val http = FakeHttp { "<html>Service unavailable</html>" }
         val error = runCatching { ResRobot("HEMLIG-NYCKEL", http).findStops("Orsa") }.exceptionOrNull() as OnlineException

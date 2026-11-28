@@ -58,7 +58,7 @@ class OnlineServices(
     }
 
     /** Resor från en hållplats eller den egna positionen till en hållplats. */
-    suspend fun trips(fromText: String, here: GeoPoint?, toText: String): Fetched<TripSearch> = transit(Secret.RESROBOT) { key ->
+    suspend fun trips(fromText: String, here: GeoPoint?, toText: String): Fetched<TripSearch> = transit { key, _ ->
         val robot = ResRobot(key, http)
         val to = robot.findStops(toText).firstOrNull() ?: return@transit Fetched.Failed("Hittar ingen hållplats som heter \"${toText.trim()}\".")
         val (origin, fromName) = if (here != null) {
@@ -73,8 +73,8 @@ class OnlineServices(
     }
 
     /** Avgångar med prognos från en namngiven hållplats, eller från den som ligger närmast. */
-    suspend fun departures(fromText: String, here: GeoPoint?): Fetched<DepartureBoard> = transit(Secret.RESROBOT) { key ->
-        val realtimeKey = secrets.get(Secret.REALTIME) ?: return@transit Fetched.Failed(missing(Secret.REALTIME))
+    suspend fun departures(fromText: String, here: GeoPoint?): Fetched<DepartureBoard> = if (here == null) departuresByName(fromText) else transit { key, other ->
+        val realtimeKey = other ?: return@transit Fetched.Failed(missing(Secret.REALTIME))
         val robot = ResRobot(key, http)
         val stop = (if (here != null) robot.nearbyStops(here.lat, here.lon) else robot.findStops(fromText)).firstOrNull()
             ?: return@transit Fetched.Failed(if (here != null) "Ingen hållplats inom två kilometer." else "Hittar ingen hållplats som heter \"${fromText.trim()}\".")
@@ -86,16 +86,69 @@ class OnlineServices(
     /** Kort tålamod: för tjänster som är trevliga att ha men inte får hålla upp svaret. */
     private val quick: HttpPort = JdkHttps(connectTimeoutMillis = 4_000, readTimeoutMillis = 9_000)
 
-    private suspend fun <T> transit(secret: Secret, call: (String) -> Fetched<T>): Fetched<T> = withContext(Dispatchers.IO) {
-        val key = secrets.get(secret) ?: return@withContext Fetched.Failed(missing(secret))
+    /**
+     * Avgångar från en namngiven hållplats, med bara Realtime-tjänsten: den slår upp hållplatsen själv.
+     * Prövar båda Trafiklab-nycklarna, ifall de ligger i varandras rutor.
+     */
+    private suspend fun departuresByName(fromText: String): Fetched<DepartureBoard> = withContext(Dispatchers.IO) {
+        val keys = listOfNotNull(secrets.get(Secret.REALTIME), secrets.get(Secret.RESROBOT))
+        if (keys.isEmpty()) return@withContext Fetched.Failed(missing(Secret.REALTIME))
+        var last: OnlineException? = null
+        for (key in keys) {
+            try {
+                val realtime = TrafiklabRealtime(key, http)
+                val stop = realtime.findStops(fromText).firstOrNull()
+                    ?: return@withContext Fetched.Failed("Hittar ingen hållplats som heter \"${fromText.trim()}\".")
+                val departures = realtime.departures(stop.id)
+                log("KOLLEKTIVTRAFIK avgångar: ${departures.size} rader")
+                return@withContext Fetched.Ok(DepartureBoard(stop, departures))
+            } catch (e: OnlineException) {
+                last = e
+                if (e.status !in setOf(401, 403)) break
+            }
+        }
+        log("KOLLEKTIVTRAFIK avgångar fel ${last?.status}")
+        Fetched.Failed(
+            when (last?.status) {
+                0 -> "Ingen kontakt med Trafiklab. Kontrollera nätet och försök igen."
+                401, 403 -> "Trafiklab Realtime godtog ingen av nycklarna. Kontrollera dem under Reglage."
+                429 -> "Nyckelns kvot hos Trafiklab är slut för den här perioden."
+                else -> "Trafiklab svarade ${last?.status}."
+            },
+        )
+    }
+
+    /** Sant när de två Trafiklab-nycklarna visade sig ligga i varandras rutor. Då används de omvänt. */
+    @Volatile private var trafiklabSwapped = false
+
+    /**
+     * Ett anrop mot Trafiklab med ResRobot-nyckeln och, om den finns, Realtime-nyckeln. Nekar ResRobot
+     * nyckeln prövas den andra Trafiklab-nyckeln en gång, ifall de har hamnat i varandras rutor.
+     */
+    private suspend fun <T> transit(call: (resRobot: String, realtime: String?) -> Fetched<T>): Fetched<T> = withContext(Dispatchers.IO) {
+        val saved = secrets.get(Secret.RESROBOT) to secrets.get(Secret.REALTIME)
+        val (first, other) = if (trafiklabSwapped) saved.second to saved.first else saved
+        if (first == null) return@withContext Fetched.Failed(missing(Secret.RESROBOT))
         try {
-            call(key)
+            call(first, other)
         } catch (e: OnlineException) {
+            val refusedByResRobot = e.status in setOf(401, 403) && "resrobot" in e.message.orEmpty()
+            if (refusedByResRobot && other != null) {
+                try {
+                    val result = call(other, first)
+                    trafiklabSwapped = !trafiklabSwapped
+                    log("KOLLEKTIVTRAFIK nycklarna ligger i varandras rutor och används omvänt")
+                    return@withContext result
+                } catch (second: OnlineException) {
+                    log("KOLLEKTIVTRAFIK fel ${second.status} även med den andra nyckeln")
+                }
+            }
             log("KOLLEKTIVTRAFIK fel ${e.status}")
+            val service = if ("realtime" in e.message.orEmpty()) "Trafiklab Realtime" else "ResRobot"
             Fetched.Failed(
                 when (e.status) {
                     0 -> "Ingen kontakt med Trafiklab. Kontrollera nätet och försök igen."
-                    401, 403 -> "Trafiklab godtog inte nyckeln. Kontrollera den under Reglage."
+                    401, 403 -> "$service godtog inte nyckeln. Kontrollera under Reglage att rätt nyckel ligger i rutan, och i Trafiklab att nyckeln hör till $service."
                     429 -> "Nyckelns kvot hos Trafiklab är slut för den här perioden."
                     else -> "Trafiklab svarade ${e.status}."
                 },
